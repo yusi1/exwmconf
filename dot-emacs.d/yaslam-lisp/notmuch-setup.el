@@ -3,10 +3,14 @@
 (defun notmuch-update-maildir ()
   "Call `notmuch new` to update maildir."
   (interactive)
-  (if 
-      (shell-command "notmuch new" "*maildir-update*" "*maildir-update-errors*")
-      (switch-to-buffer "*maildir-update*")
-    (switch-to-buffer "*maildir-update-errors*")))
+  (let ((buffer "*maildir-update*")
+	(name "maildir-update"))
+    (make-process
+     :name name
+     :buffer buffer
+     :command '("/usr/local/bin/notmuch"
+		"new"))
+    (display-buffer buffer)))
 
 (let ((map global-map))
   (define-key global-map (kbd "C-c e e") 'notmuch)
