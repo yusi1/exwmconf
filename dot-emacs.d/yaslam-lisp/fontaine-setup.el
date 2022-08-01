@@ -134,11 +134,14 @@
 			  )
 			 ))
 
+;; First, check if we are in Xorg, if not, don't do anything.
 ;; If we aren't on a desktop environment which sets the
 ;; `$XDG_CURRENT_DESKTOP' variable, then use the
 ;; regular preset.
-(if (string-equal (get-de-p) "")
-    (fontaine-set-preset 'saucecode-large)
-  (fontaine-set-preset 'saucecode-regular))
+(if (display-graphic-p)
+    (progn
+      (if (string-equal (get-de-p) "")
+	  (fontaine-set-preset 'saucecode-large)
+	(fontaine-set-preset 'saucecode-regular))))
 
 (provide 'fontaine-setup)
