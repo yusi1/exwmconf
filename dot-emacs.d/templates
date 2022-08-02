@@ -1,6 +1,7 @@
 fundamental-mode ;; Available everywhere
 
 (today (format-time-string "%Y-%m-%d"))
+(date "[" (shell-command-to-string "date +'%Y-%m-%d %a %R' | tr -d '\n'") "]" q)
 (name (insert "Yusef Aslam"))
 
 text-mode
@@ -36,7 +37,6 @@ org-mode
 
 (title "#+TITLE: " p n "#+AUTHOR: Yusef Aslam" n n %)
 (quote "#+BEGIN_QUOTE" n n> r> n> n "#+END_QUOTE")
-(date "[" (shell-command-to-string "date +'%Y-%m-%d %a %R' | tr -d '\n'") "]" q)
 
 emacs-lisp-mode
 
