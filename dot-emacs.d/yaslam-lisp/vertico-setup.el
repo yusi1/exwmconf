@@ -25,6 +25,16 @@
 
 (vertico-multiform-mode t)
 
+;; How much lines are shown above and below when
+;; scrolling in the vertico minibuffer.
+(setq vertico-scroll-margin '0)
+
+;; This works with `file-name-shadow-mode'.  When you are in a
+;; sub-directory and use, say, `find-file' to go to your home '~/' or
+;; root '/' directory, Vertico will clear the old path to keep only
+;; your current input.
+(add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
+
 ;; Save Vertico history across restarts
 (savehist-mode)
 
