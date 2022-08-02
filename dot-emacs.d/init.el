@@ -15,11 +15,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auth-source-save-behavior nil)
  '(custom-safe-themes
    '("4a288765be220b99defaaeb4c915ed783a9916e3e08f33278bf5ff56e49cbc73" default))
  '(notmuch-search-oldest-first nil)
  '(package-selected-packages
-   '(consult-notmuch lin notmuch pulsar multiple-cursors wgrep iedit org-superstar magit helpful ctrlf aggressive-indent marginalia consult pass embark which-key eglot markdown-mode corfu sly vterm orderless vertico smartparens)))
+   '(consult-notmuch lin notmuch pulsar multiple-cursors wgrep iedit org-superstar magit helpful ctrlf aggressive-indent marginalia consult pass embark which-key markdown-mode corfu sly vterm orderless vertico smartparens)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
