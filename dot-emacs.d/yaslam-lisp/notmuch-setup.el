@@ -3,8 +3,8 @@
 (defun notmuch-update-maildir ()
   "Call `notmuch new` to update maildir."
   (interactive)
-  (let ((buffer "*maildir-update*")
-	(name "maildir-update"))
+  (let ((name "maildir-update")
+	(buffer "*maildir-update*"))
     (make-process
      :name name
      :buffer buffer
