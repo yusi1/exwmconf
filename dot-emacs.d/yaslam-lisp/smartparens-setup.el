@@ -58,6 +58,8 @@
   (define-key map (kbd "M-]") #'sp-unwrap-sexp)
   (define-key map (kbd "M-i") #'sp-change-inner)
   (define-key map (kbd "M-;") #'sp-comment)
-  (define-key map (kbd "C-c p") #'smartparens-strict-mode))
+  (define-key map (kbd "C-c p") #'smartparens-strict-mode)
+  ;; Transposing s-expressions
+  (define-key map (kbd "C-M-t") #'sp-transpose-sexp))
 
 (provide 'smartparens-setup)
