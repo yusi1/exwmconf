@@ -139,9 +139,8 @@
 ;; `$XDG_CURRENT_DESKTOP' variable, then use the
 ;; regular preset.
 (if (display-graphic-p)
-    (progn
-      (if (string-equal (get-de-p) "")
-	  (fontaine-set-preset 'saucecode-large)
-	(fontaine-set-preset 'saucecode-regular))))
+    (if (string-match (get-de-p) "")
+	(fontaine-set-preset 'saucecode-large)
+      (fontaine-set-preset 'saucecode-regular)))
 
 (provide 'fontaine-setup)
