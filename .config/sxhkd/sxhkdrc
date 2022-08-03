@@ -6,7 +6,10 @@
 super + Return
 	gnome-terminal
 
-# program launcher
+# program launchers
+super + r
+    rofi -show combi
+
 super + @space
 	dmenu_run
 

@@ -1,6 +1,6 @@
 configuration {
-	/* modi: "combi,filebrowser,ssh,keys"; */
-    modi: "combi,ssh,keys";
+	modi: "combi,filebrowser,ssh,keys";
+    /* modi: "combi,ssh,keys"; */
 	font: "Saucecode Pro NF 14";
 /*	location: 0;*/
 /*	yoffset: 0;*/
