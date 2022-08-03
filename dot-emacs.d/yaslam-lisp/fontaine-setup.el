@@ -140,7 +140,7 @@
 ;; regular preset.
 (if (display-graphic-p)
     (if (string-match (get-de-p) "")
-	(fontaine-set-preset 'saucecode-large)
-      (fontaine-set-preset 'saucecode-regular)))
+	(fontaine-set-preset 'saucecode-regular)
+      (fontaine-set-preset 'saucecode-large)))
 
 (provide 'fontaine-setup)
