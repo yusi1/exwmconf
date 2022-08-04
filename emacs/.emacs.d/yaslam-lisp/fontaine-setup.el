@@ -181,7 +181,7 @@
       (progn (if (string-match-p (system-name) "voidlaptop")
 		 (fontaine-set-preset 'regular)
 	       ;; (fontaine-set-preset 'saucecode-regular)
-	       (fontaine-set-preset 'regular-desktop)
+               (fontaine-set-preset 'regular-desktop)
 	       ))))
 
 (provide 'fontaine-setup)
