@@ -32,6 +32,22 @@
 			  ;; :italic-slant italic
 			  :line-spacing 1
 			  )
+			 (large-desktop
+			  :default-family "Iosevka Comfy"
+			  :default-weight normal
+			  :default-height 170
+			  :fixed-pitch-family nil
+			  :fixed-pitch-weight nil
+			  :fixed-pitch-height nil
+			  :variable-pitch-family "Iosevka Comfy Duo"
+			  :variable-pitch-weight normal
+			  :variable-pitch-height 1.0
+			  :bold-family nil ; use whatever the underlying face has
+			  :bold-weight bold
+			  ;; :italic-family "Comic Mono"
+			  ;; :italic-slant italic
+			  :line-spacing 1
+			  )
 			 (comic-regular
 			  :default-family "Comic Mono"
 			  :default-weight normal
@@ -140,7 +156,12 @@
 ;; regular preset.
 (if (display-graphic-p)
     (if (string-match-p (get-de-p) "")
-	(fontaine-set-preset 'saucecode-large)
-      (fontaine-set-preset 'saucecode-regular)))
+	(progn
+	  (if (string-match-p (system-name) "voidlaptop")
+	      (fontaine-set-preset 'large)
+	    (fontaine-set-preset 'saucecode-large)))
+      (progn (if (string-match-p (system-name) "voidlaptop")
+		 (fontaine-set-preset 'regular)
+	       (fontaine-set-preset 'saucecode-regular)))))
 
 (provide 'fontaine-setup)

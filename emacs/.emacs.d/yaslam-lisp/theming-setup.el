@@ -4,7 +4,13 @@
 
 (setq modus-themes-italic-constructs t
       modus-themes-bold-constructs nil
-      modus-themes-region '(bg-only no-extend))
+      modus-themes-region '(bg-only no-extend)
+      modus-themes-subtle-line-numbers t
+      modus-themes-variable-pitch-ui t
+      modus-themes-deuteranopia t
+      modus-themes-bold-constructs t
+      modus-themes-diffs 'desaturated
+      modus-themes-mixed-fonts t)
 
 ;; More customizations
 ;; https://github.com/protesilaos/modus-themes/
@@ -44,7 +50,14 @@
  ;; `no-extend', `bg-only', `accented'
  modus-themes-region '(bg-only no-extend)
 
- modus-themes-org-blocks 'gray-background ; {nil,'gray-background,'tinted-background}
+ modus-themes-markup '(bold background)
+
+ ;; Options for `modus-themes-syntax' are either nil (the default),
+ ;; or a list of properties that may include any of those symbols:
+ ;; `faint', `yellow-comments', `green-strings', `alt-syntax'
+ modus-themes-syntax '(yellow-comments green-strings)
+
+ modus-themes-org-blocks 'tinted-background ; {nil,'gray-background,'tinted-background}
 
  modus-themes-org-agenda ; this is an alist: read the manual or its doc string
  '((header-block . (variable-pitch 1.3))
@@ -59,11 +72,19 @@
  ;; `intense' OR `faint'.
  modus-themes-lang-checkers (quote (straight-underline intense))
 
- modus-themes-headings ; this is an alist: read the manual or its doc string
- '((1 . (overline background variable-pitch 1.1))
-   (2 . (rainbow 1.08))
-   (t . (semibold)))
  )
+
+(if (string-match-p (system-name) "mintyness")
+    (setq  modus-themes-headings ; this is an alist: read the manual or its doc string
+	   '((1 . (rainbow 1.2))
+	     (2 . (monochrome 1.0))
+	     (t . (semibold)))
+	   )
+  (setq modus-themes-headings ; this is an alist: read the manual or its doc string
+	'((1 . (rainbow 1.4))
+	  (2 . (monochrome 1.2))
+	  (t . (semibold)))
+	))
 
 ;; Load the theme files before enabling a theme (else you get an error).
 (modus-themes-load-themes)
@@ -76,7 +97,9 @@
      (shell-command-to-string
       "gsettings get org.gnome.desktop.interface color-scheme"))
     (modus-themes-load-vivendi)
-  (modus-themes-load-operandi))
+  (if (string-match-p (system-name) "voidlaptop")
+      (modus-themes-load-vivendi)
+    (modus-themes-load-operandi)))
 
 ;; Set a keybind to toggle between light/dark mode on modus-* themes..
 (define-key global-map (kbd "<f12>") 'modus-themes-toggle)

@@ -34,9 +34,9 @@
 (setq org-startup-folded t)
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width '(600))
-(setq org-startup-indented nil)
-(setq org-pretty-entities nil)
-(setq org-hide-emphasis-markers nil)
+(setq org-startup-indented t)
+(setq org-pretty-entities t)
+(setq org-hide-emphasis-markers t)
 (setq org-hide-leading-stars nil)
 ;; Don't align tags
 (setq org-auto-align-tags t)
@@ -65,16 +65,12 @@
 (setq auto-save-default nil)
 
 ;; ;; Use fixed pitch font for certain things
-;; (defun set-buffer-variable-pitch ()
-;;   "Set variable pitch, but set fixed-pitch for tables etc.."
-;;   (interactive)
-;;   (variable-pitch-mode t)
-;;   (display-line-numbers-mode t)
-;;   (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-;;   (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
-;;   (set-face-attribute 'org-block nil :inherit 'fixed-pitch))
+(defun set-buffer-variable-pitch ()
+  "Set variable pitch, but set fixed-pitch for tables etc.."
+  (interactive)
+  (variable-pitch-mode t))
 
-;; (add-hook 'org-mode-hook 'set-buffer-variable-pitch)
+(add-hook 'org-mode-hook 'set-buffer-variable-pitch)
 
 ;; Configuring Org Babel
 (org-babel-do-load-languages 'org-babel-load-languages

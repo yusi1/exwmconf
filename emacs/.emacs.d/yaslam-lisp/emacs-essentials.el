@@ -13,7 +13,7 @@
   (define-key map (kbd "C-c <down>")  'windmove-down))
 
 ;; Quicker keybinds
-(if (string-match-p "pop-os" (system-name))
+(if (string-match-p "voidlaptop" (system-name))
     (let ((map global-map))
       (define-key map (kbd "s-)") 'delete-window)
       (define-key map (kbd "s-!") 'delete-other-windows)
