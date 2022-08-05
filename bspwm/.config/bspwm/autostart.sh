@@ -1,4 +1,7 @@
 #!/bin/bash
 
-xfce4-volumed & disown
-xfce4-power-manager & disown
+/home/yaslam/.fehbg &
+picom -b &
+xfce4-volumed &
+xfce4-power-manager &
+xfce4-panel --disable-wm-check &
