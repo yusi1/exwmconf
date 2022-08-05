@@ -1,5 +1,13 @@
 ;; Line numbers setup
-(global-display-line-numbers-mode)
+(global-display-line-numbers-mode -1)
+(dolist (modes '(prog-mode-hook
+		 conf-mode-hook
+                 ibuffer-mode-hook
+		 diff-mode-hook
+		 magit-diff-mode-hook
+		 notmuch-message-mode-hook
+		 notmuch-show-mode-hook))
+  (add-hook modes (lambda () (display-line-numbers-mode 1))))
 
 ;; Setup `load-path'.
 (dolist (path '("yaslam-lisp"))
