@@ -8,3 +8,5 @@ xterm*dynamicColors: true
 ! my customizations
 xterm*faceName: Iosevka Comfy
 xterm*faceSize: 12
+xterm*background: black
+xterm*foreground: white
