@@ -9,4 +9,8 @@ case ${title} in
     "Panel Preferences" | "Add New Items" | "Window Buttons")
 	echo "state=floating"
 	;;
+    # Emacs question dialogues
+    "Question")
+	echo "state=floating"
+	;;
 esac
