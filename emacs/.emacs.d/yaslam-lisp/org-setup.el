@@ -2,7 +2,7 @@
 (require 'org-superstar)
 
 ;; Org mode hooks
-(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode)))
+(add-hook 'org-mode-hook (lambda () (setq display-line-numbers-mode 'nil)))
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode)))
 (add-hook 'org-mode-hook (lambda () (org-indent-mode t)))
 (add-hook 'org-mode-hook (lambda () (if (display-graphic-p)
