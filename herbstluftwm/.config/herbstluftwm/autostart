@@ -22,8 +22,8 @@ hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Return spawn "${TERMINAL:-xterm}" # use your $TERMINAL with xterm as fallback
-hc keybind $Mod-Shift-p spawn "/home/yaslam-twm/.config/herbstluftwm/dmenu_run_hlwm"
-hc keybind $Mod-Shift-space spawn "/home/yaslam-twm/.config/herbstluftwm/rofi_run_hlwm"
+hc keybind $Mod-Shift-p spawn "$HOME/.config/herbstluftwm/dmenu_run_hlwm"
+hc keybind $Mod-Shift-space spawn "$HOME/.config/herbstluftwm/rofi_run_hlwm"
 
 # basic movement in tiling and floating mode
 # focusing clients
