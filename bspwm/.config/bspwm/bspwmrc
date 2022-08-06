@@ -7,7 +7,9 @@ pgrep -x sxhkd > /dev/null || sxhkd -c /home/yaslam/.config/sxhkd/sxhkdrc &
 bspc monitor -d I II III IV
 
 bspc config border_width         2
-bspc config window_gap          12
+
+gaps=12
+bspc config window_gap          $gaps
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
