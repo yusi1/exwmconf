@@ -36,7 +36,7 @@
 (setq org-image-actual-width '(600))
 (setq org-startup-indented t)
 (setq org-pretty-entities t)
-(setq org-hide-emphasis-markers t)
+(setq org-hide-emphasis-markers nil)
 (setq org-hide-leading-stars nil)
 ;; Don't align tags
 (setq org-auto-align-tags t)
@@ -99,6 +99,9 @@
 					    "Personal Thoughts")
 	 "* %U :crypt:\n%?"
 	 :jump-to-captured t)
+	;; ("d" "Distro Journal" entry (file+headline "~/Documents/Journal/Distro-Journal/journal.org"
+	;; "[ENTER DISTRO NAME HERE] Notes")
+	;; "* Note 1\n%?")
 	("x" "Trashbin" entry (file+headline "~/.notes"
 					     "Trashbin")
 	 "* %U\n%?"
