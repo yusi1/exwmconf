@@ -26,7 +26,7 @@
       (define-key map (kbd "s-S") 'save-buffer)
       (define-key map (kbd "s-:") 'other-window-kill-buffer)))
 
-(if (string-match-p "mintyness" (system-name))
+(if (string-match-p "voiddesktop" (system-name))
     (let ((map global-map))
       (define-key map (kbd "M-)") 'delete-window)
       (define-key map (kbd "M-!") 'delete-other-windows)

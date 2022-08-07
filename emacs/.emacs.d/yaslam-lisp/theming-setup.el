@@ -74,7 +74,7 @@
 
  )
 
-(if (string-match-p (system-name) "mintyness")
+(if (string-match-p (system-name) "voiddesktop")
     (setq  modus-themes-headings ; this is an alist: read the manual or its doc string
 	   '((1 . (rainbow 1.2))
 	     (2 . (monochrome 1.0))
