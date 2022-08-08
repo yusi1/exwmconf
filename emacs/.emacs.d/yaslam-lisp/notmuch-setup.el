@@ -22,5 +22,6 @@
 (setq mail-user-agent 'message-user-agent)
 (setq message-kill-buffer-on-exit t)
 (setq notmuch-fcc-dirs "sent")
+(setq notmuch-show-logo nil)
 
 (provide 'notmuch-setup)

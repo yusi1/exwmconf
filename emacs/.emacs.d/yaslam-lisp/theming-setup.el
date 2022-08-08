@@ -22,9 +22,10 @@
  ;; the text relative to the base font size (or a cons cell of
  ;; height and FLOAT)
  ;; modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
+ modus-themes-mode-line '(accented (padding . 0))
 
  ;; Options for `modus-themes-hl-line' are either nil (the default),
- ;; or a list of properties that may include any of those symbols:
+ ;; or a list of properties that may include any of these symbols:
  ;; `accented', `underline', `intense'
  modus-themes-hl-line '(underline accented)
 
@@ -46,16 +47,21 @@
                             (popup . (accented intense)))
 
  ;; Options for `modus-themes-region' are either nil (the default),
- ;; or a list of properties that may include any of those symbols:
+ ;; or a list of properties that may include any of these symbols:
  ;; `no-extend', `bg-only', `accented'
  modus-themes-region '(bg-only no-extend)
 
  modus-themes-markup '(bold background)
 
  ;; Options for `modus-themes-syntax' are either nil (the default),
- ;; or a list of properties that may include any of those symbols:
+ ;; or a list of properties that may include any of these symbols:
  ;; `faint', `yellow-comments', `green-strings', `alt-syntax'
  modus-themes-syntax '(yellow-comments green-strings)
+
+ ;; Options for `modus-themes-links' are either nil (the default),
+ ;; or list of properties that may include any of these symbols:
+ ;; `faint', `underline', `neutral-underline',`no-underline', `no-color', `bold', `italic', `background'
+ modus-themes-links '(underline background bold)
 
  modus-themes-org-blocks 'tinted-background ; {nil,'gray-background,'tinted-background}
 
@@ -67,7 +73,7 @@
    (habit . traffic-light))
 
  ;; Options for `modus-themes-lang-checkers' are either nil (the
- ;; default), or a list of properties that may include any of those
+ ;; default), or a list of properties that may include any of these
  ;; symbols: `straight-underline', `text-also', `background',
  ;; `intense' OR `faint'.
  modus-themes-lang-checkers (quote (straight-underline intense))

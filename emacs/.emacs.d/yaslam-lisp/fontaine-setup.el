@@ -164,6 +164,22 @@
 			  :italic-slant italic
 			  :line-spacing 1
 			  )
+			 (cascadia-code-regular
+			  :default-family "Cascadia Code"
+			  :default-weight normal
+			  :default-height 140
+			  :fixed-pitch-family nil
+			  :fixed-pitch-weight nil
+			  :fixed-pitch-height nil
+			  ;; :variable-pitch-family "Source Sans Pro"
+			  :variable-pitch-family "Cascadia Code"
+			  :variable-pitch-weight normal
+			  :variable-pitch-height 1.0
+			  :bold-family "Cascadia Code Bold"
+			  :bold-weight bold
+			  :italic-family "Cascadia Code"
+			  :italic-slant italic
+			  :line-spacing 1)
 			 ))
 
 ;; First, check if we are in Xorg, if not, don't do anything.

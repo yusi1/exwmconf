@@ -4,7 +4,9 @@
 (setq mc/cmds-to-run-for-all
       '(
 	sp-backward-delete-char
+	sp-backward-sexp
 	sp-delete-char
+	sp-kill-region
 	))
 
 (setq mc/cmds-to-run-once
