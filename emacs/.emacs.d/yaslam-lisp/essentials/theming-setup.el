@@ -104,7 +104,18 @@
       "gsettings get org.gnome.desktop.interface color-scheme"))
     (modus-themes-load-vivendi)
   (if (string-match-p (system-name) "voidlaptop")
-      (modus-themes-load-vivendi)
+      (progn
+	(setq modus-themes-operandi-color-overrides
+	      '((bg-main . "#ededed")
+		(bg-dim . "#faf6ef")
+		(bg-alt . "#f7efe5")
+		(bg-active . "#ddd0bb")
+		(bg-inactive . "#f6ece5")
+		(bg-completion . "#9cdbff")
+		(bg-completion-subtle . "#9cdbff")))
+
+	(setq modus-themes-operandi-color-overrides t)
+	(modus-themes-load-vivendi))
     (modus-themes-load-operandi)))
 
 ;; Set a keybind to toggle between light/dark mode on modus-* themes..
