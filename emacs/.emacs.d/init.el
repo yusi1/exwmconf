@@ -10,7 +10,7 @@
   (add-hook modes (lambda () (display-line-numbers-mode 1))))
 
 ;; Setup `load-path'.
-(dolist (path '("yaslam-lisp"))
+(dolist (path '("yaslam-lisp/essentials" "yaslam-lisp/utility-packages" "yaslam-lisp/theming-packages"))
   (add-to-list 'load-path (locate-user-emacs-file path)))
 
 ;; Setup MELPA

@@ -16,4 +16,8 @@
                nil
                (window-parameters (mode-line-format . none))))
 
+;; Replace some commands with their respective helpful variants
+(defalias 'describe-symbol 'helpful-symbol)
+(defalias 'describe-variable 'helpful-variable)
+
 (provide 'embark-setup)
