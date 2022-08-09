@@ -1,2 +1,25 @@
-dot-emacs.d/elpa
-dot-emacs.d/tramp
+emacs/.emacs.d/elpa
+emacs/.emacs.d/tramp
+emacs/.emacs.d/eln-cache
+# Ignore sensitive Emacs files
+emacs/.emacs.d/elpa
+emacs/.emacs.d/tramp
+emacs/.emacs.d/bookmarks
+emacs/.emacs.d/history
+emacs/.emacs.d/eshell
+emacs/.emacs.d/transient
+
+# Ignore Emacs backup files
+*~
+
+*.log*
+
+xmonad/.config/xmonad/xmonad
+xmonad/.config/xmonad/*stack*
+xmonad/.config/xmonad/xmonad*
+xmobar/.config/xmobar/xmobar
+xmobar/.config/xmobar/*stack*
+
+stumpwm.d/.stumpwm.d/modules
+
+nvim/.config/nvim/.netrwhist
