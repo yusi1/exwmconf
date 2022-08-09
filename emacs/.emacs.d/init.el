@@ -41,6 +41,7 @@
  )
 
 (require 'emacs-essentials)
+(require 'misc-customizations)
 
 (require 'fontaine-setup)
 (require 'diff-hl-setup)

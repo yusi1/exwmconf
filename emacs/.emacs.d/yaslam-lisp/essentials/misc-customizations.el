@@ -8,3 +8,5 @@
         (border-width . 0)
         (no-special-glyphs . t)))
 (add-hook 'after-init-hook #'tooltip-mode)
+
+(provide 'misc-customizations)
