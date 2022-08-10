@@ -95,29 +95,30 @@
 ;; Load the theme files before enabling a theme (else you get an error).
 (modus-themes-load-themes)
 
+;; Override the `modus-operandi' theme colours when using the laptop.
+;; Since the laptop display sucks at displaying white and less strong colours.
+(if (string-match-p (system-name) "voidlaptop")
+    (setq modus-themes-operandi-color-overrides
+	  '((bg-main . "#ededed")
+	    (bg-dim . "#faf6ef")
+	    (bg-alt . "#f7efe5")
+	    (bg-active . "#ddd0bb")
+	    (bg-inactive . "#f6ece5")
+	    (bg-completion . "#9cdbff")
+	    (bg-completion-subtle . "#9cdbff")
+	    (cyan-subtle-bg . "#a2e8ff"))))
+
+;; Function to get dark mode preference from GNOME.
+(defun get-dark-preference ()
+  "Get the GNOME dark preference using `gsettings'."
+  (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
+
 ;; A simple check to load the desired theme at startup based on what
 ;; the global preference for GNOME is.  If such preference is not
 ;; registered, it just loads `modus-operandi'.
-(if (string-match-p
-     "dark"
-     (shell-command-to-string
-      "gsettings get org.gnome.desktop.interface color-scheme"))
+(if (string-match-p "dark" (get-dark-preference))
     (modus-themes-load-vivendi)
-  (if (string-match-p (system-name) "voidlaptop")
-      (progn
-	(setq modus-themes-operandi-color-overrides
-	      '((bg-main . "#ededed")
-		(bg-dim . "#faf6ef")
-		(bg-alt . "#f7efe5")
-		(bg-active . "#ddd0bb")
-		(bg-inactive . "#f6ece5")
-		(bg-completion . "#9cdbff")
-		(bg-completion-subtle . "#9cdbff")
-		(cyan-subtle-bg . "#a2e8ff")))
-
-	(setq modus-themes-operandi-color-overrides nil)
-	(modus-themes-load-vivendi))
-    (modus-themes-load-operandi)))
+  (modus-themes-load-operandi))
 
 ;; Set a keybind to toggle between light/dark mode on modus-* themes..
 (define-key global-map (kbd "<f12>") 'modus-themes-toggle)
