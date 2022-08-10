@@ -112,9 +112,10 @@
 		(bg-active . "#ddd0bb")
 		(bg-inactive . "#f6ece5")
 		(bg-completion . "#9cdbff")
-		(bg-completion-subtle . "#9cdbff")))
+		(bg-completion-subtle . "#9cdbff")
+		(cyan-subtle-bg . "#a2e8ff")))
 
-	(setq modus-themes-operandi-color-overrides t)
+	(setq modus-themes-operandi-color-overrides nil)
 	(modus-themes-load-vivendi))
     (modus-themes-load-operandi)))
 

@@ -9,4 +9,7 @@
         (no-special-glyphs . t)))
 (add-hook 'after-init-hook #'tooltip-mode)
 
+;; Enable some commands that are disabled by default
+(put 'downcase-region 'disabled nil)
+
 (provide 'misc-customizations)
