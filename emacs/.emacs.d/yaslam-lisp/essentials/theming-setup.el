@@ -22,7 +22,7 @@
  ;; the text relative to the base font size (or a cons cell of
  ;; height and FLOAT)
  ;; modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
- modus-themes-mode-line '(accented (padding . 0))
+ ;; modus-themes-mode-line '(accented (padding . 0))
 
  ;; Options for `modus-themes-hl-line' are either nil (the default),
  ;; or a list of properties that may include any of these symbols:
@@ -102,21 +102,27 @@
 	  '((bg-main . "#ededed")
 	    (bg-dim . "#faf6ef")
 	    (bg-alt . "#f7efe5")
-	    (bg-active . "#ddd0bb")
+	    (bg-active . "#dbdbdb")
 	    (bg-inactive . "#f6ece5")
 	    (bg-completion . "#9cdbff")
 	    (bg-completion-subtle . "#9cdbff")
-	    (cyan-subtle-bg . "#a2e8ff"))))
+	    (cyan-subtle-bg . "#a2e8ff")
+	    (fg-diff-removed . "#4b1010")
+	    (bg-diff-removed . "#ffc3d5"))))
 
-;; Function to get dark mode preference from GNOME.
-(defun get-dark-preference ()
-  "Get the GNOME dark preference using `gsettings'."
-  (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
+;; Predicate function to get dark mode preference from GNOME.
+(defun get-dark-preference-p ()
+  "Get the GNOME dark preference using `gsettings'.
+Return `t' if GNOME is in dark mode, else, return `nil'."
+  (if (string-match-p "dark"
+		      (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
+      t
+    nil))
 
 ;; A simple check to load the desired theme at startup based on what
 ;; the global preference for GNOME is.  If such preference is not
 ;; registered, it just loads `modus-operandi'.
-(if (string-match-p "dark" (get-dark-preference))
+(if (get-dark-preference-p)
     (modus-themes-load-vivendi)
   (modus-themes-load-operandi))
 

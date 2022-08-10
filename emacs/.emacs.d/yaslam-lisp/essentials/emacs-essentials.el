@@ -24,7 +24,9 @@
   (define-key map (kbd "s-F") 'find-file)
   (define-key map (kbd "s-K") 'kill-this-buffer)
   (define-key map (kbd "s-S") 'save-buffer)
-  (define-key map (kbd "s-:") 'other-window-kill-buffer))
+  (define-key map (kbd "s-:") 'other-window-kill-buffer)
+  (define-key map (kbd "s-{") 'diff-hl-previous-hunk)
+  (define-key map (kbd "s-}") 'diff-hl-next-hunk))
 ;; )
 
 ;; (if (string-match-p "voiddesktop" (system-name))
