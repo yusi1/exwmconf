@@ -186,18 +186,22 @@
 ;; If we aren't on a desktop environment which sets the
 ;; `$XDG_CURRENT_DESKTOP' variable, then use the
 ;; regular preset.
-(if (display-graphic-p)
-    (if (string-match-p (get-de-p) "")
-	(progn
-	  (if (string-match-p (system-name) "voidlaptop")
-	      (fontaine-set-preset 'large)
-	    ;; (fontaine-set-preset 'saucecode-large)
-	    (fontaine-set-preset 'large-desktop)
-	    ))
-      (progn (if (string-match-p (system-name) "voidlaptop")
-		 (fontaine-set-preset 'regular)
-	       ;; (fontaine-set-preset 'saucecode-regular)
-               (fontaine-set-preset 'regular-desktop)
-	       ))))
+;; (if (display-graphic-p)
+;;     (if (string-match-p (get-de-p) "")
+;; 	(progn
+;; 	  (if (string-match-p (system-name) "voidlaptop")
+;; 	      (fontaine-set-preset 'large)
+;; 	    ;; (fontaine-set-preset 'saucecode-large)
+;; 	    (fontaine-set-preset 'large-desktop)
+;; 	    ))
+;;       (progn (if (string-match-p (system-name) "voidlaptop")
+;; 		 (fontaine-set-preset 'regular)
+;; 	       ;; (fontaine-set-preset 'saucecode-regular)
+;;                (fontaine-set-preset 'regular-desktop)
+;; 	       ))))
+
+(if (string-match-p (system-name) "IDEAPAD-120S-14")
+    (fontaine-set-preset 'regular)
+  (fontaine-set-preset 'large-desktop))
 
 (provide 'fontaine-setup)

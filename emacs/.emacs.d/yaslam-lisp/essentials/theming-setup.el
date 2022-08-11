@@ -97,7 +97,7 @@
 
 ;; Override the `modus-operandi' theme colours when using the laptop.
 ;; Since the laptop display sucks at displaying white and less strong colours.
-(if (string-match-p (system-name) "voidlaptop")
+(if (string-match-p (system-name) "IDEAPAD-120S-14")
     (setq modus-themes-operandi-color-overrides
 	  '((bg-main . "#ededed")
 	    (bg-dim . "#faf6ef")
