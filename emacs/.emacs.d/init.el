@@ -13,6 +13,10 @@
 (dolist (path '("yaslam-lisp/essentials" "yaslam-lisp/utility-packages" "yaslam-lisp/theming-packages"))
   (add-to-list 'load-path (locate-user-emacs-file path)))
 
+;; Setup the `HOME' variable for the laptop.
+(if (string-match-p (system-name) "IDEAPAD-120S-14")
+    (setenv "HOME" "C:\\Users\\YUZi5\\AppData\\Roaming"))
+
 ;; Setup MELPA
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
