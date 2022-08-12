@@ -30,9 +30,9 @@
 			(:open "[" :close "]" :actions
 			       (insert wrap autoskip navigate))
 			(:open "{" :close "}" :actions
-			       (insert wrap autoskip navigate))
-			(:open "`" :close "'" :actions
 			       (insert wrap autoskip navigate))))))
+			;; (:open "`" :close "'" :actions
+			;; (insert wrap autoskip navigate))))))
 
 (let ((map smartparens-mode-map))
   (define-key map (kbd "C-M-d") #'sp-splice-sexp)
