@@ -188,8 +188,10 @@
       t))
 
 (if (display-graphic-p)
-    (if (string-match-p (system-name) "IDEAPAD-120S-14")
-	(fontaine-set-preset 'regular)
+    (if (string-match-p (system-name) "fedora")
+        (if (get-de-return-p)
+	    (fontaine-set-preset 'large)
+	  (fontaine-set-preset 'regular))
       (if (get-de-return-p)
 	  (fontaine-set-preset 'regular-desktop)
 	(fontaine-set-preset 'large-desktop))))

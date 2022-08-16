@@ -9,6 +9,9 @@
 		 notmuch-show-mode-hook))
   (add-hook modes (lambda () (display-line-numbers-mode 1))))
 
+;; Emacs 29 -- `pixel-scroll-precision-mode' for enhanced scrolling behaviour.
+(pixel-scroll-precision-mode t)
+
 ;; Setup `load-path'.
 (dolist (path '("yaslam-lisp/essentials" "yaslam-lisp/utility-packages" "yaslam-lisp/theming-packages"))
   (add-to-list 'load-path (locate-user-emacs-file path)))
