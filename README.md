@@ -12,7 +12,7 @@
 
 ### Do the test first:
 
-`stow --dotfiles -v --simulate -v -t "$HOME" -R <package name>`
+`stow --dotfiles -v --simulate -t "$HOME" -R <package name>`
 
 ### Then, do the proper thing:
 
