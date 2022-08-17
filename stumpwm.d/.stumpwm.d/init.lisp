@@ -222,6 +222,8 @@
 ;; (load-module "net")
 ;; Disk information module
 (load-module "disk")
+;; Disk module configuration
+(setf disk:*disk-usage-paths* '("/" "/home"))
 ;; Ram information module
 (load-module "mem")
 ;; Time modeline format
