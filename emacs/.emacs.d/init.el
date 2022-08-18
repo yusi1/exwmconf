@@ -35,7 +35,7 @@
    '("4a288765be220b99defaaeb4c915ed783a9916e3e08f33278bf5ff56e49cbc73" default))
  '(notmuch-search-oldest-first nil)
  '(package-selected-packages
-   '(electric-cursor cursory all-the-icons-ibuffer diff-hl all-the-icons-dired all-the-icons ligature zen-mode tempel consult-notmuch lin notmuch pulsar multiple-cursors wgrep iedit org-superstar magit helpful ctrlf aggressive-indent marginalia consult pass embark which-key markdown-mode corfu sly vterm orderless vertico smartparens))
+   '(electric-cursor cursory all-the-icons-ibuffer diff-hl all-the-icons-dired all-the-icons ligature tempel consult-notmuch lin notmuch pulsar multiple-cursors wgrep iedit org-superstar magit helpful ctrlf aggressive-indent marginalia consult pass embark which-key markdown-mode corfu sly vterm orderless vertico smartparens))
  '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp-mail.outlook.com")
  '(smtpmail-smtp-service 25))

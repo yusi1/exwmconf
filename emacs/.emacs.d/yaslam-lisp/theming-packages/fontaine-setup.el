@@ -188,7 +188,7 @@
       t))
 
 (if (display-graphic-p)
-    (if (string-match-p (system-name) "fedora")
+    (if (string-match-p (system-name) "fedoralaptop")
         (if (get-de-return-p)
 	    (fontaine-set-preset 'large)
 	  (fontaine-set-preset 'regular))
