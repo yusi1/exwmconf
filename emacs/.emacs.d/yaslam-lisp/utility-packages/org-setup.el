@@ -43,10 +43,13 @@
 ;; For navigation in the `org-goto' buffer
 (setq org-goto-auto-isearch nil)
 ;; Set org files directory
-(setq org-directory "~/Documents/GTD")
+(setq org-directory "~/Documents/Captures/GTD")
 ;; Set org agenda files location
-(setq org-agenda-files '("~/Documents/GTD/Tasks"
-			 "~/Documents/GTD/Bills"))
+(let ((org-dir-1 (eval `(concat ,org-directory "/Tasks")))
+      (org-dir-2 (eval `(concat ,org-directory "/Bills"))))
+  (setq org-agenda-files `(,org-dir-1
+			   ,org-dir-2)))
+
 ;; Disable leading stars
 (setq org-superstar-remove-leading-stars t)
 ;; Org fold workaround for strange behaviour https://list.orgmode.org/87sfplyko3.fsf@localhost/
@@ -54,7 +57,7 @@
 ;; Indentation
 ;; (setq org-indent-mode t)
 
-  ;;; Setting up `org-crypt'
+;;; Setting up `org-crypt'
 (org-crypt-use-before-save-magic)
 
 (setq org-tags-exclude-from-inheritance '("crypt"))
@@ -64,7 +67,7 @@
 
 (setq auto-save-default nil)
 
-;; ;; Use fixed pitch font for certain things
+;; Use fixed pitch font for certain things
 (defun set-buffer-variable-pitch ()
   "Set variable pitch, but set fixed-pitch for tables etc.."
   (interactive)

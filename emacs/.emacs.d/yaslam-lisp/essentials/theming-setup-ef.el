@@ -12,10 +12,10 @@
 ;; 	 (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
 ;; 	(ef-themes-load-random 'dark)
 ;;       (ef-themes-load-random 'light))
-;;   (ef-themes-load-random 'light))
+;;   (ef-themes-load-random 'dark))
 
 ;; Load the theme of choice:
-(load-theme 'ef-day :no-confirm)
+(load-theme 'ef-autumn :no-confirm)
 
 ;; The themes we provide:
 ;;

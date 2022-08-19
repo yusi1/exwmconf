@@ -169,13 +169,14 @@ This is just a simpler version of the above functions for browsing root dir '/' 
   (define-key map (kbd "C-c W") 'change-symbol)
   (define-key map (kbd "C-c w") 'change-word))
 
-(defun ysz/untitled-buffer ()
-  "Create an untitled buffer and switch to it."
-  (interactive)
-  (and (get-buffer-create "untitled")
-       (switch-to-buffer "untitled")))
+;; (defun ysz/untitled-buffer ()
+;;   "Create an untitled buffer and switch to it."
+;;   (interactive)
+;;   (and (get-buffer-create "untitled")
+;;        (switch-to-buffer "untitled")))
 
-(define-key global-map (kbd "C-c C-n") 'ysz/untitled-buffer)
+;; (define-key global-map (kbd "C-c C-n") 'ysz/untitled-buffer)
+(define-key global-map (kbd "C-c C-n") 'scratch-buffer)
 
 (defun get-de-p ()
   "Get desktop environment."
@@ -197,7 +198,7 @@ This is just a simpler version of the above functions for browsing root dir '/' 
 (defun org-goto-journal ()
   "Goto the Org journal file."
   (interactive)
-  (setq org-journal-file "~/Documents/Journal/journal.org")
+  (setq org-journal-file "~/Documents/Captures/Journal/journal.org")
   (find-file org-journal-file))
 
 (defun org-goto-gtd-dir ()
