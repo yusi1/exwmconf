@@ -72,7 +72,7 @@ Control Mod1 Right :NextWorkspace
 mod1 F4 :Close
 
 #Minimize all windows on the current workspace
-Mod1 d :ShowDesktop
+Mod4 d :ShowDesktop
 
 # hide menus
 OnDesktop Mouse1 :HideMenus
