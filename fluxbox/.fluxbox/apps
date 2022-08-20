@@ -1,0 +1,143 @@
+[app] (class=Blueman-manager)
+  [Position]	(CENTER)	{0 0}
+  [Sticky]	{yes}
+[end]
+[app] (name=fbrun)
+  [Position]	(TOP)	{0 0}
+  [Deco]	{0x25}
+  [Layer]	{2}
+[end]
+[app] (class=Firefox)
+  [Position]	(UPPERLEFT)	{17% 4%}
+  [Close]	{yes}
+[end]
+[app] (class=Galculator)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=Geany)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=Gimp)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=Grsync)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=libreoffice-base)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=libreoffice-calc)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=libreoffice-draw)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=libreoffice-impress)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=libreoffice-math)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=libreoffice-writer)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=libreoffice-startcenter)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=Pavucontrol)
+  [Position]	(CENTER)	{0 0}
+  [Sticky]	{yes}
+[end]
+[app] (class=Qpdfview)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=Thunar)
+  [Position]	(UPPERLEFT)	{7% 24%}
+  [Close]	{yes}
+[end]
+[app] (class=Thunderbird)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=Tint2conf)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (class=file-roller)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (name=lxappearance)
+  [Position]	(UPPERLEFT)	{23% 27%}
+  [Close]	{yes}
+[end]
+[app] (name=yad) (class=Yad)
+  [Dimensions]	{45% 56%}
+  [Position]	(UPPERLEFT)	{51% 23%}
+  [Close]	{yes}
+[end]
+[app] (name=featherpad) (class=FeatherPad)
+  [Dimensions]	{60% 80%}
+  [Position]	(UPPERLEFT)	{25% 0%}
+[end]
+[app] (name=feh)
+  [Position]	(UPPERLEFT)	{36% 41%}
+  [Close]	{yes}
+[end]
+[app] (name=lxrandr) (class=Lxrandr)
+  [Position]	(CENTER)	{0 0}
+[end]
+[app] (name=system-keyboard-qt) (class=system-keyboard-qt)
+  [Position]	(CENTER)	{0 0}
+[end]
+[app] (name=gsimplecal) (class=calendar)
+  [Position]	(CENTER)	{0 0}
+  [Close]	{yes}
+[end]
+[app] (name=system-keyboard-qt) (class=system-keyboard-qt)
+  [Position]	(CENTER)	{0 0}
+[end]
+[app] (name=roxterm) (class=Roxterm)
+  [Dimensions]	{73% 71%}
+  [Position]	(UPPERLEFT)	{6% 35%}
+  [Close]	{yes}
+[end]
+[app] (name=synaptic) (class=Synaptic)
+  [Dimensions]	{58% 73%}
+  [Position]	(UPPERLEFT)	{22% 13%}
+  [Close]	{yes}
+[end]
+[app] (name=xfce4-appfinder) (class=Xfce4-appfinder)
+  [Dimensions]	{33% 90%}
+  [Position]	(UPPERLEFT)	{10% 8%}
+  [Close]	{yes}
+[end]
+[app] (name=mx-tools) (class=mx-tools)
+  [Dimensions]	{45% 87%}
+  [Position]	(UPPERLEFT)	{32% 7%}
+  [Close]	{yes}
+[end]
+[app] (name=custom-toolbox) (class=custom-toolbox)
+[end]
+[app] (name=qpdfview) (class=qpdfview)
+  [Dimensions]	{66% 93%}
+  [Position]	(UPPERLEFT)	{20% 3%}
+  [Close]	{yes}
+[end]
+[app] (name=gthumb)
+  [Dimensions]	{70% 75%}
+  [Position]	(UPPERLEFT)	{13% 13%}
+  [Close]	{no}
+[end]
