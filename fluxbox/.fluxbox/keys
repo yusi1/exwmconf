@@ -77,10 +77,10 @@ OnDesktop Mouse4 :PrevWorkspace
 OnDesktop Mouse5 :NextWorkspace
 
 # alt + left/right click to move/resize a window
-OnWindow Mod1 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindow Mod4 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
 OnWindowBorder Move1 :StartMoving
 
-OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 OnLeftGrip Move1 :StartResizing bottomleft
 OnRightGrip Move1 :StartResizing bottomright
 
