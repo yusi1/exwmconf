@@ -12,6 +12,9 @@
   (define-key map (kbd "C-c <up>")    'windmove-up)
   (define-key map (kbd "C-c <down>")  'windmove-down))
 
+;; Window history mode, `winner-mode'.
+(winner-mode)
+
 ;; Quicker keybinds
 ;; (if (string-match-p "voidlaptop" (system-name))
 (let ((map global-map))
