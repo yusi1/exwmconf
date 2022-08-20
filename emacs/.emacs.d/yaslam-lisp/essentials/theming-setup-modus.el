@@ -97,7 +97,7 @@
 
 ;; Override the `modus-operandi' theme colours when using the laptop.
 ;; Since the laptop display sucks at displaying white and less strong colours.
-(if (string-match-p (system-name) "fedoralaptop")
+(if (string-match-p (system-name) "MX-Laptop")
     (setq modus-themes-operandi-color-overrides
 	  '((bg-main . "#ededed")
 	    (bg-dim . "#faf6ef")
@@ -122,9 +122,11 @@ Return `t' if GNOME is in dark mode, else, return `nil'."
 ;; A simple check to load the desired theme at startup based on what
 ;; the global preference for GNOME is.  If such preference is not
 ;; registered, it just loads `modus-operandi'.
-(if (get-dark-preference-p)
-    (modus-themes-load-vivendi)
-  (modus-themes-load-operandi))
+;; (if (get-dark-preference-p)
+;;     (modus-themes-load-vivendi)
+;;   (modus-themes-load-operandi))
+
+(modus-themes-load-vivendi)
 
 ;; Set a keybind to toggle between light/dark mode on modus-* themes..
 (define-key global-map (kbd "<f12>") 'modus-themes-toggle)
