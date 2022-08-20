@@ -70,6 +70,7 @@ xfce4-clipman &
 #put brightness controller and battery monitor on toolbar
 #tint2 has its own battery widget so this is unnecessaary
 #xfce4-power-manager &
+xfce4-power-manager &
 
 # start user accessibility bus - if not already running
 /usr/libexec/at-spi-bus-launcher --launch-immediately  &
