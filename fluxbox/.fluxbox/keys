@@ -108,8 +108,9 @@ OnTitlebar Mouse3 :WindowMenu
    #OnWindow Mouse2 :WindowMenu
 
 # alt-tab
-Mod1 Tab :NextWindow {groups} (workspace=[current])
-Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])
+# REPLACED WITH: alttab application (which has a GUI for alt-tabbing)
+# Mod1 Tab :NextWindow {groups} (workspace=[current])
+# Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])
 
 # current window commands
 # Mod4 F4 :Close
