@@ -1,0 +1,12 @@
+#!/bin/bash
+
+### Do some post-processing of emails here
+# immediately archive all messages from "me"
+notmuch tag -new -- tag:new and from:YUZi54780@outlook.com
+
+# tag all messages from "*noip*"
+notmuch tag +urgent +noip -- tag:new and from:*noip*
+
+### After post-processing do stuff here
+# finally, retag all "new" messages "inbox" and "unread"
+notmuch tag +inbox +unread -new -- tag:new
