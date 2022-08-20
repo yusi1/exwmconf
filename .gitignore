@@ -23,3 +23,7 @@ xmobar/.config/xmobar/*stack*
 stumpwm.d/.stumpwm.d/modules
 
 nvim/.config/nvim/.netrwhist
+
+# Ignore databases
+*xapian*
+notmuch/mail/.notmuch/xapian
