@@ -104,7 +104,7 @@ fi
 picom -b &
 
 # start alttab application
-alttab -font "xft:Iosevka Comfy-12" -fg green -frame darkblue -t 250x100 -i 24x24 -s 2 -theme Papirus-mxbluedark &
+alttab -w 1 -font "xft:Iosevka Comfy-12" -fg green -frame darkblue -t 250x100 -i 24x24 -s 2 -theme Papirus-mxbluedark &
 
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.
