@@ -31,7 +31,7 @@ xdg-user-dirs-gtk-update
 #compton &
 
 #add system monitors 
-#gkrellm &
+gkrellm &
 
 # arandr genrated screenlayout 
 # before conky
