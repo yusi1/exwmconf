@@ -1,5 +1,5 @@
 (require 'notmuch)
-(require 'notmuch-labeler)
+;; (require 'notmuch-labeler)
 
 (defun notmuch-update-maildir ()
   "Call `notmuch new` to update maildir."
@@ -39,10 +39,10 @@
 (setq notmuch-show-logo nil)
 
 ;; `notmuch-labeler' setup.
-(notmuch-labeler-rename "unread" "unread" ':foreground "aqua")
-(notmuch-labeler-rename "inbox" "inbox" ':foreground "green")
-(notmuch-labeler-rename "signed" "signed" ':foreground "pink")
-(notmuch-labeler-rename "urgent" "urgent" ':foreground "red")
-(notmuch-labeler-rename "read" "read" ':foreground "green")
+;; (notmuch-labeler-rename "unread" "unread" ':foreground "aqua")
+;; (notmuch-labeler-rename "inbox" "inbox" ':foreground "green")
+;; (notmuch-labeler-rename "signed" "signed" ':foreground "pink")
+;; (notmuch-labeler-rename "urgent" "urgent" ':foreground "red")
+;; (notmuch-labeler-rename "read" "read" ':foreground "green")
 
 (provide 'notmuch-setup)
