@@ -1,2 +1,4 @@
 [exec] (Chroot Rescue Scan ) { x-terminal-emulator -e sudo chroot-rescue-scan --pause } Categories=X-antiX;MX-Maintenance;
 [exec] (Exit options ) { exit-options } Categories=Accessories;
+[exec] (Help ) { khelpcenter %u } Categories=Qt;KDE;Core;
+[exec] (Plasma Windowed ) { plasmawindowed %u }

@@ -115,8 +115,8 @@
   [Close]	{yes}
 [end]
 [app] (name=synaptic) (class=Synaptic)
-  [Dimensions]	{58% 73%}
-  [Position]	(UPPERLEFT)	{22% 13%}
+  [Dimensions]	{114% 111%}
+  [Position]	(UPPERLEFT)	{3% 0%}
   [Close]	{yes}
 [end]
 [app] (name=xfce4-appfinder) (class=Xfce4-appfinder)

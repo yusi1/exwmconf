@@ -1,5 +1,4 @@
 (require 'notmuch)
-;; (require 'notmuch-labeler)
 
 (defun notmuch-update-maildir ()
   "Call `notmuch new` to update maildir."
@@ -38,11 +37,15 @@
 (setq notmuch-fcc-dirs "sent")
 (setq notmuch-show-logo nil)
 
-;; `notmuch-labeler' setup.
-;; (notmuch-labeler-rename "unread" "unread" ':foreground "aqua")
-;; (notmuch-labeler-rename "inbox" "inbox" ':foreground "green")
-;; (notmuch-labeler-rename "signed" "signed" ':foreground "pink")
-;; (notmuch-labeler-rename "urgent" "urgent" ':foreground "red")
-;; (notmuch-labeler-rename "read" "read" ':foreground "green")
+;; Add things to show in `notmuch-hello'.
+(setq notmuch-saved-searches
+      `((:name "all mail" :query "*" :key ,(kbd "a"))
+	(:name "inbox" :query "tag:inbox" :key ,(kbd "i"))
+	(:name "unread" :query "tag:unread" :key ,(kbd "u"))
+	(:name "flagged" :query "tag:flagged" :key ,(kbd "f"))
+	(:name "sent" :query "tag:sent" :key ,(kbd "t"))
+	(:name "drafts" :query "tag:draft" :key ,(kbd "d"))
+	(:name "noip" :query "tag:noip" :key ,(kbd "ni"))
+	(:name "redhat" :query "tag:redhat" :key ,(kbd "rh"))))
 
 (provide 'notmuch-setup)

@@ -12,4 +12,9 @@
 ;; Enable some commands that are disabled by default
 (put 'downcase-region 'disabled nil)
 
+(require 'info)
+(let ((map Info-mode-map))
+  (define-key map (kbd "N") 'Info-next-reference)
+  (define-key map (kbd "P") 'Info-prev-reference))
+
 (provide 'misc-customizations)

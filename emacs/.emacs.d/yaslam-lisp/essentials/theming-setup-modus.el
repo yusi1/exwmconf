@@ -61,7 +61,7 @@
  ;; Options for `modus-themes-links' are either nil (the default),
  ;; or list of properties that may include any of these symbols:
  ;; `faint', `underline', `neutral-underline',`no-underline', `no-color', `bold', `italic', `background'
- modus-themes-links '(underline background bold)
+ modus-themes-links '(faint neutral-underline)
 
  modus-themes-org-blocks 'tinted-background ; {nil,'gray-background,'tinted-background}
 
@@ -108,7 +108,8 @@
 	    (bg-completion-subtle . "#9cdbff")
 	    (cyan-subtle-bg . "#a2e8ff")
 	    (fg-diff-removed . "#4b1010")
-	    (bg-diff-removed . "#ffc3d5"))))
+	    (bg-diff-removed . "#ffc3d5")
+	    )))
 
 ;; Predicate function to get dark mode preference from GNOME.
 (defun get-dark-preference-p ()
