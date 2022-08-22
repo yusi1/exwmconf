@@ -72,8 +72,8 @@
 (define-key *root-map* (kbd "C-q") "send-raw-key")
 
 ;; Open gnome-terminal
-(define-key *root-map* (kbd "c") "exec gnome-terminal")
-(define-key *root-map* (kbd "C-c") "exec gnome-terminal")
+(define-key *root-map* (kbd "c") "exec xfce4-terminal")
+(define-key *root-map* (kbd "C-c") "exec xfce4-terminal")
 
 ;; Kill windows
 ;; (define-key *group-root-map* (kbd "C-x") "delete")
@@ -97,7 +97,7 @@
 ;; (define-key *top-map* (kbd "C-r") `*my-run-bindings*)
 
 ;; Application launchers
-(define-key *top-map* (kbd "s-r") "exec rofi -show combi")
+(define-key *top-map* (kbd "s-r") "exec rofi -show drun")
 (define-key *top-map* (kbd "s-p") "exec dmenu_run")
 (define-key *top-map* (kbd "s-=") "exec ~/stuff/rofi-tmux-sessions.sh")
 
@@ -234,6 +234,7 @@
 (setf stumpwm:*screen-mode-line-format*
       (list
        "[^B%n^b] %W"
+       ;; '(:eval (enabled-minor-modes))
        "^>(^B^*%d^*^b)"
        ;; "%T"
        '(:eval
@@ -327,6 +328,28 @@
   ((kbd "s") "screenshot" t))
 
 (define-key *top-map* (kbd "SunPrint_Screen") "screenshot-map")
+
+;;; Minor mode stuff
+;; An example minor mode from the StumpWM manual
+(define-minor-mode swm-evil-mode () ()
+  (:scope :screen)
+  (:interactive t)
+  (:top-map '(("i" . "swm-evil-mode")
+              ("j" . "move-focus down")
+              ("k" . "move-focus up")
+              ("h" . "move-focus left")
+              ("l" . "move-focus right")
+              ("p" . "pull-hidden-previous")
+              ("n" . "pull-hidden-next")
+              ("S" . "hsplit")
+              ("s" . "vsplit")
+              ("r" . "remove-split")
+              ("g" . *groups-map*)
+              ("x" . *exchange-window-map*)))
+  (:lighter-make-clickable nil)
+  (:lighter "EVIL"))
+
+(define-key *root-map* (kbd "<") "swm-evil-mode")
 
 ;; Pass module
 (load-module "pass")
