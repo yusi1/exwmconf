@@ -21,7 +21,7 @@
  ;; of padding and NATNUM), and a floating point for the height of
  ;; the text relative to the base font size (or a cons cell of
  ;; height and FLOAT)
- ;; modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
+ modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
  ;; modus-themes-mode-line '(accented (padding . 0))
 
  ;; Options for `modus-themes-hl-line' are either nil (the default),
@@ -82,13 +82,13 @@
 
 (if (string-match-p (system-name) "voiddesktop")
     (setq  modus-themes-headings ; this is an alist: read the manual or its doc string
-	   '((1 . (rainbow 1.2))
+	   '((1 . (light variable-pitch 1.2))
 	     (2 . (monochrome 1.0))
 	     (t . (semibold)))
 	   )
   (setq modus-themes-headings ; this is an alist: read the manual or its doc string
-	'((1 . (rainbow 1.4))
-	  (2 . (monochrome 1.2))
+	'((1 . (light variable-pitch 1.2))
+	  (2 . (monochrome 1.05))
 	  (t . (semibold)))
 	))
 
