@@ -51,14 +51,14 @@
  ;; Hide leading stars
  org-hide-leading-stars t
  ;; Use custom ellipsis for headings
- org-ellipsis …
+ org-ellipsis "…"
  ;; Don't auto-align tags
  org-auto-align-tags nil
  ;; Don't auto-indent tags
  org-tags-column 0
  org-catch-invisible-edits 'show-and-error
  ;; Use special ctrl-a/e keybinds that are content-aware.
- setq org-special-ctrl-a/e t
+ org-special-ctrl-a/e t
  ;; Respect content when inserting new headings.
  org-insert-heading-respect-content t
  ;; For navigation in the `org-goto' buffer
@@ -97,14 +97,15 @@
 (add-hook 'org-mode-hook 'set-buffer-variable-pitch)
 
 ;; `org-agenda' styling
-(setq org-agenda-tags-column 0
-      org-agenda-block-separator ?─
-      org-agenda-time-grid
-      '((daily today require-timed)
-	(800 1000 1200 1400 1600 1800 2000)
-	" ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
-      org-agenda-current-time-string
-      "⭠ now ─────────────────────────────────────────────────")
+(setq
+ org-agenda-tags-column 0
+ org-agenda-block-separator ?─
+ org-agenda-time-grid
+ '((daily today require-timed)
+   (800 1000 1200 1400 1600 1800 2000)
+   " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+ org-agenda-current-time-string
+ "⭠ now ─────────────────────────────────────────────────")
 
 ;; Set org files directory
 (setq org-directory "~/Documents/Captures/GTD")
