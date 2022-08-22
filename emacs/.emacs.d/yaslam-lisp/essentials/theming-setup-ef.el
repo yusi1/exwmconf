@@ -14,8 +14,17 @@
 ;;       (ef-themes-load-random 'light))
 ;;   (ef-themes-load-random 'dark))
 
+;; Heading customization
+(setq ef-themes-headings
+      (quote ((1 . (light variable-pitch 1.4))
+	      (2 . (monochrome 1.2))
+	      (t . (semibold)))))
+
+;; Which themes to toggle
+(setq ef-themes-toggle '(ef-deuteranopia-dark ef-deuteranopia-light))
+
 ;; Load the theme of choice:
-(load-theme 'ef-autumn :no-confirm)
+(load-theme 'ef-deuteranopia-dark :no-confirm)
 
 ;; The themes we provide:
 ;;
