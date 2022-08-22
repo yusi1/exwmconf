@@ -16,7 +16,7 @@
   [Close]	{yes}
 [end]
 [app] (class=Geany)
-  [Position]	(CENTER)	{0 0}
+  [Position]	(UPPERLEFT)	{17% 6%}
   [Close]	{yes}
 [end]
 [app] (class=Gimp)
@@ -64,7 +64,7 @@
   [Close]	{yes}
 [end]
 [app] (class=Thunar)
-  [Position]	(UPPERLEFT)	{7% 24%}
+  [Position]	(UPPERLEFT)	{17% 7%}
   [Close]	{yes}
 [end]
 [app] (class=Thunderbird)
@@ -72,7 +72,7 @@
   [Close]	{yes}
 [end]
 [app] (class=Tint2conf)
-  [Position]	(CENTER)	{0 0}
+  [Position]	(UPPERLEFT)	{16% 6%}
   [Close]	{yes}
 [end]
 [app] (class=file-roller)
@@ -85,7 +85,7 @@
 [end]
 [app] (name=yad) (class=Yad)
   [Dimensions]	{45% 56%}
-  [Position]	(UPPERLEFT)	{51% 23%}
+  [Position]	(UPPERLEFT)	{38% 23%}
   [Close]	{yes}
 [end]
 [app] (name=featherpad) (class=FeatherPad)
@@ -93,7 +93,7 @@
   [Position]	(UPPERLEFT)	{25% 0%}
 [end]
 [app] (name=feh)
-  [Position]	(UPPERLEFT)	{36% 41%}
+  [Position]	(UPPERLEFT)	{14% 2%}
   [Close]	{yes}
 [end]
 [app] (name=lxrandr) (class=Lxrandr)
@@ -110,8 +110,8 @@
   [Position]	(CENTER)	{0 0}
 [end]
 [app] (name=roxterm) (class=Roxterm)
-  [Dimensions]	{73% 71%}
-  [Position]	(UPPERLEFT)	{6% 35%}
+  [Dimensions]	{67% 78%}
+  [Position]	(UPPERLEFT)	{20% 13%}
   [Close]	{yes}
 [end]
 [app] (name=synaptic) (class=Synaptic)
@@ -120,20 +120,20 @@
   [Close]	{yes}
 [end]
 [app] (name=xfce4-appfinder) (class=Xfce4-appfinder)
-  [Dimensions]	{33% 90%}
-  [Position]	(UPPERLEFT)	{10% 8%}
+  [Dimensions]	{65% 84%}
+  [Position]	(UPPERLEFT)	{17% 10%}
   [Close]	{yes}
 [end]
 [app] (name=mx-tools) (class=mx-tools)
   [Dimensions]	{45% 87%}
-  [Position]	(UPPERLEFT)	{32% 7%}
+  [Position]	(UPPERLEFT)	{24% 6%}
   [Close]	{yes}
 [end]
 [app] (name=custom-toolbox) (class=custom-toolbox)
 [end]
 [app] (name=qpdfview) (class=qpdfview)
-  [Dimensions]	{66% 93%}
-  [Position]	(UPPERLEFT)	{20% 3%}
+  [Dimensions]	{100% 100%}
+  [Position]	(UPPERLEFT)	{0% 0%}
   [Close]	{yes}
 [end]
 [app] (name=gthumb)

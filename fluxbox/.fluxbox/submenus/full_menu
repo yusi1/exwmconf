@@ -19,6 +19,7 @@
 [exec] (Midnight Commander ) { xfce4-terminal -e mc } Categories=ConsoleOnly;Utility;FileManager;System;FileTools;
 [exec] (MX Updater ) { /usr/bin/apt-notifier-unhide-Icon } Categories=System;Qt;KDE;Utility;X-KDE-Utilities-Desktop;
 [exec] (Neovim ) { xfce4-terminal -e nvim } Categories=Utility;TextEditor;
+[exec] (Nextcloud desktop sync client ) { nextcloud } Categories=Utility;X-SuSE-SyncUtility;
 [exec] (nitrogen ) { nitrogen } Categories=Utility;GTK;DesktopSettings;
 [exec] (Onboard ) { onboard } Categories=Utility;Accessibility;
 [exec] (ROXTerm ) { roxterm } Categories=GTK;Utility;TerminalEmulator;System;
@@ -33,6 +34,7 @@
 [exec] (Icon Browser ) { yad-icon-browser } Categories=GTK;Development;
 [end]
 [submenu] (Games)
+[exec] (SuperTux 2 ) { supertux2 } Categories=Game;ArcadeGame;
 [end]
 [submenu] (Graphics)
 [exec] (gThumb ) { gthumb  } Categories=GNOME;GTK;Graphics;Viewer;RasterGraphics;2DGraphics;Photography;
@@ -43,6 +45,7 @@
 [exec] (Firefox ) { firefox  } Categories=Network;WebBrowser;
 [exec] (MX Network Assistant ) { mxna-launcher } Categories=System;MX-Setup;
 [exec] (MX Viewer ) { mx-viewer  } Categories=Qt;Network;Utilities;
+[exec] (Wireshark ) { wireshark } Categories=Network;Monitor;Qt;
 [end]
 [submenu] (Multimedia)
 [exec] (Alsamixer ) { x-terminal-emulator -e alsamixer } Categories=AudioVideo;Player;Audio;
@@ -118,6 +121,7 @@
 [exec] (System Locales ) { su-to-root -X -c system-locales-mx } Categories=XFCE;GTK;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-HardwareSettings;MX-Setup
 [exec] (System Profiler and Benchmark ) { /usr/bin/hardinfo } Categories=System;
 [exec] (Thunar File Manager ) { thunar  } Categories=System;Utility;Core;GTK;FileTools;FileManager;
+[exec] (Timeshift ) { timeshift-launcher } Categories=System;
 [exec] (Tint2 Manager ) { /usr/bin/mxfb-tint2-manager } Categories=System;
 [exec] (Tint2 ) { tint2 } Categories=System;
 [exec] (Titlebar ) { mxfb-top } Categories=System;
