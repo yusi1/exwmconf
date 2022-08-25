@@ -4,8 +4,11 @@
 # immediately archive all messages from "me"
 notmuch tag -new -- tag:new and from:YUZi54780@outlook.com
 
-# tag all messages from "*noip*"
+# tag all messages urgent from "*noip*"
 notmuch tag +urgent +noip -- tag:new and from:*noip*
+
+# tag all messages urgent from "Important" emails
+notmuch tag +urgent -- tag:new and subject:"Important" or subject:"Action Required"
 
 # tag all messages from RedHat mailing list
 notmuch tag +redhat -- tag:new and from:errata@redhat.com
