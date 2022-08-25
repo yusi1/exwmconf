@@ -45,6 +45,7 @@
 	(:name "flagged" :query "tag:flagged" :key ,(kbd "f"))
 	(:name "sent" :query "tag:sent" :key ,(kbd "t"))
 	(:name "drafts" :query "tag:draft" :key ,(kbd "d"))
+	(:name "urgent" :query "tag:urgent" :key ,(kbd "!"))
 	(:name "noip" :query "tag:noip" :key ,(kbd "ni"))
 	(:name "redhat" :query "tag:redhat" :key ,(kbd "rh"))))
 
