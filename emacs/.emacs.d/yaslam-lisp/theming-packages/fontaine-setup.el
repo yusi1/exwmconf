@@ -1,5 +1,8 @@
 (require 'fontaine)
 
+(setq fontaine-latest-state-file
+      (locate-user-emacs-file "fontaine-latest-state.eld"))
+
 (setq fontaine-presets '((regular
 			  :default-family "Iosevka Comfy"
 			  :default-weight normal
@@ -182,19 +185,14 @@
 			  :line-spacing 1)
 			 ))
 
-
-(defun get-de-return-p ()
-  (if (not (string-match-p (get-de-p) ""))
-      t))
-
+;; Recover last preset or fall back to desired style from
+;; `fontaine-presets'.
 (if (display-graphic-p)
-    (if (string-match-p (system-name) "MX-Laptop")
-        (if (get-de-return-p)
-	    (fontaine-set-preset 'large-desktop)
-	  (fontaine-set-preset 'regular-desktop))
-      (if (get-de-return-p)
-	  (fontaine-set-preset 'regular-desktop)
-	(fontaine-set-preset 'large-desktop))))
+    (fontaine-set-preset (or (fontaine-restore-latest-preset) 'regular)))
+
+;; The other side of `fontaine-restore-latest-preset'.
+(add-hook 'kill-emacs-hook #'fontaine-store-latest-preset)
+
 ;; Keybind to change presets
 (progn
   (gkey "C-c f" 'fontaine-set-preset)
