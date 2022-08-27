@@ -4,12 +4,18 @@
 (setq mc/cmds-to-run-for-all
       '(
 	sp-backward-delete-char
+	sp-backward-kill-word
 	sp-backward-sexp
 	sp-delete-char
+	sp-forward-slurp-sexp
 	sp-kill-region
+	sp-kill-word
+	sp-unwrap-sexp
 	))
 
 (setq mc/cmds-to-run-once
       '(
+	pixel-scroll-precision
+	pixel-scroll-start-momentum
 	text-scale-adjust
 	))
