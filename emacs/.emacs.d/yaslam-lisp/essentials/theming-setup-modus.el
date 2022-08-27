@@ -21,7 +21,7 @@
  ;; of padding and NATNUM), and a floating point for the height of
  ;; the text relative to the base font size (or a cons cell of
  ;; height and FLOAT)
- modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
+ ;; modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
  ;; modus-themes-mode-line '(accented (padding . 0))
 
  ;; Options for `modus-themes-hl-line' are either nil (the default),

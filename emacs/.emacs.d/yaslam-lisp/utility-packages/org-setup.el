@@ -151,11 +151,11 @@
 	 "\n* Bills & Payments\n** %?")
 	("j" "Journal" entry (file+headline "~/Documents/Captures/Journal/journal.org"
 					    "Personal Thoughts")
-	 "* %U :crypt:\n%?"
+	 "** %U :crypt:\n%?"
 	 :jump-to-captured t)
-	;; ("d" "Distro Journal" entry (file+headline "~/Documents/Journal/Distro-Journal/journal.org"
-	;; "[ENTER DISTRO NAME HERE] Notes")
-	;; "* Note 1\n%?")
+	;; ("d" "Distro Journal" entry (file+headline "~/Documents/Captures/Journal/Distro-Journal/journal.org"
+	;; 					   "[ENTER DISTRO NAME HERE] Notes")
+	;;  "* Note 1\n%?")
 	("x" "Trashbin" entry (file+headline "~/.notes"
 					     "Trashbin")
 	 "* %U\n%?"
