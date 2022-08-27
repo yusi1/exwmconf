@@ -25,9 +25,9 @@
 		"-v"))
     (display-buffer buffer)))
 
-(let ((map global-map))
-  (define-key global-map (kbd "C-c e e") 'notmuch)
-  (define-key global-map (kbd "C-c e u") 'notmuch-update-maildir))
+(progn
+  (gkey "C-c e e" 'notmuch)
+  (gkey "C-c e u" 'notmuch-update-maildir))
 
 (setq mail-host-address "YUZi54780@outlook.com")
 (setq user-full-name "Yusef Aslam")

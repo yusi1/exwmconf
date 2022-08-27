@@ -12,13 +12,13 @@
     (global-org-modern-mode))
 
 ;; Global Org mode keybinds
-(let ((map global-map))
-  (define-key map (kbd "C-c l") 'org-store-link)
-  (define-key map (kbd "C-c a") 'org-agenda)
-  (define-key map (kbd "C-c c") 'org-capture)
-  (define-key map (kbd "C-c g g") 'org-capture-goto-file)
-  (define-key map (kbd "C-c g j") 'org-goto-journal)
-  (define-key map (kbd "C-c g t") 'org-goto-gtd-dir))
+(progn
+  (gkey "C-c l" 'org-store-link)
+  (gkey "C-c a" 'org-agenda)
+  (gkey "C-c c" 'org-capture)
+  (gkey "C-c g g" 'org-capture-goto-file)
+  (gkey "C-c g j" 'org-goto-journal)
+  (gkey "C-c g t" 'org-goto-gtd-dir))
 
 ;; Internal Org mode keybinds
 (let ((map org-mode-map))

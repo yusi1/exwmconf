@@ -130,6 +130,6 @@ Return `t' if GNOME is in dark mode, else, return `nil'."
 (modus-themes-load-vivendi)
 
 ;; Set a keybind to toggle between light/dark mode on modus-* themes..
-(define-key global-map (kbd "<f12>") 'modus-themes-toggle)
+(gkey "<f12>" 'modus-themes-toggle)
 
 (provide 'theming-setup-modus)

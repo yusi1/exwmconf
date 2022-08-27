@@ -1,35 +1,37 @@
 ;; General commands and remappings
-(let ((map global-map))
-  (define-key map [remap kill-buffer] 'kill-this-buffer))
+(progn
+  (gremap global-map "kill-buffer" 'kill-this-buffer)
+  (gkey "C-x b" 'consult-buffer)
+  (gkey "C-x C-b" 'ibuffer))
 
 ;; Quicker window navigation
 ;; With S-<UDLR>
 (windmove-default-keybindings)
 ;; For Emacs in terminal mode
-(let ((map global-map))
-  (define-key map (kbd "C-c <left>")  'windmove-left)
-  (define-key map (kbd "C-c <right>") 'windmove-right)
-  (define-key map (kbd "C-c <up>")    'windmove-up)
-  (define-key map (kbd "C-c <down>")  'windmove-down))
+(progn
+  (gkey "C-c <left>" 'windmove-left)
+  (gkey "C-c <right>" 'windmove-right)
+  (gkey "C-c <up>" 'windmove-up)
+  (gkey "C-c <down>" 'windmove-down))
 
 ;; Window history mode, `winner-mode'.
 (winner-mode)
 
 ;; Quicker keybinds
 ;; (if (string-match-p "voidlaptop" (system-name))
-(let ((map global-map))
-  (define-key map (kbd "s-)") 'delete-window)
-  (define-key map (kbd "s-!") 'delete-other-windows)
-  (define-key map (kbd "s-\"") 'split-window-below)
-  (define-key map (kbd "s-£") 'split-window-right)
-  (define-key map (kbd "s-O") 'other-window)
-  (define-key map (kbd "s-B") 'consult-buffer)
-  (define-key map (kbd "s-F") 'find-file)
-  (define-key map (kbd "s-K") 'kill-this-buffer)
-  (define-key map (kbd "s-S") 'save-buffer)
-  (define-key map (kbd "s-:") 'other-window-kill-buffer)
-  (define-key map (kbd "s-{") 'diff-hl-previous-hunk)
-  (define-key map (kbd "s-}") 'diff-hl-next-hunk))
+(progn
+  (gkey "s-)" 'delete-window)
+  (gkey "s-!" 'delete-other-windows)
+  (gkey "s-\"" 'split-window-below)
+  (gkey "s-£" 'split-window-right)
+  (gkey "s-O" 'other-window)
+  (gkey "s-B" 'consult-buffer)
+  (gkey "s-F" 'find-file)
+  (gkey "s-K" 'kill-this-buffer)
+  (gkey "s-S" 'save-buffer)
+  (gkey "s-:" 'other-window-kill-buffer)
+  (gkey "s-{" 'diff-hl-previous-hunk)
+  (gkey "s-}" 'diff-hl-next-hunk))
 ;; )
 
 ;; (if (string-match-p "voiddesktop" (system-name))
@@ -46,9 +48,9 @@
 ;;       (define-key map (kbd "M-:") 'other-window-kill-buffer)))
 
 ;; Bookmark menu
-(let ((map global-map))
-  (define-key map (kbd "C-c b") 'bookmark-bmenu-list)
-  (define-key map (kbd "C-c C-b") 'bookmark-bmenu-list))
+(progn
+  (gkey "C-c b" 'bookmark-bmenu-list)
+  (gkey "C-c C-b" 'bookmark-bmenu-list))
 
 ;; Make yes/no prompts be y/n prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -63,7 +65,7 @@
   (delete-other-windows)
   (message "Killing buffer in the next window."))
 
-(define-key global-map (kbd "C-:") 'other-window-kill-buffer)
+(gkey "C-:" 'other-window-kill-buffer)
 
 ;; Make the current file being viewed in the buffer
 ;; get viewed with root privileges using TRAMP and `su'.
@@ -112,21 +114,21 @@ This is just a simpler version of the above functions for browsing root dir '/' 
   (interactive)
   (find-file (read-file-name "Find file (OpenWRT - root): " "/ssh:root@192.168.2.1:/")))
 
-(let ((map global-map))
-  (define-key map (kbd "C-c s s") 'view-as-root)
-  (define-key map (kbd "C-c s c") 'view-as-root-new-buffer)
-  (define-key map (kbd "C-c s f") 'find-file-as-root)
-  (define-key map (kbd "C-c s <mouse-3>") 'find-file-as-root) ; This keybind will open a graphical dialogue to find a file as root.
-  (define-key map (kbd "C-c s d") 'dired-root)
-  (define-key map (kbd "C-c s v") 'find-file-vps)
-  (define-key map (kbd "C-c s r") 'find-file-openwrt))
+(progn
+  (gkey "C-c s s" 'view-as-root)
+  (gkey "C-c s c" 'view-as-root-new-buffer)
+  (gkey "C-c s f" 'find-file-as-root)
+  (gkey "C-c s <mouse-3>" 'find-file-as-root) ; This keybind will open a graphical dialogue to find a file as root.
+  (gkey "C-c s d" 'dired-root)
+  (gkey "C-c s v" 'find-file-vps)
+  (gkey "C-c s r" 'find-file-openwrt))
 
 (defun search-nextcloud-dir ()
   "Search the Nextcloud directory, usually in /home/<user>/Nextcloud."
   (interactive)
   (find-file (read-file-name "Find file (Nextcloud): " "~/Nextcloud/")))
 
-(define-key global-map (kbd "C-c n s") 'search-nextcloud-dir)
+(gkey "C-c n s" 'search-nextcloud-dir)
 
 (defun transpose-words-backwards ()
   "Transpose words, but backwards."
@@ -168,9 +170,9 @@ This is just a simpler version of the above functions for browsing root dir '/' 
                        (set-window-configuration old-window-configuration)
                        (goto-char end-of-edit))))))
 
-(let ((map global-map))
-  (define-key map (kbd "C-c W") 'change-symbol)
-  (define-key map (kbd "C-c w") 'change-word))
+(progn 
+  (gkey "C-c W" 'change-symbol)
+  (gkey "C-c w" 'change-word))
 
 ;; (defun ysz/untitled-buffer ()
 ;;   "Create an untitled buffer and switch to it."
@@ -178,8 +180,8 @@ This is just a simpler version of the above functions for browsing root dir '/' 
 ;;   (and (get-buffer-create "untitled")
 ;;        (switch-to-buffer "untitled")))
 
-;; (define-key global-map (kbd "C-c C-n") 'ysz/untitled-buffer)
-(define-key global-map (kbd "C-c C-n") 'scratch-buffer)
+;; (gkey "C-c C-n" 'ysz/untitled-buffer)
+(gkey "C-c C-n" 'scratch-buffer)
 
 (defun get-de-p ()
   "Get desktop environment."

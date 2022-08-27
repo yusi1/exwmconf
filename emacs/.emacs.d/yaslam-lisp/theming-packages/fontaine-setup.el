@@ -195,5 +195,9 @@
       (if (get-de-return-p)
 	  (fontaine-set-preset 'regular-desktop)
 	(fontaine-set-preset 'large-desktop))))
+;; Keybind to change presets
+(progn
+  (gkey "C-c f" 'fontaine-set-preset)
+  (gkey "C-c F" 'fontaine-set-face-font))
 
 (provide 'fontaine-setup)
