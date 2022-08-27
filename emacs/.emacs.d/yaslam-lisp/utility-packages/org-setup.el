@@ -22,14 +22,14 @@
 
 ;; Internal Org mode keybinds
 (let ((map org-mode-map))
-  (define-key map (kbd "<double-mouse-1>") 'org-cycle)
-  (define-key map (kbd "<f8>") 'org-tree-slide-mode)
-  (define-key map (kbd "S-<f8>") 'org-tree-slide-skip-done-toggle)
-  ;; (define-key map (kbd "C-c s a") 'ag)
-  (define-key map (kbd "C-c h e") 'org-encrypt-entry)
-  (define-key map (kbd "C-c h d") 'org-decrypt-entry)
-  (define-key map (kbd "M-n") 'org-next-item)
-  (define-key map (kbd "M-p") 'org-previous-item))
+  (keymap-set map "<double-mouse-1>" 'org-cycle)
+  (keymap-set map "<f8>" 'org-tree-slide-mode)
+  (keymap-set map "s-<f8>" 'org-tree-slide-skip-done-toggle)
+  ;; (keymap-set map "C-c s a" 'ag)
+  (keymap-set map "C-c h e" 'org-encrypt-entry)
+  (keymap-set map "C-c h d" 'org-decrypt-entry)
+  (keymap-set map "M-n" 'org-next-item)
+  (keymap-set map "M-p" 'org-previous-item))
 
 ;; Configuration
 (visual-line-mode 1)
