@@ -26,8 +26,8 @@
 ;; (run-shell-command "nextcloud --background")
 
 ;; Finally, start the mode-line
-(sleep 0.5)
-(mode-line)
+; (sleep 0.5)
+; (mode-line)
 
 ;; Start the system tray aswell
 ;; (load-module "stumptray")

@@ -65,6 +65,9 @@
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "exec sleep 0.1 && ~/stuff/brightness-control.sh -i 2000")
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "exec sleep 0.1 && ~/stuff/brightness-control.sh -d 2000")
 
+;; set display configuration using a keybind
+(define-key *top-map* (kbd "F12") "exec autorandr -c")
+
 ;; Send raw key, for example when you need to press C-t to open a new
 ;; tab in a browser, StumpWM intercepts this, thus you can't open a new tab.
 ;; So `send-raw-key' does exactly what is said on the tin, it sends the raw C-t so that
@@ -72,8 +75,8 @@
 (define-key *root-map* (kbd "C-q") "send-raw-key")
 
 ;; Open gnome-terminal
-(define-key *root-map* (kbd "c") "exec xfce4-terminal")
-(define-key *root-map* (kbd "C-c") "exec xfce4-terminal")
+(define-key *root-map* (kbd "c") "exec uxterm")
+(define-key *root-map* (kbd "C-c") "exec uxterm")
 
 ;; Kill windows
 ;; (define-key *group-root-map* (kbd "C-x") "delete")
