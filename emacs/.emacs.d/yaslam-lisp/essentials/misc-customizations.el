@@ -17,4 +17,7 @@
   (define-key map (kbd "N") 'Info-next-reference)
   (define-key map (kbd "P") 'Info-prev-reference))
 
+(require 'speedbar)
+(gkey "C-c `" 'speedbar)
+
 (provide 'misc-customizations)
