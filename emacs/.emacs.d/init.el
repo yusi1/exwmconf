@@ -9,6 +9,14 @@
 		 notmuch-show-mode-hook))
   (add-hook modes (lambda () (display-line-numbers-mode 1))))
 
+;; UI tweaks
+(if (display-graphic-p)
+    (progn
+      (menu-bar-mode -1)
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)
+      (tab-bar-mode -1)
+      (tab-bar-history-mode -1)))
 ;; Emacs 29 -- `pixel-scroll-precision-mode' for enhanced scrolling behaviour.
 (pixel-scroll-precision-mode t)
 
