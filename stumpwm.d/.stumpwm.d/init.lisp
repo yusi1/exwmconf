@@ -66,7 +66,7 @@
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "exec sleep 0.1 && ~/stuff/brightness-control.sh -d 2000")
 
 ;; set display configuration using a keybind
-(define-key *top-map* (kbd "F12") "exec autorandr -c")
+(define-key *root-map* (kbd "F12") "exec autorandr -c")
 
 ;; Send raw key, for example when you need to press C-t to open a new
 ;; tab in a browser, StumpWM intercepts this, thus you can't open a new tab.
@@ -101,16 +101,16 @@
 
 ;; Application launchers
 (define-key *top-map* (kbd "s-r") "exec rofi -show drun")
-(define-key *top-map* (kbd "s-p") "exec dmenu_run")
+(define-key *top-map* (kbd "s-p") "exec dmenu_run -fn \"Iosevka Comfy Wide Fixed:size=14\" -nb \"#000000\" -sb \"darkblue\" -nf \"white\"")
 (define-key *top-map* (kbd "s-=") "exec ~/stuff/rofi-tmux-sessions.sh")
 
 ;; Fullscreen
 (define-key *top-map* (kbd "s-f") "fullscreen")
 
 ;; Volume control
-;; (define-key *top-map* (kbd "s-F8") "exec pamixer -i 2")
-;; (define-key *top-map* (kbd "s-F7") "exec pamixer -d 2")
-;; (define-key *top-map* (kbd "s-F5") "exec pamixer -t")
+(define-key *top-map* (kbd "s-F8") "exec pamixer -i 2")
+(define-key *top-map* (kbd "s-F7") "exec pamixer -d 2")
+(define-key *top-map* (kbd "s-F5") "exec pamixer -t")
 
 ;; My own mini interactive navigation keymap for navigating windows
 ;; in the current group.
@@ -229,6 +229,9 @@
 (setf disk:*disk-usage-paths* '("/" "/home"))
 ;; Ram information module
 (load-module "mem")
+;; maildir module
+;; (load-module "maildir")
+;; (setf maildir:*maildir-alist* '((Personal . "/home/yaslam/mail")))
 ;; Time modeline format
 (setf stumpwm:*time-modeline-string* "%a %b %e %H:%M")
 ;; Window modeline format
