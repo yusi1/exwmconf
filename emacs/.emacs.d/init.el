@@ -17,8 +17,10 @@
       (scroll-bar-mode -1)
       (tab-bar-mode -1)
       (tab-bar-history-mode -1)))
+
 ;; Emacs 29 -- `pixel-scroll-precision-mode' for enhanced scrolling behaviour.
-(pixel-scroll-precision-mode t)
+(if (fboundp 'pixel-scroll-precision-mode)
+    (pixel-scroll-precision-mode t))
 
 ;; Setup `load-path'.
 (dolist (path '("yaslam-lisp/essentials" "yaslam-lisp/utility-packages" "yaslam-lisp/theming-packages"))
@@ -54,6 +56,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Emacs 29 introduced the new `keymap-set' function to set
+;; keybinds, I moved my config over to it, since previous
+;; Emacs versions do not have this new function yet, I made
+;; a macro to emulate the functionality.
+(unless (fboundp 'keymap-set)
+  (defmacro keymap-set (map key func)
+    `(define-key ,map (kbd ,key) ,func)))
 
 (defmacro gkey (key func)
   "Define keys globally using a macro."
