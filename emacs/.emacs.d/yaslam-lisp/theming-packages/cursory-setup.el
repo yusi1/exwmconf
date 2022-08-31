@@ -7,6 +7,12 @@
          :blink-cursor-blinks 10
          :blink-cursor-interval 0.5
          :blink-cursor-delay 0.2)
+	(slow-bar
+	 :cursor-type (bar . 2)
+	 :cursor-in-non-selected-windows hollow
+	 :blink-cursor-blinks 3
+	 :blink-cursor-interval 0.8
+	 :blink-cursor-delay 0.5)
         (box
          :cursor-type box
          :cursor-in-non-selected-windows hollow
