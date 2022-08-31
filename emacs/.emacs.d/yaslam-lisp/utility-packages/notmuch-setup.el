@@ -47,9 +47,10 @@
 	(:name "unread" :query "tag:unread" :key ,(kbd "u"))
 	(:name "flagged" :query "tag:flagged" :key ,(kbd "f"))
 	(:name "sent" :query "tag:sent" :key ,(kbd "t"))
-	(:name "drafts" :query "tag:draft" :key ,(kbd "d"))
+	(:name "drafts" :query "tag:draft" :key ,(kbd "dr"))
 	(:name "urgent" :query "tag:urgent" :key ,(kbd "!"))
 	(:name "noip" :query "tag:noip" :key ,(kbd "ni"))
-	(:name "redhat" :query "tag:redhat" :key ,(kbd "rh"))))
+	(:name "redhat" :query "tag:redhat" :key ,(kbd "rh"))
+	(:name "debian" :query "tag:debian" :key ,(kbd "db"))))
 
 (provide 'notmuch-setup)
