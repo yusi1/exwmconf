@@ -10,7 +10,10 @@
      :buffer buffer
      :command '("/usr/local/bin/notmuch"
 		"new"))
-    (display-buffer buffer)))
+    ;; (display-buffer buffer)
+    ))
+
+(add-hook 'notmuch-hello-refresh-hook 'notmuch-update-maildir)
 
 (defun fetch-mail ()
   "Call `getmail --rcfile personal -v` to fetch new emails."
