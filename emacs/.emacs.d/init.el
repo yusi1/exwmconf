@@ -117,3 +117,4 @@
 ;; (require 'minimal-completion)
 (require 'vertico-setup)
 (require 'eglot-setup)
+(require 'deft-setup)
