@@ -138,16 +138,16 @@
 ;; https://orgmode.org/manual/Template-elements.html
 ;; http://howardism.org/Technical/Emacs/capturing-intro.html
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline (eval (concat org-directory "/Tasks/gtd.org")) "Tasks")
+      '(("t" "Todo" entry (file+headline "~/Documents/Captures/GTD/Tasks/gtd.org" "Tasks")
          "* TODO %?\n  %i\n  %a")
 	("n" "Notes" plain (file "~/.notes")
 	 "\n* ENTER NOTE TITLE HERE%?\n")
 	("r" "Random Note" plain (file "~/.notes")
 	 "\n* Random Note\n%?"
 	 :empty-lines 0)
-	("p" "Project Idea" plain (file (eval (concat org-directory "/Tasks/projects.org")))
+	("p" "Project Idea" plain (file "~/Documents/Captures/GTD/Tasks/projects.org")
 	 "\n* TODO (ENTER PROJECT NAME HERE)%?\n")
-	("b" "Bills & Payments" plain (file (eval (concat org-directory"/Bills/Bills.org")))
+	("b" "Bills & Payments" plain (file "~/Documents/Captures/GTD/Bills/Bills.org")
 	 "\n* Bills & Payments\n** %?")
 	("j" "Journal" entry (file+headline "~/Documents/Captures/Journal/journal.org"
 					    "Personal Thoughts")
