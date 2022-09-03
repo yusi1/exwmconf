@@ -104,6 +104,7 @@
 (require 'multiple-cursors-setup)
 (require 'iedit-setup)
 (require 'org-setup)
+(require 'org-modern-setup)
 (require 'magit-setup)
 (require 'helpful-setup)
 (require 'ctrlf-setup)
