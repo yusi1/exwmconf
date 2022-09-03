@@ -1,5 +1,6 @@
 (require 'evil)
 (require 'evil-smartparens)
+(require 'evil-mc)
 
 (evil-set-leader 'normal (kbd "SPC"))
 (evil-define-key 'normal 'global (kbd "<leader>ff") 'find-file)
