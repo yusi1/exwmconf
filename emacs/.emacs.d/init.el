@@ -23,7 +23,7 @@
     (pixel-scroll-precision-mode t))
 
 ;; Setup `load-path'.
-(dolist (path '("yaslam-lisp/essentials" "yaslam-lisp/utility-packages" "yaslam-lisp/theming-packages"))
+(dolist (path '("yaslam-lisp/essentials" "yaslam-lisp/utility-packages" "yaslam-lisp/theming-packages" "yaslam-lisp/load-path"))
   (add-to-list 'load-path (locate-user-emacs-file path)))
 
 ;; Setup the `HOME' variable for the laptop.
@@ -122,4 +122,5 @@
 (require 'deft-setup)
 (require 'elfeed-setup)
 ;; (require 'doom-modeline-setup)
+;; (require 'powerline-setup)
 (require 'evil-setup)
