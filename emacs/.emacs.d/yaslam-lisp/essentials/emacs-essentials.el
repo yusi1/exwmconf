@@ -238,4 +238,6 @@ This is just a simpler version of the above functions for browsing root dir '/' 
 ;; If you want to hide the mode-line in every buffer by default
 ;; (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
 
+(gkey "s-M" 'hidden-mode-line-mode)
+
 (provide 'emacs-essentials)
