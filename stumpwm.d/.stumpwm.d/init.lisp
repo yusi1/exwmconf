@@ -63,11 +63,11 @@
       (eval-command cmd t))))
 
 ;; Read some doc
-(define-key *root-map* (kbd "d") "exec gv")
+(define-key *root-map* (kbd "d") "exec uxterm pinfo")
 ;; Browse somewhere
 (define-key *root-map* (kbd "b") "colon1 exec firefox-bin http://www.")
 ;; Ssh somewhere
-(define-key *root-map* (kbd "C-s") "colon1 exec gnome-terminal -- tmux new-session ssh ")
+(define-key *root-map* (kbd "C-s") "colon1 exec uxterm tmux new-session ssh ")
 ;; Lock screen
 (define-key *root-map* (kbd "C-l") "exec slock")
 ;; Turn off screen
