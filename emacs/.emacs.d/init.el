@@ -123,3 +123,4 @@
 (require 'elfeed-setup)
 ;; (require 'doom-modeline-setup)
 ;; (require 'powerline-setup)
+;; (require 'solaire-setup)
