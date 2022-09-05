@@ -9,23 +9,23 @@
 
 ;; `org-modern' configuration
 (setq
- ;; Enable modern styling for code blocks and other blocks.
+ ;; Enable/Disable modern styling for code blocks and other blocks.
  org-modern-block t
- ;; Enable modern styling for tags.
+ ;; Enable/Disable modern styling for tags.
  org-modern-tag t
- ;; Enable modern styling for todo labels.
+ ;; Enable/Disable modern styling for todo labels.
  org-modern-todo t
- ;; Enable modern styling for tables.
+ ;; Enable/Disable modern styling for tables.
  org-modern-table t
- ;; Enable modern styling for keywords.
+ ;; Enable/Disable modern styling for keywords.
  org-modern-keyword t
- ;; Enable modern styling for priority keywords.
+ ;; Enable/Disable modern styling for priority keywords.
  org-modern-priority t
- ;; Enable modern styling for timestamps.
+ ;; Enable/Disable modern styling for timestamps.
  org-modern-timestamp t
- ;; Enable modern styling for statistics.
+ ;; Enable/Disable modern styling for statistics.
  org-modern-statistics t
- ;; Enable modern styling for horizontal rulers.
+ ;; Enable/Disable modern styling for horizontal rulers.
  org-modern-horizontal-rule t)
 
 (provide 'org-modern-setup)
