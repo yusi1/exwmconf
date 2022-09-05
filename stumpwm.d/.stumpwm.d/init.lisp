@@ -385,3 +385,21 @@
 (load-module "end-session")
 
 (define-key *top-map* (kbd "C-M-Delete") "end-session")
+
+;; Gaps module
+(load-module "swm-gaps")
+
+;; Head gaps run along the 4 borders of the monitor(s)
+(setf swm-gaps:*head-gaps-size* 10)
+
+;; Inner gaps run along all the 4 borders of a window
+(setf swm-gaps:*inner-gaps-size* 10)
+
+;; Outer gaps add more padding to the outermost borders of a window (touching
+;; the screen border)
+(setf swm-gaps:*outer-gaps-size* 10)
+
+;; Call command
+;; toggle-gaps
+
+(define-key *top-map* (kbd "s-g") "toggle-gaps")
