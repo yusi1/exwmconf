@@ -37,6 +37,24 @@
 (set-focus-color "gray")
 (set-unfocus-color "black")
 
+;; mode line colors
+(setf *mode-line-background-color* "black")
+(setf *mode-line-foreground-color* "green")
+(setf *mode-line-border-color* "black")
+
+;; function from the manual to add right-click delete window to the mode-line.
+(labels ((ml-on-click-focus-or-delete-window (code id &rest rest)
+                (declare (ignore rest))
+                (when-let ((window (window-by-id id)))
+                  (let ((button (decode-button-code code)))
+                    (case button
+                      ((:left-button)
+                       (focus-all window))
+                      ((:right-button)
+                       (delete-window window)))))))
+       (register-ml-on-click-id :ml-on-click-focus-window
+                                #'ml-on-click-focus-or-delete-window))
+
 ;; prompt the user for an interactive command. The first arg is an
 ;; optional initial contents.
 (defcommand colon1 (&optional (initial "")) (:rest)
