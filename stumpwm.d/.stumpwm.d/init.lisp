@@ -2,6 +2,10 @@
 
 (in-package :stumpwm)
 
+;; Setup logging
+(setf *debug-level* 1)
+(redirect-all-output (data-dir-file "stumpwm" "log"))
+
 ;; Needed for StumpWM modules support and other
 ;; things
 (load "~/quicklisp/setup.lisp")
