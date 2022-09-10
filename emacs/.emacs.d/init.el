@@ -18,6 +18,9 @@
       (tab-bar-mode -1)
       (tab-bar-history-mode -1)))
 
+;; Recentf -- keep track of recently-visited files
+(recentf-mode t)
+
 ;; Emacs 29 -- `pixel-scroll-precision-mode' for enhanced scrolling behaviour.
 (if (fboundp 'pixel-scroll-precision-mode)
     (pixel-scroll-precision-mode t))
