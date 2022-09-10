@@ -119,6 +119,7 @@
 (require 'which-key-setup)
 (require 'orderless-setup)
 (require 'corfu-setup)
+(require 'company-setup)
 (require 'smartparens-setup)
 ;; (require 'minimal-completion)
 (require 'vertico-setup)
