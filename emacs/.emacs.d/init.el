@@ -105,6 +105,7 @@
 (require 'iedit-setup)
 (require 'org-setup)
 (require 'org-modern-setup)
+(require 'org-contacts-setup)
 (require 'magit-setup)
 (require 'helpful-setup)
 (require 'ctrlf-setup)
