@@ -20,8 +20,10 @@
 (evil-set-leader 'normal (kbd "SPC"))
 (evil-define-key 'normal 'global (kbd "<leader>ff") 'find-file)
 (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>fr") 'recentf)
 (evil-define-key 'normal 'global (kbd "<leader>bb") 'consult-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>bk") 'kill-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>b;") 'other-window-kill-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>o") 'other-window)
 (evil-define-key 'normal 'global (kbd "<leader>0") 'delete-window)
 (evil-define-key 'normal 'global (kbd "<leader>1") 'delete-other-windows)
@@ -31,6 +33,8 @@
 (evil-define-key 'normal 'global (kbd "<leader>[") 'sp-backward-slurp-sexp)
 (evil-define-key 'normal 'global (kbd "<leader>{") 'sp-backward-unwrap-sexp)
 (evil-define-key 'normal 'global (kbd "<leader>}") 'sp-unwrap-sexp)
+(evil-define-key 'normal 'global (kbd "<leader>wn") 'next-window-any-frame)
+(evil-define-key 'normal 'global (kbd "<leader>wp") 'previous-window-any-frame)
 
 ;; Motion state mappings
 (evil-define-key 'motion 'global "gcc" 'comment-line)
@@ -40,7 +44,12 @@
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
 (evil-org-agenda-set-keys)
 
+;; Info mode turn off evil
+(add-hook 'Info-mode-hook 'turn-off-evil-mode)
+
+;; Prog mode turn on evil smartparens mode
 (add-hook 'prog-mode-hook 'evil-smartparens-mode)
+;; Turn on evil multiple-cursors mode globally 
 (global-evil-mc-mode 1)
 (evil-mode 1)
 
