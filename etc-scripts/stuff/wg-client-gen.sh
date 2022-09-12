@@ -1,42 +1,39 @@
 #!/bin/bash
 
+# =================Where the script was launched from.
+script="${0}"
+
 # =================Function to print help
 printhelp () {
 	echo "Usage: $script [OPTION...]"
-	echo "  -r    remove temporary files created by the script"
 	echo "  -c    copy publickey and presharedkey to current dir"
-	echo "  -g    remove previously generated config files in current dir"
+    echo "  -q    generate qrcodes and put them in the current dir (REQUIRES QRENCODE)"
 	echo "  -h    print help"
 	exit 0
 	}
 
 # =================Arguments to the script
-script="${0}"
 args="${@:1}"
 
 # check for the help argument and print help
 case $args in
     *"-h"* )
-	printhelp	
-	;;
-    *"-g"* )
-	generatedfiles=("./client.conf"
-			"./wireguard-client-config.png")
-
-	for i in ${generatedfiles[@]}; do
-	    [ -f "$i" ] &&
-		rm "./$i"
-	done
-	;;
-    * )
-	printhelp
-	rtemp
-	;;
+    printhelp
+    ;;
 esac
 
 # don't return anything about the script running with arguments
 # if there is no arguments passed to the script.
 [ -z "$args" ] || echo "Running script with arguments: $args"
+
+# First, remove previously generated config files created by this script.
+generatedfiles=("./client.conf"
+                "./wireguard-client-config.png")
+
+for i in ${generatedfiles[@]}; do
+    [ -f "$i" ] &&
+        rm "./$i"
+done
 
 # =================Temporary files that will be created
 #                  by this script.
@@ -47,17 +44,14 @@ files=("/tmp/a"  # where the privatekey will be temporarily stored
 # ================Function to remove temporary files created by this script.
 rtemp () {
     for i in ${files[@]}; do
-	if [ ! "$args" == *"k"* ]; then
-	    [ -f "$i" ] && shred -n 200 -u "$i"
-	fi
+        [ -f "$i" ] && shred -n 200 -u "$i"
     done
 }
 
-# ===============Function to keep certain files.
-keep () {
+# ===============Function to copy certain files to the current directory.
+copy-config-files-to-current-dir () {
 	cp "${files[1]}" ./publickey
 	cp "${files[2]}" ./presharedkey
-	[ -f "$i" ] && shred -n 200 -u "$i"
 }
 
 # ===============Set permissions for files that are to
@@ -118,13 +112,20 @@ Endpoint = $endpoint
 PersistentKeepAlive = $keepalive
 __EOF
 
-# ===============Generate qrcode from client config for use
-#                with wireguard app on phones for example.
-qrencode -t png -o wireguard-client-config.png < client.conf
+# ===============Function to generate a qrcode from client config for use with
+#                wireguard app on phones for example.
+qrgen () {
+    check=$(which qrencode 2>/dev/null)
+    if [[ ${check} ]]; then
+        qrencode -t png -o wireguard-client-config.png < client.conf
+    else
+        echo "qrencode is not installed, won't do anything."
+    fi
+}
 
-# ===============remove temporary files
-if [[ "$args" == *"c"* ]]; then
-	keep
-fi
+# ===============Argument checking
+[[ "$args" == *"q"* ]] && qrgen
+[[ "$args" == *"c"* ]] && copy-config-files-to-current-dir
 
-[[ "$args" == *"r"* ]] && rtemp || echo "Not removing temporary files, remove these files manually: ${files[@]}"
+# ===============Finally, remove temporary files created by this script.
+rtemp
