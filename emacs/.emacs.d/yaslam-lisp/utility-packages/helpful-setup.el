@@ -1,11 +1,11 @@
 (require 'helpful)
 
-(let ((map global-map))
-  (define-key map (kbd "C-h f") 'helpful-callable)
-  (define-key map (kbd "C-h v") 'helpful-variable)
-  (define-key map (kbd "C-h k") 'helpful-key)
-  (define-key map (kbd "C-h F") 'helpful-function)
-  (define-key map (kbd "C-c C-d") 'helpful-at-point)
-  (define-key map (kbd "C-h C") 'helpful-command))
+(progn
+  (gkey "C-h f" 'helpful-callable)
+  (gkey "C-h v" 'helpful-variable)
+  (gkey "C-h k" 'helpful-key)
+  (gkey "C-h F" 'helpful-function)
+  (gkey "C-c C-d" 'helpful-at-point)
+  (gkey "C-h C" 'helpful-command))
 
 (provide 'helpful-setup)

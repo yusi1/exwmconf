@@ -10,6 +10,6 @@
   (gkey "C-)" 'mc/cycle-forward)
   (gkey "C-(" 'mc/cycle-backward))
 
-(define-key mc/keymap (kbd "<escape>") 'mc/keyboard-quit)
+(keymap-set mc/keymap "<escape>" 'mc/keyboard-quit)
 
 (provide 'multiple-cursors-setup)

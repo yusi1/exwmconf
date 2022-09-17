@@ -3,13 +3,13 @@
 ;; Require trigger prefix before template name when completing.
 (setq tempel-trigger-prefix "!")
 
-(let ((map global-map))
-  (define-key map (kbd "M-+") 'tempel-complete) ;; Alternative tempel-expand
-  (define-key map (kbd "M-*") 'tempel-insert))
+(progn
+  (gkey "M-+" 'tempel-complete) ;; Alternative tempel-expand
+  (gkey "M-*" 'tempel-insert))
 
 (let ((map tempel-map))
-  (define-key map (kbd "TAB") 'tempel-next)
-  (define-key map (kbd "<backtab>") 'tempel-previous))
+  (keymap-set map "TAB" 'tempel-next)
+  (keymap-set map "<backtab>" 'tempel-previous))
 
 ;; Setup completion at point
 (defun tempel-setup-capf ()

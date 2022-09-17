@@ -11,13 +11,13 @@
 
 ;; Vertico multiform setup
 (let ((map vertico-map))
-  (define-key map (kbd "M-F") 'vertico-multiform-flat)
-  (define-key map (kbd "M-G") 'vertico-multiform-grid)
-  (define-key map (kbd "M-B") 'vertico-multiform-buffer)
-  (define-key map (kbd "M-D") 'vertico-multiform-unobtrusive))
+  (keymap-set map "M-F" 'vertico-multiform-flat)
+  (keymap-set map "M-G" 'vertico-multiform-grid)
+  (keymap-set map "M-B" 'vertico-multiform-buffer)
+  (keymap-set map "M-D" 'vertico-multiform-unobtrusive))
 
 ;; Repeat previous prompt
-(define-key global-map (kbd "C-x C-z") 'vertico-repeat)
+(keymap-set global-map "C-x C-z" 'vertico-repeat)
 
 (setq vertico-multiform-commands
       '((consult-imenu buffer)

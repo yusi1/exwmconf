@@ -1,11 +1,10 @@
 (require 'consult)
 (require 'consult-notmuch)
 
-(let ((map global-map))
-  (define-key map (kbd "C-x b") 'consult-buffer)
-  (define-key map (kbd "C-c i") 'consult-imenu)
-  (define-key map (kbd "M-y") 'consult-yank-pop)
-  (define-key map (kbd "C-c i") 'consult-imenu))
+(progn
+  (gkey "C-x b" 'consult-buffer)
+  (gkey "C-c i" 'consult-imenu)
+  (gkey "M-y" 'consult-yank-pop))
 
 (add-hook 'completion-list-mode-hook 'consult-preview-at-point-mode)
 
