@@ -10,3 +10,6 @@ xterm*faceName: Iosevka Comfy
 xterm*faceSize: 17
 xterm*background: black
 xterm*foreground: white
+
+! fix Emacs icon artifacts bug
+Xft.rgba: none
