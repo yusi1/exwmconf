@@ -1,8 +1,12 @@
+(require 'crux)
+
 ;; General commands and remappings
 (progn
   (gremap global-map "kill-buffer" 'kill-this-buffer)
   (gkey "C-x b" 'consult-buffer)
-  (gkey "C-x C-b" 'ibuffer))
+  (gkey "C-x C-b" 'ibuffer)
+  (gkey "C-x w n" 'next-window-any-frame)
+  (gkey "C-x w p" 'previous-window-any-frame))
 
 ;; Quicker window navigation
 ;; With S-<UDLR>
@@ -17,12 +21,27 @@
 ;; Window history mode, `winner-mode'.
 (winner-mode)
 
+;; Tab bar history mode
+(tab-bar-history-mode)
+
+;; Visual line mode hooks
+(add-hook 'helpful-mode-hook #'visual-line-mode)
+(add-hook 'help-mode-hook #'visual-line-mode)
+(add-hook 'custom-mode-hook #'visual-line-mode)
+
+(defun tranpose-windows ()
+  "Tranpose two windows."
+  (interactive)
+  (crux-transpose-windows 1))
+
 ;; Quicker keybinds
 ;; (if (string-match-p "voidlaptop" (system-name))
 (progn
   (gkey "s-)" 'delete-window)
   (gkey "s-!" 'delete-other-windows)
   (gkey "s-\"" 'split-window-below)
+  (gkey "s-\\" 'next-window-any-frame)
+  (gkey "s-\|" 'previous-window-any-frame)
   (gkey "s-£" 'split-window-right)
   (gkey "s-O" 'other-window)
   (gkey "s-B" 'consult-buffer)
@@ -31,7 +50,10 @@
   (gkey "s-S" 'save-buffer)
   (gkey "s-:" 'other-window-kill-buffer)
   (gkey "s-{" 'diff-hl-previous-hunk)
-  (gkey "s-}" 'diff-hl-next-hunk))
+  (gkey "s-}" 'diff-hl-next-hunk)
+  ;; (gkey "s-¬" 'tab-bar-mode)
+  (gkey "s-¬" 'prot-tab-status-line)
+  (gkey "s-T" 'tranpose-windows))
 ;; )
 
 ;; (if (string-match-p "voiddesktop" (system-name))
@@ -128,7 +150,7 @@ This is just a simpler version of the above functions for browsing root dir '/' 
   (interactive)
   (find-file (read-file-name "Find file (Nextcloud): " "~/Nextcloud/")))
 
-(gkey "C-c n s" 'search-nextcloud-dir)
+(gkey "C-c s n" 'search-nextcloud-dir)
 
 (defun transpose-words-backwards ()
   "Transpose words, but backwards."
@@ -239,5 +261,21 @@ This is just a simpler version of the above functions for browsing root dir '/' 
 ;; (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
 
 (gkey "s-M" 'hidden-mode-line-mode)
+
+;; Function to dedicate a window to a buffer and nothing else.
+(defun mp-toggle-window-dedication ()
+  "Toggles window dedication in the selected window."
+  (interactive)
+  (set-window-dedicated-p (selected-window)
+			  (not (window-dedicated-p (selected-window)))))
+
+;; Function to improve `add-to-list' behaviour with a new function.
+;; Came from the `org-capture-templates' and `add-to-list' rabbit hole.
+;; https://emacs.stackexchange.com/questions/38008/adding-many-items-to-a-list/68048#68048
+;; https://www.reddit.com/r/DoomEmacs/comments/poxx5n/comment/hz12x3k/
+(defun add-list-to-list (dst src)
+  "Similar to `add-to-list', but accepts a list as 2nd argument"
+  (set dst
+       (append (eval dst) src)))
 
 (provide 'emacs-essentials)
