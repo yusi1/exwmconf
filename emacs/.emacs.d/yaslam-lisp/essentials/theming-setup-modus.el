@@ -10,7 +10,9 @@
       modus-themes-deuteranopia t
       modus-themes-bold-constructs t
       modus-themes-diffs 'desaturated
-      modus-themes-mixed-fonts t)
+      modus-themes-mixed-fonts t
+      ;; modus-themes-mixed-fonts nil
+      )
 
 ;; More customizations
 ;; https://github.com/protesilaos/modus-themes/
@@ -21,8 +23,9 @@
  ;; of padding and NATNUM), and a floating point for the height of
  ;; the text relative to the base font size (or a cons cell of
  ;; height and FLOAT)
- modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
+ ;; modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
  ;; modus-themes-mode-line '(accented (padding . 0))
+ modus-themes-mode-line '(borderless (padding . 4) (height . 1.0))
 
  ;; Options for `modus-themes-hl-line' are either nil (the default),
  ;; or a list of properties that may include any of these symbols:
@@ -97,19 +100,19 @@
 
 ;; Override the `modus-operandi' theme colours when using the laptop.
 ;; Since the laptop display sucks at displaying white and less strong colours.
-(if (string-match-p (system-name) "MX-Laptop")
-    (setq modus-themes-operandi-color-overrides
-	  '((bg-main . "#ededed")
-	    (bg-dim . "#faf6ef")
-	    (bg-alt . "#f7efe5")
-	    (bg-active . "#dbdbdb")
-	    (bg-inactive . "#f6ece5")
-	    (bg-completion . "#9cdbff")
-	    (bg-completion-subtle . "#9cdbff")
-	    (cyan-subtle-bg . "#a2e8ff")
-	    (fg-diff-removed . "#4b1010")
-	    (bg-diff-removed . "#ffc3d5")
-	    )))
+;; (if (string-match-p (system-name) "MX-Laptop")
+;;     (setq modus-themes-operandi-color-overrides
+;; 	  '((bg-main . "#ededed")
+;; 	    (bg-dim . "#faf6ef")
+;; 	    (bg-alt . "#f7efe5")
+;; 	    (bg-active . "#dbdbdb")
+;; 	    (bg-inactive . "#f6ece5")
+;; 	    (bg-completion . "#9cdbff")
+;; 	    (bg-completion-subtle . "#9cdbff")
+;; 	    (cyan-subtle-bg . "#a2e8ff")
+;; 	    (fg-diff-removed . "#4b1010")
+;; 	    (bg-diff-removed . "#ffc3d5")
+;; 	    )))
 
 ;; Predicate function to get dark mode preference from GNOME.
 (defun get-dark-preference-p ()
@@ -127,7 +130,14 @@ Return `t' if GNOME is in dark mode, else, return `nil'."
 ;;     (modus-themes-load-vivendi)
 ;;   (modus-themes-load-operandi))
 
-(modus-themes-load-vivendi)
+;; Quick check to load a theme based on time of day.
+(let ((time (string-to-number (shell-command-to-string "date +'%H%M' | perl -pe 'chomp'")))
+      (day (string-to-number "0700"))
+      (night (string-to-number "1900")))
+  (if (and (> time day)
+	   (< time night))
+      (modus-themes-load-operandi)
+    (modus-themes-load-vivendi)))
 
 ;; Set a keybind to toggle between light/dark mode on modus-* themes..
 (gkey "<f12>" 'modus-themes-toggle)
