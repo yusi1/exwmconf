@@ -12,7 +12,7 @@
 (setq consult-buffer-sources (quote
 			      (consult--source-hidden-buffer
 			       consult--source-buffer
-			       consult--source-recent-file
+			       ;; consult--source-recent-file
 			       consult-notmuch-buffer-source)))
 
 (provide 'consult-setup)

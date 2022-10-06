@@ -1,6 +1,10 @@
 ;; Disable startup screen
 (setq inhibit-startup-screen t)
 
+(setq initial-frame-alist
+      '((width . 76)
+	(height . 32)))
+
 ;; Frame configuration
 ;; Add frame borders and window dividers
 ;; (modify-all-frames-parameters

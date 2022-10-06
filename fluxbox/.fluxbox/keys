@@ -41,8 +41,8 @@ Mod4 Mod1 t :Exec xfce4-terminal --drop-down
 Ctrl F5 :Exec mx-tools
 
 # open xfce4-terminal or roxterm
-Ctrl Mod1 t :Exec roxterm
-Mod4 t :Exec xfce4-terminal
+Ctrl Mod1 t :Exec xfce4-terminal
+Mod4 t :Exec uxterm
 
 # open GNU Emacs
 # Mod4 e :Exec emacs

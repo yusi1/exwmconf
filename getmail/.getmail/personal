@@ -7,7 +7,7 @@ password_command = ("/home/yaslam/stuff/get-email-pass.sh", "YUZi54780@outlook.c
 
 [destination]
 type = Maildir
-path = ~/mail/
+path = ~/mail/personal/
 
 [options]
 read_all = False

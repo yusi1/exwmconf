@@ -97,8 +97,8 @@
 (define-key *root-map* (kbd "C-q") "send-raw-key")
 
 ;; Open gnome-terminal
-(define-key *root-map* (kbd "c") "exec uxterm")
-(define-key *root-map* (kbd "C-c") "exec uxterm")
+(define-key *root-map* (kbd "c") "exec xfce4-terminal")
+(define-key *root-map* (kbd "C-c") "exec xfce4-terminal")
 
 ;; Kill windows
 ;; (define-key *group-root-map* (kbd "C-x") "delete")

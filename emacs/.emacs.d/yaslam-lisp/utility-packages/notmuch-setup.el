@@ -1,4 +1,5 @@
 (require 'notmuch)
+(require 'notmuch-bookmarks)
 
 (defun notmuch-update-maildir ()
   "Call `notmuch new` to update maildir."
@@ -10,9 +11,19 @@
      :buffer buffer
      :command '("/usr/local/bin/notmuch"
 		"new"))
-    ;; (display-buffer buffer)
     ))
 
+(defun display-maildir-update-buffer ()
+  "Display the maildir update buffer."
+  (interactive)
+  (when (notmuch-update-maildir)
+    (let ((buffer "*maildir-update*"))
+      (if (get-buffer buffer)
+          (display-buffer buffer `((display-buffer-in-side-window)
+				   (side . bottom)
+				   (window-height . 10)))))))
+
+(keymap-set notmuch-hello-mode-map "C-c C-u" 'display-maildir-update-buffer)
 (add-hook 'notmuch-hello-refresh-hook 'notmuch-update-maildir)
 
 (defun fetch-mail ()
@@ -43,7 +54,8 @@
 ;; Add things to show in `notmuch-hello'.
 (setq notmuch-saved-searches
       `((:name "all mail" :query "*" :key ,(kbd "a"))
-	(:name "inbox" :query "tag:inbox" :key ,(kbd "i"))
+	(:name "personal-inbox" :query "tag:inbox and tag:personal and not tag:redhat and not tag:emacs-devel and not tag:emacs-bugs and not tag:debian" :key ,(kbd "i"))
+	(:name "other-inbox" :query "tag:inbox and tag:other" :key ,(kbd "oi"))
 	(:name "unread" :query "tag:unread" :key ,(kbd "u"))
 	(:name "flagged" :query "tag:flagged" :key ,(kbd "f"))
 	(:name "sent" :query "tag:sent" :key ,(kbd "t"))
@@ -51,6 +63,11 @@
 	(:name "urgent" :query "tag:urgent" :key ,(kbd "!"))
 	(:name "noip" :query "tag:noip" :key ,(kbd "ni"))
 	(:name "redhat" :query "tag:redhat" :key ,(kbd "rh"))
-	(:name "debian" :query "tag:debian" :key ,(kbd "db"))))
+	(:name "debian" :query "tag:debian" :key ,(kbd "db"))
+	(:name "emacs-devel" :query "tag:emacs-devel" :key ,(kbd "ed"))
+	(:name "emacs-bugs" :query "tag:emacs-bugs" :key ,(kbd "eb"))))
+
+;; minor mode to add Emacs standard bookmark functionality to `notmuch'
+(notmuch-bookmarks-mode)
 
 (provide 'notmuch-setup)

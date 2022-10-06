@@ -79,6 +79,14 @@ lisp-mode emacs-lisp-mode
           ";;; |    " (s str)                       "    |" n
           ";;; +----" (make-string (length str) ?-) "----+" n)
 
+html-mode mhtml-mode
+
+(begin "\\begin{" (s env) "}" r> n> "\\end{" (s env) "}")
+(tr "<tr>" n> p n> "</tr>")
+(td "<td>"p"</td>")
+(a "<a href=""\\"p"\\""">""</a>""q)
+(c "<code>"p"</code>"q)
+
 ;; Local Variables:
 ;; mode: lisp-data
 ;; outline-regexp: "[a-z]"

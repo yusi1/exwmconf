@@ -1,0 +1,14 @@
+[retriever]
+type = SimplePOP3SSLRetriever
+server = outlook.office365.com
+username = ashz.one@hotmail.com
+port = 995
+password_command = ("/home/yaslam/stuff/get-email-pass.sh", "ashz.one@hotmail.com", "")
+
+[destination]
+type = Maildir
+path = ~/mail/other/
+
+[options]
+read_all = False
+verbose = 0

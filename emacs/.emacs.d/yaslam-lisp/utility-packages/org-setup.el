@@ -32,7 +32,7 @@
  ;; Startup folded
  org-startup-folded t
  ;; Startup with inline images
- org-startup-with-inline-images t
+ org-startup-with-inline-images nil
  ;; Image width
  org-image-actual-width '(600)
  ;; Startup indented
@@ -40,9 +40,9 @@
  ;; Use UTF-8 characters for Org-mode
  org-pretty-entities t
  ;; Hide emphasis markers like =code= or ~code~ etc..
- org-hide-emphasis-markers t
+ org-hide-emphasis-markers nil
  ;; Hide leading stars
- org-hide-leading-stars t
+ org-hide-leading-stars nil
  ;; Use custom ellipsis for headings
  org-ellipsis "…"
  ;; Don't auto-align tags
@@ -57,16 +57,30 @@
  ;; For navigation in the `org-goto' buffer
  org-goto-auto-isearch nil)
 
+;; ;; Controlling org heading sizes
+;; (unless (featurep 'modus-themes)
+;;   (setq org-level-faces
+;; 	'(
+;; 	  org-level-1 ((t (:height 180)))
+;; 	  org-level-2 ((t (:height 120)))
+;; 	  org-level-3
+;; 	  org-level-4
+;; 	  org-level-5
+;; 	  org-level-6
+;; 	  org-level-7
+;; 	  org-level-8
+;; 	  )))
+
 ;; Enable `org-indent-mode'.
 (setq org-indent-mode t)
 
 ;; Use fixed pitch font for certain things
-(defun set-buffer-variable-pitch ()
-  "Set variable pitch, but set fixed-pitch for tables etc.."
-  (interactive)
-  (variable-pitch-mode t))
+;; (defun set-buffer-variable-pitch ()
+;;   "Set variable pitch, but set fixed-pitch for tables etc.."
+;;   (interactive)
+;;   (variable-pitch-mode t))
 
-(add-hook 'org-mode-hook 'set-buffer-variable-pitch)
+;; (add-hook 'org-mode-hook 'set-buffer-variable-pitch)
 
 ;; `org-agenda' styling
 (setq
@@ -121,9 +135,9 @@
 	 "\n* TODO (ENTER PROJECT NAME HERE)%?\n")
 	("b" "Bills & Payments" plain (file "~/Documents/Captures/GTD/Bills/Bills.org")
 	 "\n* Bills & Payments\n** %?")
-	("j" "Journal" entry (file+headline "~/Documents/Captures/Journal/journal.org"
-					    "Personal Thoughts")
-	 "** %U :crypt:\n%?"
+	("j" "Journal" entry (file+olp "~/Documents/Captures/Journal/journal.org"
+					    "Personal Thoughts" "Thoughts")
+	 "*** %U :crypt:\n%?"
 	 :jump-to-captured t)
 	;; ("d" "Distro Journal" entry (file+headline "~/Documents/Captures/Journal/Distro-Journal/journal.org"
 	;; 					   "[ENTER DISTRO NAME HERE] Notes")

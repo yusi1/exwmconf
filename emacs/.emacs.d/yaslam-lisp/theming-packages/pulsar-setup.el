@@ -19,6 +19,8 @@
         backward-page
         scroll-up-command
         scroll-down-command
+	evil-scroll-page-up
+	evil-scroll-page-down
         ;; windmove-right
         ;; windmove-left
         ;; windmove-up

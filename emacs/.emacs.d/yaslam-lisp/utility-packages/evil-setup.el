@@ -1,8 +1,16 @@
+;; Fix issue #60 in evil-collection
+(setq evil-want-keybinding nil)
+
 (require 'evil)
 (require 'evil-smartparens)
 (require 'evil-mc)
+(require 'evil-multiedit)
 (require 'evil-org)
 (require 'evil-org-agenda)
+(require 'evil-collection)
+
+;; Setting up evil-collection
+(evil-collection-init '(magit eshell helpful pass notmuch ibuffer eww bookmark dictionary custom info compile))
 
 ;; ;; . in visual mode
 ;; (defun moon/make-region-search-history ()
@@ -36,8 +44,15 @@
 (evil-define-key 'normal 'global (kbd "<leader>wn") 'next-window-any-frame)
 (evil-define-key 'normal 'global (kbd "<leader>wp") 'previous-window-any-frame)
 
+;; Visual state mappings
+(evil-define-key 'visual 'global "gc" 'comment-region)
+
 ;; Motion state mappings
 (evil-define-key 'motion 'global "gcc" 'comment-line)
+
+;; Mode mappings
+;; (evil-define-key 'normal 'notmuch-show "gn" 'notmuch-show-next-open-message)
+;; (evil-define-key 'normal 'notmuch-show "gp" 'notmuch-show-previous-open-message)
 
 ;; evil mode org mode keybind integration `evil-org'.
 (add-hook 'org-mode-hook 'evil-org-mode)
@@ -49,8 +64,13 @@
 
 ;; Prog mode turn on evil smartparens mode
 (add-hook 'prog-mode-hook 'evil-smartparens-mode)
+
 ;; Turn on evil multiple-cursors mode globally 
 (global-evil-mc-mode 1)
+
+;; Load evil-multiedit with default keybinds
+(evil-multiedit-default-keybinds)
+
 (evil-mode 1)
 
 (provide 'evil-setup)

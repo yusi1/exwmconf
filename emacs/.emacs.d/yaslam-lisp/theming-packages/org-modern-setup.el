@@ -1,7 +1,7 @@
 (require 'org-modern)
-(require 'org-modern-indent)
+;; (require 'org-modern-indent)
 
-(add-hook 'org-mode-hook (lambda () (org-modern-indent-mode)))
+;; (add-hook 'org-mode-hook (lambda () (org-modern-indent-mode)))
 
 ;; Enable `global-org-modern-mode' if we are on a graphical display.
 (if (display-graphic-p)

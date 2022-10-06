@@ -3,9 +3,13 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+	evil-backward-char
+	evil-delete-char
+	evil-forward-char
 	sp-backward-delete-char
 	sp-backward-kill-word
 	sp-backward-sexp
+	sp-backward-unwrap-sexp
 	sp-delete-char
 	sp-forward-slurp-sexp
 	sp-kill-region
@@ -15,6 +19,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+	handle-switch-frame
 	pixel-scroll-precision
 	pixel-scroll-start-momentum
 	text-scale-adjust

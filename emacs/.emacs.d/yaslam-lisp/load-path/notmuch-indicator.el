@@ -1,0 +1,1 @@
+/home/yaslam/Git/notmuch-indicator/notmuch-indicator.el

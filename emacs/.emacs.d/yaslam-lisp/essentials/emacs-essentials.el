@@ -3,7 +3,7 @@
 ;; General commands and remappings
 (progn
   (gremap global-map "kill-buffer" 'kill-this-buffer)
-  (gkey "C-x b" 'consult-buffer)
+  ;; (gkey "C-x b" 'consult-buffer)
   (gkey "C-x C-b" 'ibuffer)
   (gkey "C-x w n" 'next-window-any-frame)
   (gkey "C-x w p" 'previous-window-any-frame))
@@ -23,6 +23,9 @@
 
 ;; Tab bar history mode
 (tab-bar-history-mode)
+
+;; electric pair mode
+(electric-pair-mode)
 
 ;; Visual line mode hooks
 (add-hook 'helpful-mode-hook #'visual-line-mode)
@@ -205,10 +208,12 @@ This is just a simpler version of the above functions for browsing root dir '/' 
 ;; (gkey "C-c C-n" 'ysz/untitled-buffer)
 (gkey "C-c C-n" 'scratch-buffer)
 
+;; Get the current desktop environent from
+;; global variable `$XDG_CURRENT_DESKTOP'.
 (defun get-de-p ()
   "Get desktop environment."
   (interactive)
-  (shell-command-to-string "echo $XDG_CURRENT_DESKTOP | tr -d '\n'"))
+  (getenv "XDG_CURRENT_DESKTOP"))
 
 (defun get-public-ip ()
   "Get Public IP address from a shell command."

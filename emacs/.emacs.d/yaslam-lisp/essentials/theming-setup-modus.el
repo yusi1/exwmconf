@@ -7,9 +7,9 @@
       modus-themes-region '(bg-only no-extend)
       modus-themes-subtle-line-numbers t
       modus-themes-variable-pitch-ui t
-      modus-themes-deuteranopia t
+      modus-themes-deuteranopia nil
       modus-themes-bold-constructs t
-      modus-themes-diffs 'desaturated
+      modus-themes-diffs 'nil
       modus-themes-mixed-fonts t
       ;; modus-themes-mixed-fonts nil
       )
@@ -24,8 +24,8 @@
  ;; the text relative to the base font size (or a cons cell of
  ;; height and FLOAT)
  ;; modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
- ;; modus-themes-mode-line '(accented (padding . 0))
- modus-themes-mode-line '(borderless (padding . 4) (height . 1.0))
+ modus-themes-mode-line '(accented (padding . 0))
+ ;; modus-themes-mode-line '(borderless (padding . 4) (height . 1.0))
 
  ;; Options for `modus-themes-hl-line' are either nil (the default),
  ;; or a list of properties that may include any of these symbols:

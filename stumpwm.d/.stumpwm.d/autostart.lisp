@@ -22,6 +22,8 @@
 (run-shell-command "volumeicon")
 (sleep 0.5)
 (run-shell-command "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
+(sleep 0.5)
+(run-shell-command "kdeconnect-indicator")
 ;; (sleep 0.5)
 ;; (run-shell-command "nextcloud --background")
 

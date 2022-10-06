@@ -5,12 +5,11 @@ script="${0}"
 
 # =================Function to print help
 printhelp () {
-	echo "Usage: $script [OPTION...]"
-	echo "  -c    copy publickey and presharedkey to current dir"
+    echo "Usage: $script [OPTION...]"
     echo "  -q    generate qrcodes and put them in the current dir (REQUIRES QRENCODE)"
-	echo "  -h    print help"
-	exit 0
-	}
+    echo "  -h    print help"
+    exit 0
+}
 
 # =================Arguments to the script
 args="${@:1}"
@@ -18,8 +17,8 @@ args="${@:1}"
 # check for the help argument and print help
 case $args in
     *"-h"* )
-    printhelp
-    ;;
+	printhelp
+	;;
 esac
 
 # don't return anything about the script running with arguments
@@ -37,21 +36,15 @@ done
 
 # =================Temporary files that will be created
 #                  by this script.
-files=("/tmp/a"  # where the privatekey will be temporarily stored
-       "/tmp/b"  # where the publickey will be temporarily stored
-       "/tmp/c") # where the presharedkey will be temporarily stored
+files=("/tmp/pk"	# where the privatekey will be temporarily stored
+       "/tmp/pbk"	# where the publickey will be temporarily stored
+       "/tmp/psk")	# where the presharedkey will be temporarily stored
 
 # ================Function to remove temporary files created by this script.
 rtemp () {
     for i in ${files[@]}; do
         [ -f "$i" ] && shred -n 200 -u "$i"
     done
-}
-
-# ===============Function to copy certain files to the current directory.
-copy-config-files-to-current-dir () {
-	cp "${files[1]}" ./publickey
-	cp "${files[2]}" ./presharedkey
 }
 
 # ===============Set permissions for files that are to
@@ -112,6 +105,13 @@ Endpoint = $endpoint
 PersistentKeepAlive = $keepalive
 __EOF
 
+
+# ===============Function to copy generated keys to the current directory.
+copy-keys-to-current-dir () {
+    cp "${files[1]}" ./publickey
+    cp "${files[2]}" ./presharedkey
+}
+
 # ===============Function to generate a qrcode from client config for use with
 #                wireguard app on phones for example.
 qrgen () {
@@ -125,7 +125,9 @@ qrgen () {
 
 # ===============Argument checking
 [[ "$args" == *"q"* ]] && qrgen
-[[ "$args" == *"c"* ]] && copy-config-files-to-current-dir
+
+# ===============Copy keys to current directory
+copy-keys-to-current-dir
 
 # ===============Finally, remove temporary files created by this script.
 rtemp

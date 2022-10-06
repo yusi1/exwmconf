@@ -1,0 +1,5 @@
+(require 'imgur)
+(require 'meme)
+(autoload 'meme "meme.el" "Create a meme from a collection" t)
+(autoload 'meme-file "meme.el" "Create a meme from a file" t)
+(provide 'meme-setup)

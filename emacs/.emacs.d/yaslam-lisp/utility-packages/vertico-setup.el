@@ -8,13 +8,23 @@
 (require 'savehist)
 
 (vertico-mode t)
+;; put vertico into its own buffer
+;; (vertico-buffer-mode t)
+;; show line-numbers in vertico
+;; (vertico-indexed-mode t)
+
+;; control placement of `vertico-buffer'.
+(setq vertico-buffer-display-action '((display-buffer-in-side-window)
+				      (window-height . 10)
+				      (side . bottom)))
 
 ;; Vertico multiform setup
 (let ((map vertico-map))
-  (keymap-set map "M-F" 'vertico-multiform-flat)
-  (keymap-set map "M-G" 'vertico-multiform-grid)
-  (keymap-set map "M-B" 'vertico-multiform-buffer)
-  (keymap-set map "M-D" 'vertico-multiform-unobtrusive))
+  (keymap-set map "M-V" #'vertico-multiform-vertical)
+  (keymap-set map "M-G" #'vertico-multiform-grid)
+  (keymap-set map "M-F" #'vertico-multiform-flat)
+  (keymap-set map "M-R" #'vertico-multiform-reverse)
+  (keymap-set map "M-U" #'vertico-multiform-unobtrusive))
 
 ;; Repeat previous prompt
 (keymap-set global-map "C-x C-z" 'vertico-repeat)

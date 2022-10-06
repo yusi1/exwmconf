@@ -1,15 +1,15 @@
 configuration {
-	modi: "combi,filebrowser,ssh,keys";
-    /* modi: "combi,ssh,keys"; */
+	/* modi: "combi,filebrowser,ssh,keys"; */
+    modi: "combi,ssh,keys";
 	font: "Saucecode Pro NF 14";
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
 	show-icons: true;
-	terminal: "gnome-terminal";
+	terminal: "uxterm";
 	ssh-client: "ssh";
-	ssh-command: "gnome-terminal -- tmux new-session {ssh-client} {host} [-p {port}]";
+	ssh-command: "uxterm -- tmux new-session {ssh-client} {host} [-p {port}]";
 /*	run-command: "{cmd}";*/
 /*	run-list-command: "";*/
 /*	run-shell-command: "{terminal} -e {cmd}";*/
@@ -150,4 +150,4 @@ configuration {
   /* } */
 }
 
-@theme "solarized"
+@import "/usr/share/rofi/themes/glue_pro_blue.rasi"

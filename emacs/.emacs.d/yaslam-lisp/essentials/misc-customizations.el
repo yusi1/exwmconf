@@ -15,9 +15,9 @@ Hide the mode lines and change their colors."
     (setq tab-bar-show nil)
     (tab-bar-mode -1)
     (tab-bar-history-mode -1)
-    (display-time-mode -1)))
+    (display-time-mode 1)))
 
-(add-hook 'after-init-hook 'prot-tab-status-line)
+;; (add-hook 'after-init-hook 'prot-tab-status-line)
 
 (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
 (setq tab-bar-close-button-show nil)
@@ -72,6 +72,9 @@ Hide the mode lines and change their colors."
 ;; 				(propertize " " 'face `(:foreground "black")))))
 ;; (setq eshell-highlight-prompt nil)
 
+(add-hook 'eshell-mode-hook (lambda () (setq-local imenu-generic-expression
+						   '(("Prompt" " $ \\(.*\\)" 1)))))
+
 ;; Buffer and window customizations
 (require 'window)
 
@@ -101,27 +104,27 @@ Hide the mode lines and change their colors."
 	 (window-parameters
 	  (mode-line-format . none)))
 	("^ \\*org-contact\\*" display-buffer-below-selected)
-	("\\*info\\*"
-         (display-buffer-reuse-window display-buffer-pop-up-frame)
-         (pop-up-frame-parameters . ((width . (text-pixels . 1280))
-				     (height . (text-pixels . 720))))
-	 (reusable-frames . 0)
-	 (dedicated . t))
-	(prot/display-buffer-shell-or-term-p
-	 (display-buffer-reuse-window display-buffer-pop-up-frame)
-	 (pop-up-frame-parameters . ((width . (text-pixels . 800))
-				     (height . (text-pixels . 600))
-				     (tab-bar-lines . 0)))
-	 (window-parameters . ((no-other-window . t)
-			       (mode-line-format . none)))
-	 (reusable-frames . 0)
-	 (dedicated . t))
-        ((or . ((derived-mode . helpful-mode)
-		"\\*Help\\*"))
-         (display-buffer-reuse-window display-buffer-in-side-window)
-	 (side . right)
-	 (window-width . 60)
-         (inhibit-same-window . t))
+	;; ("\\*info\\*"
+        ;;  (display-buffer-reuse-window display-buffer-pop-up-frame)
+        ;;  (pop-up-frame-parameters . ((width . (text-pixels . 1280))
+	;; 			     (height . (text-pixels . 720))))
+	;;  (reusable-frames . 0)
+	;;  (dedicated . t))
+	;; (prot/display-buffer-shell-or-term-p
+	;;  (display-buffer-reuse-window display-buffer-pop-up-frame)
+	;;  (pop-up-frame-parameters . ((width . (text-pixels . 800))
+	;; 			     (height . (text-pixels . 600))
+	;; 			     (tab-bar-lines . 0)))
+	;;  (window-parameters . ((no-other-window . t)
+	;; 		       (mode-line-format . none)))
+	;;  (reusable-frames . 0)
+	;;  (dedicated . t))
+        ;; ((or . ((derived-mode . helpful-mode)
+	;; 	"\\*Help\\*"))
+        ;;  (display-buffer-reuse-window display-buffer-in-side-window)
+	;;  (side . right)
+	;;  (window-width . 60)
+        ;;  (inhibit-same-window . t))
         ((or . ((derived-mode . backtrace-mode)
                 "\\*\\(Warnings\\|Compile-Log\\)\\*"))
          (display-buffer-in-side-window)
@@ -144,11 +147,11 @@ Hide the mode lines and change their colors."
 	 (inhibit-same-window . t)
 	 (dedicated . t)
 	 (reusable-frames . 0))
-	((derived-mode . pass-view-mode)
-	 (display-buffer-in-side-window)
-	 (side . right)
-	 (slot . 1)
-	 (window-width . 80))
+	;; ((derived-mode . pass-view-mode)
+	;;  (display-buffer-in-side-window)
+	;;  (side . right)
+	;;  (slot . 1)
+	;;  (window-width . 80))
 	))
 
 ;; Requires Emacs 27+
