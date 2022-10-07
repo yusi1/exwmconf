@@ -1,6 +1,7 @@
 emacs/.emacs.d/elpa
 emacs/.emacs.d/tramp
 emacs/.emacs.d/eln-cache
+emacs/.emacs.d/yaslam-lisp/load-path/*.el
 # Ignore sensitive Emacs files
 emacs/.emacs.d/elpa
 emacs/.emacs.d/tramp

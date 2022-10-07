@@ -1,1 +1,0 @@
-/home/yaslam/Git/emacs-corfu-doc-terminal/corfu-doc-terminal.el

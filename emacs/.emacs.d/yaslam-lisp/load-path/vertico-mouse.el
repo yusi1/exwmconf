@@ -1,1 +1,0 @@
-/home/yaslam/Git/vertico/extensions/vertico-mouse.el

@@ -1,1 +1,0 @@
-/home/yaslam/Git/vertico/vertico.el
