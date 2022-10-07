@@ -11,12 +11,18 @@
 (corfu-doc-mode)
 (global-corfu-mode)
 
+;; `corfu-doc' keybinds
+(progn
+  (keymap-set corfu-map "M-p" #'corfu-doc-scroll-down) ;; corfu-next
+  (keymap-set corfu-map "M-n" #'corfu-doc-scroll-up)  ;; corfu-previous
+  (keymap-set corfu-map "M-d" #'corfu-doc-toggle))
+
 ;; enable corfu in the minibuffer
 (defun corfu-enable-in-minibuffer ()
-       "Enable Corfu in the minibuffer if `completion-at-point' is bound."
-       (when (where-is-internal #'completion-at-point (list (current-local-map)))
-         ;; (setq-local corfu-auto nil) Enable/disable auto completion
-         (corfu-mode 1)))
+  "Enable Corfu in the minibuffer if `completion-at-point' is bound."
+  (when (where-is-internal #'completion-at-point (list (current-local-map)))
+    ;; (setq-local corfu-auto nil) Enable/disable auto completion
+    (corfu-mode 1)))
 (add-hook 'minibuffer-setup-hook #'corfu-enable-in-minibuffer)
 
 ;; TAB cycle if there are only few candidates
