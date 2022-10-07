@@ -283,4 +283,17 @@ This is just a simpler version of the above functions for browsing root dir '/' 
   (set dst
        (append (eval dst) src)))
 
+(defun open-external-app ()
+  "Open a file in an external app with the default shell's `xdg-open' command."
+  (interactive)
+  (let ((current-file (buffer-file-name)))
+    (cond ((string-equal system-type "gnu/linux")
+	   (call-process shell-file-name nil nil nil
+			 shell-command-switch
+			 (format "xdg-open %s" current-file)))
+	  ((string-equal system-type "windows-nt")
+	   (shell-command (concat "PowerShell -Command \"Invoke-Item -LiteralPath\" " "'" current-file)) "'"))))
+
+(gkey "C-c x" 'open-external-app)
+
 (provide 'emacs-essentials)
