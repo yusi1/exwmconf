@@ -52,20 +52,21 @@
 (setq notmuch-show-logo nil)
 
 ;; Add things to show in `notmuch-hello'.
-(setq notmuch-saved-searches
-      `((:name "all mail" :query "*" :key ,(kbd "a"))
-	(:name "personal-inbox" :query "tag:inbox and tag:personal and not tag:redhat and not tag:emacs-devel and not tag:emacs-bugs and not tag:debian" :key ,(kbd "i"))
-	(:name "other-inbox" :query "tag:inbox and tag:other" :key ,(kbd "oi"))
-	(:name "unread" :query "tag:unread" :key ,(kbd "u"))
-	(:name "flagged" :query "tag:flagged" :key ,(kbd "f"))
-	(:name "sent" :query "tag:sent" :key ,(kbd "t"))
-	(:name "drafts" :query "tag:draft" :key ,(kbd "dr"))
-	(:name "urgent" :query "tag:urgent" :key ,(kbd "!"))
-	(:name "noip" :query "tag:noip" :key ,(kbd "ni"))
-	(:name "redhat" :query "tag:redhat" :key ,(kbd "rh"))
-	(:name "debian" :query "tag:debian" :key ,(kbd "db"))
-	(:name "emacs-devel" :query "tag:emacs-devel" :key ,(kbd "ed"))
-	(:name "emacs-bugs" :query "tag:emacs-bugs" :key ,(kbd "eb"))))
+;; Switched to `custom' to do this.
+;; (setq notmuch-saved-searches
+;;       `((:name "all mail" :query "*" :key ,(kbd "a"))
+;; 	(:name "personal-inbox" :query "tag:inbox and tag:personal and not tag:redhat and not tag:emacs-devel and not tag:emacs-bugs and not tag:debian" :key ,(kbd "i"))
+;; 	(:name "other-inbox" :query "tag:inbox and tag:other" :key ,(kbd "oi"))
+;; 	(:name "unread" :query "tag:unread" :key ,(kbd "u"))
+;; 	(:name "flagged" :query "tag:flagged" :key ,(kbd "f"))
+;; 	(:name "sent" :query "tag:sent" :key ,(kbd "t"))
+;; 	(:name "drafts" :query "tag:draft" :key ,(kbd "dr"))
+;; 	(:name "urgent" :query "tag:urgent" :key ,(kbd "!"))
+;; 	(:name "noip" :query "tag:noip" :key ,(kbd "ni"))
+;; 	(:name "redhat" :query "tag:redhat" :key ,(kbd "rh"))
+;; 	(:name "debian" :query "tag:debian" :key ,(kbd "db"))
+;; 	(:name "emacs-devel" :query "tag:emacs-devel" :key ,(kbd "ed"))
+;; 	(:name "emacs-bugs" :query "tag:emacs-bugs" :key ,(kbd "eb"))))
 
 ;; minor mode to add Emacs standard bookmark functionality to `notmuch'
 (notmuch-bookmarks-mode)
