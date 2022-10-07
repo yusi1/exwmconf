@@ -10,7 +10,7 @@ Hide the mode lines and change their colors."
       (progn
         (setq tab-bar-show t)
         (tab-bar-mode 1)
-        (tab-bar-history-mode 1)
+        (tab-bar-history-mode -1)
         (display-time-mode 1))
     (setq tab-bar-show nil)
     (tab-bar-mode -1)
@@ -26,7 +26,6 @@ Hide the mode lines and change their colors."
 (setq world-clock-list
       '(("Europe/London" "London")
 	("Europe/Greece" "Athens")
-	;; ("Asia/Pakistan" "Karachi")
 	))
 
 (require 'dictionary)
