@@ -63,6 +63,8 @@ Hide the mode lines and change their colors."
 (gkey "C-c `" 'speedbar)
 
 (require 'eshell)
+;; Enhanced completion akin to fish shell / zsh
+(require 'pcmpl-args)
 
 ;; (setq eshell-prompt-function (lambda nil
 ;; 			       (concat
