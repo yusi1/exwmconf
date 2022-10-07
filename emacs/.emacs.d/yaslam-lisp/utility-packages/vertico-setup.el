@@ -5,6 +5,7 @@
 (require 'vertico-unobtrusive)
 (require 'vertico-multiform)
 (require 'vertico-repeat)
+(require 'vertico-mouse)
 (require 'savehist)
 
 (vertico-mode t)
@@ -12,6 +13,8 @@
 ;; (vertico-buffer-mode t)
 ;; show line-numbers in vertico
 ;; (vertico-indexed-mode t)
+;; enable mouse support in vertico
+(vertico-mouse-mode t)
 
 ;; control placement of `vertico-buffer'.
 (setq vertico-buffer-display-action '((display-buffer-in-side-window)
