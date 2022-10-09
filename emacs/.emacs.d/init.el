@@ -39,11 +39,12 @@
 ;; UI tweaks
 (if (display-graphic-p)
     (progn
-      (menu-bar-mode 1)
+      (menu-bar-mode -1)
       (tool-bar-mode -1)
       (scroll-bar-mode -1)
       (tab-bar-mode -1)
-      (tab-bar-history-mode -1)))
+      (tab-bar-history-mode -1)
+      (fringe-mode 15)))
 
 ;; Recentf -- keep track of recently-visited files
 (recentf-mode t)
