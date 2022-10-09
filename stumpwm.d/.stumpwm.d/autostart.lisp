@@ -12,7 +12,7 @@
 (sleep 0.5)
 (run-shell-command "nitrogen --restore")
 (sleep 0.5)
-(run-shell-command "/usr/lib64/xfce4/notifyd/xfce4-notifyd")
+(run-shell-command "xfce4-notifyd-start")
 (sleep 0.5)
 (run-shell-command "xfce4-power-manager")
 (sleep 0.5)
