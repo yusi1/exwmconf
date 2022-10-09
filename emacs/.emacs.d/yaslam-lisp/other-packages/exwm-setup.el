@@ -85,6 +85,13 @@
 (exwm-enable)
 
 ;; Free up space
+(defun exwm-config-misc ()
+  "Other configurations."
+  ;; Make more room
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
+
 (exwm-config-misc)
 
 (provide 'exwm-setup)
