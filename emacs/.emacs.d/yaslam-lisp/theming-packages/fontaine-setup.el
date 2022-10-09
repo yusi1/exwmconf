@@ -267,8 +267,8 @@
 			  :variable-pitch-family "DejaVu Sans"
 			  :bold-family nil
 			  :bold-weight bold
-			  :italic-family "DejaVu Sans"
-			  :italic-slant italic
+			  ;; :italic-family "DejaVu Sans"
+			  ;; :italic-slant italic
 			  :line-spacing 1)
 			 (dejavu-sans-large
 			  :default-family "DejaVu Sans Mono"
@@ -280,8 +280,8 @@
 			  :variable-pitch-family "DejaVu Sans"
 			  :bold-family nil
 			  :bold-weight bold
-			  :italic-family "DejaVu Sans Mono"
-			  :italic-slant italic
+			  ;; :italic-family "DejaVu Sans Mono"
+			  ;; :italic-slant italic
 			  :line-spacing 1)
 			 (jetbrainsmono-large
 			  :default-family "JetBrains Mono"
