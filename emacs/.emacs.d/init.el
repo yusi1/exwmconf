@@ -53,7 +53,7 @@
     (pixel-scroll-precision-mode t))
 
 ;; Setup `load-path'.
-(dolist (path '("yaslam-lisp/essentials" "yaslam-lisp/utility-packages" "yaslam-lisp/theming-packages" "yaslam-lisp/random-packages" "yaslam-lisp/load-path"))
+(dolist (path '("yaslam-lisp/essentials" "yaslam-lisp/utility-packages" "yaslam-lisp/theming-packages" "yaslam-lisp/random-packages" "yaslam-lisp/other-packages" "yaslam-lisp/load-path"))
   (add-to-list 'load-path (locate-user-emacs-file path)))
 
 ;; Setup the `HOME' variable when on Windows.
@@ -95,7 +95,7 @@
      (:name "Rebecca Stoker - Careers Advisor" :query "rebecca.stoker@sds.co.uk")))
  '(notmuch-search-oldest-first nil)
  '(package-selected-packages
-   '(pcmpl-args notmuch-bookmarks xah-fly-keys corfu-terminal corfu-doc kind-icon cape all-the-icons-completion mct meow evil-collection consult-imenu flx-isearch minions avy posframe diredfl fussy mini-frame readline-complete company-shell company evil-multiedit org-contacts evil-smartparens evil-org evil-mc evil crux dashboard denote org-tree-slide solarized-theme solaire-mode doom-modeline doom-themes elfeed wgrep wgrep-ag deft ef-themes consult-eglot eglot osm org-modern notmuch-labeler highlight-indentation electric-cursor cursory all-the-icons-ibuffer diff-hl all-the-icons-dired all-the-icons ligature tempel consult-notmuch lin notmuch multiple-cursors iedit magit helpful ctrlf aggressive-indent marginalia consult pass embark which-key markdown-mode corfu sly vterm orderless smartparens))
+   '(exwm-edit exwm yaml-mode pcmpl-args notmuch-bookmarks xah-fly-keys corfu-terminal corfu-doc kind-icon cape all-the-icons-completion mct meow evil-collection consult-imenu flx-isearch minions avy posframe diredfl fussy mini-frame readline-complete company-shell company evil-multiedit org-contacts evil-smartparens evil-org evil-mc evil crux dashboard denote org-tree-slide solarized-theme solaire-mode doom-modeline doom-themes elfeed wgrep wgrep-ag deft ef-themes consult-eglot eglot osm org-modern notmuch-labeler highlight-indentation electric-cursor cursory all-the-icons-ibuffer diff-hl all-the-icons-dired all-the-icons ligature tempel consult-notmuch lin notmuch multiple-cursors iedit magit helpful ctrlf aggressive-indent marginalia consult pass embark which-key markdown-mode corfu sly vterm orderless smartparens))
  '(send-mail-function 'smtpmail-send-it)
  '(smtpmail-smtp-server "smtp-mail.outlook.com")
  '(smtpmail-smtp-service 25))
@@ -196,4 +196,5 @@
 (require 'notmuch-indicator-setup)
 (require 'elisp-format-setup)
 (require 'web-mode-setup)
-
+(require 'yaml-mode-setup)
+(require 'exwm-setup)
