@@ -2,6 +2,8 @@ fundamental-mode ;; Available everywhere
 
 (today (format-time-string "%Y-%m-%d"))
 (date "[" (shell-command-to-string "date +'%Y-%m-%d %a %R' | tr -d '\n'") "]" q)
+(dateplain (shell-command-to-string "date +'%Y-%m-%d %T %z' | tr -d '\n'") q)
+(dateplain2 (shell-command-to-string "date +'%Y-%m-%d %T' | tr -d '\n'") q)
 (name (insert "Yusef Aslam"))
 
 text-mode
@@ -79,13 +81,12 @@ lisp-mode emacs-lisp-mode
           ";;; |    " (s str)                       "    |" n
           ";;; +----" (make-string (length str) ?-) "----+" n)
 
-html-mode mhtml-mode
+web-mode html-mode mhtml-mode
 
-(begin "\\begin{" (s env) "}" r> n> "\\end{" (s env) "}")
-(tr "<tr>" n> p n> "</tr>")
-(td "<td>"p"</td>")
-(a "<a href=""\\"p"\\""">""</a>""q)
-(c "<code>"p"</code>"q)
+(tr "<tr>" n> p q n> "</tr>")
+(td "<td>"pq"</td>")
+(c "<code>"pq"</code>")
+(update "<cite>" "Last updated: " (shell-command-to-string "date +'%Y-%m-%d %T' | tr -d '\n'") "</cite>" q)
 
 ;; Local Variables:
 ;; mode: lisp-data
