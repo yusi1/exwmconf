@@ -1,3 +1,6 @@
+;; focus follows mouse
+(setq mouse-autoselect-window t)
+(setq focus-follows-mouse t)
 (require 'exwm)
 (require 'exwm-config)
 (require 'exwm-edit)
