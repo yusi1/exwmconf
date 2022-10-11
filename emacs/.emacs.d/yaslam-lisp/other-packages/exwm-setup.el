@@ -14,12 +14,17 @@
           (lambda ()
             (exwm-workspace-rename-buffer exwm-class-name)))
 
-
 (defun show-rofi ()
   (interactive)
   (call-process shell-file-name nil nil nil
 		shell-command-switch
 		(format "rofi -show combi &"))  )
+
+(defun exwm-simple-lock ()
+  (interactive)
+  (call-process shell-file-name nil nil nil
+		shell-command-switch
+		(format "slock &")))
 
 ;; Global keybindings.
 (unless (get 'exwm-input-global-keys 'saved-value)
@@ -27,20 +32,40 @@
         `(
           ;; 's-r': Reset (to line-mode).
           ([?\s-r] . exwm-reset)
+
+	  ;; Move between windows
+	  ([s-left] . windmove-left)
+	  ([s-right] . windmove-right)
+	  ([s-up] . windmove-up)
+	  ([s-down] . windmove-down)
+	  
           ;; 's-w': Switch workspace.
           ([?\s-w] . exwm-workspace-switch)
+	  
           ;; 's-&': Launch application.
           ([?\s-&] . (lambda (command)
                        (interactive (list (read-shell-command "$ ")))
                        (start-process-shell-command command nil command)))
+	  ;; 's-p': Launch rofi
 	  ([?\s-p] . show-rofi)
+	  ;; 's-P': Launch Emacs app-launcher
+	  ([?\s-P] . (lambda () (interactive)
+		       (app-launcher-run-app)))
+
+	  ;; 's-\`'': Switch to workspace 0 with the grave key.
+	  ([?\s-`] . (lambda () (interactive)
+		       (exwm-workspace-switch-create 0)))
+	  
           ;; 's-N': Switch to certain workspace.
           ,@(mapcar (lambda (i)
                       `(,(kbd (format "s-%d" i)) .
                         (lambda ()
                           (interactive)
                           (exwm-workspace-switch-create ,i))))
-                    (number-sequence 0 9)))))
+                    (number-sequence 0 9))
+	  
+	  ;; 's-l': Lock the screen
+	  ([?\s-l] . exwm-simple-lock))))
 
 ;; Line-editing shortcuts
 (unless (get 'exwm-input-simulation-keys 'saved-value)
