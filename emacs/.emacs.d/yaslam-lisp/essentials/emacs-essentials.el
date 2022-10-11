@@ -6,7 +6,11 @@
   ;; (gkey "C-x b" 'consult-buffer)
   (gkey "C-x C-b" 'ibuffer)
   (gkey "C-x w n" 'next-window-any-frame)
-  (gkey "C-x w p" 'previous-window-any-frame))
+  (gkey "C-x w p" 'previous-window-any-frame)
+  (gkey "C-x 4 t" (lambda () (interactive) (crux-transpose-windows 1)))
+  (gkey "C-c I" 'crux-find-user-init-file)
+  (gkey "s-k" 'crux-kill-whole-line)
+  (gkey "C-c x" 'crux-open-with))
 
 ;; Quicker window navigation
 ;; With S-<UDLR>
@@ -31,11 +35,6 @@
 (add-hook 'helpful-mode-hook #'visual-line-mode)
 (add-hook 'help-mode-hook #'visual-line-mode)
 (add-hook 'custom-mode-hook #'visual-line-mode)
-
-(defun tranpose-windows ()
-  "Tranpose two windows."
-  (interactive)
-  (crux-transpose-windows 1))
 
 ;; Quicker keybinds
 ;; (if (string-match-p "voidlaptop" (system-name))
@@ -283,17 +282,17 @@ This is just a simpler version of the above functions for browsing root dir '/' 
   (set dst
        (append (eval dst) src)))
 
-(defun open-external-app ()
-  "Open a file in an external app with the default shell's `xdg-open' command."
-  (interactive)
-  (let ((current-file (buffer-file-name)))
-    (cond ((string-equal system-type "gnu/linux")
-	   (call-process shell-file-name nil nil nil
-			 shell-command-switch
-			 (format "xdg-open %s" current-file)))
-	  ((string-equal system-type "windows-nt")
-	   (shell-command (concat "PowerShell -Command \"Invoke-Item -LiteralPath\" " "'" current-file)) "'"))))
+;; (defun open-external-app ()
+;;   "Open a file in an external app with the default shell's `xdg-open' command."
+;;   (interactive)
+;;   (let ((current-file (buffer-file-name)))
+;;     (cond ((string-equal system-type "gnu/linux")
+;; 	   (call-process shell-file-name nil nil nil
+;; 			 shell-command-switch
+;; 			 (format "xdg-open %s" current-file)))
+;; 	  ((string-equal system-type "windows-nt")
+;; 	   (shell-command (concat "PowerShell -Command \"Invoke-Item -LiteralPath\" " "'" current-file)) "'"))))
 
-(gkey "C-c x" 'open-external-app)
+;; (gkey "C-c x" 'open-external-app)
 
 (provide 'emacs-essentials)
