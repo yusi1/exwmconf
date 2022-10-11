@@ -4,6 +4,26 @@
 (require 'exwm)
 (require 'exwm-config)
 (require 'exwm-edit)
+;; (defun exwm-change-screen-hook ()
+;;   (let ((xrandr-output-regexp "\n\\([^ ]+\\) connected ")
+;;         default-output)
+;;     (with-temp-buffer
+;;       (call-process "xrandr" nil t nil)
+;;       (goto-char (point-min))
+;;       (re-search-forward xrandr-output-regexp nil 'noerror)
+;;       (setq default-output (match-string 1))
+;;       (forward-line)
+;;       (if (not (re-search-forward xrandr-output-regexp nil 'noerror))
+;;           (call-process "xrandr" nil nil nil "--output" default-output "--auto")
+;;         (call-process
+;;          "xrandr" nil nil nil
+;;          "--output" (match-string 1) "--primary" "--auto"
+;;          "--output" default-output "--off")
+;;         (setq exwm-randr-workspace-output-plist (list 0 (match-string 1)))))))
+
+;; (add-hook 'exwm-randr-screen-change-hook 'exwm-change-screen-hook)
+
+;; Start the compositor
 
 ;; Set the initial workspace number.
 (unless (get 'exwm-workspace-number 'saved-value)
@@ -81,36 +101,13 @@
           ([?\C-d] . [delete])
           ([?\C-k] . [S-end delete]))))
 
-(defun exwm-change-screen-hook ()
-  (let ((xrandr-output-regexp "\n\\([^ ]+\\) connected ")
-        default-output)
-    (with-temp-buffer
-      (call-process "xrandr" nil t nil)
-      (goto-char (point-min))
-      (re-search-forward xrandr-output-regexp nil 'noerror)
-      (setq default-output (match-string 1))
-      (forward-line)
-      (if (not (re-search-forward xrandr-output-regexp nil 'noerror))
-          (call-process "xrandr" nil nil nil "--output" default-output "--auto")
-        (call-process
-         "xrandr" nil nil nil
-         "--output" (match-string 1) "--primary" "--auto"
-         "--output" default-output "--off")
-        (setq exwm-randr-workspace-output-plist (list 0 (match-string 1)))))))
-
-(add-hook 'exwm-randr-screen-change-hook 'exwm-change-screen-hook)
-
-(defun start-compositor ()
-  (interactive)
-  (shell-command "picom -b & disown"))
-
-(add-hook 'exwm-init-hook 'start-compositor)
-
 ;; Ricing tweaks
+;; tab bar modeline for after EXWM loads
+(prot-tab-status-line 1)
+;;floating window border
 (setq exwm-floating-border-width 2)
-
-;; Enable EXWM
-(exwm-enable)
+;;exwm modeline mode (show workspaces in modeline)
+;; (exwm-modeline-mode 1)
 
 ;; Free up space
 (defun exwm-config-misc ()
