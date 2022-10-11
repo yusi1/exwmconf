@@ -3,5 +3,6 @@
 
 (display-time-mode)
 (display-battery-mode)
+(column-number-mode)
 
 (provide 'mode-line-customization)
