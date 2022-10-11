@@ -1,3 +1,6 @@
+;; start Emacs server
+(server-start)
+
 ;; Add these things to `default-frame-alist'.
 (modify-all-frames-parameters '((width . 95)
 				(height . 25)))
