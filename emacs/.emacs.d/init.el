@@ -1,6 +1,10 @@
 ;; start Emacs server
 (server-start)
 
+;; Transparency
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
 ;; Add these things to `default-frame-alist'.
 (modify-all-frames-parameters '((width . 95)
 				(height . 25)))
