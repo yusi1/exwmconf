@@ -24,8 +24,9 @@
  ;; the text relative to the base font size (or a cons cell of
  ;; height and FLOAT)
  ;; modus-themes-mode-line '(accented borderless (padding . 4) (height . 1.0))
- modus-themes-mode-line '(accented (padding . 0))
+ ;; modus-themes-mode-line '(accented (padding . 0))
  ;; modus-themes-mode-line '(borderless (padding . 4) (height . 1.0))
+ modus-themes-mode-line '(borderless)
 
  ;; Options for `modus-themes-hl-line' are either nil (the default),
  ;; or a list of properties that may include any of these symbols:
@@ -90,7 +91,7 @@
 	     (t . (semibold)))
 	   )
   (setq modus-themes-headings ; this is an alist: read the manual or its doc string
-	'((1 . (light variable-pitch 1.2))
+	'((1 . (light variable-pitch 1.5))
 	  (2 . (monochrome 1.05))
 	  (t . (semibold)))
 	))
@@ -130,14 +131,21 @@ Return `t' if GNOME is in dark mode, else, return `nil'."
 ;;     (modus-themes-load-vivendi)
 ;;   (modus-themes-load-operandi))
 
-;; Quick check to load a theme based on time of day.
-(let ((time (string-to-number (shell-command-to-string "date +'%H%M' | perl -pe 'chomp'")))
-      (day (string-to-number "0700"))
-      (night (string-to-number "1900")))
-  (if (and (> time day)
-	   (< time night))
-      (modus-themes-load-operandi)
-    (modus-themes-load-vivendi)))
+;; Check to load a theme based on time of day.
+(defun ysz/modus-load-theme-tod ()
+  "Load a modus theme based on the time of day returned by `date'."
+  (interactive)
+  (let ((time (string-to-number (shell-command-to-string "date +'%H%M' | perl -pe 'chomp'")))
+	(day (string-to-number "0700"))
+	(night (string-to-number "1900")))
+    (if (and (> time day)
+	     (< time night))
+	(if (not (get-dark-preference-p))
+	    (modus-themes-load-operandi)
+	  (modus-themes-load-vivendi))
+      (modus-themes-load-vivendi))))
+
+(modus-themes-load-vivendi)
 
 ;; Set a keybind to toggle between light/dark mode on modus-* themes..
 (gkey "<f12>" 'modus-themes-toggle)
