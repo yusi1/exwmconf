@@ -83,6 +83,22 @@
 			  ;; :italic-slant italic
 			  :line-spacing 1
 			  )
+			 (curly-regular-desktop
+			  :default-family "Iosevka Comfy"
+			  :default-weight normal
+			  :default-height 160
+			  :fixed-pitch-family nil
+			  :fixed-pitch-weight nil
+			  :fixed-pitch-height nil
+			  :variable-pitch-family "Iosevka Comfy Motion Duo"
+			  :variable-pitch-weight normal
+			  :variable-pitch-height 1.0
+			  :bold-family nil ; use whatever the underlying face has
+			  :bold-weight bold
+			  ;; :italic-family "Comic Mono"
+			  ;; :italic-slant italic
+			  :line-spacing 1
+			  )
 			 (curly-large-desktop
 			  :default-family "Iosevka Comfy"
 			  :default-weight normal
@@ -290,7 +306,8 @@
 			  :fixed-pitch-family nil
 			  :fixed-pitch-weight nil
 			  :fixed-pitch-height nil
-			  :variable-pitch-family "JetBrainsMono"
+			  ;; :variable-pitch-family "JetBrainsMono"
+			  :variable-pitch-family "Iosevka Aile"
 			  :bold-family "JetBrainsMono-Bold"
 			  :bold-weight bold
 			  :italic-family "JetBrainsMono-Italic"
@@ -303,7 +320,7 @@
 			  :fixed-pitch-family nil
 			  :fixed-pitch-weight nil
 			  :fixed-pitch-height nil
-			  :variable-pitch-family "JetBrainsMono"
+			  :variable-pitch-family "Iosevka Aile Light"
 			  :bold-family "JetBrainsMono-Bold"
 			  :bold-weight bold
 			  :italic-family "JetBrainsMono-Italic"
@@ -316,14 +333,26 @@
 			  :fixed-pitch-family nil
 			  :fixed-pitch-weight nil
 			  :fixed-pitch-height nil
-			  :variable-pitch-family "JetBrainsMono"
+			  :variable-pitch-family "Iosevka Aile Light"
+			  :variable-pitch-height 160
 			  :bold-family "JetBrainsMono-Bold"
 			  :bold-weight bold
 			  :italic-family "JetBrainsMono-Italic"
 			  :italic-slant italic
 			  :line-spacing 1)
+			 (firacode-regular
+			  :default-family "FiraCode"
+			  :default-weight regular
+			  :default-height 140
+			  :bold-family "FiraCode"
+			  :bold-weight bold
+			  ;; :variable-pitch-family "FiraSans"
+			  ;; :variable-pitch-weight Book
+			  ;; :variable-pitch-height nil
+			  )
 			 (t
-			  :variable-pitch-family "Iosevka Comfy Motion Duo"
+			  ;; :variable-pitch-family "Iosevka Comfy Motion Duo"
+			  :variable-pitch-family "Iosevka Aile"
 			  :variable-pitch-weight nil
 			  :variable-pitch-height 1.0)
 			 ))
