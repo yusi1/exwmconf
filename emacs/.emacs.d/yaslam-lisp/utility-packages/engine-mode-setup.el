@@ -2,7 +2,7 @@
 
 ;; Default prefix is "C-x / (engine)"
 (engine/set-keymap-prefix (kbd "C-x /"))
-(define-key engine-mode-map (kbd engine/keybinding-prefix) nil)
+;; (define-key engine-mode-map (kbd engine/keybinding-prefix) nil)
 
 ;; function to goto librewolf prefixed buffers
 (defun ysz/consult-buffer-by-prefix (prefix)
