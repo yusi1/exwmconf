@@ -20,6 +20,9 @@ emacs/.emacs.d/transient
 # Ignore Emacs backup files
 *~
 
+# ignore doomemacs emacsd folder (not used in doomemacs)
+/doom-emacs/.emacs.d/
+
 *.log*
 
 xmonad/.config/xmonad/xmonad
