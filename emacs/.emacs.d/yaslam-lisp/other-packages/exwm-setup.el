@@ -6,15 +6,27 @@
 (display-battery-mode -1)
 (display-time-mode -1)
 
+(defun switch-display ()
+  (interactive)
+  (start-process-shell-command "autorandr" nil "autorandr -c"))
+
+(switch-display)
+
 (require 'exwm)
 (require 'exwm-config)
 (require 'exwm-edit)
+(require 'desktop-environment)
 ;; (require 'exwm-modeline)
+
+(desktop-environment-mode)
 
 ;; Set the screen resolution
 (require 'exwm-randr)
 (exwm-randr-enable)
-(start-process-shell-command "autorandr" nil "autorandr -c external-display")
+
+(add-hook 'exwm-randr-screen-change-hook (lambda ()
+					   (interactive)
+					   (switch-display)))
 
 ;; (defun exwm-change-screen-hook ()
 ;;   (let ((xrandr-output-regexp "\n\\([^ ]+\\) connected ")
@@ -35,9 +47,6 @@
 
 ;; (add-hook 'exwm-randr-screen-change-hook 'exwm-change-screen-hook)
 
-;; Start the compositor
-(start-process-shell-command "picom" nil "picom -b")
-
 ;; Set the initial workspace number.
 (unless (get 'exwm-workspace-number 'saved-value)
   (setq exwm-workspace-number 4))
@@ -51,7 +60,7 @@
   (interactive)
   (call-process shell-file-name nil nil nil
 		shell-command-switch
-		(format "rofi -show combi &"))  )
+		(format "rofi -show drun &"))  )
 
 (defun exwm-simple-lock ()
   (interactive)
@@ -112,11 +121,17 @@
           ([?\M-v] . [prior])
           ([?\C-v] . [next])
           ([?\C-d] . [delete])
-          ([?\C-k] . [S-end delete]))))
+          ([?\C-k] . [S-end delete])
+	  ([?\C-/] . [?\C-z])
+	  ([?\M-f] . [C-right])
+	  ([?\M-b] . [C-left])
+	  ([?\M-d] . [C-S-right delete])
+	  ;; FIXME:: Figure out a way to bind Alt+Backspace to Control+Delete
+	  ([M-delete] . [C-delete]))))
 
 ;; Ricing tweaks
 ;; tab bar modeline for after EXWM loads
-(prot-tab-status-line 1)
+;; (prot-tab-status-line 1)
 ;;floating window border
 (setq exwm-floating-border-width 2)
 ;;exwm modeline mode (show workspaces in modeline)
@@ -158,6 +173,15 @@
 				   
 				   ))
 
+;; (PREDICATE FUNCTION)
+;; get current screen preset using `autorandr' and return `t' if we are on the laptop display
+(defun ysz/laptop-screen-p ()
+  (interactive)
+  (let ((displaycmd (shell-command-to-string "sleep 0.5 && autorandr --current | perl -pe 'chomp'"))
+	(laptop-preset "mobile")
+	(ext-display-preset "external-display"))
+    (string-match-p displaycmd laptop-preset)))
+
 ;; polybar functions
 (defvar ysz/polybar-process nil
   "Holds the process of the running Polybar instance, if any")
@@ -172,9 +196,25 @@
 (defun ysz/start-panel ()
   (interactive)
   (ysz/kill-panel)
-  (setq ysz/polybar-process (start-process-shell-command "polybar" nil "polybar my-bar")))
+  (if (ysz/laptop-screen-p)
+      (setq ysz/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config-smallscreen.ini"))
+    (setq ysz/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config.ini"))))
 
-(ysz/start-panel)
+;; refresh panel on screen change event
+(add-hook 'exwm-randr-screen-change-hook (lambda ()
+					   (interactive)
+					   (ysz/start-panel)))
+
+;; refresh wallpaper on screen change event
+(add-hook 'exwm-randr-screen-change-hook (lambda ()
+					   (interactive)
+					   (start-process-shell-command "nitrogen" nil "nitrogen --restore")))
+
+;;save fontaine preset before EXWM exits
+(add-hook 'exwm-exit-hook #'fontaine-store-latest-preset)
+
+;;save cursory preset before EXWM exits
+(add-hook 'exwm-exit-hook #'cursory-store-latest-preset)
 
 ;; Enable EXWM
 (exwm-enable)
