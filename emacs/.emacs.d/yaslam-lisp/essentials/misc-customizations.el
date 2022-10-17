@@ -1,3 +1,13 @@
+;; `Dired-X' (Dired-Xtensions)
+(with-eval-after-load 'dired
+  (setq dired-x-hands-off-my-keys t)
+  (require 'dired-x))
+
+;; Find-file-at-point extension
+(require 'ffap)
+;; FFAP keybinds extensions
+(ffap-bindings)
+
 (require 'tab-bar)
 
 ;;;###autoload
@@ -32,10 +42,6 @@ Hide the mode lines and change their colors."
 (gkey "C-c d" #'dictionary-search)
 (setq dictionary-server "dict.org")
 
-(setq dired-x-hands-off-my-keys nil)
-(require 'dired-x)
-;; (gremap global-map "find-file" 'dired-x-find-file)
-
 (require 'dired)
 (setq dired-listing-switches "-ahl -v --group-directories-first")
 ;; (setq list-directory-verbose-switches "-ahl -v --group-directories-first")
@@ -64,17 +70,33 @@ Hide the mode lines and change their colors."
 
 (require 'eshell)
 ;; Enhanced completion akin to fish shell / zsh
-(require 'pcmpl-args)
+;; (require 'pcmpl-args)
+;; Vterm for Eshell visual commands
+(require 'eshell-vterm)
+(eshell-vterm-mode)
+;; Eshell prompt extra information (git branch etc..)
+(require 'eshell-prompt-extras)
+(eval-after-load 'esh-opt
+  (progn
+    (autoload 'epe-theme-lambda "eshell-prompt-extras")
+    (setq eshell-highlight-prompt nil
+          eshell-prompt-function 'epe-theme-multiline-with-status)))
+;; Eshell syntax highlighting
+(require 'eshell-syntax-highlighting)
+(eshell-syntax-highlighting-global-mode)
+;; Eshell info banner
+;; (require 'eshell-info-banner)
+;; (add-hook 'eshell-banner-load-hook 'eshell-info-banner-update-banner)
 
-;; (setq eshell-prompt-function (lambda nil
-;; 			       (concat
-;; 				(propertize (eshell/pwd) 'face `(:foreground "blue"))
-;; 				(propertize " $" 'face `(:foreground "dark violet"))
-;; 				(propertize " " 'face `(:foreground "black")))))
-;; (setq eshell-highlight-prompt nil)
+(setq eshell-banner-message "Welcome to Eshell!\n\n")
 
 (add-hook 'eshell-mode-hook (lambda () (setq-local imenu-generic-expression
 						   '(("Prompt" " $ \\(.*\\)" 1)))))
+
+(add-to-list 'eshell-visual-options '(("git" "--help" "--paginate")))
+(add-to-list 'eshell-visual-subcommands '(("git" "log" "diff" "show")))
+(add-to-list 'eshell-visual-commands "duf")
+(add-to-list 'eshell-visual-commands "cmatrix")
 
 ;; Buffer and window customizations
 (require 'window)
