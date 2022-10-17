@@ -28,3 +28,6 @@ nvim/.config/nvim/.netrwhist
 # Ignore databases
 *xapian*
 notmuch/mail/.notmuch/xapian
+
+# Ignore gkrellm directory
+gkrellm2/.gkrellm2/data
