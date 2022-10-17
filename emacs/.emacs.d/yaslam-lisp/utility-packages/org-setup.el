@@ -1,7 +1,7 @@
 (require 'org)
 
 ;; Org mode hooks
-(add-hook 'org-mode-hook (lambda () (setq display-line-numbers-mode 'nil)))
+(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 1)))
 (add-hook 'org-mode-hook (lambda () (auto-fill-mode)))
 
 ;; Global Org mode keybinds
