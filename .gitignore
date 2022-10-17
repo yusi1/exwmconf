@@ -30,4 +30,4 @@ nvim/.config/nvim/.netrwhist
 notmuch/mail/.notmuch/xapian
 
 # Ignore gkrellm directory
-gkrellm2/.gkrellm2/data
+gkrellm2/.gkrellm2/
