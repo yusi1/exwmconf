@@ -47,6 +47,10 @@
   "https://github.com/search?q=%s"
   :keybinding "g")
 
+(defengine brave
+  "https://search.brave.com/search?q=%s"
+  :keybinding "b")
+
 (engine-mode t)
 
 (provide 'engine-mode-setup)
