@@ -68,35 +68,37 @@ Hide the mode lines and change their colors."
 (require 'speedbar)
 (gkey "C-c `" 'speedbar)
 
-(require 'eshell)
-;; Enhanced completion akin to fish shell / zsh
-;; (require 'pcmpl-args)
-;; Vterm for Eshell visual commands
-(require 'eshell-vterm)
-(eshell-vterm-mode)
-;; Eshell prompt extra information (git branch etc..)
-(require 'eshell-prompt-extras)
-(eval-after-load 'esh-opt
-  (progn
-    (autoload 'epe-theme-lambda "eshell-prompt-extras")
-    (setq eshell-highlight-prompt nil
-          eshell-prompt-function 'epe-theme-multiline-with-status)))
-;; Eshell syntax highlighting
-(require 'eshell-syntax-highlighting)
-(eshell-syntax-highlighting-global-mode)
-;; Eshell info banner
-;; (require 'eshell-info-banner)
-;; (add-hook 'eshell-banner-load-hook 'eshell-info-banner-update-banner)
+(with-eval-after-load 'eshell
+  ;; Enhanced completion akin to fish shell / zsh
+  ;; (require 'pcmpl-args)
+  ;; Vterm for Eshell visual commands
+  (require 'eshell-vterm)
+  (eshell-vterm-mode)
+  ;; Eshell prompt extra information (git branch etc..)
+  (require 'eshell-prompt-extras)
+  (eval-after-load 'esh-opt
+    (progn
+      (autoload 'epe-theme-lambda "eshell-prompt-extras")
+      (setq eshell-highlight-prompt nil
+            eshell-prompt-function 'epe-theme-multiline-with-status)))
+  ;; Eshell syntax highlighting
+  (require 'eshell-syntax-highlighting)
+  (eshell-syntax-highlighting-global-mode)
+  ;; Eshell info banner
+  ;; (require 'eshell-info-banner)
+  ;; (add-hook 'eshell-banner-load-hook 'eshell-info-banner-update-banner)
 
-(setq eshell-banner-message "Welcome to Eshell!\n\n")
+  (setq eshell-banner-message "Welcome to Eshell!\n\n")
 
-(add-hook 'eshell-mode-hook (lambda () (setq-local imenu-generic-expression
-						   '(("Prompt" " $ \\(.*\\)" 1)))))
+  (add-hook 'eshell-mode-hook (lambda () (setq-local imenu-generic-expression
+						     '(("Prompt" " $ \\(.*\\)" 1)))))
 
-(add-to-list 'eshell-visual-options '(("git" "--help" "--paginate")))
-(add-to-list 'eshell-visual-subcommands '(("git" "log" "diff" "show")))
-(add-to-list 'eshell-visual-commands "duf")
-(add-to-list 'eshell-visual-commands "cmatrix")
+  (add-to-list 'eshell-visual-options '(("git" "--help" "--paginate")))
+  (add-to-list 'eshell-visual-subcommands '(("git" "log" "diff" "show")))
+  (add-to-list 'eshell-visual-commands "duf")
+  (add-to-list 'eshell-visual-commands "cmatrix")
+
+  (setq eshell-modules-list '(eshell-alias eshell-banner eshell-basic eshell-cmpl eshell-dirs eshell-extpipe eshell-glob eshell-hist eshell-ls eshell-pred eshell-prompt eshell-script eshell-term)))
 
 ;; Buffer and window customizations
 (require 'window)
