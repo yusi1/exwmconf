@@ -25,6 +25,24 @@
 ;; Window history mode, `winner-mode'.
 (winner-mode)
 
+;; allow dragging a buffers file from the mode-line to other applications
+;; see emacs NEWS for more details
+;; new option in Emacs 29.1, Built: [2022-10-19 Wed 11:41]
+(setq mouse-drag-mode-line-buffer t)
+
+;; allow dragging region to another program
+;; see emacs NEWS for more details
+;; new option in Emacs 29.1, Built: [2022-10-19 Wed 11:41]
+(setq mouse-drag-and-drop-region-cross-program t)
+
+;; prevent mouse drag gestures from putting empty strings onto the kill ring
+;; see emacs NEWS for more details
+;; new option in Emacs 29.1, Built: [2022-10-19 Wed 11:41]
+(setq mouse-drag-copy-region 'non-empty)
+
+;; users mail address
+(setq user-mail-address "YUZi54780@outlook.com")
+
 ;; Tab bar history mode
 (tab-bar-history-mode)
 
@@ -294,5 +312,23 @@ This is just a simpler version of the above functions for browsing root dir '/' 
 ;; 	   (shell-command (concat "PowerShell -Command \"Invoke-Item -LiteralPath\" " "'" current-file)) "'"))))
 
 ;; (gkey "C-c x" 'open-external-app)
+
+;; function to goto PREFIXED# buffers
+(defun ysz/consult-buffer-by-prefix (prefix)
+  "Use consult to select a buffer prefixed by *PREFIX:."
+  (minibuffer-with-setup-hook
+      (lambda ()
+        (insert (concat prefix "# " )))
+    (consult-buffer)))
+
+;; search through librewolf buffers
+(gkey "C-c M-/" (lambda ()
+		  (interactive)
+		  (ysz/consult-buffer-by-prefix "L")))
+
+;; search through firefox buffers
+(gkey "C-c /" (lambda ()
+		  (interactive)
+		  (ysz/consult-buffer-by-prefix "F")))
 
 (provide 'emacs-essentials)
