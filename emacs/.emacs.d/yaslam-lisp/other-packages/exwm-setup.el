@@ -62,6 +62,12 @@
 		shell-command-switch
 		(format "rofi -show drun &"))  )
 
+(defun show-rofi-bookmarks ()
+  (interactive)
+  (call-process shell-file-name nil nil nil
+		shell-command-switch
+		(format "rofi -show bookmarks -modi \"bookmarks: rofi-bookmarks.py\"")))
+
 (defun exwm-simple-lock ()
   (interactive)
   (call-process shell-file-name nil nil nil
@@ -90,6 +96,8 @@
                        (start-process-shell-command command nil command)))
 	  ;; 's-p': Launch rofi
 	  ([?\s-p] . show-rofi)
+	  ;; 's-b': Launch rofi-bookmarks
+	  ([?\s-b] . show-rofi-bookmarks)
 	  ;; 's-P': Launch Emacs app-launcher
 	  ([?\s-P] . (lambda () (interactive)
 		       (app-launcher-run-app)))
@@ -172,6 +180,54 @@
 				    floating-mode-line nil)
 				   
 				   ))
+
+(defun ysz/exwm--format-window-title-firefox (title &optional length)
+  "Removes noise from and trims Firefox window titles.
+Assumes the Add URL to Window Title extension is enabled and
+configured to use @ (at symbol) as separator."
+  (let* ((length (or length 55))
+         (title (concat "F# " (replace-regexp-in-string " [-—] Mozilla Firefox$" "" title)))
+         (title-and-hostname (split-string title "@" nil " "))
+         (hostname (substring (car (last title-and-hostname)) 0 -1))
+         (page-title (string-join (reverse (nthcdr 1 (reverse title-and-hostname))) " "))
+         (short-title (reverse (string-truncate-left (reverse page-title) length))))
+    (if (length> title-and-hostname 1)
+        (concat short-title " @ " hostname)
+      (reverse (string-truncate-left (reverse title) length)))))
+
+(defun ysz/exwm--format-window-title-librewolf-default (title &optional length)
+  "Removes noise from and trims LibreWolf window titles.
+Assumes the Add URL to Window Title extension is enabled and
+configured to use @ (at symbol) as separator."
+  (let* ((length (or length 55))
+         (title (concat "L# " (replace-regexp-in-string " [-—] LibreWolf$" "" title)))
+         (title-and-hostname (split-string title "@" nil " "))
+         (hostname (substring (car (last title-and-hostname)) 0 -1))
+         (page-title (string-join (reverse (nthcdr 1 (reverse title-and-hostname))) " "))
+         (short-title (reverse (string-truncate-left (reverse page-title) length))))
+    (if (length> title-and-hostname 1)
+        (concat short-title " @ " hostname)
+      (reverse (string-truncate-left (reverse title) length)))))
+
+(defun ysz/exwm--format-window-title-* (title)
+  "Removes annoying notifications counters."
+  (string-trim (replace-regexp-in-string "([[:digit:]]+)" "" title)))
+
+(defun ysz/exwm-buffer-name ()
+  "Guesses (and formats) the buffer name using the class of the X client."
+  (let ((title (ysz/exwm--format-window-title-* exwm-title))
+        (formatter (intern
+                    (format "ysz/exwm--format-window-title-%s"
+			    (downcase exwm-class-name)))))
+    (if (fboundp formatter)
+        (funcall formatter title)
+      title)))
+
+(add-hook 'exwm-update-title-hook
+	  (lambda ()
+	    (progn
+	      (exwm-workspace-rename-buffer
+	       (ysz/exwm-buffer-name)))))
 
 ;; (PREDICATE FUNCTION)
 ;; get current screen preset using `autorandr' and return `t' if we are on the laptop display
