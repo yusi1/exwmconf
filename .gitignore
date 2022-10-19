@@ -51,3 +51,4 @@ fluxbox/.fluxbox/pre-global-menu.txt
 fluxbox/.fluxbox/submenus/appearance
 fluxbox/.fluxbox/submenus/full_menu
 
+*.elc
