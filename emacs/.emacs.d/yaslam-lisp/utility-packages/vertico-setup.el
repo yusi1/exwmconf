@@ -6,6 +6,7 @@
 (require 'vertico-multiform)
 (require 'vertico-repeat)
 (require 'vertico-mouse)
+(require 'vertico-directory)
 (require 'savehist)
 
 (vertico-mode t)
@@ -38,15 +39,23 @@
 
 (vertico-multiform-mode t)
 
+;; `vertico-directory' configuration
+(with-eval-after-load 'vertico
+  ;; keybinds for `vertico-directory'
+  (let ((map vertico-map))
+    (keymap-set map "RET" 'vertico-directory-enter)
+    (keymap-set map "DEL" 'vertico-directory-delete-char)
+    (keymap-set map "M-DEL" 'vertico-directory-delete-word))
+  
+  ;; This works with `file-name-shadow-mode'.  When you are in a
+  ;; sub-directory and use, say, `find-file' to go to your home '~/' or
+  ;; root '/' directory, Vertico will clear the old path to keep only
+  ;; your current input.
+  (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy))
+
 ;; How much lines are shown above and below when
 ;; scrolling in the vertico minibuffer.
 (setq vertico-scroll-margin '0)
-
-;; This works with `file-name-shadow-mode'.  When you are in a
-;; sub-directory and use, say, `find-file' to go to your home '~/' or
-;; root '/' directory, Vertico will clear the old path to keep only
-;; your current input.
-(add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
 
 ;; Save Vertico history across restarts
 (savehist-mode)
