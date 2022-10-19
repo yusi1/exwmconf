@@ -4,36 +4,28 @@
 (engine/set-keymap-prefix (kbd "C-x /"))
 ;; (define-key engine-mode-map (kbd engine/keybinding-prefix) nil)
 
-;; function to goto librewolf prefixed buffers
-(defun ysz/consult-buffer-by-prefix (prefix)
-  "Use consult to select a buffer prefixed by *PREFIX:."
-  (minibuffer-with-setup-hook
-      (lambda ()
-        (insert (concat "*" prefix ": ")))
-    (consult-buffer)))
-
-;; search through librewolf buffers
-(gkey "C-c /" (lambda ()
-		(interactive)
-		(ysz/consult-buffer-by-prefix "librewolf")))
 
 ;; Browser function for the `Librewolf' browser (only browser that works with `exwm-firefox-mode' atm for some unknown reason)
-(setq browse-url-librewolf-program "librewolf")
-(defun browse-url-librewolf-new-window (url &optional _)
-  (interactive (browse-url-interactive-arg "URL: "))
-  (setq url (browse-url-encode-url url))
-  (let* ((process-environment (browse-url-process-environment)))
-    (apply #'start-process
-           (concat "librewolf --new-window" url) nil
-           browse-url-librewolf-program
-           (append
-	    '("--new-window")
-            (list url)))))
+;; (setq browse-url-librewolf-program "librewolf")
+;; (defun browse-url-librewolf-new-window (url &optional _)
+;;   (interactive (browse-url-interactive-arg "URL: "))
+;;   (setq url (browse-url-encode-url url))
+;;   (let* ((process-environment (browse-url-process-environment)))
+;;     (apply #'start-process
+;;            (concat "librewolf --new-window" url) nil
+;;            browse-url-librewolf-program
+;;            (append
+;; 	    '("--new-window")
+;;             (list url)))))
 
-(function-put 'browse-url-librewolf-new-window 'browse-url-browser-kind 'external)
+;; (function-put 'browse-url-librewolf-new-window 'browse-url-browser-kind 'external)
+
+;; start firefox tabs in seperate windows
+(setq browse-url-firefox-new-window-is-tab nil)
+(setq browse-url-firefox-arguments '("--new-window"))
 
 ;; Default browser for `engine-mode'
-(setq engine/browser-function 'browse-url-librewolf-new-window)
+(setq engine/browser-function 'browse-url-firefox)
 
 (defengine youtube
   "https://youtube.com/results?search_query=%s"
@@ -50,6 +42,10 @@
 (defengine brave
   "https://search.brave.com/search?q=%s"
   :keybinding "b")
+
+(defengine url
+  "%s"
+  :keybinding "u")
 
 (engine-mode t)
 
