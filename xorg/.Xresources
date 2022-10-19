@@ -1,15 +1,14 @@
-! Basic settings
+!xterm
 xterm*termName: xterm-256color
 xterm*locale: true
 xterm*utf8: 1
 xterm*utf8Fonts: always
 xterm*dynamicColors: true
-
-! my customizations
 xterm*faceName: Iosevka Comfy
 xterm*faceSize: 17
 xterm*background: black
 xterm*foreground: white
 
-! fix Emacs icon artifacts bug
+!emacs
 Xft.rgba: none
+emacs.font: Fira Code-14

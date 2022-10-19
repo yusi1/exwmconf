@@ -17,6 +17,11 @@ emacs/.emacs.d/history
 emacs/.emacs.d/eshell
 emacs/.emacs.d/transient
 
+emacs-minimal/.emacs.d/elpa
+emacs-minimal/.emacs.d/tramp
+emacs-minimal/.emacs.d/eln-cache
+
+
 # Ignore Emacs backup files
 *~
 
