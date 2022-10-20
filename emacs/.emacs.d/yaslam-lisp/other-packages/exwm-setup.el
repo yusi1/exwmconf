@@ -1,6 +1,6 @@
 ;; focus follows mouse
 (setq mouse-autoselect-window t)
-(setq focus-follows-mouse t)
+(setq focus-follows-mouse nil)
 
 ;; disable things not needed when we have polybar enabled
 (display-battery-mode -1)
@@ -94,6 +94,8 @@
           ([?\s-&] . (lambda (command)
                        (interactive (list (read-shell-command "$ ")))
                        (start-process-shell-command command nil command)))
+	  ;; 's-t': Launch eshell
+	  ([?\s-t] . eshell)
 	  ;; 's-p': Launch rofi
 	  ([?\s-p] . show-rofi)
 	  ;; 's-b': Launch rofi-bookmarks
