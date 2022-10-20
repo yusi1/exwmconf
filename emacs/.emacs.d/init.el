@@ -204,9 +204,14 @@
 ;;; | other-packages |
 ;;; ==================
 (require 'enwc-setup)
-(require 'exwm-init-setup)
-(require 'exwm-setup)
-(require 'exwm-outer-gaps-setup)
+
+;;; ========
+;;; | EXWM |
+;;; ========
+(unless (getenv "XDG_CURRENT_DESKTOP")
+  (require 'exwm-init-setup)
+  (require 'exwm-setup)
+  (require 'exwm-outer-gaps-setup))
 
 ;;; ===================
 ;;; | random-packages |
