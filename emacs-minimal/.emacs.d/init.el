@@ -1,56 +1,31 @@
+(server-start)
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
-
-(add-to-list 'load-path "/home/yaslam/.emacs.d/site-lisp")
-
-(setq auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory "auto-save/") t)))
-
-(setq backup-directory-alist
-      `(("." . ,(expand-file-name
-                 (concat user-emacs-directory "backups")))))
-
-(unless (getenv "XDG_CURRENT_DESKTOP")
-  (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-  (add-to-list 'default-frame-alist '(alpha . (90 . 90))))
-
-(load-theme 'modus-vivendi)
-
-(server-start)
-
-(progn
-  (menu-bar-mode 1)
-  (tool-bar-mode -1))
-
-(electric-pair-mode 1)
-(global-display-line-numbers-mode 1)
-
-(recentf-mode t)
-
-(setq native-comp-async-report-warnings-errors t)
-(setq byte-compile-warnings '(not nresolved
-                                  free-vars
-                                  callargs
-                                  redefine
-                                  obsolete
-                                  noruntime
-                                  cl-functions
-                                  interactive-only
-                                  ))
-
-(modify-all-frames-parameters '((width . 95)
-				(height . 25)))
-
-(if (fboundp 'pixel-scroll-precision-mode)
-    (pixel-scroll-precision-mode t))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(magit exwm orderless vertico)))
+ '(notmuch-saved-searches
+   '((:name "all mail" :query "*" :key "a")
+     (:name "personal-inbox" :query "tag:inbox and tag:personal and not tag:redhat and not tag:emacs-devel and not tag:emacs-bugs and not tag:debian" :key "i")
+     (:name "other-inbox" :query "tag:inbox and tag:other" :key "oi")
+     (:name "unread" :query "tag:unread" :key "u")
+     (:name "flagged" :query "tag:flagged" :key "f")
+     (:name "sent" :query "tag:sent" :key "t")
+     (:name "drafts" :query "tag:draft" :key "dr")
+     (:name "urgent" :query "tag:urgent" :key "!")
+     (:name "noip" :query "tag:noip" :key "ni")
+     (:name "redhat" :query "tag:redhat" :key "rh")
+     (:name "debian" :query "tag:debian" :key "db")
+     (:name "emacs-devel" :query "tag:emacs-devel" :key "ed")
+     (:name "emacs-bugs" :query "tag:emacs-bugs" :key "eb")
+     (:name "Rebecca Stoker - Careers Advisor" :query "rebecca.stoker@sds.co.uk")))
+ '(notmuch-search-oldest-first nil)
+ '(package-selected-packages '(notmuch corfu-doc corfu magit exwm orderless vertico)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -76,7 +51,6 @@ expressions."
   "Set up PACKAGE from an Elisp archive with rest BODY.
 PACKAGE is a quoted symbol, while BODY consists of balanced
 expressions.
-
 Try to install the package if it is missing."
   (declare (indent 1))
   `(progn
@@ -90,6 +64,12 @@ Try to install the package if it is missing."
                         (format "Loading `%s' failed" ,package)
                         :warning))))
 
+(defun ysz/enable-desktop ()
+  (prot-emacs-builtin-package 'ysz-desktop
+    (message "a")))
+
+(add-to-list 'command-switch-alist '("--use-exwm" . ysz/enable-desktop))
+
 (prot-emacs-elpa-package 'orderless
   (setq completion-styles '(orderless basic)
 	completion-category-defaults nil
@@ -98,5 +78,32 @@ Try to install the package if it is missing."
 (prot-emacs-elpa-package 'vertico
   (vertico-mode 1))
 
+(prot-emacs-elpa-package 'corfu
+  (let ((map corfu-map))
+    (keymap-set map "M-p" 'nil)
+    (keymap-set map "M-n" 'nil))
+  (setq tab-always-indent 'complete)
+  (setq completion-cycle-threshold 3)
+  (global-corfu-mode 1))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(prot-emacs-elpa-package 'corfu-doc
+  (let ((map corfu-map))
+    (keymap-set map "M-p" 'corfu-doc-scroll-down)
+    (keymap-set map "M-n" 'corfu-doc-scroll-up)
+    (keymap-set map "M-d" 'corfu-doc-toggle))
+  (corfu-doc-mode 1))
+
 (prot-emacs-elpa-package 'magit
   (keymap-set global-map "C-x g" 'magit))
+
+(prot-emacs-elpa-package 'notmuch
+  (keymap-set global-map "C-c e" 'notmuch)
+  (setq mail-host-address "YUZi54780@outlook.com")
+  (setq user-full-name "Yusef Aslam")
+  (setq user-mail-adress "YUZi54780@outlook.com")
+  (setq mail-user-agent 'message-user-agent)
+  (setq message-kill-buffer-on-exit t)
+  (setq notmuch-fcc-dirs "sent")
+  (setq notmuch-show-logo nil))
+
+
