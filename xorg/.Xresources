@@ -12,3 +12,4 @@ xterm*foreground: white
 !emacs
 Xft.rgba: none
 emacs.font: Fira Code-14
+
