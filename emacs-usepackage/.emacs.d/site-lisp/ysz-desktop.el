@@ -30,13 +30,13 @@
   :straight t
   :hook ((exwm-init . (lambda ()
 			(interactive)
-			(ysz/set-wallpaper)))
+			(ysz-exwm/set-wallpaper)))
 	 (exwm-init . (lambda ()
 			(interactive)
-			(ysz/start-compositor)))
+			(ysz-exwm/start-compositor)))
 	 (exwm-init . (lambda ()
 			(interactive)
-			(ysz/start-panel)))))
+			(ysz-exwm/start-panel)))))
 
 (use-package exwm-config
   :after (exwm))
@@ -45,43 +45,59 @@
   :after (exwm)
   :hook ((exwm-randr-screen-change . (lambda ()
 				       (interactive)
-				       (ysz/switch-display)))
+				       (ysz-exwm/switch-display)))
 	 (exwm-randr-screen-change . (lambda ()
 				       (interactive)
-				       (ysz/set-wallpaper)))
+				       (ysz-exwm/set-wallpaper)))
 	 (exwm-randr-screen-change . (lambda ()
 				       (interactive)
-				       (ysz/start-panel))))
+				       (ysz-exwm/start-panel))))
   :config
   (exwm-randr-enable))
 
-(use-package exwm-outer-gaps
-  :straight '(exwm-outer-gaps :host github
-			      :repo "lucasgruss/exwm-outer-gaps")
-  :after (xelb exwm exwm-randr)
+;; (use-package exwm-outer-gaps
+;;   :straight '(exwm-outer-gaps :host github
+;; 			      :repo "lucasgruss/exwm-outer-gaps")
+;;   :after (xelb exwm)
+;;   :config
+;;   (add-to-list 'exwm-input-global-keys '([?\s-G] . exwm-outer-gaps-mode))
+;;   (add-hook 'exwm-init-hook (lambda () (interactive) (exwm-outer-gaps-mode 1))))
+
+(use-package exwm-edit
+  :straight t
+  :demand t
+  :bind (("C-c '" . exwm-edit--compose)
+	 ("C-c C-'" . exwm-edit--compose))
   :config
-  (exwm-outer-gaps-mode 1))
+  (defun ysz-exwm/on-exwm-edit-compose ()
+      (funcall 'markdown-mode))
+  (add-hook 'exwm-edit-compose-hook 'ysz-exwm/on-exwm-edit-compose))
 
 (use-package desktop-environment
   :straight t
   :config
   (desktop-environment-mode))
 
+(use-package app-launcher
+  :straight '(app-launcher :host github :repo "SebastienWae/app-launcher")
+  :demand t
+  :bind (("s-P" . (lambda () (interactive) (app-launcher-run-app)))))
+
 (setq mouse-autoselect-window t)
 (setq focus-follows-mouse nil)
 
-(defun ysz/switch-display () (interactive)
+(defun ysz-exwm/switch-display () (interactive)
        (start-process-shell-command "autorandr" nil "autorandr -c"))
 
-(ysz/switch-display)
+(ysz-exwm/switch-display)
 
-(defun ysz/set-wallpaper () (interactive)
+(defun ysz-exwm/set-wallpaper () (interactive)
        (start-process-shell-command "nitrogen" nil "nitrogen --restore"))
 
-(defun ysz/start-compositor () (interactive)
+(defun ysz-exwm/start-compositor () (interactive)
        (start-process-shell-command "picom" nil "picom -b"))
 
-(defun ysz/laptop-screen-p ()
+(defun ysz-exwm/laptop-screen-p ()
   "Check if our current screen is a screen that matches `laptop-preset', then return `t' if so."
   (interactive)
   (let ((displaycmd (shell-command-to-string "sleep 0.5 && autorandr --current | perl -pe 'chomp'"))
@@ -89,22 +105,22 @@
 	(ext-display-preset "external-display"))
     (string-match-p displaycmd laptop-preset)))
 
-(defvar ysz/polybar-process nil
+(defvar ysz-exwm/polybar-process nil
   "Holds the process of the running Polybar instance, if any")
 
-(defun ysz/kill-panel ()
+(defun ysz-exwm/kill-panel ()
   (interactive)
-  (when ysz/polybar-process
+  (when ysz-exwm/polybar-process
     (ignore-errors
-      (kill-process ysz/polybar-process)))
-  (setq ysz/polybar-process nil))
+      (kill-process ysz-exwm/polybar-process)))
+  (setq ysz-exwm/polybar-process nil))
 
-(defun ysz/start-panel ()
+(defun ysz-exwm/start-panel ()
   (interactive)
-  (ysz/kill-panel)
-  (if (ysz/laptop-screen-p)
-      (setq ysz/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config-smallscreen.ini"))
-    (setq ysz/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config.ini"))))
+  (ysz-exwm/kill-panel)
+  (if (ysz-exwm/laptop-screen-p)
+      (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config-smallscreen.ini"))
+    (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config.ini"))))
 
 (defun show-rofi ()
   (interactive)
@@ -118,7 +134,7 @@
 		shell-command-switch
 		(format "rofi -show bookmarks -modi \"bookmarks: rofi-bookmarks.py\"")))
 
-(defun ysz/exwm-config ()
+(defun ysz-exwm/exwm-config ()
   "My configuration of EXWM."
   ;; Set the initial workspace number.
   (unless (get 'exwm-workspace-number 'saved-value)
@@ -175,19 +191,19 @@
   ;; Other configurations
   (exwm-config-misc))
 
-(ysz/exwm-config)
+(ysz-exwm/exwm-config)
 
-(defun ysz/fmat-wintitle-firefox (title &optional length)
+(defun ysz-exwm/fmat-wintitle-firefox (title &optional length)
   "Removes noise from and trims Firefox window titles."
   (let* ((length (or length 55))
          (title (concat "F# " (replace-regexp-in-string " [-—] Mozilla Firefox$" "" title))))
     (reverse (string-truncate-left (reverse title) length))))
 
-(defun ysz/buffer-name ()
+(defun ysz-exwm/buffer-name ()
   "Guesses (and formats) the buffer name using the class of the X client."
   (let ((title exwm-title)
 	(formatter (intern
-                    (format "ysz/fmat-wintitle-%s"
+                    (format "ysz-exwm/fmat-wintitle-%s"
 			    (downcase exwm-class-name)))))
     (if (fboundp formatter)
         (funcall formatter title)
