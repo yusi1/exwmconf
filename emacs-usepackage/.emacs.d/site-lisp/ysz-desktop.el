@@ -163,6 +163,7 @@
                             (interactive)
                             (exwm-workspace-switch-create ,i))))
                       (number-sequence 0 9))
+	    ([?\s-`] . (lambda () (interactive) (exwm-workspace-switch 0)))
 	    ([?\s-p] . (lambda () (interactive) (show-rofi)))
 	    ([?\s-b] . (lambda () (interactive) (show-rofi-bookmarks)))
 	    )))
@@ -212,7 +213,12 @@
 (add-hook 'exwm-update-title-hook (lambda ()
 				    (progn
 				      (exwm-workspace-rename-buffer
-				       (ysz/buffer-name)))))
+				       (ysz-exwm/buffer-name)))))
+
+(add-list-to-list 'display-buffer-alist '(("pavucontrol"
+					   (display-buffer-in-side-window)
+					   (side . bottom)
+					   (window-height . 10))))
 
 (provide 'ysz-desktop)
 ;;; ysz-desktop.el ends here
