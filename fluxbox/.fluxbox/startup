@@ -80,9 +80,12 @@ if [ ! -f $HOME/.fluxbox/submenus/full_menu ]; then
     command -v mxfb-menu-generator && mxfb-menu-generator
 fi
 
+# setup screen
+autorandr -c
+
 #get last background selected
 #~/.fehbg
-nitrogen --restore
+sleep 2 && nitrogen --restore
 
 # Debian-local change:
 #   - fbautostart has been added with a quick hack to check to see if it

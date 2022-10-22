@@ -42,7 +42,7 @@ Ctrl F5 :Exec mx-tools
 
 # open xfce4-terminal or roxterm
 Ctrl Mod1 t :Exec xfce4-terminal
-Mod4 t :Exec uxterm
+Mod4 t :Exec xfce4-terminal
 
 # open GNU Emacs
 # Mod4 e :Exec emacs
