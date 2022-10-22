@@ -67,6 +67,7 @@
 (require 'ysz-git)
 (require 'ysz-email)
 (require 'ysz-keybinds)
+(require 'ysz-writing)
 
 ;;;;;;;;;;;;;;;;;;;;;
 (defun ysz/exwm-enabled (switch) "Dummy function")
