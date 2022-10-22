@@ -64,46 +64,6 @@ Try to install the package if it is missing."
                         (format "Loading `%s' failed" ,package)
                         :warning))))
 
-(defun ysz/enable-desktop ()
-  (prot-emacs-builtin-package 'ysz-desktop
-    (message "a")))
-
-(add-to-list 'command-switch-alist '("--use-exwm" . ysz/enable-desktop))
-
-(prot-emacs-elpa-package 'orderless
-  (setq completion-styles '(orderless basic)
-	completion-category-defaults nil
-	completion-category-overrides '((file (styles . (partial-completion))))))
-
-(prot-emacs-elpa-package 'vertico
-  (vertico-mode 1))
-
-(prot-emacs-elpa-package 'corfu
-  (let ((map corfu-map))
-    (keymap-set map "M-p" 'nil)
-    (keymap-set map "M-n" 'nil))
-  (setq tab-always-indent 'complete)
-  (setq completion-cycle-threshold 3)
-  (global-corfu-mode 1))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(prot-emacs-elpa-package 'corfu-doc
-  (let ((map corfu-map))
-    (keymap-set map "M-p" 'corfu-doc-scroll-down)
-    (keymap-set map "M-n" 'corfu-doc-scroll-up)
-    (keymap-set map "M-d" 'corfu-doc-toggle))
-  (corfu-doc-mode 1))
-
-(prot-emacs-elpa-package 'magit
-  (keymap-set global-map "C-x g" 'magit))
-
-(prot-emacs-elpa-package 'notmuch
-  (keymap-set global-map "C-c e" 'notmuch)
-  (setq mail-host-address "YUZi54780@outlook.com")
-  (setq user-full-name "Yusef Aslam")
-  (setq user-mail-adress "YUZi54780@outlook.com")
-  (setq mail-user-agent 'message-user-agent)
-  (setq message-kill-buffer-on-exit t)
-  (setq notmuch-fcc-dirs "sent")
-  (setq notmuch-show-logo nil))
-
-
+(require 'ysz-completion)
+(require 'ysz-git)
+(require 'ysz-email)
