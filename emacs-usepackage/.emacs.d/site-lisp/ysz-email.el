@@ -1,3 +1,5 @@
+;;; Email configurations (notmuch et al.) --- ysz-email.el
+
 (use-package notmuch
   :straight t
   :config
@@ -23,3 +25,4 @@
 					consult-notmuch-buffer-source)))
 
 (provide 'ysz-email)
+;;; ysz-email.el ends here

@@ -1,3 +1,5 @@
+;;; Completion configurations (vertico, orderless et al.) --- ysz-completion.el
+
 (use-package orderless
   :straight t
   :init
@@ -108,3 +110,4 @@
 				 ))))
 
 (provide 'ysz-completion)
+;;; ysz-completion.el ends here

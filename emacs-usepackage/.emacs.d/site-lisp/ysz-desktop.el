@@ -1,4 +1,4 @@
-;;; Desktop configurations (EXWM et al.)
+;;; Desktop configurations (EXWM et al.) --- ysz-desktop.el
 
 (use-package engine-mode
   :straight t
@@ -199,3 +199,4 @@
 				       (ysz/buffer-name)))))
 
 (provide 'ysz-desktop)
+;;; ysz-desktop.el ends here

@@ -1,3 +1,5 @@
+;;; Keybind configurations --- ysz-keybinds.el
+
 (use-package s
   :straight t)
 
@@ -87,3 +89,4 @@
   "d" 'dired-root)
 
 (provide 'ysz-keybinds)
+;;; ysz-keybinds.el ends here

@@ -1,3 +1,5 @@
+;;; Theming configurations --- ysz-theme.el
+
 (use-package modus-themes
   :straight t
   :demand t
@@ -7,3 +9,4 @@
   (modus-themes-load-vivendi))
 
 (provide 'ysz-theme)
+;;; ysz-theme.el ends here
