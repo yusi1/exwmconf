@@ -32,7 +32,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(variable-pitch ((t (:family "Iosevka Aile")))))
 
 ;;; Packages
 
@@ -68,6 +68,9 @@
 (require 'ysz-email)
 (require 'ysz-keybinds)
 (require 'ysz-writing)
+(require 'ysz-lang)
+(require 'ysz-functions)
+(require 'ysz-shell)
 
 ;;;;;;;;;;;;;;;;;;;;;
 (defun ysz/exwm-enabled (switch) "Dummy function")
