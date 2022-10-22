@@ -4,8 +4,8 @@ xterm*locale: true
 xterm*utf8: 1
 xterm*utf8Fonts: always
 xterm*dynamicColors: true
-xterm*faceName: Iosevka Comfy
-xterm*faceSize: 17
+xterm*faceName: Fira Code
+xterm*faceSize: 14
 xterm*background: black
 xterm*foreground: white
 
