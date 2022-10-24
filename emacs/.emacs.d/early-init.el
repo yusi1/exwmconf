@@ -1,18 +1,31 @@
-;; Disable startup screen
-(setq inhibit-startup-screen t)
+(setq package-enable-at-startup nil)
 
-(setq initial-frame-alist
-      '((width . 76)
-	(height . 32)))
+(let ((dir (expand-file-name user-emacs-directory)))
+  (dolist (paths `(,(concat dir "site-lisp")
+		   ,(concat dir "load-path")))
+    (add-to-list 'load-path paths)))
 
-;; Frame configuration
-;; Add frame borders and window dividers
-;; (modify-all-frames-parameters
-;;  '((right-divider-width . 0)
-;;    (internal-border-width . 0)))
-;; (dolist (face '(window-divider
-;;                 window-divider-first-pixel
-;;                 window-divider-last-pixel))
-;;   (face-spec-reset-face face)
-;;   (set-face-foreground face (face-attribute 'default :background)))
-;; (set-face-background 'fringe (face-attribute 'default :background))
+;; Hide nativecomp warnings
+(setq native-comp-async-report-warnings-errors t)
+;; Hide bytecomp warning
+(setq byte-compile-warnings '(not nresolved
+                                  free-vars
+                                  callargs
+                                  redefine
+                                  obsolete
+                                  noruntime
+                                  cl-functions
+                                  interactive-only
+                                  ))
+
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "auto-save/") t)))
+
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+(if (fboundp 'pixel-scroll-precision-mode)
+    (pixel-scroll-precision-mode t))
+
+(require 'ysz-ui)
