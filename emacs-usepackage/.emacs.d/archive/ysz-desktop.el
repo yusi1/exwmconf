@@ -26,9 +26,16 @@
 
   (engine-mode t))
 
+(use-package xelb
+  :straight '(xelb :type git :host github :repo "ch11ng/xelb"))
+;;;;;;;;;;;;;;
 (use-package exwm
-  :straight t
-  :hook ((exwm-init . (lambda ()
+  :straight '(exwm :type git :host github :repo "ch11ng/exwm")
+  :hook (
+	 ;; (exwm-init . (lambda ()
+	 ;; 		(interactive)
+	 ;; 		(ysz-exwm/switch-display)))
+	 (exwm-init . (lambda ()
 			(interactive)
 			(ysz-exwm/set-wallpaper)))
 	 (exwm-init . (lambda ()
@@ -36,7 +43,10 @@
 			(ysz-exwm/start-compositor)))
 	 (exwm-init . (lambda ()
 			(interactive)
-			(ysz-exwm/start-panel)))))
+			(ysz-exwm/start-panel)))
+	 (exwm-init . (lambda ()
+			(interactive)
+			(ysz-exwm/start-xsettingsd)))))
 
 (use-package exwm-config
   :after (exwm))
@@ -89,8 +99,6 @@
 (defun ysz-exwm/switch-display () (interactive)
        (start-process-shell-command "autorandr" nil "autorandr -c"))
 
-(ysz-exwm/switch-display)
-
 (defun ysz-exwm/set-wallpaper () (interactive)
        (start-process-shell-command "nitrogen" nil "nitrogen --restore"))
 
@@ -99,7 +107,6 @@
 
 (defun ysz-exwm/laptop-screen-p ()
   "Check if our current screen is a screen that matches `laptop-preset', then return `t' if so."
-  (interactive)
   (let ((displaycmd (shell-command-to-string "sleep 0.5 && autorandr --current | perl -pe 'chomp'"))
 	(laptop-preset "mobile")
 	(ext-display-preset "external-display"))
@@ -120,7 +127,23 @@
   (ysz-exwm/kill-panel)
   (if (ysz-exwm/laptop-screen-p)
       (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config-smallscreen.ini"))
-    (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config.ini"))))
+    (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config-light.ini"))))
+
+(defvar ysz-exwm/xsettingsd-process nil
+  "Holds the process of the running Xsettingsd instance, if any")
+
+(defun ysz-exwm/kill-xsettingsd ()
+  (interactive)
+  (when ysz-exwm/xsettingsd-process
+    (ignore-errors
+      (kill-process ysz-exwm/xsettingsd-process)))
+  (setq ysz-exwm/xsettingsd-process nil))
+
+(defun ysz-exwm/start-xsettingsd ()
+  (interactive)
+  (ysz-exwm/kill-xsettingsd)
+  (setq ysz-exwm/xsettingsd-process
+	(start-process-shell-command "xsettingsd" nil "xsettingsd")))
 
 (defun show-rofi ()
   (interactive)
