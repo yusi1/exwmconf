@@ -71,3 +71,4 @@
 (require 'ysz-lang)
 (require 'ysz-functions)
 (require 'ysz-shell)
+(require 'ysz-utils)

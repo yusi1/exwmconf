@@ -4,4 +4,5 @@
   :straight t
   :bind (("C-c p" . pass)))
 
+(provide 'ysz-utils)
 ;;; ysz-utils.el ends here
