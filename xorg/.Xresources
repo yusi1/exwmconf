@@ -13,3 +13,6 @@ xterm*foreground: white
 Xft.rgba: none
 emacs.font: Fira Code-14
 
+!X*.*
+Xcursor.size: 32
+
