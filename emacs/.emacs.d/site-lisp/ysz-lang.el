@@ -3,5 +3,7 @@
 (use-package markdown-mode
   :straight t)
 
+(add-to-list 'auto-mode-alist '("\\.rasi\\'" . css-mode))
+
 (provide 'ysz-lang)
 ;;; ysz-lang.el ends here
