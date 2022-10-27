@@ -57,3 +57,4 @@ fluxbox/.fluxbox/submenus/appearance
 fluxbox/.fluxbox/submenus/full_menu
 
 *.elc
+notmuch/mail/.notmuch/muchsync/*
