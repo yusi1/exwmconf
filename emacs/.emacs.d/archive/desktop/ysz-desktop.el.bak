@@ -1,5 +1,58 @@
 ;;; Desktop configurations (EXWM et al.) --- ysz-desktop.el
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Init Functions
+(defun ysz-exwm/switch-display () (interactive)
+       (start-process-shell-command "autorandr" nil "autorandr -c"))
+
+(ysz-exwm/switch-display)
+
+(defun ysz-exwm/set-wallpaper () (interactive)
+       (start-process-shell-command "nitrogen" nil "nitrogen --restore"))
+
+(defun ysz-exwm/start-compositor () (interactive)
+       (start-process-shell-command "picom" nil "picom -b"))
+
+(defun ysz-exwm/laptop-screen-p ()
+  "Check if our current screen is a screen that matches `laptop-preset', then return `t' if so."
+  (let ((displaycmd (shell-command-to-string "sleep 0.5 && autorandr --current | perl -pe 'chomp'"))
+	(laptop-preset "mobile")
+	(ext-display-preset "docked"))
+    (string-match-p displaycmd laptop-preset)))
+
+(defvar ysz-exwm/polybar-process nil
+  "Holds the process of the running Polybar instance, if any")
+
+(defun ysz-exwm/kill-panel ()
+  (interactive)
+  (when ysz-exwm/polybar-process
+    (ignore-errors
+      (kill-process ysz-exwm/polybar-process)))
+  (setq ysz-exwm/polybar-process nil))
+
+(defun ysz-exwm/start-panel ()
+  (interactive)
+  (ysz-exwm/kill-panel)
+  (if (ysz-exwm/laptop-screen-p)
+      (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config-smallscreen.ini"))
+    (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config.ini"))))
+
+(defvar ysz-exwm/xsettingsd-process nil
+  "Holds the process of the running Xsettingsd instance, if any")
+
+(defun ysz-exwm/kill-xsettingsd ()
+  (interactive)
+  (when ysz-exwm/xsettingsd-process
+    (ignore-errors
+      (kill-process ysz-exwm/xsettingsd-process)))
+  (setq ysz-exwm/xsettingsd-process nil))
+
+(defun ysz-exwm/start-xsettingsd ()
+  (interactive)
+  (ysz-exwm/kill-xsettingsd)
+  (setq ysz-exwm/xsettingsd-process
+	(start-process-shell-command "xsettingsd" nil "xsettingsd")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package xelb
   :straight '(xelb :type git :host github :repo "ch11ng/xelb"))
 ;;;;;;;;;;;;;;
@@ -16,10 +69,7 @@
 			(ysz-exwm/start-panel)))
 	 (exwm-init . (lambda ()
 			(interactive)
-			(ysz-exwm/start-xsettingsd)))
-	 (exwm-init . (lambda ()
-			(interactive)
-			(ysz-exwm/switch-display)))))
+			(ysz-exwm/start-xsettingsd)))))
 
 (use-package exwm-config
   :after (exwm))
@@ -42,8 +92,9 @@
   :straight '(exwm-outer-gaps :host github
 			      :repo "lucasgruss/exwm-outer-gaps")
   :after (xelb exwm)
-  :config
+  :preface
   (add-to-list 'exwm-input-global-keys '([?\s-G] . exwm-outer-gaps-mode))
+  :init
   (add-hook 'exwm-init-hook (lambda () (interactive) (exwm-outer-gaps-mode 1))))
 
 (use-package exwm-edit
@@ -94,55 +145,6 @@
 
 (setq mouse-autoselect-window t)
 (setq focus-follows-mouse nil)
-
-(defun ysz-exwm/switch-display () (interactive)
-       (start-process-shell-command "autorandr" nil "autorandr -c"))
-
-(defun ysz-exwm/set-wallpaper () (interactive)
-       (start-process-shell-command "nitrogen" nil "nitrogen --restore"))
-
-(defun ysz-exwm/start-compositor () (interactive)
-       (start-process-shell-command "picom" nil "picom -b"))
-
-(defun ysz-exwm/laptop-screen-p ()
-  "Check if our current screen is a screen that matches `laptop-preset', then return `t' if so."
-  (let ((displaycmd (shell-command-to-string "sleep 0.5 && autorandr --current | perl -pe 'chomp'"))
-	(laptop-preset "mobile")
-	(ext-display-preset "docked"))
-    (string-match-p displaycmd laptop-preset)))
-
-(defvar ysz-exwm/polybar-process nil
-  "Holds the process of the running Polybar instance, if any")
-
-(defun ysz-exwm/kill-panel ()
-  (interactive)
-  (when ysz-exwm/polybar-process
-    (ignore-errors
-      (kill-process ysz-exwm/polybar-process)))
-  (setq ysz-exwm/polybar-process nil))
-
-(defun ysz-exwm/start-panel ()
-  (interactive)
-  (ysz-exwm/kill-panel)
-  (if (ysz-exwm/laptop-screen-p)
-      (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config-smallscreen.ini"))
-    (setq ysz-exwm/polybar-process (start-process-shell-command "polybar" nil "polybar --config=~/.config/polybar/config.ini"))))
-
-(defvar ysz-exwm/xsettingsd-process nil
-  "Holds the process of the running Xsettingsd instance, if any")
-
-(defun ysz-exwm/kill-xsettingsd ()
-  (interactive)
-  (when ysz-exwm/xsettingsd-process
-    (ignore-errors
-      (kill-process ysz-exwm/xsettingsd-process)))
-  (setq ysz-exwm/xsettingsd-process nil))
-
-(defun ysz-exwm/start-xsettingsd ()
-  (interactive)
-  (ysz-exwm/kill-xsettingsd)
-  (setq ysz-exwm/xsettingsd-process
-	(start-process-shell-command "xsettingsd" nil "xsettingsd")))
 
 (defun show-rofi ()
   (interactive)
@@ -215,7 +217,6 @@
   (exwm-config-misc))
 
 (ysz-exwm/exwm-config)
-(ysz-exwm/switch-display)
 
 (defun ysz-exwm/fmat-wintitle-firefox (title &optional length)
   "Removes noise from and trims Firefox window titles."
