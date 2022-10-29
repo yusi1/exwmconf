@@ -5,6 +5,9 @@
 
 (recentf-mode t)
 
+;; modeline
+(column-number-mode 1)
+
 (progn
   (menu-bar-mode 1)
   (tool-bar-mode -1))

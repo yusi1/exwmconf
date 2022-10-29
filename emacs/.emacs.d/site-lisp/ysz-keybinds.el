@@ -10,6 +10,10 @@
   :config
   (ffap-bindings))
 
+(use-package help
+  :config
+  (general-def global-map "C-c C-d" 'help-follow-symbol))
+
 (defmacro gremap (map func remap)
     "Remap keys using a macro.
 - MAP is the map to remap the key on.
