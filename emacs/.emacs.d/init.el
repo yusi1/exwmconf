@@ -79,3 +79,13 @@
 (use-package ysz-functions)
 (use-package ysz-shell)
 (use-package ysz-utils)
+
+;;; EXWM
+(defun ysz/exwm-enabled (switch) "Dummy function")
+(add-to-list 'command-switch-alist '("--use-exwm" . ysz/exwm-enabled))
+(setq ysz/exwm-enabled-p
+      (if (seq-contains command-line-args "--use-exwm") t))
+
+(when ysz/exwm-enabled-p
+  (use-package ysz-desktop-init)
+  (use-package ysz-desktop))

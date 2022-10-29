@@ -2,7 +2,8 @@
 
 (let ((dir (expand-file-name user-emacs-directory)))
   (dolist (paths `(,(concat dir "site-lisp")
-		   ,(concat dir "load-path")))
+		   ,(concat dir "load-path")
+		   ,(concat dir "site-lisp/desktop")))
     (add-to-list 'load-path paths)))
 
 ;; Hide nativecomp warnings
