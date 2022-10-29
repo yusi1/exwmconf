@@ -4,7 +4,7 @@
 ;; (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
 (modify-all-frames-parameters '((width . 95)
-				(height . 25)))
+			  (height . 25)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -26,12 +26,16 @@
      (:name "emacs-devel" :query "tag:emacs-devel" :key "ed")
      (:name "emacs-bugs" :query "tag:emacs-bugs" :key "eb")
      (:name "Rebecca Stoker - Careers Advisor" :query "rebecca.stoker@sds.co.uk")))
- '(notmuch-search-oldest-first nil))
+ '(notmuch-search-oldest-first nil)
+ '(send-mail-function 'smtpmail-send-it)
+ '(smtpmail-smtp-server "smtp-mail.outlook.com")
+ '(smtpmail-smtp-service 25))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(fixed-pitch ((t (:height 140 :family "FiraCode"))))
  '(variable-pitch ((t (:height 1.04 :family "Iosevka Aile")))))
 
 ;;; Packages
@@ -55,6 +59,9 @@
 
 ;; Use straight.el for use-package expressions
 (straight-use-package 'use-package)
+
+;; Enable imenu support for use-package expressions
+(setq use-package-enable-imenu-support t)
 
 ;; Load the helper package for commands like `straight-x-clean-unused-repos'
 (require 'straight-x)
