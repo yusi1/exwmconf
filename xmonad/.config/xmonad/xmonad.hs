@@ -90,7 +90,7 @@ main = do
   xmonad $ withSB mySB . ewmhFullscreen . ewmh . docks $ def {
     borderWidth = 2
     , terminal = "gnome-terminal"
-    , keys = customKeys delKeys insKeys
+    -- , keys = customKeys delKeys insKeys
     , startupHook = myStartupHook
     , workspaces = myWorkspaces
     , layoutHook = myLayoutHook
@@ -191,9 +191,9 @@ main = do
     , ("M4-a s", spawn "/bin/bash -c ~/.xmonad-bash-scripts/set-alarm.sh")
     , ("M4-c", spawn "greenclip print | sed '/^$/d' | dmenu -i -l 10 -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'")
     , ("M4-S-c", spawn "notify-send Clearing clipboard... && greenclip clear")
-    , ("C-n <Space>", spawn "dunstctl close")
-    , ("C-n <Return>", spawn "dunstctl close-all")
-    , ("C-n h", spawn "dunstctl history-pop")
+    , ("M4-n <Space>", spawn "dunstctl close")
+    , ("M4-n <Return>", spawn "dunstctl close-all")
+    , ("M4-n h", spawn "dunstctl history-pop")
     , ("M4-r b", spawn "openrgb --profile blue-bright")
     , ("M4-r d", spawn "openrgb --profile blue-dark")
     , ("M4-r o", spawn "openrgb --profile off")
