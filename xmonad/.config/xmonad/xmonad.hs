@@ -89,7 +89,7 @@ main :: IO ()
 main = do
   xmonad $ withSB mySB . ewmhFullscreen . ewmh . docks $ def {
     borderWidth = 2
-    , terminal = "gnome-terminal"
+    , terminal = "lxterminal"
     -- , keys = customKeys delKeys insKeys
     , startupHook = myStartupHook
     , workspaces = myWorkspaces
@@ -179,6 +179,11 @@ main = do
     , ("M4-S-/", helpCommand)
     , ("M4-?", helpCommand)
 
+    -- Media control
+    , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 2")
+    , ("<XF86AudioLowerVolume>", spawn "pamixer -d 2")
+    , ("<XF86AudioMute>", spawn "pamixer -t")
+    
     -- Scratchpad activation keybinds
     -- TODO: Use visual submaps to visualize the keybinds
     , ("M4-M1-e", namedScratchpadAction scratchpads "Emacs")
