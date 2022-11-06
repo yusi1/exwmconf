@@ -14,6 +14,19 @@
   :config
   (general-def global-map "C-c C-d" 'help-follow-symbol))
 
+(use-package which-key
+  :straight t
+  :config
+  (setq which-key-idle-delay 2)
+  (which-key-mode))
+
+;;;EviL mode
+;; (use-package ysz-evil)
+;;;;;;;;;;;;;;;;;;;;;;;
+;;;Xah-Fly-Keys mode
+(use-package ysz-xfk)
+;;;;;;;;;;;;;;;;;;;;;;;
+
 (defmacro gremap (map func remap)
     "Remap keys using a macro.
 - MAP is the map to remap the key on.
@@ -40,8 +53,7 @@
 (keymap-set global-map "C-c /"
 	    (lambda () (interactive) (ysz/consult-buffer-by-prefix "F")))
 
-(general-def
-  :keymap global-map
+(general-def global-map
   "s-O" 'other-window
   "s-!" 'delete-other-windows
   "s-\"" 'split-window-below
@@ -83,8 +95,7 @@
   (interactive)
   (find-file (concat "/sudo:root@localhost:" "/")))
 
-(general-def
-  :keymap global-map
+(general-def global-map
   :prefix "C-c s"
   "f" 'find-file-as-root
   "<mouse-3>" 'find-file-as-root
