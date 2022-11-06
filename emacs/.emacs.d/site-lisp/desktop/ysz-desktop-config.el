@@ -25,17 +25,18 @@
                            (interactive (list (read-shell-command "$ ")))
                            (start-process-shell-command command nil command)))
 
-            ;; 's-N': Switch to certain workspace.
-            ,@(mapcar (lambda (i)
-                        `(,(kbd (format "s-%d" i)) .
-                          (lambda ()
-                            (interactive)
-                            (exwm-workspace-switch-create ,i))))
-                      (number-sequence 0 9))
-	    ([?\s-`] . (lambda () (interactive) (exwm-workspace-switch 0)))
-	    ([?\s-p] . (lambda () (interactive) (show-rofi)))
-	    ([?\s-b] . (lambda () (interactive) (show-rofi-bookmarks)))
-	    )))
+              ;; 's-N': Switch to certain workspace.
+              ,@(mapcar (lambda (i)
+                          `(,(kbd (format "s-%d" i)) .
+                            (lambda ()
+                              (interactive)
+                              (exwm-workspace-switch-create ,i))))
+			(number-sequence 0 9))
+	      ([?\s-`] . (lambda () (interactive) (exwm-workspace-switch 0)))
+	      ([?\s-p] . (lambda () (interactive) (show-rofi)))
+	      ([?\s-b] . (lambda () (interactive) (show-rofi-bookmarks)))
+	      ([?\s-t] . eshell)
+	      )))
   ;; Line-editing shortcuts
   (unless (get 'exwm-input-simulation-keys 'saved-value)
     (setq exwm-input-simulation-keys
@@ -55,6 +56,9 @@
 	    ([?\M-d] . [C-S-right delete])
 	    ;; FIXME:: Figure out a way to bind Alt+Backspace to Control+Delete
 	    ;; (() . [C-delete])
+	    ([?\C-\M-d] . [?\M-\S-c])
+	    ([?\C-\M-a] . [?\M-\S-r])
+	    ([?\C-\M-m] . [?\M-\S-m])
 	  )))
   ;; Enable EXWM
   (exwm-enable)
