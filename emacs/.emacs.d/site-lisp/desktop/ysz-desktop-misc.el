@@ -2,12 +2,12 @@
 
 ;;; EXWM-related integration packages
 
-(use-package exwm-outer-gaps
-  :straight '(exwm-outer-gaps :host github
-			      :repo "lucasgruss/exwm-outer-gaps")
-  :init
-  (add-hook 'exwm-init-hook (lambda () (interactive) (exwm-outer-gaps-mode 1)))
-  (add-to-list 'exwm-input-global-keys '([?\s-G] . exwm-outer-gaps-mode)))
+;; (use-package exwm-outer-gaps
+;;   :straight '(exwm-outer-gaps :host github
+;; 			      :repo "lucasgruss/exwm-outer-gaps")
+;;   :init
+;;   (add-hook 'exwm-init-hook (lambda () (interactive) (exwm-outer-gaps-mode 1)))
+;;   (add-to-list 'exwm-input-global-keys '([?\s-G] . exwm-outer-gaps-mode)))
 
 (use-package exwm-edit
   :straight t
@@ -24,6 +24,10 @@
 (use-package desktop-environment
   :straight t
   :config
+  ;; (setq desktop-environment-volume-get-command "pamixer --get-volume-human")
+  ;; (setq desktop-environment-volume-set-command "pamixer --set-volume %s")
+  ;; (setq desktop-environment-volume-normal-increment "2")
+  
   (desktop-environment-mode))
 
 (use-package app-launcher
@@ -34,7 +38,7 @@
 (use-package engine-mode
   :straight t
   :config
-  (engine/set-keymap-prefix (kbd "C-j"))
+  (engine/set-keymap-prefix (kbd "C-x /"))
   (setq browse-url-firefox-new-window-is-tab nil)
   (setq browse-url-firefox-arguments '("--new-window"))
   (setq engine/browser-function 'browse-url-firefox)
