@@ -7,7 +7,7 @@
        (start-process-shell-command "nitrogen" nil "nitrogen --restore"))
 
 (defun ysz-exwm/start-compositor () (interactive)
-       (start-process-shell-command "picom" nil "picom -b"))
+       (start-process-shell-command "picom" nil "picom -b --config $HOME/.config/picom/picom-exwm.conf"))
 
 (defun ysz-exwm/laptop-screen-p ()
   "Check if our current screen is a screen that matches `laptop-preset', then return `t' if so."
