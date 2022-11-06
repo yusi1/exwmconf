@@ -11,8 +11,14 @@ xterm*foreground: white
 
 !emacs
 Xft.rgba: none
-emacs.font: Fira Code-14
+! emacs.font: Fira Code-14
+emacs.font: -xos4-terminus-bold-*-*-*-18-*-*-*-*-*-*-*
 
 !X*.*
 Xcursor.size: 32
+
+!dzen2
+dzen2.font:       -*-fixed-*-*-*-*-*-*-*-*-*-*-*-*
+dzen2.foreground: #22EE11
+dzen2.background: black
 
