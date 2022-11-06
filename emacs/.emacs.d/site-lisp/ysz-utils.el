@@ -42,6 +42,27 @@
        (ibuffer-do-sort-by-project-file-relative))))
   (add-to-list 'ibuffer-project-root-functions '(file-remote-p . "Remote")))
 
+(use-package tempel
+  :straight t
+  :demand t
+  :hook ((prog-mode . tempel-setup-capf)
+	 (text-mode . tempel-setup-capf))
+  :bind (("M-+" . tempel-complete)
+	 ("M-*" . tempel-insert)
+	 (:map tempel-map
+	       ("TAB" . tempel-next)
+	       ("<backtab>" . tempel-previous)))
+  :config
+  (setq tempel-trigger-prefix "!")
+  (defun tempel-setup-capf ()
+    (setq-local completion-at-point-functions
+		(cons #'tempel-expand
+                      completion-at-point-functions)))
+
+  ;; Optionally make the Tempel templates available to Abbrev,
+  ;; either locally or globally. `expand-abbrev' is bound to C-x '.
+  (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
+  (global-tempel-abbrev-mode))
 
 (provide 'ysz-utils)
 ;;; ysz-utils.el ends here
