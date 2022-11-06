@@ -5,7 +5,9 @@
 (use-package org
   :straight t
   :hook ((org-mode . (lambda () (auto-fill-mode 1)))
-	 (org-mode . (lambda () (visual-line-mode 1))))
+	 (org-mode . (lambda () (visual-line-mode 1)))
+	 ;; (org-mode . (lambda () (variable-pitch-mode 1)))
+	 )
   :config
   (general-def global-map
     :prefix "C-c"
@@ -93,12 +95,13 @@
   (setq org-crypt-key "Yusef Password Store")
   (setq auto-save-default nil))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package org-superstar
-  :straight '(org-superstar :type git :flavor melpa
-			    :host github :repo "integral-dw/org-superstar-mode")
-  :after (org)
-  :hook ((org-mode . (lambda () (org-superstar-mode 1)))))
+;; (use-package org-superstar
+;;   :straight '(org-superstar :type git :flavor melpa
+;; 			    :host github :repo "integral-dw/org-superstar-mode")
+;;   :after (org)
+;;   :hook ((org-mode . (lambda () (org-superstar-mode 1)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package denote
   :straight t
   :config
@@ -145,7 +148,7 @@
   (with-eval-after-load 'org-capture
     (setq denote-org-capture-specifiers "%l\n%i\n%?")
     (add-to-list 'org-capture-templates
-		 '("n" "New note (with denote.el) (Org)" plain
+		 '("d" "New note (with denote.el) (Org)" plain
                    (file denote-last-path)
                    #'denote-org-capture
                    :no-save t
