@@ -4,6 +4,7 @@
 ;;   :straight '(exwm-firefox :type git :host nil
 ;; 			   :repo "https://codeberg.org/emacs-weirdware/exwm-firefox")
 ;;   :config
+;;   (add-to-list 'exwm-firefox-class->name-alist '("firefox" . "firefox"))
 ;;   (exwm-firefox-mode))
 
 (defun ysz-exwm/exwm-window-config ()
@@ -29,6 +30,7 @@
 		(progn
 		  (exwm-workspace-rename-buffer
 		   (ysz-exwm/buffer-name)))))
+
     (add-list-to-list 'display-buffer-alist
 		      '(("pavucontrol"
 			 (display-buffer-in-side-window)
