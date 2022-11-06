@@ -77,7 +77,14 @@
     (keymap-set map "M-n" 'nil))
   (setq tab-always-indent 'complete)
   (setq completion-cycle-threshold 3)
-  (global-corfu-mode 1))
+  (global-corfu-mode 1)
+  ;; enable corfu in the minibuffer
+  (defun corfu-enable-in-minibuffer ()
+    "Enable Corfu in the minibuffer if `completion-at-point' is bound."
+    (when (where-is-internal #'completion-at-point (list (current-local-map)))
+      ;; (setq-local corfu-auto nil) Enable/disable auto completion
+      (corfu-mode 1)))
+  (add-hook 'minibuffer-setup-hook #'corfu-enable-in-minibuffer))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package corfu-doc
   :straight t
