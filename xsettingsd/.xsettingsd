@@ -8,3 +8,4 @@ Xft/lcdfilter "none"
 # GTK settings
 Net/ThemeName "Adwaita-dark"
 Net/FontName "Fira Sans 12"
+Net/CursorThemeName "Adwaita"
