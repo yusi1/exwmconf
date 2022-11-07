@@ -108,6 +108,7 @@
 (use-package ysz-shell)
 (use-package ysz-utils)
 (use-package ysz-media)
+(use-package ysz-irc)
 
 ;;; EXWM
 (defun ysz/exwm-enabled (switch) "Dummy function")
