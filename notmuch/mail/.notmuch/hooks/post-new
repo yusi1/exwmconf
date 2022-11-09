@@ -29,10 +29,10 @@ notmuch tag +redhat -- tag:new and from:errata@redhat.com
 notmuch tag +debian +personal -- tag:new and to:debian-security-announce@lists.debian.org
 
 # tag all messages from Emacs-devel mailing list
-notmuch tag +emacs-devel +personal -- tag:new and to:emacs-devel@gnu.org
+# notmuch tag +emacs-devel +personal -- tag:new and to:emacs-devel@gnu.org
 
 # tag all messages from bug-gnu-emacs mailing list
-notmuch tag +emacs-bugs +personal -- tag:new and to:debbugs.gnu.org
+# notmuch tag +emacs-bugs +personal -- tag:new and to:debbugs.gnu.org
 
 ### After post-processing do stuff here
 # finally, retag all "new" messages "inbox" and "unread"

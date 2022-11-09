@@ -1,0 +1,8 @@
+inbox=tag:inbox and tag:personal and not tag:redhat and not tag:debian
+sent=tag:sent
+urgent=tag:urgent
+drafts=tag:drafts
+flagged=tag:flagged
+debian=tag:debian
+noip=tag:noip
+redhat=tag:redhat

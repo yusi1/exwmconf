@@ -16,7 +16,7 @@
  '(notmuch-saved-searches
    '((:name "all mail" :query "*" :key
 	    [97])
-     (:name "personal-inbox" :query "tag:inbox and tag:personal and not tag:redhat and not tag:emacs-devel and not tag:emacs-bugs and not tag:debian" :key
+     (:name "personal-inbox" :query "tag:inbox and tag:personal and not tag:redhat and not tag:debian" :key
 	    [105])
      (:name "other-inbox" :query "tag:inbox and tag:other" :key
 	    [111 105])
