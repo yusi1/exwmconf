@@ -14,7 +14,10 @@ linux_version=$(uname -r)
 
 # Returns the battery status: "Full", "Discharging", or "Charging".
 battery_status=$(cat /sys/class/power_supply/BAT1/status)
+battery_charge=$(upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | awk '{print $2}')
+
+volume=$(pamixer --get-volume-human)
 
 # Emojis and characters for the status bar
 # 💎 💻 💡 🔌 ⚡ 📁 \|
-echo "<UP> $uptime_formatted <VER> $linux_version <BAT> $battery_status $date_formatted"
+echo "<UP> $uptime_formatted <VER> $linux_version <VOL> $volume <BAT> $battery_status ($battery_charge) $date_formatted"
