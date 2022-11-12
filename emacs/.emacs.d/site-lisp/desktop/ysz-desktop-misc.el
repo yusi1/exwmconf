@@ -2,12 +2,12 @@
 
 ;;; EXWM-related integration packages
 
-;; (use-package exwm-outer-gaps
-;;   :straight '(exwm-outer-gaps :host github
-;; 			      :repo "lucasgruss/exwm-outer-gaps")
-;;   :init
-;;   (add-hook 'exwm-init-hook (lambda () (interactive) (exwm-outer-gaps-mode 1)))
-;;   (add-to-list 'exwm-input-global-keys '([?\s-G] . exwm-outer-gaps-mode)))
+(use-package exwm-outer-gaps
+  :straight '(exwm-outer-gaps :host github
+			      :repo "lucasgruss/exwm-outer-gaps")
+  :init
+  (setq exwm-outer-gaps-width [3 3 3 3])
+  (add-hook 'exwm-init-hook (lambda () (interactive) (exwm-outer-gaps-mode 1))))
 
 (use-package exwm-edit
   :straight t
@@ -55,6 +55,9 @@
   (defengine brave
     "https://search.brave.com/search?q=%s"
     :keybinding "b")
+  (defengine neeva
+    "https://neeva.com/search?q=%s"
+    :keybinding "n")
   (defengine url
     "%s"
     :keybinding "u")

@@ -32,7 +32,7 @@
 		   (ysz-exwm/buffer-name)))))
 
     (add-list-to-list 'display-buffer-alist
-		      '(("pavucontrol"
+		      '(("Volume Control"
 			 (display-buffer-in-side-window)
 			 (side . bottom)
 			 (window-height . 10)))))
