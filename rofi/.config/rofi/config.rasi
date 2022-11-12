@@ -1,7 +1,8 @@
 configuration {
     /* modi: "combi,filebrowser,ssh,keys"; */
     modi: "drun,window,ssh,keys";
-    font: "Fira Code 14";
+    /* font: "Fira Code 14"; */
+    font: "Terminus Bold 16";
     /*	location: 0;*/
     /*	yoffset: 0;*/
     /*	xoffset: 0;*/
