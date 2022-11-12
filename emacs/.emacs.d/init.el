@@ -12,7 +12,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("f64189544da6f16bab285747d04a92bd57c7e7813d8c24c30f382f087d460a33" "02f57ef0a20b7f61adce51445b68b2a7e832648ce2e7efb19d217b6454c1b644" "5f128efd37c6a87cd4ad8e8b7f2afaba425425524a68133ac0efd87291d05874" "930ebff784a26210a29eeb4513518ec06340fb2afb5863211385aca08b55d18c" default))
+   '("7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "0c08a5c3c2a72e3ca806a29302ef942335292a80c2934c1123e8c732bb2ddd77" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" "f64189544da6f16bab285747d04a92bd57c7e7813d8c24c30f382f087d460a33" "02f57ef0a20b7f61adce51445b68b2a7e832648ce2e7efb19d217b6454c1b644" "5f128efd37c6a87cd4ad8e8b7f2afaba425425524a68133ac0efd87291d05874" "930ebff784a26210a29eeb4513518ec06340fb2afb5863211385aca08b55d18c" default))
  '(notmuch-saved-searches
    '((:name "all mail" :query "*" :key
 	    [97])
@@ -47,11 +47,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-
- '(default ((t (:height 160 :family "Terminus" :weight bold))))
- '(fixed-pitch ((t (:height 160 :family "Terminus" :weight bold))))
- '(variable-pitch ((t (:height 1.04 :family "Terminus" :weight bold))))
-
  )
 
 ;;; Packages
