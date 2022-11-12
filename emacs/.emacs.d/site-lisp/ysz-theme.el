@@ -1,27 +1,27 @@
 ;;; Theming configurations --- ysz-theme.el
 
-(use-package modus-themes
-  :straight t
-  :demand t
-  :bind (("<f12>" . modus-themes-toggle))
-  :config
-  (setq
-   ;; modus-themes-mode-line '(3d accented)
-   modus-themes-mode-line '(3d)
+;; (use-package modus-themes
+;;   :straight t
+;;   :demand t
+;;   :bind (("<f12>" . modus-themes-toggle))
+;;   :config
+;;   (setq
+;;    ;; modus-themes-mode-line '(3d accented)
+;;    modus-themes-mode-line '(3d)
 
-   modus-themes-headings '((1 . (light variable-pitch 1.5))
-			   (2 . (monochrome 1.05))
-			   (t . (semibold)))
-   modus-themes-org-blocks 'gray-background
-   modus-themes-mixed-fonts t)
-  ;;;;;;;;;;;;;;
-  ;; (if (not (null (getenv "XDG_CURRENT_DESKTOP")))
-  ;;     (if (string-match-p "dark"
-  ;; 			  (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
-  ;; 	  (modus-themes-load-vivendi)
-  ;; 	(modus-themes-load-operandi))
-  ;;   (modus-themes-load-vivendi))
-  (modus-themes-load-vivendi))
+;;    modus-themes-headings '((1 . (light variable-pitch 1.5))
+;; 			   (2 . (monochrome 1.05))
+;; 			   (t . (semibold)))
+;;    modus-themes-org-blocks 'gray-background
+;;    modus-themes-mixed-fonts t)
+;;   ;;;;;;;;;;;;;;
+;;   ;; (if (not (null (getenv "XDG_CURRENT_DESKTOP")))
+;;   ;;     (if (string-match-p "dark"
+;;   ;; 			  (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
+;;   ;; 	  (modus-themes-load-vivendi)
+;;   ;; 	(modus-themes-load-operandi))
+;;   ;;   (modus-themes-load-vivendi))
+;;   (modus-themes-load-vivendi))
 
 ;; (use-package green-is-the-new-black-theme
 ;;   :straight '(green-is-the-new-black-emacs
@@ -30,23 +30,22 @@
 ;;   :config
 ;;   (load-theme 'green-is-the-new-black t))
 
-;; (use-package doom-themes
-;;   :straight t
-;;   :config
-;;   ;; Global settings (defaults)
-;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;;   (load-theme 'doom-one t)
-
-;;   ;; Enable flashing mode-line on errors
-;;   ;; (doom-themes-visual-bell-config)
-;;   ;; ;; Enable custom neotree theme (all-the-icons must be installed!)
-;;   ;; (doom-themes-neotree-config)
-;;   ;; ;; or for treemacs users
-;;   ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-;;   ;; (doom-themes-treemacs-config)
-;;   ;; Corrects (and improves) org-mode's native fontification.
-;;   (doom-themes-org-config))
+(use-package doom-themes
+  :straight t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-tomorrow-night t)
+  ;; Enable flashing mode-line on errors
+  ;; (doom-themes-visual-bell-config)
+  ;; ;; Enable custom neotree theme (all-the-icons must be installed!)
+  ;; (doom-themes-neotree-config)
+  ;; ;; or for treemacs users
+  ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  ;; (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package doom-modeline
   :straight t
@@ -65,7 +64,7 @@
   :config
   ;; whether fontaine is enabled
   (defvar fontaine-enabled nil "Whether fontaine is enabled or not.")
-  (setq fontaine-enabled nil)
+  (setq fontaine-enabled t)
   
   (setq fontaine-latest-state-file
 	(locate-user-emacs-file "fontaine-latest-state.eld"))
@@ -91,15 +90,31 @@
 	  (monoid-regular
 	   :default-family "Monoid"
 	   :default-height 160
-	   :default-weight regular)
+	   :default-weight regular
+	   ;; :variable-pitch-family nil
+	   :variable-pitch-weight bold
+	   :variable-pitch-height 1.2)
 	  (monoid-medium
 	   :default-family "Monoid"
 	   :default-height 140
-	   :default-weight regular)
+	   :default-weight regular
+	   ;; :variable-pitch-family nil
+	   :variable-pitch-weight bold
+	   :variable-pitch-height 1.1)
 	  (monoid-small
 	   :default-family "Monoid"
 	   :default-height 120
-	   :default-weight regular)
+	   :default-weight regular
+	   ;; :variable-pitch-family nil
+	   :variable-pitch-weight bold
+	   :variable-pitch-height 1.0)
+	  (sourcecode-ubuntu-medium
+	   :default-family "Source Code Pro"
+	   :default-height 140
+	   :default-weight regular
+	   :variable-pitch-family "Ubuntu Nerd Font"
+	   :variable-pitch-height 1.1
+	   :variable-pitch-weight bold)
 	  (t
 	   :default-family "FiraCode"
 	   :default-weight normal
