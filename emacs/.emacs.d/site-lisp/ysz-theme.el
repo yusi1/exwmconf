@@ -1,27 +1,27 @@
 ;;; Theming configurations --- ysz-theme.el
 
-;; (use-package modus-themes
-;;   :straight t
-;;   :demand t
-;;   :bind (("<f12>" . modus-themes-toggle))
-;;   :config
-;;   (setq
-;;    ;; modus-themes-mode-line '(3d accented)
-;;    modus-themes-mode-line '(3d)
+(use-package modus-themes
+  :straight t
+  :demand t
+  :bind (("<f12>" . modus-themes-toggle))
+  :config
+  (setq
+   ;; modus-themes-mode-line '(3d accented)
+   modus-themes-mode-line '(3d)
 
-;;    modus-themes-headings '((1 . (light variable-pitch 1.5))
-;; 			   (2 . (monochrome 1.05))
-;; 			   (t . (semibold)))
-;;    modus-themes-org-blocks 'gray-background
-;;    modus-themes-mixed-fonts t)
-;;   ;;;;;;;;;;;;;;
-;;   ;; (if (not (null (getenv "XDG_CURRENT_DESKTOP")))
-;;   ;;     (if (string-match-p "dark"
-;;   ;; 			  (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
-;;   ;; 	  (modus-themes-load-vivendi)
-;;   ;; 	(modus-themes-load-operandi))
-;;   ;;   (modus-themes-load-vivendi))
-;;   (modus-themes-load-vivendi))
+   modus-themes-headings '((1 . (light variable-pitch 1.5))
+			   (2 . (monochrome 1.05))
+			   (t . (semibold)))
+   modus-themes-org-blocks 'gray-background
+   modus-themes-mixed-fonts t)
+  ;;;;;;;;;;;;;;
+  ;; (if (not (null (getenv "XDG_CURRENT_DESKTOP")))
+  ;;     (if (string-match-p "dark"
+  ;; 			  (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
+  ;; 	  (modus-themes-load-vivendi)
+  ;; 	(modus-themes-load-operandi))
+  ;;   (modus-themes-load-vivendi))
+  (modus-themes-load-vivendi))
 
 ;; (use-package green-is-the-new-black-theme
 ;;   :straight '(green-is-the-new-black-emacs
@@ -30,22 +30,26 @@
 ;;   :config
 ;;   (load-theme 'green-is-the-new-black t))
 
-(use-package doom-themes
-  :straight t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-tomorrow-night t)
-  ;; Enable flashing mode-line on errors
-  ;; (doom-themes-visual-bell-config)
-  ;; ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;; (doom-themes-neotree-config)
-  ;; ;; or for treemacs users
-  ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  ;; (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+;; (use-package retro-green-theme
+;;   :config
+;;   (load-theme 'retro-green t))
+
+;; (use-package doom-themes
+;;   :straight t
+;;   :config
+;;   ;;; Global settings (defaults)
+;;   (setq doom-themes-enable-bold t    ;; if nil, bold is universally disabled
+;;         doom-themes-enable-italic t) ;; if nil, italics is universally disabled
+;;   (load-theme 'doom-city-lights t)
+;;   ;;; Enable flashing mode-line on errors
+;;   ;;; (doom-themes-visual-bell-config)
+;;   ;;; ;;; Enable custom neotree theme (all-the-icons must be installed!)
+;;   ;;; (doom-themes-neotree-config)
+;;   ;;; ;;; or for treemacs users
+;;   ;;; (setq doom-themes-treemacs-theme "doom-atom") ;; use "doom-colors" for less minimal icon theme
+;;   ;;; (doom-themes-treemacs-config)
+;;   ;;; Corrects (and improves) org-mode's native fontification.
+;;   (doom-themes-org-config))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package doom-modeline
   :straight t
@@ -115,6 +119,22 @@
 	   :variable-pitch-family "Ubuntu Nerd Font"
 	   :variable-pitch-height 1.1
 	   :variable-pitch-weight bold)
+	  (consolas-regular
+	   :default-family "Consolas"
+	   :default-height 160
+	   :default-weight regular)
+	  (consolas-medium
+	   :default-family "Consolas"
+	   :default-height 140
+	   :default-weight regular)
+	  (fantasque-sans-regular
+	   :default-family "Fantasque Sans Mono"
+	   :default-height 160
+	   :default-weight regular)
+	  (fantasque-sans-medium
+	   :default-family "Fantasque Sans Mono"
+	   :default-height 140
+	   :default-weight regular)
 	  (t
 	   :default-family "FiraCode"
 	   :default-weight normal
@@ -128,38 +148,38 @@
 	  (fontaine-set-preset (or (fontaine-restore-latest-preset) 'regular))))
   (add-hook 'kill-emacs-hook #'fontaine-store-latest-preset))
 
-(use-package cursory
-  :straight t
-  :bind (("C-c C-p" . cursory-set-preset))
-  :config
-  (setq cursory-presets
-	'((bar
-           :cursor-type (bar . 2)
-           :cursor-in-non-selected-windows hollow
-           :blink-cursor-blinks 10
-           :blink-cursor-interval 0.5
-           :blink-cursor-delay 0.2)
-	  (slow-bar
-	   :cursor-type (bar . 2)
-	   :cursor-in-non-selected-windows hollow
-	   :blink-cursor-blinks 3
-	   :blink-cursor-interval 0.8
-	   :blink-cursor-delay 0.5)
-          (box
-           :cursor-type box
-           :cursor-in-non-selected-windows hollow
-           :blink-cursor-blinks 10
-           :blink-cursor-interval 0.5
-           :blink-cursor-delay 0.2)
-          (underscore
-           :cursor-type (hbar . 3)
-           :cursor-in-non-selected-windows hollow
-           :blink-cursor-blinks 50
-           :blink-cursor-interval 0.2
-           :blink-cursor-delay 0.2)))
-  (setq cursory-latest-state-file (locate-user-emacs-file "cursory-latest-state"))
-  (cursory-set-preset (or (cursory-restore-latest-preset) 'box))
-  (add-hook 'kill-emacs-hook #'cursory-store-latest-preset))
+;; (use-package cursory
+;;   :straight t
+;;   :bind (("C-c C-p" . cursory-set-preset))
+;;   :config
+;;   (setq cursory-presets
+;; 	'((bar
+;;            :cursor-type (bar . 2)
+;;            :cursor-in-non-selected-windows hollow
+;;            :blink-cursor-blinks 10
+;;            :blink-cursor-interval 0.5
+;;            :blink-cursor-delay 0.2)
+;; 	  (slow-bar
+;; 	   :cursor-type (bar . 2)
+;; 	   :cursor-in-non-selected-windows hollow
+;; 	   :blink-cursor-blinks 3
+;; 	   :blink-cursor-interval 0.8
+;; 	   :blink-cursor-delay 0.5)
+;;           (box
+;;            :cursor-type box
+;;            :cursor-in-non-selected-windows hollow
+;;            :blink-cursor-blinks 10
+;;            :blink-cursor-interval 0.5
+;;            :blink-cursor-delay 0.2)
+;;           (underscore
+;;            :cursor-type (hbar . 3)
+;;            :cursor-in-non-selected-windows hollow
+;;            :blink-cursor-blinks 50
+;;            :blink-cursor-interval 0.2
+;;            :blink-cursor-delay 0.2)))
+;;   (setq cursory-latest-state-file (locate-user-emacs-file "cursory-latest-state"))
+;;   (cursory-set-preset (or (cursory-restore-latest-preset) 'box))
+;;   (add-hook 'kill-emacs-hook #'cursory-store-latest-preset))
 
 (use-package diredfl
   :straight t
