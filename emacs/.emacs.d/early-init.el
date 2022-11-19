@@ -31,4 +31,5 @@
 (if (fboundp 'pixel-scroll-precision-mode)
     (pixel-scroll-precision-mode t))
 
+(require 'ysz-compatibility)
 (require 'ysz-ui)
