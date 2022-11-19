@@ -12,36 +12,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "0c08a5c3c2a72e3ca806a29302ef942335292a80c2934c1123e8c732bb2ddd77" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" "f64189544da6f16bab285747d04a92bd57c7e7813d8c24c30f382f087d460a33" "02f57ef0a20b7f61adce51445b68b2a7e832648ce2e7efb19d217b6454c1b644" "5f128efd37c6a87cd4ad8e8b7f2afaba425425524a68133ac0efd87291d05874" "930ebff784a26210a29eeb4513518ec06340fb2afb5863211385aca08b55d18c" default))
- '(notmuch-saved-searches
-   '((:name "all mail" :query "*" :key
-	    [97])
-     (:name "personal-inbox" :query "tag:inbox and tag:personal and not tag:redhat and not tag:debian" :key
-	    [105])
-     (:name "other-inbox" :query "tag:inbox and tag:other" :key
-	    [111 105])
-     (:name "unread" :query "tag:unread" :key
-	    [117])
-     (:name "flagged" :query "tag:flagged" :key
-	    [102])
-     (:name "sent" :query "tag:sent" :key
-	    [116])
-     (:name "drafts" :query "tag:draft" :key
-	    [100 114])
-     (:name "urgent" :query "tag:urgent" :key
-	    [33])
-     (:name "noip" :query "tag:noip" :key
-	    [110 105])
-     (:name "redhat" :query "tag:redhat" :key
-	    [114 104])
-     (:name "debian" :query "tag:debian" :key
-	    [100 98])
-     (:name "Rebecca Stoker - Careers Advisor" :query "rebecca.stoker@sds.co.uk")
-     (:name "Vicky Briggs - Bernardos Scotland" :query "from:Vicky Briggs")))
- '(notmuch-search-oldest-first nil)
- '(send-mail-function 'smtpmail-send-it)
- '(smtpmail-smtp-server "smtp-mail.outlook.com")
- '(smtpmail-smtp-service 25))
+   '("84bb2ad9d4d861a307171718840d486f5b9f6b9d7af9c0ce00a70b91e8747756" "9724dd370de9086cc2ab6b0c6a563d6b4967d0262187fd6d712e8ce413eea7cd" "ed0fab80b2281894fbe53fb8ba3dad24a2dbbf6be1ddd19f76c97f21cf4c5ac2" "276c229174c67849fabffe2191be30a2663d7ce7a1b05b7e2bf3ddac624136ec" "c282a528137220d5f71c84ca68eb8bd87b3ccb3656434b20ad600a380f9f198c" "7d2734f226168fd7a47ab8fce2dfb4047b1a41f1844bde7eb9b91de461c40029" "c25d00b2b71ebd0133d4512ad6070342dd0b662d30106bbacced82a6c52ade8c" "3c18abfca12fa71b6d4a998d4cfe49e8248620ebb24cdc4992110206e5eb5be5" "28d87ee3d89c7625702cb2596f897528d7f59cc580be5c401757493521b692fc" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "0c08a5c3c2a72e3ca806a29302ef942335292a80c2934c1123e8c732bb2ddd77" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" "f64189544da6f16bab285747d04a92bd57c7e7813d8c24c30f382f087d460a33" "02f57ef0a20b7f61adce51445b68b2a7e832648ce2e7efb19d217b6454c1b644" "5f128efd37c6a87cd4ad8e8b7f2afaba425425524a68133ac0efd87291d05874" "930ebff784a26210a29eeb4513518ec06340fb2afb5863211385aca08b55d18c" default)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -95,7 +66,7 @@
 (use-package ysz-theme)
 (use-package ysz-completion)
 (use-package ysz-git)
-(use-package ysz-email)
+;; (use-package ysz-email)
 (use-package ysz-keybinds)
 (use-package ysz-writing)
 (use-package ysz-lang)
