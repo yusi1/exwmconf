@@ -6,6 +6,6 @@ Xft/RGBA "none"
 Xft/lcdfilter "none"
 
 # GTK settings
-Net/ThemeName "Adwaita-dark"
+Net/ThemeName "Greybird-dark"
 Net/FontName "Fira Sans 12"
-Net/CursorThemeName "Adwaita"
+Net/CursorThemeName "whiteglass"
