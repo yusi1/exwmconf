@@ -24,7 +24,7 @@
 ;; (use-package ysz-evil)
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;;Xah-Fly-Keys mode
-(use-package ysz-xfk)
+;; (use-package ysz-xfk)
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmacro gremap (map func remap)
