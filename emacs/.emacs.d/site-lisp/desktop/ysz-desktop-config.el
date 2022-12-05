@@ -74,6 +74,7 @@
 	    ([?\M-d] . [C-S-right delete])
 	    ;; FIXME:: Figure out a way to bind Alt+Backspace to Control+Delete
 	    ;; (() . [C-delete])
+	    ;; TabDetach key remappings
 	    ([?\C-\M-d] . [?\M-\S-c])
 	    ([?\C-\M-a] . [?\M-\S-r])
 	    ([?\C-\M-m] . [?\M-\S-m])
