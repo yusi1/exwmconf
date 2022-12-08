@@ -86,6 +86,7 @@
       (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook #'corfu-enable-in-minibuffer))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; XXX: Deprecated, use Corfu's builtin extension (corfu-popupinfo) instead.
 (use-package corfu-doc
   :straight t
   :after (corfu)

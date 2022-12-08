@@ -53,6 +53,11 @@
 (keymap-set global-map "C-c /"
 	    (lambda () (interactive) (ysz/consult-buffer-by-prefix "F")))
 
+;; Remappings for when backspace doesn't work in TTY's.
+(when (not window-system)
+  (keymap-set key-translation-map "C-h" "DEL")
+  (keymap-set key-translation-map "M-h" "C-h"))
+
 (general-def global-map
   "s-O" 'other-window
   "s-!" 'delete-other-windows
