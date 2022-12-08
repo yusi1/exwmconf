@@ -66,12 +66,26 @@
   ;;;;;;;;;;;;;;;;;;;;;
   "s-T" 'eshell)
 
+(defun tramp-method-p ()
+  "Get the TRAMP privilege escalation method depending on the `system-type' variable.
+If `system-type' is `berkeley-unix', use the `doas' method.
+If `system-type' is anything else (e.g `gnu/linux') then use the `sudo' method."
+  (setq tramp-method (if (not (eq system-type 'berkeley-unix))
+			 "sudo"
+		       "doas")))
+
+(defun mail-as-root ()
+  "View mail in `/var/mail/root' as root with RMAIL."
+  (interactive)
+  (let ((rmail-file-name (concat "/" (tramp-method-p) ":" "root@localhost:/var/mail/root")))
+    (rmail rmail-file-name)))
+
 (defun view-as-root ()
   "Use TRAMP to view the current buffer with root privileges."
   (interactive)
   (when buffer-file-name
     (find-alternate-file
-     (concat "/sudo:root@localhost:"
+     (concat "/" (tramp-method-p) ":" "root@localhost:"
 	     buffer-file-name))
     (message (concat "Viewing file: \"" buffer-file-name "\" with root privileges."))))
 
@@ -80,20 +94,20 @@
   (interactive)
   (when buffer-file-name
     (find-file
-     (concat "/sudo:root@localhost:"
+     (concat "/" (tramp-method-p) ":" "root@localhost:"
 	     buffer-file-name))
     (message (concat "Viewing file: \"" buffer-file-name "\" with root privileges in a new buffer."))))
 
 (defun find-file-as-root ()
   "Find-file as root."
   (interactive)
-  (find-file (concat "/sudo:root@localhost:"
-		     (read-file-name "Find file (as root): " "/"))))
+      (find-file (concat "/" (tramp-method-p) ":" "root@localhost:"
+			 (read-file-name "Find file (as root): " "/"))))
 
 (defun dired-root ()
   "Dired as root."
   (interactive)
-  (find-file (concat "/sudo:root@localhost:" "/")))
+  (find-file (concat "/" (tramp-method-p) ":" "root@localhost:" "/")))
 
 (general-def global-map
   :prefix "C-c s"
@@ -101,7 +115,8 @@
   "<mouse-3>" 'find-file-as-root
   "s" 'view-as-root
   "S" 'view-as-root-new-buffer
-  "d" 'dired-root)
+  "d" 'dired-root
+  "m" 'mail-as-root)
 
 (provide 'ysz-keybinds)
 ;;; ysz-keybinds.el ends here
