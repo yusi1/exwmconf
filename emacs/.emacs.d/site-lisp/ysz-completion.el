@@ -95,6 +95,8 @@
     (keymap-set map "M-p" 'corfu-popupinfo-scroll-down)
     (keymap-set map "M-n" 'corfu-popupinfo-scroll-up)
     (keymap-set map "M-d" 'corfu-popupinfo-toggle))
+  ;; Change height of `corfu-popinfo' face.
+  (set-face-attribute 'corfu-popupinfo nil :height 1.0)
   (corfu-popupinfo-mode 1))
 
 (use-package marginalia
