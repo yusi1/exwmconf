@@ -86,17 +86,16 @@
       (corfu-mode 1)))
   (add-hook 'minibuffer-setup-hook #'corfu-enable-in-minibuffer))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; XXX: Deprecated, use Corfu's builtin extension (corfu-popupinfo) instead.
-(use-package corfu-doc
-  :straight t
+(use-package corfu-popupinfo
+  :load-path "straight/repos/corfu/extensions"
   :after (corfu)
   :demand t
   :config
   (let ((map corfu-map))
-    (keymap-set map "M-p" 'corfu-doc-scroll-down)
-    (keymap-set map "M-n" 'corfu-doc-scroll-up)
-    (keymap-set map "M-d" 'corfu-doc-toggle))
-  (corfu-doc-mode 1))
+    (keymap-set map "M-p" 'corfu-popupinfo-scroll-down)
+    (keymap-set map "M-n" 'corfu-popupinfo-scroll-up)
+    (keymap-set map "M-d" 'corfu-popupinfo-toggle))
+  (corfu-popupinfo-mode 1))
 
 (use-package marginalia
   :straight t
