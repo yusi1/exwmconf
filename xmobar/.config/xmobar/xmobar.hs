@@ -3,7 +3,7 @@ import Xmobar
 config :: Config
 config =
     defaultConfig
-      { font = "JetBrains Mono Bold 14",
+      { font = "DejaVu Sans Mono Regular 14",
         additionalFonts = [ "Noto Emoji 14" ],
         textOffsets = [0, -2],
         allDesktops = True,
