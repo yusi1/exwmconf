@@ -21,7 +21,8 @@
   ;; 	  (modus-themes-load-vivendi)
   ;; 	(modus-themes-load-operandi))
   ;;   (modus-themes-load-vivendi))
-  (modus-themes-load-vivendi))
+  ;; (modus-themes-load-vivendi)
+  (modus-themes-load-operandi))
 
 ;; (use-package green-is-the-new-black-theme
 ;;   :straight '(green-is-the-new-black-emacs

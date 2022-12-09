@@ -27,7 +27,7 @@
         </Menu>
         <Separator/>
         <Program icon="lock" label="Lock">
-           xscreensaver-command -lock
+            slock & sleep 1 && xset dpms force off
         </Program>
         <Separator/>
         <Program icon="text-editor" label="Edit config file">vim -g ~/.jwmrc</Program>
@@ -52,7 +52,7 @@
     <!-- Tray at the bottom. -->
     <Tray x="0" y="-1" autohide="off" delay="1000">
 
-        <TrayButton label="JWM">root:1</TrayButton>
+        <TrayButton label="Applications">root:1</TrayButton>
         <Spacer width="2"/>
         <TrayButton label="_">showdesktop</TrayButton>
         <Spacer width="2"/>

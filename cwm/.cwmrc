@@ -25,8 +25,12 @@ ignore xclock
 ignore dmenu 
  
 # Key bindings 
+bind-key XF86AudioRaiseVolume "pamixer -i 2"
+bind-key XF86AudioLowerVolume "pamixer -d 2"
+bind-key XF86AudioMute "pamixer -t"
 bind-key CM-r		    window-menu-label 
 bind-key CM-p 	    "dmenu_run -fn 'Ubuntu Mono:size=14'"
+bind-key 4-t        "xterm" 
 bind-key CM-equal	window-vmaximize 
 bind-key CMS-equal	window-hmaximize 
 bind-key M-1		group-only-1 
@@ -56,4 +60,4 @@ color inactiveborder gray
 color selfont white
 
 #window options
-borderwidth 2
+borderwidth 4
