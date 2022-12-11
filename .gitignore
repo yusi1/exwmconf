@@ -61,3 +61,4 @@ notmuch/mail/.notmuch/muchsync/*
 *.swp
 *.hi
 *.o
+emacs/.emacs.d/straight/
