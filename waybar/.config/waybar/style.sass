@@ -1,0 +1,71 @@
+$bar-bg-color: #323232
+$bar-fg-color: #ffffff
+
+$ws-focused-bg-color: #285577
+$ws-focused-fg-color: #fafce1
+$ws-unfocused-bg-color: #81dff4
+$ws-unfocused-fg-color: #5c5c5c
+$ws-focused-border-color: #4c7899
+
+*
+  font-family: FontAwesome, "DejaVu Sans Mono"
+  font-size: 18px
+
+window#waybar
+  background-color: $bar-bg-color
+  color: $bar-fg-color
+  .hidden
+    opacity: 0.2
+
+button
+  box-shadow: inset 0 -3px transparent
+  border: none
+  border-radius: 0
+
+#workspaces button
+  background-color: $ws-unfocused-bg-color
+  color: $ws-unfocused-fg-color
+  padding: 0 2px
+  &:hover
+    box-shadow: inherit
+    text-shadow: inherit
+    background: $ws-unfocused-bg-color
+    color: $ws-unfocused-fg-color
+    padding: 0 2px
+  &.focused
+    background-color: $ws-focused-bg-color
+    border: 1px solid $ws-focused-border-color
+    color: $ws-focused-fg-color
+    padding: 0 2px
+  &.focused:hover
+    box-shadow: inherit
+    text-shadow: inherit
+    background: $ws-focused-bg-color
+    border: 1px solid $ws-focused-border-color
+  &.urgent
+    background-color: #eb4d4b
+    padding: 0 2px
+
+#mode
+  background-color: #900000
+  border: 1px solid #2f343a
+  padding: 2px
+  padding-right: 3px
+
+#window, #workspaces
+  margin: 0 4px
+
+#window
+  text-shadow: 2px 2px #555
+
+#battery
+  margin-right: 10px
+
+#clock
+  margin-right: 4px
+
+.modules-left > widget:first-child > #workspaces
+  margin-left: 0
+
+.modules-right > widget:first-child > #workspaces
+  margin-right: 0

@@ -62,3 +62,4 @@ notmuch/mail/.notmuch/muchsync/*
 *.hi
 *.o
 emacs/.emacs.d/straight/
+.sass-cache
