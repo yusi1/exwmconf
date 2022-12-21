@@ -1,6 +1,6 @@
 * {
   font-family: FontAwesome, "DejaVu Sans Mono";
-  font-size: 18px; }
+  font-size: 16px; }
 
 window#waybar {
   background-color: #323232;
@@ -49,8 +49,31 @@ button {
 #window {
   text-shadow: 2px 2px #555; }
 
-#battery {
-  margin-right: 10px; }
+#pulseaudio, #network, #battery {
+  margin-right: 8px; }
+
+#pulseaudio {
+  color: lime; }
+
+#pulseaudio.muted {
+  color: #FB2F2F; }
+
+#network.wifi {
+  color: #8080FF; }
+
+#battery.discharging {
+  color: aqua; }
+
+#battery.charging, #battery.full {
+  color: lime; }
+
+#battery.warning {
+  color: orange;
+  background-color: inherit; }
+
+#battery.critical {
+  color: #FB2F2F;
+  background-color: inherit; }
 
 #clock {
   margin-right: 4px; }
