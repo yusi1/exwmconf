@@ -4,7 +4,27 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-exec xsettingsd
+# Workaround for GTK3/Sway theme incompatibility:
+# https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
+# WlRoots issue tracker:
+# https://gitlab.freedesktop.org/wlroots/wlroots/-/merge_requests/1324
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Greybird-dark'
+    gsettings set $gnome-schema icon-theme 'Adwaita'
+    gsettings set $gnome-schema cursor-theme 'elementary'
+    gsettings set $gnome-schema font-name 'Fira Sans 12'
+}
+
+# XSettingsd for setting GTK themes on XWayland applications
+exec xsettingsd -c ~/.xsettingsd-twm
+
+# Turn headset lights off
+exec headsetcontrol -l0
+
+# Bar
+exec waybar
 
 ### Variables
 #
@@ -16,12 +36,14 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $termsize 12
+set $termsize 16
 set $term foot -f "Fira Code:size=$termsize"
+set $term2size 12
+set $term2 foot -f "Fira Code Nerd Font:size=$term2size"
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu2 dmenu_path | dmenu_run -fn "DejaVu Sans Mono:size=$termsize" | xargs swaymsg exec --
 
 for_window [title="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
 set $menu exec $term -T launcher /usr/bin/sway-launcher-desktop
@@ -30,10 +52,15 @@ set $menu exec $term -T launcher /usr/bin/sway-launcher-desktop
 # is used in the bar {} block below.
 font pango:DejaVu Sans Mono 12
 
+# GAPS MMMMMMMMMMMMMM
+gaps inner 5
+gaps outer 10
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/default-wallpaper.jpg fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $HOME/Git/wallpapers/0071.jpg fill
 # exec "swaybg -i /usr/share/background/default-wallpaper.jpg"
 #
 # Example configuration:
@@ -67,6 +94,9 @@ bindswitch --reload --locked lid:off output $laptop enable
 #   timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
 #   before-sleep 'swaylock -f -c 000000'
 
+exec swayidle -w \
+    before-sleep 'swaylock -f -c 000000'
+
 ### Input configuration
 #
 # Example configuration:
@@ -92,18 +122,16 @@ input "type:mouse" {
    natural_scroll disabled
    dwt enabled
    accel_profile "flat"
-   pointer_accel 0.5
+   pointer_accel 0.0
 }
 
 input "type:1267:12417:ELAN060F:00_04F3:3081_Touchpad" {
    left_handed enabled
    tap enabled
    tap_button_map lrm
-   # natural_scroll disabled
-   # dwt enabled
-   # accel_profile "flat"
-   # pointer_accel 0.5
 }
+
+for_window [app_id="^zenity$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 4
 
 ### Key bindings
 #
@@ -112,14 +140,20 @@ input "type:1267:12417:ELAN060F:00_04F3:3081_Touchpad" {
     # Start a terminal
     bindsym $mod+Return exec $term
 
-    # Start Emacs
-    bindsym $mod+e exec emacs
+    # Volume control
+    bindsym XF86AudioRaiseVolume exec "pamixer -i2"
+    bindsym XF86AudioLowerVolume exec "pamixer -d2"
+    bindsym XF86AudioMute exec "pamixer -t"
+
+    # Start editor
+    bindsym $mod+e exec /bin/sh -c $HOME/stuff/vim-select-file.sh
 
     # Kill focused window
     bindsym $mod+x kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+p exec $menu2
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -253,22 +287,22 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position bottom
-    font "DejaVu Sans Mono 12"
+# bar {
+#     position bottom
+#     font "DejaVu Sans Mono 12"
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while ~/.config/sway/status.sh; do sleep 1; done
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     status_command while ~/.config/sway/status.sh; do sleep 1; done
 
-    tray_output *
-    icon_theme "Adwaita"
+#     tray_output *
+#     icon_theme "Adwaita"
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
+# }
 
 include /etc/sway/config.d/*
