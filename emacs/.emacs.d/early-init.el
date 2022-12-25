@@ -8,6 +8,9 @@
 		   ,(concat dir "site-lisp/xah-fly-keys")))
     (add-to-list 'load-path paths)))
 
+;; Custom theme directory (set to be able to use my own themes)
+(setq custom-theme-directory "~/.emacs.d/themes")
+
 ;; Hide nativecomp warnings
 (setq native-comp-async-report-warnings-errors t)
 ;; Hide bytecomp warning
