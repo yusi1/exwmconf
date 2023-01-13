@@ -3,30 +3,41 @@ module Main (main) where
 -- Imports
 import XMonad
 import qualified XMonad.StackSet as W
-import XMonad.Util.EZConfig(additionalKeysP, additionalMouseBindings)
+import XMonad.Util.EZConfig(additionalKeysP, additionalMouseBindings, mkKeymap, removeKeysP)
 import XMonad.Util.SpawnOnce
 import XMonad.Util.CustomKeys
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.NoTaskbar
--- import XMonad.Util.XUtils
+-- ?????? import XMonad.Util.WorkspaceCompare
+import XMonad.Util.XUtils
+import XMonad.Util.ActionCycle
 import XMonad.Prompt
 import XMonad.Prompt.FuzzyMatch
 import XMonad.Prompt.Pass
+import XMonad.Prompt.XMonad
+import XMonad.Prompt.Unicode
+import XMonad.Prompt.Input
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.CycleWS
 import XMonad.Actions.WindowGo
+import XMonad.Actions.TiledWindowDragging
 -- import XMonad.Actions.NoBorders
--- import XMonad.Actions.Submap
+import XMonad.Actions.Submap
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.FadeWindows
+import XMonad.Layout
 import XMonad.Layout.Simplest
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
+-- import XMonad.Layout.Groups
+-- import XMonad.Layout.Groups.Examples
+-- import XMonad.Layout.Groups.Helpers
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.SimpleDecoration
@@ -37,111 +48,133 @@ import XMonad.Layout.LayoutModifier
 import XMonad.Layout.WindowNavigation
 import XMonad.Layout.NoBorders
 import XMonad.Layout.SubLayouts
+import XMonad.Layout.DraggingVisualizer
+import XMonad.Layout.WindowSwitcherDecoration
+import XMonad.Layout.BoringWindows
 import qualified XMonad.Layout.Renamed as R
 import qualified XMonad.Layout.ToggleLayouts as T
 import System.IO
 import Data.Monoid
 import qualified Data.Map as M
 
+-- Colours
+import Solarized
+
 -- Function to update the pointer
 updPointer = updatePointer (0.95, 0.95) (0, 0)
 
--- Delete and remap default XMonad keys
 -- delKeys :: XConfig l -> [(KeyMask, KeySym)]
 -- delKeys XConfig {modMask = modm} =
---   [ (modm, xK_k)
---   , (modm, xK_j)
---   , (modm .|. shiftMask, xK_j)
---   , (modm .|. shiftMask, xK_k)
---   , (modm, xK_h)
---   ]
+--     [ (modm .|. shiftMask, xK_Return)
+--     , (modm, xK_p) ]
 
 -- insKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
--- insKeys conf@(XConfig {modMask = modm}) =
---   [ ((modm, xK_l), sendMessage (Go R) >> updPointer) 
---   , ((modm, xK_j), sendMessage (Go L) >> updPointer)
---   , ((modm, xK_i), sendMessage (Go U) >> updPointer)
---   , ((modm, xK_k), sendMessage (Go D) >> updPointer)
---   , ((modm, xK_u), windows W.swapUp)
---   , ((modm, xK_o), windows W.swapDown)
---   , ((modm .|. mod1Mask, xK_o), sendMessage Expand)
---   , ((modm .|. mod1Mask, xK_u), sendMessage Shrink)
---   ]
+-- insKeys conf@(XConfig {modMask = modm}) = []
 
 -- Scratchpad config
-scratchpads = [
-  NS "Emacs" "emacsclient -c -a 'emacs'" (className =? "Emacs") nonFloating ,
+scratchpads = [ ]
 
-  NS "qterminal" "qterminal" (className =? "qterminal") nonFloating ,
-  -- NS "qterminal-floating" "qterminal -d" (title =? "qtermdd") defaultFloating ,
-
-  -- Kitty terminal scratchpad that tries to mimick yakuake
-  -- drop-down terminal in KDE.
-  -- 0/6 of screen width from the left, 0/6 of screen height
-  -- from the top, 3/3 of screen width by 1/6 of screen height
-  NS "kitty" "kitty --class=scratchpad" (className =? "scratchpad")
-    (customFloating $ W.RationalRect (0/6) (0/6) (3/3) (1/6)) ,
-  
-  NS "Caja" "caja" (className =? "Caja") nonFloating ]
+-- FadeWindows config (NEEDS COMPOSITOR RUNNING)
+myFadeHook = composeAll [ opaque
+                        , isUnfocused --> transparency 0.2
+                        ]
 
 -- Main
 main :: IO ()
 main = do
-  xmonad $ withSB mySB . ewmhFullscreen . ewmh . docks $ def {
+  xmonad
+  $ withSB mySB
+  . ewmhFullscreen
+  . ewmh
+  . docks
+  $ cfg
+
+cfg = def {
     borderWidth = 2
-    , terminal = "lxterminal"
+    , terminal = "alacritty"
     -- , keys = customKeys delKeys insKeys
     , startupHook = myStartupHook
     , workspaces = myWorkspaces
     , layoutHook = myLayoutHook
     , manageHook = myManageHook
-    , normalBorderColor = bg2
-    , focusedBorderColor = blue2
+    , logHook = fadeWindowsLogHook myFadeHook
+    , handleEventHook = fadeWindowsEventHook
+    , normalBorderColor = solarizedBase01
+    , focusedBorderColor = solarizedRed
     , modMask = mod4Mask
     , XMonad.mouseBindings = Main.mouseBindings
     }
-    `additionalKeysP` [
-    -- Window resizing using arrow keys
-    ("M4-C-S-<L>", sendMessage Shrink)
-    , ("M4-C-S-<R>", sendMessage Expand)
-    , ("M4-C-S-<U>", sendMessage MirrorExpand)
-    , ("M4-C-S-<D>", sendMessage MirrorShrink)
-    -- Windows resizing using other keys
-    , ("M4-M1-i", sendMessage MirrorExpand)
-    , ("M4-M1-k", sendMessage MirrorShrink)
-    , ("M4-;", sendMessage Expand)
-    , ("M4-h", sendMessage Shrink)
-    , ("M4-S-;", sendMessage MirrorExpand)
-    , ("M4-S-h", sendMessage MirrorShrink)
+    `removeKeysP` [("M4-S-<Return>"), ("M4-p")]
+    `additionalKeysP` myKeys
+    `additionalMouseBindings` [
+    ((0, 9), \w -> windows W.focusUp >> updPointer)
+    , ((0, 8), \w -> windows W.focusDown >> updPointer)
+    ]
 
-    -- Adjust window and screen spacing in spaced layouts
+myKeys = ([
+    -- # XMonad keymap
+
+    -- ## Window resizing using arrow keys
+
+    -- Shrink window left
+    ("M4-C-S-<L>", sendMessage Shrink)
+    -- Expand window right
+    , ("M4-C-S-<R>", sendMessage Expand)
+
+    -- Mirror expand window up
+    , ("M4-C-S-<U>", sendMessage MirrorExpand)
+    , ("M4-M1-k", sendMessage MirrorExpand)
+
+    -- Mirror shrink window down
+    , ("M4-C-S-<D>", sendMessage MirrorShrink)
+    , ("M4-M1-j", sendMessage MirrorShrink)
+
+    -- Swap master window
+    , ("M4-S-<Return>", windows W.swapMaster)
+
+    -- ## Adjust window and screen spacing in spaced layouts
+    -- Increase window spacing by 4px
     , ("M4-C-i", incWindowSpacing 4)
+    -- Decrease window spacing by 4px
     , ("M4-C-d", decWindowSpacing 4)
+    -- Increase screen spacing by 4px
     , ("M4-C-S-i", incScreenSpacing 4)
+    -- Decrease screen spacing by 4px
     , ("M4-C-S-d", decScreenSpacing 4)
       
-    -- Window navigation
+    -- ## Window navigation
+    , ("M4-j", focusDown)
+    , ("M4-k", focusUp)
     , ("M4-<L>", sendMessage (Go L) >> updPointer)
     , ("M4-<R>", sendMessage (Go R) >> updPointer)
     , ("M4-<U>", sendMessage (Go U) >> updPointer)
     , ("M4-<D>", sendMessage (Go D) >> updPointer)
-    -- Window shifting
+    -- ## Window shifting
     , ("M4-S-<L>", sendMessage (Swap L) >> updPointer)
     , ("M4-S-<R>", sendMessage (Swap R) >> updPointer)
     , ("M4-S-<U>", sendMessage (Swap U) >> updPointer)
     , ("M4-S-<D>", sendMessage (Swap D) >> updPointer)    
-    -- Stack based window navigation
+    -- ## Stack based window navigation
     , ("M4-C-<R>", windows W.focusDown >> updPointer)
     , ("M4-C-<L>", windows W.focusUp >> updPointer)
-    , ("M4-C-j", windows W.focusDown >> updPointer)
-    , ("M4-C-l", windows W.focusUp >> updPointer)
-    -- , ("M4-;", windows W.focusUp >> updPointer)
-    -- , ("M4-h", windows W.focusDown >> updPointer)
+    -- , ("M4-C-j", windows W.focusDown >> updPointer)
+    -- , ("M4-C-k", windows W.focusUp >> updPointer)
 
-    -- Killing programs
+    -- ## Sublayout grouping / ungrouping
+    , ("M4-C-h", sendMessage $ pullGroup L)
+    , ("M4-C-j", sendMessage $ pullGroup D)
+    , ("M4-C-k", sendMessage $ pullGroup U)
+    , ("M4-C-l", sendMessage $ pullGroup R)
+    , ("M4-C-m", withFocused (sendMessage . MergeAll))
+    , ("M4-C-u", withFocused (sendMessage . UnMerge))
+    -- ## Sublayout focusing
+    , ("M4-C-.", onGroup W.focusUp')
+    , ("M4-C-,", onGroup W.focusDown')
+
+    -- ## Killing programs
     , ("M4-x", kill)
     
-    -- Workspace navigation
+    -- ## Workspace navigation
     , ("M4-M1-<R>", moveTo Next $ Not emptyWS)
     , ("M4-M1-<L>", moveTo Prev $ Not emptyWS)
     -- , ("M4-M1-j", moveTo Prev $ Not emptyWS)
@@ -155,74 +188,135 @@ main = do
     -- , ("M4-C-S-<R>", shiftTo Next (Not emptyWS) >> moveTo Next (Not emptyWS))
     -- , ("M4-C-S-<L>", shiftTo Prev (Not emptyWS) >> moveTo Prev (Not emptyWS))
 
-    -- Toggle struts (bars etc...)
-    , ("M4-S-b a", sendMessage ToggleStruts)
-    , ("M4-S-b u", sendMessage $ ToggleStrut U)
-    , ("M4-S-b d", sendMessage $ ToggleStrut D)
-    , ("M4-S-b l", sendMessage $ ToggleStrut L)
-    , ("M4-S-b r", sendMessage $ ToggleStrut R)
+    -- ## Toggle struts (bars etc...)
+    -- ToggleStruts visual submap
+    -- , ("M4-S-b", visualSubmap myWindowConfig . M.fromList $ map (\(k, s, a) -> ((0, k), (s, a)))
+    --                 [ (xK_a, "Toggle all struts", sendMessage ToggleStruts)
+    --                 , (xK_u, "Toggle only upper struts", sendMessage $ ToggleStrut U)
+    --                 , (xK_d, "Toggle only lower struts", sendMessage $ ToggleStrut D)
+    --                 , (xK_l, "Toggle only struts on the left", sendMessage $ ToggleStrut L)
+    --                 , (xK_r, "Toggle only struts on the right", sendMessage $ ToggleStrut R)
+    --                 ])
     
-    -- ToggleLayouts keybinds
+    -- Toggle spacing
     , ("M4-C-<Space>", sendMessage T.ToggleLayout)
     
-    -- MultiToggle keybinds
-    , ("M4-<Return>", sendMessage $ Toggle NBFULL)
+    -- ## MultiToggle keybinds
+    -- Toggle fullscreen (no borders)
+    , ("M4-S-f", sendMessage $ Toggle NBFULL)
+    -- Toggle normal fullscreen
     , ("M4-f", sendMessage $ Toggle FULL)
+    -- Toggle mirroring of the current layout
+    , ("M4-s", sendMessage $ Toggle MIRROR)
 
-    -- Keybinds for XP prompts (XMonad.Prompt prompts)
-    , ("M4-=", passPrompt brownishXPConfig)
-    , ("M4-C-=", passGeneratePrompt brownishXPConfig)
-    , ("M4-S-=", passEditPrompt brownishXPConfig)
-    , ("M4-C-S-=", passRemovePrompt brownishXPConfig)
+    -- ## Layout Groups keybinds
+    -- , ("M4-C-s", splitGroup)
+    -- , ("M4-C-l", nextOuterLayout)
+    -- , ("M4-M1-u", swapGroupUp)
+    -- , ("M4-M1-d", swapGroupDown)
+    -- , ("M4-S-u", moveToGroupUp False)
+    -- , ("M4-S-d", moveToGroupDown False)
+    
+    -- ## Keybinds for XP prompts (XMonad.Prompt prompts)
+    -- Start pass prompt
+    , ("M4-=", passPrompt solarizedDarkXPConfig)
+    -- Start passGenerate prompt
+    , ("M4-C-=", passGeneratePrompt solarizedDarkXPConfig)
+    -- Start passEdit prompt
+    , ("M4-S-=", passEditPrompt solarizedDarkXPConfig)
+    -- Start passRemove prompt
+    , ("M4-C-S-=", passRemovePrompt solarizedDarkXPConfig)
+    -- Start xmonad prompt
+    , ("M4-S-1", xmonadPromptC myXMonadCommands solarizedDarkXPConfig)
+    -- Start unicode prompt
+    , ("M4-S-u", unicodePrompt "/usr/share/unicode/UnicodeData.txt" solarizedDarkXPConfig)
 
+    -- ## Help keybinds
     -- Run xmessage with a summary of the default keybindings
     , ("M4-S-/", helpCommand)
+    -- Run xmessage with a summary of the default keybindings
     , ("M4-?", helpCommand)
 
-    -- Media control
+    -- ## Media control
+    -- Increase volume
+    , ("M4-<Page_Up>", spawn "pamixer -i 2")
+    -- Increase volume
     , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 2")
+    -- Decrease volume
+    , ("M4-<Page_Down>", spawn "pamixer -d 2")
+    -- Decrease volume
     , ("<XF86AudioLowerVolume>", spawn "pamixer -d 2")
+    -- Toggle mute volume
+    , ("M4-<End>", spawn "pamixer -t")
+    -- Toggle mute volume
     , ("<XF86AudioMute>", spawn "pamixer -t")
     
-    -- Scratchpad activation keybinds
+    -- ## Scratchpad activation keybinds
     -- TODO: Use visual submaps to visualize the keybinds
-    , ("M4-M1-e", namedScratchpadAction scratchpads "Emacs")
-    , ("M4-M1-<Return>", namedScratchpadAction scratchpads "qterminal")
-    , ("M4-M1-f", namedScratchpadAction scratchpads "Caja")
-    , ("M4-M1-s", namedScratchpadAction scratchpads "kitty")
+    -- , ("M4-M1-e", namedScratchpadAction scratchpads "Emacs")
+    -- , ("M4-M1-<Return>", namedScratchpadAction scratchpads "qterminal")
+    -- , ("M4-M1-f", namedScratchpadAction scratchpads "Caja")
+    -- , ("M4-M1-s", namedScratchpadAction scratchpads "kitty")
 
-    -- Keybinds for applications
-    , ("M4-a c", spawn "/bin/bash -c ~/.xmonad-bash-scripts/kill-alarm.sh")
-    , ("M4-a s", spawn "/bin/bash -c ~/.xmonad-bash-scripts/set-alarm.sh")
-    , ("M4-c", spawn "greenclip print | sed '/^$/d' | dmenu -i -l 10 -p clipboard | xargs -r -d'\n' -I '{}' greenclip print '{}'")
-    , ("M4-S-c", spawn "notify-send Clearing clipboard... && greenclip clear")
-    , ("M4-n <Space>", spawn "dunstctl close")
-    , ("M4-n <Return>", spawn "dunstctl close-all")
-    , ("M4-n h", spawn "dunstctl history-pop")
-    , ("M4-r b", spawn "openrgb --profile blue-bright")
-    , ("M4-r d", spawn "openrgb --profile blue-dark")
-    , ("M4-r o", spawn "openrgb --profile off")
-    -- , ("M4-h l", spawn "/bin/bash -c ~/.xmonad-bash-scripts/headset-lights-on.sh")
-    -- , ("M4-h o", spawn "/bin/bash -c ~/.xmonad-bash-scripts/headset-lights-off.sh") 
-    , ("M4-<Page_Up>", spawn "pamixer -i 2")
-    , ("M4-<Page_Down>", spawn "pamixer -d 2")
-    , ("M4-<End>", spawn "pamixer -t")
-    , ("M4-S-e", spawn "emacs")
-    -- , ("M4-r", spawn "dmenu_run_app")
-    -- Logout LXQT session
-    -- , ("M4-S-q", spawn "lxqt-leave")
-    -- , ("M4-p", spawn "dmenu")
-    -- Application keybinds to be used with function keys (KMonad remapped)
-    , ("M4-e", raiseMaybe (spawn "emacsclient -s yusef-emacsd -c -a 'emacs'") (className =? "Emacs"))
-    -- , ("M1-e", raiseMaybe (spawn "emacsd derived-from-windows-minimal") (className =? ""))
-    , ("M4-M1-1", raiseMaybe (spawn "qterminal") (className =? "qterminal"))
-    , ("M4-M1-2", raiseMaybe (spawn "brave-browser-stable") (className =? "Brave-browser"))
-    , ("M4-M1-3", raiseMaybe (spawn "pcmanfm-qt") (className =? "pcmanfm-qt"))
-    ]
-    `additionalMouseBindings` [
-    ((0, 9), \w -> windows W.focusUp >> updPointer)
-    , ((0, 8), \w -> windows W.focusDown >> updPointer)
-    ]
+    -- , ("M4-g", visualSubmap myWindowConfig . M.fromList $ map (\(k, s, a) -> ((0, k), (s, a)))
+    --             [ (xK_t, "Tall", sendMessage $ JumpToLayout "Tall")
+    --             , (xK_r, "Full", sendMessage $ JumpToLayout "Full")
+    --             ])
+
+    -- , ("M4-g", sendMessage $ JumpToLayout "Tall")
+
+
+    -- ## Dynamic scratchpad activation keybinds
+    -- Allocate 1st dynamic scratchpad
+    , ("M4-C-a", withFocused $ toggleDynamicNSP "dyn1")
+    -- Allocate 2nd dynamic scratchpad
+    , ("M4-C-b", withFocused $ toggleDynamicNSP "dyn2")
+    -- Toggle 1st dynamic scratchpad
+    , ("M4-a", dynamicNSPAction "dyn1")
+    -- Toggle 2nd dynamic scratchpad
+    , ("M4-b", dynamicNSPAction "dyn2")
+
+    -- ## Visual submaps
+    -- "M4-n" Notification visual submap
+    , ("M4-n", visualSubmap myWindowConfig . M.fromList $ map (\(k, s, a) -> ((0, k), (s, a)))
+                    [ (xK_Return, "Clear notifications", spawn "dunstctl close-all")
+                    , (xK_space, "Close current notification", spawn "dunstctl close")
+                    , (xK_h, "Clear history", spawn "dunstctl history-pop")
+                    ])
+
+    -- "C-M1-<Delete>" Logout visual submap
+    , ("C-M1-<Delete>", visualSubmap myWindowConfig . M.fromList $ map (\(k, s, a) -> ((0, k), (s, a)))
+                            [ (xK_p, "Poweroff system (1min)", spawn "shutdown '+1'")
+                            , (xK_r, "Restart system (1min)", spawn "shutdown -r '+1'")
+                            , (xK_s, "Suspend system", spawn "systemctl suspend")
+                            , (xK_l, "Logout user", spawn "loginctl kill-user yaslam") ])
+
+    -- "M4-S-b" ToggleStruts visual submap
+    , ("M4-S-b", visualSubmap myWindowConfig . M.fromList $ map (\(k, s, a) -> ((0, k), (s, a)))
+                    [ (xK_a, "Toggle all struts", sendMessage ToggleStruts)
+                    , (xK_u, "Toggle only upper struts", sendMessage $ ToggleStrut U)
+                    , (xK_d, "Toggle only lower struts", sendMessage $ ToggleStrut D)
+                    , (xK_l, "Toggle only struts on the left", sendMessage $ ToggleStrut L)
+                    , (xK_r, "Toggle only struts on the right", sendMessage $ ToggleStrut R)
+                    ])
+    
+    -- ## Keybinds for applications
+    -- Restart XMobar
+    , ("M4-]", spawn "killall -SIGUSR1 xmobar")
+    -- Spawn terminal
+    , ("M4-<Return>", spawn "alacritty")
+    -- Run vim-select-file.sh script
+    , ("M4-e", spawn "/bin/sh -c ~/stuff/vim-select-file.sh")
+    -- Run dmenu-dark script
+    , ("M4-d", spawn "dmenu-dark")
+    -- Run rofi
+    , ("M4-r", spawn "rofi -show drun")
+    -- Run i3lock
+    , ("M4-<Backspace>", spawn "i3lock -c000000 & sleep 1 && xset dpms force off")
+    -- Headsetcontrol toggle keybind
+    , ("M4-S-h", cycleAction "headsetcontrol" [ spawn "headsetcontrol -l0", spawn "headsetcontrol -l1" ])
+    -- #
+    ])
     where
       helpCommand :: X ()
       helpCommand = xmessage help
@@ -234,6 +328,7 @@ mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
     -- mod-button1 %! Set the window to floating mode and move by dragging
     [ ((modMask, button1), \w -> focus w >> mouseMoveWindow w
                                           >> windows W.shiftMaster)
+    , ((modMask .|. shiftMask, button1), dragWindow)
     -- mod-button2 %! Raise the window to the top of the stack
     , ((modMask, button2), windows . (W.shiftMaster .) . W.focusWindow)
     -- mod-button3 %! Set the window to floating mode and resize by dragging
@@ -250,20 +345,35 @@ mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
     --                                      >> updPointer)
     ]
 
+-- System tray command
+trayerExpand    x = " --expand "          ++ x
+trayerWidth     x = " --width "           ++ x
+trayerEdge      x = " --edge "            ++ x
+trayerAlign     x = " --align "           ++ x
+trayerStrut     x = " --SetPartialStrut " ++ x
+trayerDockType  x = " --SetDockType "     ++ x
+
+trayerCmd = "/usr/bin/trayer"
+            ++ trayerExpand "true"   -- true/false
+            ++ trayerWidth "10"      -- max 100
+            ++ trayerEdge "bottom"   -- none/bottom/top/left/right
+            ++ trayerAlign "left"    -- left/right/center       
+            ++ trayerStrut "true"    -- true/false
+            ++ trayerDockType "true" -- true/false
+
 -- StartupHook
 myStartupHook :: X ()
 myStartupHook = do
   setWMName "LG3D"
-  -- spawnOnce "/usr/bin/setxkbmap gb"
-  -- spawnOnce "/usr/bin/picom --xrender-sync-fence"
-  -- spawnOnce "sudo ~/.local/bin/kmonad ~/.config/kmonad/config.kbd"
-  -- spawnOnce "/usr/bin/openrgb --profile blue-light-light"
-  -- spawnOnce "/bin/bash -c ~/.fehbg"
-  -- spawnOnce "/usr/bin/xfce4-power-manager --daemon"
-  -- spawnOnce "/usr/bin/emacs --daemon"
-  -- spawnOnce "/usr/bin/sv restart emacs-daemon" -- Temp Hack/Fix
-  --spawnOnce "~/.xmonad-bash-scripts/set-alarm-no-gui.sh"
-  -- spawnOnce "/usr/bin/caffeine"
+  spawnOnce "/usr/bin/xsetroot -cursor_name left_ptr"
+  spawnOnce "/usr/bin/picom --config ~/.config/picom/picom-xmonad.conf"
+  spawnOnce "/usr/bin/xsettingsd -c ~/.xsettingsd-solarized"
+  spawnOnce "/usr/bin/dunst -config ~/.config/dunst/dunstrc-solarized"
+  spawnOnce "/usr/bin/nitrogen --restore"
+  spawnOnce "/usr/bin/conky -c ~/.config/conky/conky-moregap.conf"
+  spawnOnce "/usr/bin/conky -c ~/.config/conky/conky-mpd.conf"
+  spawnOnce "/usr/bin/dex ~/.config/autostart/*.desktop"
+  spawnOnce trayerCmd
 
 -- Colourscheme for this config (based on zenburn <- NOT REALLY ANYMORE)
 -- https://github.com/bbatsov/zenburn-emacs/blob/master/zenburn-theme.el
@@ -284,55 +394,71 @@ fgHLightC = "#DCDCCC"
 
 -- PP config for appearance of workspaces etc.
 myPP :: PP
-myPP = def { ppCurrent         = xmobarColor fgText blue2 . wrap " " " "
-           , ppVisible         = xmobarColor fgText blue1 . wrap " [" "] "
-           , ppHidden          = xmobarColor fgText blue01 . wrap " " " "
+myPP = def { ppCurrent         = xmobarColor fgText solarizedCyan
+                                 . wrap " " " "
+           , ppVisible         = xmobarColor fgText blue1
+                                 . wrap " [" "] "
+           , ppHidden          = xmobarColor fgText blue01
+                                 . wrap " " " "
            --, ppHiddenNoWindows = xmobarColor fgText bluelow . wrap " " " "
-           , ppUrgent          = xmobarColor fgText orange . wrap " " " "
+           , ppUrgent          = xmobarColor fgText solarizedOrange . wrap " " " "
            , ppOrder           = \(ws:l:t:ex) -> [ws,l,t]++ex
            , ppSep             = " :: "
            , ppWsSep           = ""
-           , ppLayout          = xmobarColor bluesap ""
-           , ppTitle           = shorten 60
+           , ppLayout          = xmobarColor solarizedGreen ""
+           , ppTitle           = shorten 40 
            }
 
 -- Status bars
 mySB :: StatusBarConfig
-mySB = statusBarPropTo "_XMONAD_LOG_1" "xmobar ~/.config/xmobar/xmobar.cfg" (pure myPP)
+mySB = statusBarPropTo "_XMONAD_LOG_1" "xmobar" (pure myPP)
 
 -- Theme for tab bars and other decorations
 myTheme :: Theme
-myTheme = def { fontName            = "xft:SauceCodePro NF:Bold:size=13"
-              , activeColor         = blue2
-              , inactiveColor       = blue01
-              , activeBorderColor   = blue3
-              , inactiveBorderColor = blue01
+myTheme = def { fontName            = "xft:DejaVu Sans Mono:size=13"
+              , activeColor         = solarizedBlue
+              , activeBorderColor   = solarizedBlue
               , activeTextColor     = fgText
-              , inactiveTextColor   = fgText
+              , inactiveColor       = solarizedBase02
+              , inactiveBorderColor = solarizedBase02
+              , inactiveTextColor   = solarizedBase01
               }
 
--- -- Theme for showSimpleWindow-based windows such as visual submaps
--- -- in X.A.Submap.
--- myWindowConfig :: WindowConfig
--- myWindowConfig = def { winFont = "xft:SauceCodePro NF:Bold:size=13"
---                      , winBg   = "white"
---                      , winFg   = blue2
---                      , winRect = CenterWindow
---                      }
+-- This theme "hides" the text by making it the same colour as everything else.
+-- 
+mySubLayoutTheme :: Theme
+mySubLayoutTheme = def { fontName            = "xft:DejaVu Sans Mono:size=13"
+                         , activeColor         = solarizedOrange
+                         , activeBorderColor   = solarizedOrange
+                         , activeTextColor     = fgText
+                         , inactiveColor       = solarizedBase02
+                         , inactiveBorderColor = solarizedBase02
+                         , inactiveTextColor   = solarizedBase01
+                         -- , decoHeight          = 5
+                       }
+
+-- Theme for showSimpleWindow-based windows such as visual submaps
+-- in X.A.Submap.
+myWindowConfig :: WindowConfig
+myWindowConfig = def { winFont = "xft:DejaVu Sans Mono:size=16"
+                     , winBg   = solarizedBase03
+                     , winFg   = solarizedBase0
+                     , winRect = CenterWindow
+                     }
 
 -- Show workspace names config
 mySWNConfig :: SWNConfig
 mySWNConfig = def
-    { swn_font    = "xft:SauceCodePro NF:Bold:size=70"
-    , swn_bgcolor = "white"
-    , swn_color   = bluesap
+    { swn_font    = "xft:SourceCodePro:Regular:size=70"
+    , swn_bgcolor = solarizedBase03
+    , swn_color   = solarizedBase1
     , swn_fade    = 0.3
     }
 
 -- XP prompt config
 brownishXPConfig :: XPConfig
 brownishXPConfig = def {
-  font                = "xft:SauceCodePro NF:Bold:size=16"
+  font                = "xft:SourceCodePro:Bold:size=16"
   , bgColor           = bg
   , fgColor           = fgHLightC
   , bgHLight          = blue3
@@ -344,32 +470,72 @@ brownishXPConfig = def {
   , sorter            = fuzzySort
   }
 
+solarizedDarkXPConfig :: XPConfig
+solarizedDarkXPConfig = def {
+  font                = "xft:DejaVu Sans Mono:size=16"
+  , bgColor           = solarizedBase03
+  , fgColor           = solarizedBase0
+  , bgHLight          = solarizedBase02
+  , fgHLight          = solarizedOrange
+  , promptBorderWidth = 0
+  , position          = Top
+  , height            = 24
+  , searchPredicate   = fuzzyMatch
+  , sorter            = fuzzySort
+  }
+
+myXMonadCommands :: [(String, X ())]
+myXMonadCommands = [ ("shrink"              , sendMessage Shrink                               )
+                     , ("expand"              , sendMessage Expand                               )
+                     , ("next-layout"         , sendMessage NextLayout                           )
+                     , ("default-layout"      , asks (layoutHook . config) >>= setLayout         )
+                     , ("restart-wm"          , restart "xmonad" True                            )
+                     , ("restart-wm-no-resume", restart "xmonad" False                           )
+                     , ("xterm"               , spawn =<< asks (terminal .  config)              )
+                     , ("run"                 , spawn "exec dmenu-dark"                          )
+                     , ("kill"                , kill                                             )
+                     , ("refresh"             , refresh                                          )
+                     , ("focus-up"            , windows W.focusUp                                  )
+                     , ("focus-down"          , windows W.focusDown                                )
+                     , ("swap-up"             , windows W.swapUp                                   )
+                     , ("swap-down"           , windows W.swapDown                                 )
+                     , ("swap-master"         , windows W.swapMaster                               )
+                     , ("toggle-tray"         , cycleAction "trayer" [ spawn "pkill trayer", spawn trayerCmd ] )
+                    --  , ("sink"                , withFocused $ windows . sink                     )
+                    --  , ("quit-wm"             , io exitSuccess                                   )
+            ]
+
 -- Spacing function definition for screen & window borders
 -- Borders: (top bottom right left)
 mySpacing :: Bool -> Integer -> Integer -> Bool -> Integer -> Integer -> Bool -> l a -> ModifiedLayout Spacing l a
 mySpacing sB i j scB k l winB = spacingRaw sB (Border i i j j) scB (Border k k l l) winB
 
 -- Function definition to add spacing to layouts using the mySpacing function,
--- (ModifiedLayout Spacing l a)
+    -- (ModifiedLayout Spacing l a)
 defSpacing :: l a -> ModifiedLayout Spacing l a
 defSpacing = mySpacing (l) (a) (b) (m) (c) (d) (n)
   where
-    l = False    -- Should the smart border be enabled?
-    m = True     -- Should the screen border be enabled?
-    n = True     -- Should the window border be enabled?
-    a = 20       -- top and bottom screen border
-    b = 20       -- right and left screen border
-    c = 6        -- top and bottom window border
-    d = 6        -- right and left window border
+    l = True        -- Should the smart border be enabled?
+    m = True        -- Should the screen border be enabled?
+    n = True        -- Should the window border be enabled?
+    a = 20          -- top and bottom screen border
+    b = 20          -- right and left screen border
+    c = 6           -- top and bottom window border
+    d = 6           -- right and left window border
 
 -- Layouts
 -- Dummy tiled layout only for spacing
 tiled = R.renamed [R.Replace "Tall"]
+        $ draggingVisualizer
+        $ mkToggle (single MIRROR)
         $ ResizableTall 1 (3/100) (1/2) []
 
 tiledDeco = R.renamed [R.Replace "Tall"]
             -- $ noFrillsDeco shrinkText myTheme
-            $ ResizableTall 1 (3/100) (1/2) []
+            $ windowSwitcherDecoration shrinkText myTheme
+            $ boringWindows
+            $ addTabs shrinkText mySubLayoutTheme $ subLayout [] Simplest
+            $ tiled
 
 tabs = R.renamed [R.Replace "Tabs"]
        $ noBorders
@@ -383,16 +549,21 @@ floating = R.renamed [R.Replace "Floating"]
 
 -- Spacing Layouts
 tiledSp = R.renamed [R.Replace "Spacing Tall"]
-          -- $ noFrillsDeco shrinkText myTheme
           $ defSpacing tiled
+
+tiledSpDeco = R.renamed [R.Replace "Spacing Tall"]
+              -- $ noFrillsDeco shrinkText myTheme
+              $ windowSwitcherDecoration shrinkText myTheme
+              $ boringWindows
+              $ addTabs shrinkText mySubLayoutTheme $ subLayout [] Simplest
+              $ defSpacing tiled
 
 tabsSp = R.renamed [R.Replace "Spacing Tabs"]
          $ addTabs shrinkText myTheme
          $ defSpacing Simplest
 
-
 -- Toggle between two layouts
-tiledSpToggle = T.toggleLayouts tiledDeco tiledSp
+tiledSpToggle = T.toggleLayouts tiledDeco tiledSpDeco
 tabsSpToggle = T.toggleLayouts tabs tabsSp
 
 -- LayoutHook 
@@ -425,10 +596,9 @@ myManageHook = composeAll . concat $
   -- Steam ManageHooks
   , [className =? "Zenity" --> doCenterFloat]
   , [(title =? "Friends List") <&&> (className =? "Steam") --> doFloat]
-  , [(className =? "Steam") <||> (title =? "Steam") --> doShiftAndGo (myWorkspaces !! 8)]
+  , [(className =? "Steam") <||> (title =? "Steam") --> doShiftAndGo (myWorkspaces !! 3)]
   , [className =? "pinentry-qt" --> doCenterFloat]
-  , [className =? "lxqt-runner" --> doFloat]
-  -- , [className =? "lxqt-notificationd" --> doIgnore]
+  , [(title =? "Library") <&&> (className =? "firefox") <||> (className =? "Firefox") --> doCenterFloat]
   ]
 
 -- | Finally, a copy of the default bindings in simple textual tabular format.
