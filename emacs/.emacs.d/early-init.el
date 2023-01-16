@@ -9,7 +9,7 @@
     (add-to-list 'load-path paths)))
 
 ;; Custom theme directory (set to be able to use my own themes)
-(setq custom-theme-directory "~/.emacs.d/themes")
+(setq custom-theme-directory (concat (expand-file-name user-emacs-directory) "themes"))
 
 ;; Hide nativecomp warnings
 (setq native-comp-async-report-warnings-errors t)
