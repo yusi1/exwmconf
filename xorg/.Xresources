@@ -11,7 +11,9 @@ xterm*foreground: white
 
 !emacs
 Xft.rgba: none
-emacs.font: Fira Code-14
+emacs.font: DejaVu Sans Mono-14
+! emacs.font: PragmataPro Mono-16
+! emacs.font: Fira Code-14
 ! emacs.font: -xos4-terminus-bold-*-*-*-18-*-*-*-*-*-*-*
 
 !X*.*
