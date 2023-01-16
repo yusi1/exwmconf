@@ -34,8 +34,17 @@ set $terminal xfce4-terminal
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 12
 
+# GAPS MMMMMMMMMMMMM
+gaps inner 5
+gaps outer 10
+smart_gaps on
+
 # Set screen resolutions
 exec xrandr --output eDP1 --off --output HDMI1 --primary
+
+# Start conky
+exec conky
+exec conky -c ~/.config/conky/conky-mpd.conf
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -53,13 +62,16 @@ exec xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
 exec nm-applet
 
 # Start xsettingsd
-exec xsettingsd
+exec xsettingsd -c ~/.xsettingsd-twm
 
 # Start compositor
 exec picom -b
 
 # Restore wallpaper
-exec nitrogen --restore
+# exec nitrogen --restore
+
+# Set wallpaper
+exec nitrogen --set-auto ~/Git/wallpapers/0238.jpg
 
 # Volume icon
 exec volumeicon
