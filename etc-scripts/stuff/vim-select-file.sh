@@ -4,7 +4,7 @@ FILE=$(zenity --file-selection)
 
 case $? in
     0 )
-        vim -g ${FILE} ;;
+        vim -g "${FILE}" ;;
     1 )
         echo "You did not select a file!" ;;
     -1 )
