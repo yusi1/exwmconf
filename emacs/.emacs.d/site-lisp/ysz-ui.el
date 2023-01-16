@@ -4,6 +4,7 @@
 (global-display-line-numbers-mode 1)
 
 (recentf-mode t)
+(delete-selection-mode 1)
 
 ;; modeline
 (column-number-mode 1)

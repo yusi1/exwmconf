@@ -85,6 +85,34 @@ If `system-type' is anything else (e.g `gnu/linux') then use the `sudo' method."
   (let ((rmail-file-name (concat "/" (tramp-method-p) ":" "root@localhost:/var/mail/root")))
     (rmail rmail-file-name)))
 
+(defun mail-as-user (&optional user)
+  "View mail in `/var/spool/mail/USER' as USER with RMAIL.
+The mail file in `/var/spool/mail' should be owned by USER for this to work."
+  (interactive)
+  (let ((rmail-file-name (if user
+			     (concat "/var/spool/mail/" user)
+			   "/var/spool/mail/yaslam")))
+    (rmail rmail-file-name)))
+
+(defun mail-as-root-multihop (&optional xfilepick xaddr xuser)
+  "View mail in `/var/mail/root' as root with RMAIL.
+If XFILEPICK is `t', show a prompt in `/var/mail' of the server to select a file.
+If XADDR is `t', use that server address instead.
+If XUSER is `t', use that username instead."
+  (interactive)
+  (let* ((username (if (not xuser) (read-from-minibuffer "Enter USERNAME to use: " nil) xuser))
+	 (address (if (not xaddr) (read-from-minibuffer "Enter IP/HOSTNAME to SSH into: " nil) xaddr))
+	 (host (concat username "@" address))
+	 (tramp-args (concat "/ssh:" host "|" "doas" ":" "root" "@" address ":"))
+	 (tramp-file (if (not xfilepick)
+			 ;; Defaults to the file `/var/mail/root'
+			 (concat tramp-args "/var/mail/root")
+		       ;; Else, prompt for other mail files in `/var/mail'
+		       (read-file-name "Find mail: " (concat tramp-args "/var/mail/"))))
+	 (remote-file tramp-file))
+    ;; Run rmail using `remote-file' as the mail file to be shown.
+    (rmail remote-file)))
+
 (defun view-as-root ()
   "Use TRAMP to view the current buffer with root privileges."
   (interactive)
@@ -120,8 +148,12 @@ If `system-type' is anything else (e.g `gnu/linux') then use the `sudo' method."
   "<mouse-3>" 'find-file-as-root
   "s" 'view-as-root
   "S" 'view-as-root-new-buffer
-  "d" 'dired-root
-  "m" 'mail-as-root)
+  "d" 'dired-root)
+
+(general-def global-map
+  :prefix "C-c s m"
+  "r" 'mail-as-root
+  "u" 'mail-as-user)
 
 (provide 'ysz-keybinds)
 ;;; ysz-keybinds.el ends here

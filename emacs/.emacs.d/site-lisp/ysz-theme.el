@@ -1,28 +1,54 @@
 ;;; Theming configurations --- ysz-theme.el
 
-(use-package modus-themes
-  :straight t
-  :demand t
-  :bind (("<f12>" . modus-themes-toggle))
-  :config
-  (setq
-   ;; modus-themes-mode-line '(3d accented)
-   modus-themes-mode-line '(3d)
+;; My own theme
+;; (load-theme 'ysz-dark t)
 
-   modus-themes-headings '((1 . (light variable-pitch 1.5))
-			   (2 . (monochrome 1.05))
-			   (t . (semibold)))
-   modus-themes-org-blocks 'gray-background
-   modus-themes-mixed-fonts t)
-  ;;;;;;;;;;;;;;
-  ;; (if (not (null (getenv "XDG_CURRENT_DESKTOP")))
-  ;;     (if (string-match-p "dark"
-  ;; 			  (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
-  ;; 	  (modus-themes-load-vivendi)
-  ;; 	(modus-themes-load-operandi))
-  ;;   (modus-themes-load-vivendi))
-  ;; (modus-themes-load-vivendi)
-  (modus-themes-load-operandi))
+;; Icons
+(setq ysz/icons-enabled nil)
+(if ysz/icons-enabled
+    (use-package all-the-icons
+      :straight t
+      :ensure t
+      :config
+      (setq all-the-icons-scale-factor 1.0)))
+
+(use-package solarized-theme
+  :straight '(emacs-color-theme-solarized
+	      :type git
+	      :host github
+	      :repo "sellout/emacs-color-theme-solarized")
+  :config
+  (set-frame-parameter nil 'background-mode 'dark)
+  (load-theme 'solarized t))
+
+;; (use-package solarized-theme
+;;   :straight t
+;;   :config
+;;   (load-theme 'solarized-dark))
+
+;; (use-package modus-themes
+;;   :straight t
+;;   :demand t
+;;   :bind (("<f12>" . modus-themes-toggle))
+;;   :config
+;;   (setq
+;;    ;; modus-themes-mode-line '(3d accented)
+;;    modus-themes-mode-line '(3d)
+
+;;    modus-themes-headings '((1 . (light variable-pitch 1.5))
+;; 			   (2 . (monochrome 1.05))
+;; 			   (t . (semibold)))
+;;    modus-themes-org-blocks 'gray-background
+;;    modus-themes-mixed-fonts t)
+;;   ;;;;;;;;;;;;;;
+;;   ;; (if (not (null (getenv "XDG_CURRENT_DESKTOP")))
+;;   ;;     (if (string-match-p "dark"
+;;   ;; 			  (shell-command-to-string "gsettings get org.gnome.desktop.interface color-scheme"))
+;;   ;; 	  (modus-themes-load-vivendi)
+;;   ;; 	(modus-themes-load-operandi))
+;;   ;;   (modus-themes-load-vivendi))
+;;   ;; (modus-themes-load-vivendi)
+;;   (modus-themes-load-operandi))
 
 ;; (use-package green-is-the-new-black-theme
 ;;   :straight '(green-is-the-new-black-emacs
@@ -52,11 +78,12 @@
 ;;   ;;; Corrects (and improves) org-mode's native fontification.
 ;;   (doom-themes-org-config))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package doom-modeline
-  :straight t
-  :config
-  (setq doom-modeline-icon nil)
-  (doom-modeline-mode 1))
+;; (use-package doom-modeline
+;;   :straight t
+;;   :config
+;;   (if ysz/icons-enabled
+;;       (setq doom-modeline-icons t))
+;;   (doom-modeline-mode 1))
 
 (use-package fontaine
   :straight t
@@ -69,7 +96,7 @@
   :config
   ;; whether fontaine is enabled
   (defvar fontaine-enabled nil "Whether fontaine is enabled or not.")
-  (setq fontaine-enabled t)
+  (setq fontaine-enabled nil)
   
   (setq fontaine-latest-state-file
 	(locate-user-emacs-file "fontaine-latest-state.eld"))
@@ -85,6 +112,13 @@
 	   :default-family "Iosevka Comfy Fixed"
 	   :default-height 140
 	   :variable-pitch-weight bold
+	   :bold-family nil
+	   :bold-weight bold
+	   :line-spacing 1)
+	  (pragmata-pro-regular
+	   :default-family "PragmataPro Mono"
+	   :default-height 160
+	   :variable-pitch-weight nil
 	   :bold-family nil
 	   :bold-weight bold
 	   :line-spacing 1)
@@ -136,6 +170,13 @@
 	   :default-family "Fantasque Sans Mono"
 	   :default-height 140
 	   :default-weight regular)
+	  (dejavu-sans-mono-regular
+	   :default-family "DejaVu Sans Mono"
+	   :default-height 140
+	   :default-weight regular
+	   :variable-pitch-family "DejaVu Sans")
+	  (firacode-nf-regular
+	   :default-family "FiraCode Nerd Font")
 	  (t
 	   :default-family "FiraCode"
 	   :default-weight normal
