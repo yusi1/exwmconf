@@ -17,14 +17,14 @@ exec_always {
     gsettings set $gnome-schema font-name 'Fira Sans 12'
 }
 
+# Bar
+exec waybar -c ~/.config/waybar/config
+
 # XSettingsd for setting GTK themes on XWayland applications
 exec xsettingsd -c ~/.xsettingsd-twm
 
 # Turn headset lights off
 exec headsetcontrol -l0
-
-# Bar
-exec waybar
 
 ### Variables
 #
@@ -55,6 +55,7 @@ font pango:DejaVu Sans Mono 12
 # GAPS MMMMMMMMMMMMMM
 gaps inner 5
 gaps outer 10
+smart_gaps on
 
 ### Output configuration
 #
@@ -117,18 +118,20 @@ input "type:keyboard" {
 }
 
 input "type:mouse" {
-   left_handed enabled
-   tap enabled
-   natural_scroll disabled
-   dwt enabled
-   accel_profile "flat"
-   pointer_accel 0.0
+    tap enabled
+    natural_scroll disabled
+    dwt enabled
+    accel_profile "flat"
+    pointer_accel 0.0
 }
 
-input "type:1267:12417:ELAN060F:00_04F3:3081_Touchpad" {
-   left_handed enabled
-   tap enabled
-   tap_button_map lrm
+input "1267:12417:ELAN060F:00_04F3:3081_Touchpad" {
+    click_method button_areas
+    scroll_method two_finger
+    dwt enabled
+    tap enabled
+    tap_button_map lrm
+    natural_scroll disabled
 }
 
 for_window [app_id="^zenity$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 4
