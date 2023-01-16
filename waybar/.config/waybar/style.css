@@ -16,17 +16,20 @@ button {
 #workspaces button {
   background-color: #81dff4;
   color: #5c5c5c;
+  opacity: 0.8;
   padding: 0 2px; }
   #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
     background: #81dff4;
     color: #5c5c5c;
+    opacity: 1;
     padding: 0 2px; }
   #workspaces button.focused {
     background-color: #285577;
     border: 1px solid #4c7899;
     color: #fafce1;
+    opacity: 1;
     padding: 0 2px; }
   #workspaces button.focused:hover {
     box-shadow: inherit;
@@ -49,17 +52,18 @@ button {
 #window {
   text-shadow: 2px 2px #555; }
 
-#pulseaudio, #network, #battery {
-  margin-right: 8px; }
+#pulseaudio, #battery {
+  margin-right: 10px;
+  margin-left: 10px; }
 
-#pulseaudio {
-  color: lime; }
+#network {
+  margin-right: 0px; }
 
 #pulseaudio.muted {
-  color: #FB2F2F; }
+  color: orange; }
 
 #network.wifi {
-  color: #8080FF; }
+  color: lime; }
 
 #battery.discharging {
   color: aqua; }
