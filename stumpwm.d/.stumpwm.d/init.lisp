@@ -12,11 +12,15 @@
 
 (load "~/.stumpwm.d/autostart.lisp")
 
+;; Focus policy for mouse
+(setf *mouse-focus-policy* :click)
+
 ;; Start mode line
-;;(mode-line)
+(enable-mode-line (current-screen) (current-head) t)
 
 ;; startup slynk server for StumpWM REPL in Emacs
 (ql:quickload :slynk)
+(slynk:create-server)
 ;; (slynk:create-server :dont-close t)
 
 ;; change the prefix key to something else
@@ -42,9 +46,9 @@
 (set-unfocus-color "black")
 
 ;; mode line colors
-(setf *mode-line-background-color* "black")
-(setf *mode-line-foreground-color* "green")
-(setf *mode-line-border-color* "black")
+;; (setf *mode-line-background-color* "black")
+;; (setf *mode-line-foreground-color* "green")
+;; (setf *mode-line-border-color* "black")
 
 ;; function from the manual to add right-click delete window to the mode-line.
 (labels ((ml-on-click-focus-or-delete-window (code id &rest rest)
@@ -123,7 +127,7 @@
 
 ;; Application launchers
 (define-key *top-map* (kbd "s-r") "exec rofi -show drun")
-(define-key *top-map* (kbd "s-p") "exec dmenu_run -fn \"Iosevka Comfy Wide Fixed:size=14\" -nb \"#000000\" -sb \"darkblue\" -nf \"white\"")
+(define-key *top-map* (kbd "s-p") "exec dmenu_run -fn \"DejaVu Sans Mono:size=14\" -nb \"#000000\" -sb \"darkblue\" -nf \"white\"")
 (define-key *top-map* (kbd "s-=") "exec ~/stuff/rofi-tmux-sessions.sh")
 
 ;; Fullscreen
@@ -209,7 +213,7 @@
 (define-key *root-map* (kbd "M-i") "imdb")
 
 ;; Message window font
-(set-font "-xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso8859-15")
+(set-font "-xos4-terminus-*-*-*-*-20-*-*-*-*-*-*-*")
 
 ;;; Define window placement policy...
 
@@ -254,6 +258,8 @@
 ;; maildir module
 ;; (load-module "maildir")
 ;; (setf maildir:*maildir-alist* '((Personal . "/home/yaslam/mail")))
+;; mpd module
+;; (load-module "mpd")
 ;; Time modeline format
 (setf stumpwm:*time-modeline-string* "%a %b %e %H:%M")
 ;; Window modeline format
@@ -271,6 +277,7 @@
        " [^BWIFI: %I^b]"
        " [^B%D^b]"
        " [^B%M^b]"
+       ;; " (^BMUSIC: %m^b)"
        "^>[^B"
        '(:eval (stumpwm:run-shell-command
 		"uname -rs | perl -pe 'chomp'" t))
@@ -308,16 +315,20 @@
   (run-or-raise "steam" '(:class "Steam")))
 
 (setq app-menu:*app-menu*
-      '(("INTERNET"
-	 ;; submenu
-	 ;; call stumpwm command
-	 ("Chromium" chromium))
-	("PROGRAMMING"
-	 ("Emacs" emacs))
-	("GAMING"
-	 ("Steam" "stumpish gnew Gaming && sleep 2"
-	  steam)
-	 ("SuperTuxKart" "supertuxkart"))))
+  '(("INTERNET"
+     ;; submenu
+     ;; call stumpwm command
+     ("Firefox" "firefox"))
+    ("PROGRAMMING"
+     ("GVim" "gvim")
+     ("Sqriptor" "sqriptor")
+     ("Sublime Text" "subl")
+     ("VScode" "code-oss")
+     ("Emacs" "emacs"))
+    ("GAMING"
+     ("Steam" "stumpish gnew Gaming && sleep 2"
+      "steam")
+     ("SuperTuxKart" "supertuxkart"))))
 
 (define-key *top-map* (kbd "M-`") "show-menu")
 
@@ -377,7 +388,7 @@
   (:lighter-make-clickable nil)
   (:lighter "EVIL"))
 
-(define-key *root-map* (kbd "<") "swm-evil-mode")
+(define-key *root-map* (kbd "less") "swm-evil-mode")
 
 ;; Pass module
 (load-module "pass")
