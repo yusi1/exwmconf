@@ -34,6 +34,7 @@ xmonad/.config/xmonad/xmonad
 xmonad/.config/xmonad/*stack*
 xmonad/.config/xmonad/xmonad*
 xmobar/.config/xmobar/xmobar
+xmobar/.config/xmobar/xmobar*
 xmobar/.config/xmobar/*stack*
 
 stumpwm.d/.stumpwm.d/modules
