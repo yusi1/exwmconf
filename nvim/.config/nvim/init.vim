@@ -27,6 +27,9 @@ set smartindent
 " Plugins with vim-plug
 call plug#begin()
 
+" Align text
+Plug 'godlygeek/tabular'
+
 " Bracket(s) manipulation
 Plug 'tpope/vim-surround'
 
