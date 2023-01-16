@@ -4,6 +4,7 @@
   :straight t
   :preface
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-redo) ; Enables Ctrl-R redo
   :hook ((Info-mode . turn-off-evil-mode))
   :init
   (evil-mode 1)
@@ -75,7 +76,7 @@
   :after (evil)
   :config
   ;; Setting up evil-collection
-  (evil-collection-init '(magit eshell helpful pass notmuch ibuffer eww bookmark dictionary custom info compile)))
+  (evil-collection-init '(magit eshell helpful pass notmuch ibuffer eww bookmark dictionary custom info compile gnus)))
 
 (provide 'ysz-evil)
 ;;; ysz-evil.el ends here
