@@ -25,17 +25,20 @@ button
 #workspaces button
   background-color: $ws-unfocused-bg-color
   color: $ws-unfocused-fg-color
+  opacity: 0.8
   padding: 0 2px
   &:hover
     box-shadow: inherit
     text-shadow: inherit
     background: $ws-unfocused-bg-color
     color: $ws-unfocused-fg-color
+    opacity: 1.0
     padding: 0 2px
   &.focused
     background-color: $ws-focused-bg-color
     border: 1px solid $ws-focused-border-color
     color: $ws-focused-fg-color
+    opacity: 1.0
     padding: 0 2px
   &.focused:hover
     box-shadow: inherit
@@ -59,17 +62,22 @@ button
   text-shadow: 2px 2px #555
 
 // Margins between modules in the modules-right CSS class
-#pulseaudio,#network,#battery
-  margin-right: 8px
+#pulseaudio,#battery
+  margin-right: 10px
+  margin-left: 10px
 
-#pulseaudio
-  color: lime
+#network
+  margin-right: 0px
+
+// #pulseaudio
+//   color: lime
 
 #pulseaudio.muted
-  color: #FB2F2F
+  color: orange
+  // color: #FB2F2F
 
 #network.wifi
-  color: #8080FF
+  color: lime
 
 // #network.disconnected
 //   color: #FB2F2F 

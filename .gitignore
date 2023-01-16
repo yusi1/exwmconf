@@ -63,3 +63,4 @@ notmuch/mail/.notmuch/muchsync/*
 *.o
 emacs/.emacs.d/straight/
 .sass-cache
+waybar/.config/waybar/style.css*

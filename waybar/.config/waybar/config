@@ -13,7 +13,7 @@
                       "clock"],
     "clock": {
         "interval": 60,
-        "format": "{:[%d-%m-%y %H:%M]}",
+        "format": "{:🕛 %d-%m-%y %H:%M}",
         "max-length": 25
     },
     "battery": {
@@ -23,7 +23,7 @@
             "warning": 30,
             "critical": 15
         },
-        "format-full": "[🔋{time}{capacity}%]",
+        "format-full": "🔋{time}{capacity}%",
         "format-discharging": "🔋[- {time}]{capacity}%",
         "format-charging": "🔋[⚡ {time}]{capacity}%",
         "format-warning": "🪫[-]{capacity}%",
@@ -35,19 +35,19 @@
     "network": {
         "interface": "wlan0",
         "format": "{ifname}",
-        "format-wifi": "WIFI(UP): {essid} ({signalStrength}%)",
+        "format-wifi": "W: {essid} ({signalStrength}%)",
         "format-ethernet": "ETH(UP): {ipaddr}/{cidr}",
-        "format-disconnected": "", //An empty format will hide the module.
+        "format-disconnected": "W: down", //An empty format will hide the module.
         "tooltip-format": "{ifname} via {gwaddr}",
-        "tooltip-format-wifi": "WIFI(UP): {essid} ({signalStrength}%)",
+        "tooltip-format-wifi": "W: {essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "ETH: {ifname}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
     "pulseaudio": {
-        "format": "VOL: {volume}%",
+        "format": "♪: {volume}%",
         "format-bluetooth": "BLE: {volume}%",
-        "format-muted": "VOL: [MUTED]",
+        "format-muted": "♪: [MUTED]",
         "scroll-step": 1,
         "on-click": "pavucontrol",
         "ignored-sinks": ["Easy Effects Sink"]
