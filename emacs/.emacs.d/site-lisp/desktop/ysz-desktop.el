@@ -21,12 +21,16 @@
 	 (exwm-init . (lambda ()
 			(interactive)
 			(ysz-exwm/start-compositor)))
-	 ;; (exwm-init . (lambda ()
-	 ;; 		(interactive)
-	 ;; 		(ysz-exwm/start-panel)))
 	 (exwm-init . (lambda ()
 			(interactive)
-			(ysz-exwm/start-xsettingsd)))))
+			(ysz-exwm/start-panel)))
+	 (exwm-init . (lambda ()
+			(interactive)
+			(ysz-exwm/start-xsettingsd)))
+	 (exwm-init . (lambda ()
+			(interactive)
+			(start-process-shell-command "dex" nil
+						     "dex ~/.config/autostart/*.desktop")))))
 
 (use-package exwm-randr
   :after (exwm)
@@ -36,9 +40,9 @@
 	 (exwm-randr-screen-change . (lambda ()
 				       (interactive)
 				       (ysz-exwm/set-wallpaper)))
-	 ;; (exwm-randr-screen-change . (lambda ()
-	 ;; 			       (interactive)
-	 ;; 			       (ysz-exwm/start-panel)))
+	 (exwm-randr-screen-change . (lambda ()
+				       (interactive)
+				       (ysz-exwm/start-panel)))
 	 )
   :config
   (exwm-randr-enable))

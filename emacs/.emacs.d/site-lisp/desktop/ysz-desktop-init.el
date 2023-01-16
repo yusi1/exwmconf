@@ -1,7 +1,15 @@
 ;;; Init Functions for EXWM --- ysz-desktop-init.el
 
 (defun ysz-exwm/switch-display () (interactive)
-       (start-process-shell-command "autorandr" nil "autorandr -c"))
+       (if (eq (shell-command "which autorandr > /dev/null 2>&1") 0)
+	   (start-process-shell-command "autorandr" nil "autorandr -c")
+	 (let ((display "HDMI1")
+	       (mode "1920x1080")
+	       (rate "60"))
+	   (start-process-shell-command "xrandr" nil (concat
+						      "xrandr --output " display
+						      " --mode " mode
+						      " --rate " rate)))))
 
 (defun ysz-exwm/set-wallpaper () (interactive)
        (start-process-shell-command "nitrogen" nil "nitrogen --restore"))
@@ -11,10 +19,11 @@
 
 (defun ysz-exwm/laptop-screen-p ()
   "Check if our current screen is a screen that matches `laptop-preset', then return `t' if so."
-  (let ((displaycmd (shell-command-to-string "sleep 0.5 && autorandr --current | perl -pe 'chomp'"))
-	(laptop-preset "mobile")
-	(ext-display-preset "docked"))
-    (string-match-p displaycmd laptop-preset)))
+  nil)
+  ;; (let ((displaycmd (shell-command-to-string "sleep 0.5 && autorandr --current | perl -pe 'chomp'"))
+  ;; 	(laptop-preset "mobile")
+  ;; 	(ext-display-preset "docked"))
+  ;;   (string-match-p displaycmd laptop-preset)))
 
 (defvar ysz-exwm/polybar-process nil
   "Holds the process of the running Polybar instance, if any")
