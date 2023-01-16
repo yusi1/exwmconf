@@ -24,6 +24,9 @@
                                   interactive-only
                                   ))
 
+;; Keep nativecomp cache clean from older versions
+(setq native-compile-prune-cache t)
+
 (setq auto-save-file-name-transforms
       `((".*" ,(concat user-emacs-directory "auto-save/") t)))
 
