@@ -237,19 +237,19 @@ myKeys = ([
     -- Run xmessage with a summary of the default keybindings
     , ("M4-?", helpCommand)
 
-    -- ## Media control
-    -- Increase volume
-    , ("M4-<Page_Up>", spawn "pamixer -i 2")
-    -- Increase volume
-    , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 2")
-    -- Decrease volume
-    , ("M4-<Page_Down>", spawn "pamixer -d 2")
-    -- Decrease volume
-    , ("<XF86AudioLowerVolume>", spawn "pamixer -d 2")
-    -- Toggle mute volume
-    , ("M4-<End>", spawn "pamixer -t")
-    -- Toggle mute volume
-    , ("<XF86AudioMute>", spawn "pamixer -t")
+    -- ## Media control (SECTION NOW REPLACED WITH VOLUMEICON)
+    -- -- Increase volume
+    -- , ("M4-<Page_Up>", spawn "pamixer -i 2")
+    -- -- Increase volume
+    -- , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 2")
+    -- -- Decrease volume
+    -- , ("M4-<Page_Down>", spawn "pamixer -d 2")
+    -- -- Decrease volume
+    -- , ("<XF86AudioLowerVolume>", spawn "pamixer -d 2")
+    -- -- Toggle mute volume
+    -- , ("M4-<End>", spawn "pamixer -t")
+    -- -- Toggle mute volume
+    -- , ("<XF86AudioMute>", spawn "pamixer -t")
     
     -- ## Scratchpad activation keybinds
     -- TODO: Use visual submaps to visualize the keybinds
@@ -373,7 +373,10 @@ myStartupHook = do
   spawnOnce "/usr/bin/conky -c ~/.config/conky/conky-moregap.conf"
   spawnOnce "/usr/bin/conky -c ~/.config/conky/conky-mpd.conf"
   spawnOnce "/usr/bin/dex ~/.config/autostart/*.desktop"
+  spawnOnce "/usr/bin/xfce4-volumed-pulse"
   spawnOnce trayerCmd
+  spawnOnce "/usr/bin/nm-applet"
+  spawnOnce "/usr/bin/xss-lock --transfer-sleep-lock -- /usr/bin/i3lock -c 000000 --nofork"
 
 -- Colourscheme for this config (based on zenburn <- NOT REALLY ANYMORE)
 -- https://github.com/bbatsov/zenburn-emacs/blob/master/zenburn-theme.el
