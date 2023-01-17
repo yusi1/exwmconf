@@ -18,13 +18,20 @@ exec_always {
 }
 
 # Bar
-exec waybar -c ~/.config/waybar/config
+# exec waybar -c ~/.config/waybar/config
 
 # XSettingsd for setting GTK themes on XWayland applications
 exec xsettingsd -c ~/.xsettingsd-twm
 
-# Turn headset lights off
-exec headsetcontrol -l0
+# Nm-applet
+exec nm-applet --indicator
+
+# Autostart desktop files
+exec dex --autostart --environment sway
+
+# Start conky
+# exec conky
+# exec conky -c ~/.config/conky/conky-mpd.conf
 
 ### Variables
 #
@@ -36,7 +43,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $termsize 16
+set $termsize 12
 set $term foot -f "Fira Code:size=$termsize"
 set $term2size 12
 set $term2 foot -f "Fira Code Nerd Font:size=$term2size"
@@ -173,6 +180,10 @@ for_window [app_id="^zenity$"] floating enable, sticky enable, resize set 60 ppt
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+q exec swaynag -f "DejaVu Sans Mono 12" -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # Brightness control
+    bindsym XF86MonBrightnessUp exec light -A 2
+    bindsym XF86MonBrightnessDown exec light -U 2
 #
 # Moving around:
 #
@@ -307,5 +318,43 @@ bindsym $mod+r mode "resize"
 #         inactive_workspace #32323200 #32323200 #5c5c5c
 #     }
 # }
+
+bar {
+    output HDMI-A-1
+    position bottom
+    font "DejaVu Sans Mono 12"
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command i3status -c ~/.config/i3status/config
+
+    tray_output *
+    icon_theme "Adwaita"
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+bar {
+    output eDP-1
+    position bottom
+    font "DejaVu Sans Mono 12"
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command i3status -c ~/.config/i3status/config-small
+
+    tray_output *
+    icon_theme "Adwaita"
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
 
 include /etc/sway/config.d/*
