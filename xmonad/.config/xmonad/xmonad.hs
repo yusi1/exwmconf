@@ -83,7 +83,7 @@ myFadeHook = composeAll [ opaque
 main :: IO ()
 main = do
   xmonad
-  $ withSB mySB
+  $ dynamicSBs barSpawner
   . ewmhFullscreen
   . ewmh
   . docks
@@ -157,8 +157,8 @@ myKeys = ([
     -- ## Stack based window navigation
     , ("M4-C-<R>", windows W.focusDown >> updPointer)
     , ("M4-C-<L>", windows W.focusUp >> updPointer)
-    -- , ("M4-C-j", windows W.focusDown >> updPointer)
-    -- , ("M4-C-k", windows W.focusUp >> updPointer)
+    , ("C-<Tab>", windows W.focusDown >> updPointer)
+    , ("C-S-<Tab>", windows W.focusUp >> updPointer)
 
     -- ## Sublayout grouping / ungrouping
     , ("M4-C-h", sendMessage $ pullGroup L)
@@ -251,6 +251,12 @@ myKeys = ([
     -- -- Toggle mute volume
     -- , ("<XF86AudioMute>", spawn "pamixer -t")
     
+    -- ## Brightness control keybinds
+    -- Increase brightness
+    , ("<XF86MonBrightnessUp>", spawn "light -A 2")
+    -- Decrease brightness
+    , ("<XF86MonBrightnessDown>", spawn "light -U 2")
+
     -- ## Scratchpad activation keybinds
     -- TODO: Use visual submaps to visualize the keybinds
     -- , ("M4-M1-e", namedScratchpadAction scratchpads "Emacs")
@@ -396,25 +402,50 @@ fgText    = "#000000"
 fgHLightC = "#DCDCCC"
 
 -- PP config for appearance of workspaces etc.
-myPP :: PP
-myPP = def { ppCurrent         = xmobarColor fgText solarizedCyan
-                                 . wrap " " " "
-           , ppVisible         = xmobarColor fgText blue1
-                                 . wrap " [" "] "
-           , ppHidden          = xmobarColor fgText blue01
-                                 . wrap " " " "
-           --, ppHiddenNoWindows = xmobarColor fgText bluelow . wrap " " " "
-           , ppUrgent          = xmobarColor fgText solarizedOrange . wrap " " " "
-           , ppOrder           = \(ws:l:t:ex) -> [ws,l,t]++ex
-           , ppSep             = " :: "
-           , ppWsSep           = ""
-           , ppLayout          = xmobarColor solarizedGreen ""
-           , ppTitle           = shorten 40 
-           }
+myPrettyPrinter :: PP
+myPrettyPrinter = def { ppCurrent         = xmobarColor fgText solarizedCyan
+                                     . wrap " " " "
+               , ppVisible         = xmobarColor fgText blue1
+                                     . wrap " [" "] "
+               , ppHidden          = xmobarColor fgText blue01
+                                     . wrap " " " "
+               --, ppHiddenNoWindows = xmobarColor fgText bluelow . wrap " " " "
+               , ppUrgent          = xmobarColor fgText solarizedOrange . wrap " " " "
+               , ppOrder           = \(ws:l:t:ex) -> [ws,l,t]++ex
+               , ppSep             = " :: "
+               , ppWsSep           = ""
+               , ppLayout          = xmobarColor solarizedGreen ""
+               , ppTitle           = shorten 20 
+               }
+
+
+myPrettyPrinter1 :: PP
+myPrettyPrinter1 = def { ppCurrent         = xmobarColor fgText solarizedCyan
+                                     . wrap " " " "
+               , ppVisible         = xmobarColor fgText blue1
+                                     . wrap " [" "] "
+               , ppHidden          = xmobarColor fgText blue01
+                                     . wrap " " " "
+               --, ppHiddenNoWindows = xmobarColor fgText bluelow . wrap " " " "
+               , ppUrgent          = xmobarColor fgText solarizedOrange . wrap " " " "
+               , ppOrder           = \(ws:l:t:ex) -> [ws,l,t]++ex
+               , ppSep             = " :: "
+               , ppWsSep           = ""
+               , ppLayout          = xmobarColor solarizedGreen ""
+               , ppTitle           = shorten 40 
+               }
 
 -- Status bars
-mySB :: StatusBarConfig
-mySB = statusBarPropTo "_XMONAD_LOG_1" "xmobar" (pure myPP)
+mySBLaptop :: StatusBarConfig
+mySBLaptop = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0 ~/.config/xmobar/xmobar-laptop.hs" (pure myPrettyPrinter)
+
+mySBExt :: StatusBarConfig
+mySBExt = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1 ~/.config/xmobar/xmobar.hs" (pure myPrettyPrinter1)
+
+barSpawner :: ScreenId -> IO StatusBarConfig
+barSpawner 0 = pure $ mySBLaptop
+barSpawner 1 = pure $ mySBExt
+barSpawner _ = mempty -- nothing on the rest of the screens
 
 -- Theme for tab bars and other decorations
 myTheme :: Theme
