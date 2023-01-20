@@ -30,6 +30,7 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.FadeWindows
+import XMonad.Hooks.Rescreen
 import XMonad.Layout
 import XMonad.Layout.Simplest
 import XMonad.Layout.SimplestFloat
@@ -79,6 +80,12 @@ myFadeHook = composeAll [ opaque
                         , isUnfocused --> transparency 0.2
                         ]
 
+myAfterRescreenHook :: X ()
+myAfterRescreenHook = spawn "~/bin/xlayout/post.sh"
+
+myRandrChangeHook :: X ()
+myRandrChangeHook = spawn "autorandr --change"
+
 -- Main
 main :: IO ()
 main = do
@@ -86,6 +93,8 @@ main = do
   $ dynamicSBs barSpawner
   . ewmhFullscreen
   . ewmh
+  . addAfterRescreenHook myAfterRescreenHook
+  . addRandrChangeHook myRandrChangeHook
   . docks
   $ cfg
 
@@ -227,7 +236,7 @@ myKeys = ([
     -- Start passRemove prompt
     , ("M4-C-S-=", passRemovePrompt solarizedDarkXPConfig)
     -- Start xmonad prompt
-    , ("M4-S-1", xmonadPromptC myXMonadCommands solarizedDarkXPConfig)
+    , ("M4-S-m", xmonadPromptC myXMonadCommands solarizedDarkXPConfig)
     -- Start unicode prompt
     , ("M4-S-u", unicodePrompt "/usr/share/unicode/UnicodeData.txt" solarizedDarkXPConfig)
 
@@ -312,11 +321,11 @@ myKeys = ([
     -- Spawn terminal
     , ("M4-<Return>", spawn "alacritty")
     -- Run vim-select-file.sh script
-    , ("M4-e", spawn "/bin/sh -c ~/stuff/vim-select-file.sh")
+    , ("M4-v", spawn "/bin/sh -c ~/stuff/vim-select-file.sh")
     -- Run dmenu-dark script
     , ("M4-d", spawn "dmenu-dark")
     -- Run rofi
-    , ("M4-r", spawn "rofi -show drun")
+    , ("M4-p", spawn "rofi -show drun")
     -- Run i3lock
     , ("M4-<Backspace>", spawn "i3lock -c000000 & sleep 1 && xset dpms force off")
     -- Headsetcontrol toggle keybind
@@ -351,38 +360,52 @@ mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
     --                                      >> updPointer)
     ]
 
+-- remove "#" from a string
+colour xs = [ x | x <- xs, not (x `elem` "#") ]
+
 -- System tray command
+trayerMonitor   x = " --monitor "         ++ x
 trayerExpand    x = " --expand "          ++ x
 trayerWidth     x = " --width "           ++ x
 trayerEdge      x = " --edge "            ++ x
 trayerAlign     x = " --align "           ++ x
 trayerStrut     x = " --SetPartialStrut " ++ x
 trayerDockType  x = " --SetDockType "     ++ x
+trayerTransparent x s = " --transparent "   ++ x ++ " --alpha " ++ s
+trayerColour    x = " --tint " ++ "0xF" ++ colour x
 
-trayerCmd = "/usr/bin/trayer"
-            ++ trayerExpand "true"   -- true/false
-            ++ trayerWidth "10"      -- max 100
-            ++ trayerEdge "bottom"   -- none/bottom/top/left/right
-            ++ trayerAlign "left"    -- left/right/center       
-            ++ trayerStrut "true"    -- true/false
-            ++ trayerDockType "true" -- true/false
+trayerCmd = "/usr/bin/sleep 2 && "
+            ++ "/usr/bin/trayer"
+            ++ trayerMonitor "primary" -- primary/number
+            ++ trayerExpand "true"     -- true/false
+            ++ trayerWidth "10"        -- max 100
+            ++ trayerEdge "bottom"     -- none/bottom/top/left/right
+            ++ trayerAlign "left"      -- left/right/center       
+            ++ trayerDockType "true"   -- true/false
+            ++ trayerStrut "true"      -- true/false
+            ++ trayerTransparent "true" "0" -- true/false 0-100
+            ++ trayerColour "#002b36"
 
 -- StartupHook
 myStartupHook :: X ()
 myStartupHook = do
   setWMName "LG3D"
+  spawnOnce "/usr/bin/autorandr --change"
   spawnOnce "/usr/bin/xsetroot -cursor_name left_ptr"
   spawnOnce "/usr/bin/picom --config ~/.config/picom/picom-xmonad.conf"
   spawnOnce "/usr/bin/xsettingsd -c ~/.xsettingsd-solarized"
   spawnOnce "/usr/bin/dunst -config ~/.config/dunst/dunstrc-solarized"
-  spawnOnce "/usr/bin/nitrogen --restore"
   spawnOnce "/usr/bin/conky -c ~/.config/conky/conky-moregap.conf"
-  spawnOnce "/usr/bin/conky -c ~/.config/conky/conky-mpd.conf"
+  -- spawnOnce "/usr/bin/conky -c ~/.config/conky/conky-mpd.conf"
   spawnOnce "/usr/bin/dex ~/.config/autostart/*.desktop"
   spawnOnce "/usr/bin/xfce4-volumed-pulse"
-  spawnOnce trayerCmd
   spawnOnce "/usr/bin/nm-applet"
   spawnOnce "/usr/bin/xss-lock --transfer-sleep-lock -- /usr/bin/i3lock -c 000000 --nofork"
+  spawnOnce "/usr/bin/nitrogen --restore"
+  spawnOnce "/usr/bin/udiskie"
+  -- kill trayer on every restart
+  spawn "pkill trayer"
+  spawn trayerCmd
 
 -- Colourscheme for this config (based on zenburn <- NOT REALLY ANYMORE)
 -- https://github.com/bbatsov/zenburn-emacs/blob/master/zenburn-theme.el
@@ -393,7 +416,7 @@ blue02    = "#598C8E"
 blue01    = "#528083"
 blue      = "#4C7073"
 bluelow   = "#24274B"
-bluesap = "#005577"
+bluesap   = "#005577"
 green     = "#7F9F7F"
 orange    = "#DFAF8F"
 bg        = "#1B1B1B"
@@ -403,19 +426,16 @@ fgHLightC = "#DCDCCC"
 
 -- PP config for appearance of workspaces etc.
 myPrettyPrinter :: PP
-myPrettyPrinter = def { ppCurrent         = xmobarColor fgText solarizedCyan
-                                     . wrap " " " "
-               , ppVisible         = xmobarColor fgText blue1
-                                     . wrap " [" "] "
-               , ppHidden          = xmobarColor fgText blue01
-                                     . wrap " " " "
-               --, ppHiddenNoWindows = xmobarColor fgText bluelow . wrap " " " "
-               , ppUrgent          = xmobarColor fgText solarizedOrange . wrap " " " "
-               , ppOrder           = \(ws:l:t:ex) -> [ws,l,t]++ex
-               , ppSep             = " :: "
-               , ppWsSep           = ""
-               , ppLayout          = xmobarColor solarizedGreen ""
-               , ppTitle           = shorten 20 
+myPrettyPrinter = def { ppCurrent  = xmobarColor fgText solarizedCyan . wrap " " " "
+                      , ppVisible         = xmobarColor fgText blue1  . wrap " [" "] "
+                      , ppHidden          = xmobarColor fgText blue01 . wrap " " " "
+                      --, ppHiddenNoWindows = xmobarColor fgText bluelow . wrap " " " "
+                      , ppUrgent          = xmobarColor fgText solarizedOrange . wrap " " " "
+                      , ppOrder           = \(ws:l:t:ex) -> [ws,l,t]++ex
+                      , ppSep             = " :: "
+                      , ppWsSep           = ""
+                      , ppLayout          = xmobarColor solarizedGreen ""
+                      , ppTitle           = shorten 20 
                }
 
 
@@ -436,15 +456,15 @@ myPrettyPrinter1 = def { ppCurrent         = xmobarColor fgText solarizedCyan
                }
 
 -- Status bars
-mySBLaptop :: StatusBarConfig
-mySBLaptop = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0 ~/.config/xmobar/xmobar-laptop.hs" (pure myPrettyPrinter)
+xmobarSmall :: StatusBarConfig
+xmobarSmall = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0 ~/.config/xmobar/xmobar-laptop.hs" (pure myPrettyPrinter)
 
-mySBExt :: StatusBarConfig
-mySBExt = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1 ~/.config/xmobar/xmobar.hs" (pure myPrettyPrinter1)
+xmobarRegular :: StatusBarConfig
+xmobarRegular = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1 ~/.config/xmobar/xmobar.hs" (pure myPrettyPrinter1)
 
 barSpawner :: ScreenId -> IO StatusBarConfig
-barSpawner 0 = pure $ mySBLaptop
-barSpawner 1 = pure $ mySBExt
+barSpawner 0 = pure $ xmobarSmall
+-- barSpawner 1 = pure $ xmobarRegular
 barSpawner _ = mempty -- nothing on the rest of the screens
 
 -- Theme for tab bars and other decorations
@@ -627,6 +647,7 @@ myManageHook = composeAll . concat $
   [
     [isDialog --> doCenterFloat]
   , [isFullscreen --> doFullFloat]
+  , [checkDock --> doRaise]
   -- Steam ManageHooks
   , [className =? "Zenity" --> doCenterFloat]
   , [(title =? "Friends List") <&&> (className =? "Steam") --> doFloat]
