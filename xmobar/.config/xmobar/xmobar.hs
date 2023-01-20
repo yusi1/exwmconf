@@ -23,7 +23,7 @@ config =
             Run $ BatteryP ["BAT1"] ["-t", "<fn=2>🔋</fn> <timeleft> (<left>%)"] 600,
             -- Run $ Alsa "default" "Master" ["-t", "♪: <volume>% <status>", "--", "--alsactl=/usr/bin/alsactl"]
             -- Run $ Volume "default" "Master" ["-t", "♪: <volume>% <status>"] 10
-            Run $ Wireless "wlan0" ["-t", "<ssid> <quality>%"] 10
+            Run $ Wireless "wlan0" ["-L","20","-H","50","--high","lime","--low","red","-t", "<ssid> <quality>%"] 10
           ],
         template = concat $
             [ "%_XMONAD_LOG_2%" ] <>
