@@ -20,8 +20,13 @@
   (setq which-key-idle-delay 2)
   (which-key-mode))
 
+(use-package parinfer-rust-mode
+  :straight t
+  :hook emacs-lisp-mode
+  :config (setq-default indent-tabs-mode nil)) ;; disable tabs
+
 ;;;EviL mode
-;; (use-package ysz-evil)
+(use-package ysz-evil)
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;;Xah-Fly-Keys mode
 ;; (use-package ysz-xfk)
@@ -47,11 +52,11 @@
   "Select a buffer prefixed by PREFIX#"
   (minibuffer-with-setup-hook
       (lambda ()
-        (insert (concat prefix "# " )))
+        (insert (concat prefix "# ")))
     (consult-buffer)))
 
 (keymap-set global-map "C-c /"
-	    (lambda () (interactive) (ysz/consult-buffer-by-prefix "F")))
+            (lambda () (interactive) (ysz/consult-buffer-by-prefix "F")))
 
 ;; Remappings for when backspace doesn't work in TTY's.
 (when (not window-system)
@@ -76,8 +81,8 @@
 If `system-type' is `berkeley-unix', use the `doas' method.
 If `system-type' is anything else (e.g `gnu/linux') then use the `sudo' method."
   (setq tramp-method (if (not (eq system-type 'berkeley-unix))
-			 "sudo"
-		       "doas")))
+                         "sudo"
+                       "doas")))
 
 (defun mail-as-root ()
   "View mail in `/var/mail/root' as root with RMAIL."
@@ -90,8 +95,8 @@ If `system-type' is anything else (e.g `gnu/linux') then use the `sudo' method."
 The mail file in `/var/spool/mail' should be owned by USER for this to work."
   (interactive)
   (let ((rmail-file-name (if user
-			     (concat "/var/spool/mail/" user)
-			   "/var/spool/mail/yaslam")))
+                             (concat "/var/spool/mail/" user)
+                           "/var/spool/mail/yaslam")))
     (rmail rmail-file-name)))
 
 (defun mail-as-root-multihop (&optional xfilepick xaddr xuser)
@@ -101,15 +106,15 @@ If XADDR is `t', use that server address instead.
 If XUSER is `t', use that username instead."
   (interactive)
   (let* ((username (if (not xuser) (read-from-minibuffer "Enter USERNAME to use: " nil) xuser))
-	 (address (if (not xaddr) (read-from-minibuffer "Enter IP/HOSTNAME to SSH into: " nil) xaddr))
-	 (host (concat username "@" address))
-	 (tramp-args (concat "/ssh:" host "|" "doas" ":" "root" "@" address ":"))
-	 (tramp-file (if (not xfilepick)
-			 ;; Defaults to the file `/var/mail/root'
-			 (concat tramp-args "/var/mail/root")
-		       ;; Else, prompt for other mail files in `/var/mail'
-		       (read-file-name "Find mail: " (concat tramp-args "/var/mail/"))))
-	 (remote-file tramp-file))
+         (address (if (not xaddr) (read-from-minibuffer "Enter IP/HOSTNAME to SSH into: " nil) xaddr))
+         (host (concat username "@" address))
+         (tramp-args (concat "/ssh:" host "|" "doas" ":" "root" "@" address ":"))
+         (tramp-file (if (not xfilepick)
+                         ;; Defaults to the file `/var/mail/root'
+                         (concat tramp-args "/var/mail/root")
+                       ;; Else, prompt for other mail files in `/var/mail'
+                       (read-file-name "Find mail: " (concat tramp-args "/var/mail/"))))
+         (remote-file tramp-file))
     ;; Run rmail using `remote-file' as the mail file to be shown.
     (rmail remote-file)))
 
@@ -119,7 +124,7 @@ If XUSER is `t', use that username instead."
   (when buffer-file-name
     (find-alternate-file
      (concat "/" (tramp-method-p) ":" "root@localhost:"
-	     buffer-file-name))
+             buffer-file-name))
     (message (concat "Viewing file: \"" buffer-file-name "\" with root privileges."))))
 
 (defun view-as-root-new-buffer ()
@@ -128,19 +133,36 @@ If XUSER is `t', use that username instead."
   (when buffer-file-name
     (find-file
      (concat "/" (tramp-method-p) ":" "root@localhost:"
-	     buffer-file-name))
+             buffer-file-name))
     (message (concat "Viewing file: \"" buffer-file-name "\" with root privileges in a new buffer."))))
 
 (defun find-file-as-root ()
   "Find-file as root."
   (interactive)
-      (find-file (concat "/" (tramp-method-p) ":" "root@localhost:"
-			 (read-file-name "Find file (as root): " "/"))))
+  (find-file (concat "/" (tramp-method-p) ":" "root@localhost:"
+                     (read-file-name "Find file (as root): " "/"))))
 
 (defun dired-root ()
   "Dired as root."
   (interactive)
   (find-file (concat "/" (tramp-method-p) ":" "root@localhost:" "/")))
+
+(defun ysz/tramp--extract-file-name (xFILE)
+  (s-replace-regexp ".*\:.+?:" "" xFILE))
+
+(defun view-as-root-remote (&optional xUSER)
+  (interactive)
+  (if-let ((file buffer-file-name))
+   (if (file-remote-p file)
+     (let* ((remote-file (ysz/tramp--extract-file-name file))
+            (user (concat (if xUSER xUSER "root") "@"))
+            (method (concat "/" (file-remote-p file 'method) ":"))
+            (host (concat (file-remote-p file 'host) ":"))
+            (full-filename (concat method user host remote-file)))
+       (find-alternate-file full-filename)
+       (message (concat "Viewing file: \"" full-filename "\" with root privileges.")))
+     (message "This file is not remote!"))
+   (message "This buffer does not contain a file!")))
 
 (general-def global-map
   :prefix "C-c s"

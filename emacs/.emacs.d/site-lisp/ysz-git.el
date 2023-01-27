@@ -5,12 +5,13 @@
   :config
   (if (eq system-type 'windows-nt)
       ;; Use Git4Windows executable instead of MingW or anything else.
-      (setq magit-git-executable "C:/Program Files/Git/cmd/git.exe"))
+      (setq magit-git-executable "C:/Program Files/Git/cmd/git.exe")))
   ;; (keymap-set global-map "C-x g" 'magit)
-  )
+  
 
 (use-package vc
   :config
+  (setq vc-follow-symlinks t)
   (keymap-set global-map "C-x g" 'project-vc-dir))
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package agitate

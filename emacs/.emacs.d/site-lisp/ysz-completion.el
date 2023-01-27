@@ -1,11 +1,14 @@
 ;;; Completion configurations (vertico, orderless et al.) --- ysz-completion.el
 
+(use-package general
+  :straight t)
+
 (use-package orderless
   :straight t
   :init
   (setq completion-styles '(orderless basic)
-	completion-category-defaults nil
-	completion-category-overrides '((file (styles . (partial-completion))))))
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles . (partial-completion))))))
 
 (use-package vertico
   :straight t
@@ -29,8 +32,8 @@
 (use-package vertico-multiform
   :load-path "straight/repos/vertico/extensions"
   :after (vertico vertico-unobtrusive
-		  vertico-reverse vertico-grid
-		  vertico-flat vertico-buffer)
+                  vertico-reverse vertico-grid
+                  vertico-flat vertico-buffer)
   :config
   (let ((map vertico-map))
     (keymap-set map "M-V" #'vertico-multiform-vertical)
@@ -39,8 +42,8 @@
     (keymap-set map "M-R" #'vertico-multiform-reverse)
     (keymap-set map "M-U" #'vertico-multiform-unobtrusive))
   (setq vertico-multiform-commands
-	'((consult-imenu buffer)
-	  (execute-extended-command flat)))
+        '((consult-imenu buffer)
+          (execute-extended-command flat)))
   (vertico-multiform-mode t))
 ;;;;;;;;;;;;;;;;;;;;;;;
 (use-package vertico-unobtrusive
@@ -60,8 +63,8 @@
   :after (vertico)
   :init
   (setq vertico-buffer-display-action '((display-buffer-in-side-window)
-					(window-height . 10)
-					(side . bottom))))
+                                        (window-height . 10)
+                                        (side . bottom))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package savehist
   :straight t
@@ -108,15 +111,44 @@
   :straight t
   :demand t
   :bind (;; ("C-x b" . consult-buffer)
-	 ("C-c i" . consult-imenu)
-	 ("M-y" . consult-yank-pop))
+         ("C-c i" . consult-imenu)
+         ("M-y" . consult-yank-pop))
   :hook (completion-list-mode . consult-previous-at-point-mode)
   :config
   (setq consult-buffer-sources (quote
-				(consult--source-hidden-buffer
-				 consult--source-buffer
-				 ;; consult--source-recent-file
-				 ))))
+                                (consult--source-hidden-buffer
+                                 consult--source-buffer))))
+                                 ;; consult--source-recent-file
+                                 
+
+(use-package cape
+  :straight t
+  :demand t
+  :config
+  ;; Bind dedicated completion commands
+  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+  (general-def global-map
+    :prefix "C-c ["
+    "p" 'completion-at-point ;; capf
+    "t" 'complete-tag        ;; etags
+    "d" 'cape-dabbrev        ;; or dabbrev-completion
+    "h" 'cape-history
+    "f" 'cape-file
+    "k" 'cape-keyword
+    "s" 'cape-symbol
+    "a" 'cape-abbrev
+    "i" 'cape-ispell
+    "l" 'cape-line
+    "w" 'cape-dict
+    "\\" 'cape-tex
+    "_" 'cape-tex
+    "^" 'cape-tex
+    "&" 'cape-sgml
+    "r" 'cape-rfc1345)
+
+   ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
 
 (provide 'ysz-completion)
 ;;; ysz-completion.el ends here

@@ -1,6 +1,6 @@
 ;;; UI configurations --- ysz-ui.el
 
-(electric-pair-mode 1)
+;; (electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 
 (recentf-mode t)

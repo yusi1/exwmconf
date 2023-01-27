@@ -1,7 +1,7 @@
 ;;; Theming configurations --- ysz-theme.el
 
 ;; My own theme
-;; (load-theme 'ysz-dark t)
+(load-theme 'ysz-dark t)
 
 ;; Icons
 (setq ysz/icons-enabled nil)
@@ -12,19 +12,19 @@
       :config
       (setq all-the-icons-scale-factor 1.0)))
 
-(use-package solarized-theme
-  :straight '(emacs-color-theme-solarized
-	      :type git
-	      :host github
-	      :repo "sellout/emacs-color-theme-solarized")
-  :config
-  (set-frame-parameter nil 'background-mode 'dark)
-  (load-theme 'solarized t))
+;; (use-package solarized-theme
+;;   :straight '(emacs-color-theme-solarized
+;; 	      :type git
+;; 	      :host github
+;; 	      :repo "sellout/emacs-color-theme-solarized")
+;;   :config
+;;   (set-frame-parameter nil 'background-mode 'dark)
+;;   (load-theme 'solarized t))
 
 ;; (use-package solarized-theme
 ;;   :straight t
 ;;   :config
-;;   (load-theme 'solarized-dark))
+;;   (load-theme 'solarized-dark t))
 
 ;; (use-package modus-themes
 ;;   :straight t
@@ -67,7 +67,10 @@
 ;;   ;;; Global settings (defaults)
 ;;   (setq doom-themes-enable-bold t    ;; if nil, bold is universally disabled
 ;;         doom-themes-enable-italic t) ;; if nil, italics is universally disabled
-;;   (load-theme 'doom-city-lights t)
+;;   (custom-set-faces
+;;    '(magit-header-line ((t :foreground "#222222" :bold t))))
+
+;;   (load-theme 'doom-solarized-dark t)
 ;;   ;;; Enable flashing mode-line on errors
 ;;   ;;; (doom-themes-visual-bell-config)
 ;;   ;;; ;;; Enable custom neotree theme (all-the-icons must be installed!)
@@ -83,7 +86,13 @@
 ;;   :config
 ;;   (if ysz/icons-enabled
 ;;       (setq doom-modeline-icons t))
+;;   (setq doom-modeline-minor-modes t)
 ;;   (doom-modeline-mode 1))
+
+;; (use-package smart-mode-line
+;;   :straight t
+;;   :preface (setq sml/theme 'automatic)
+;;   :config (sml/setup))
 
 (use-package fontaine
   :straight t
@@ -96,12 +105,19 @@
   :config
   ;; whether fontaine is enabled
   (defvar fontaine-enabled nil "Whether fontaine is enabled or not.")
-  (setq fontaine-enabled nil)
+  (setq fontaine-enabled t)
   
   (setq fontaine-latest-state-file
 	(locate-user-emacs-file "fontaine-latest-state.eld"))
   (setq fontaine-presets
-	'((iosevka-comfy-regular
+	'((iosevka-comfy-large
+	   :default-family "Iosevka Comfy Fixed"
+	   :default-height 180
+	   :variable-pitch-weight bold
+	   :bold-family nil
+	   :bold-weight bold
+	   :line-spacing 1)
+	  (iosevka-comfy-regular
 	   :default-family "Iosevka Comfy Fixed"
 	   :default-height 160
 	   :variable-pitch-weight bold

@@ -26,18 +26,18 @@
     (kbd "<leader>2") 'split-window-below
     (kbd "<leader>3") 'split-window-right
     (kbd "<leader>wn") 'next-window-any-frame
-    (kbd "<leader>wp") 'previous-window-any-frame
-
-    )
+    (kbd "<leader>wp") 'previous-window-any-frame)
 
   ;; Visual state mappings
   (evil-define-key 'visual 'global "gc" 'comment-dwim)
   ;; Motion state mappings
   (evil-define-key 'motion 'global "gcc" 'comment-line)
-  ;; Mode mappings
+  (evil-define-key 'motion 'global "gQ" 'quit-window)
+  ;;; Mode mappings
   ;; (evil-define-key 'normal 'notmuch-show "gn" 'notmuch-show-next-open-message)
   ;; (evil-define-key 'normal 'notmuch-show "gp" 'notmuch-show-previous-open-message)
-  )
+  (evil-define-key 'normal 'rmail-mode-map "g>" 'rmail-last-message)
+  (evil-define-key 'normal 'rmail-mode-map "g<" 'rmail-first-message))
 
 (use-package evil-org
   :straight t
@@ -76,7 +76,7 @@
   :after (evil)
   :config
   ;; Setting up evil-collection
-  (evil-collection-init '(magit eshell helpful pass notmuch ibuffer eww bookmark dictionary custom info compile gnus)))
+  (evil-collection-init '(magit eshell helpful pass notmuch ibuffer eww bookmark dictionary custom info compile gnus vc-dir man)))
 
 (provide 'ysz-evil)
 ;;; ysz-evil.el ends here
