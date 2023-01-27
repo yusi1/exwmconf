@@ -129,7 +129,7 @@ input "type:mouse" {
     natural_scroll disabled
     dwt enabled
     accel_profile "flat"
-    pointer_accel 0.0
+    pointer_accel -1
 }
 
 input "1267:12417:ELAN060F:00_04F3:3081_Touchpad" {
@@ -321,14 +321,14 @@ bindsym $mod+r mode "resize"
 
 bar {
     output HDMI-A-1
-    position bottom
+    position top
     font "DejaVu Sans Mono 12"
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     status_command i3status -c ~/.config/i3status/config
 
-    tray_output *
+    tray_output none
     icon_theme "Adwaita"
 
     colors {
