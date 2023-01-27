@@ -81,10 +81,12 @@ myFadeHook = composeAll [ opaque
                         ]
 
 myAfterRescreenHook :: X ()
-myAfterRescreenHook = spawn "~/bin/xlayout/post.sh"
+myAfterRescreenHook = do
+  spawn "~/bin/xlayout/post.sh"
 
 myRandrChangeHook :: X ()
-myRandrChangeHook = spawn "autorandr --change"
+myRandrChangeHook = do
+  spawn "autorandr --change"
 
 -- Main
 main :: IO ()
@@ -361,30 +363,32 @@ mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
     ]
 
 -- remove "#" from a string
-colour xs = [ x | x <- xs, not (x `elem` "#") ]
+-- colour xs = [ x | x <- xs, not (x `elem` "#") ]
 
--- System tray command
-trayerMonitor   x = " --monitor "         ++ x
-trayerExpand    x = " --expand "          ++ x
-trayerWidth     x = " --width "           ++ x
-trayerEdge      x = " --edge "            ++ x
-trayerAlign     x = " --align "           ++ x
-trayerStrut     x = " --SetPartialStrut " ++ x
-trayerDockType  x = " --SetDockType "     ++ x
-trayerTransparent x s = " --transparent "   ++ x ++ " --alpha " ++ s
-trayerColour    x = " --tint " ++ "0xF" ++ colour x
+-- -- System tray command
+-- trayerMonitor   x = " --monitor "         ++ x
+-- trayerExpand    x = " --expand "          ++ x
+-- trayerWidth     x = " --width "           ++ x
+-- trayerEdge      x = " --edge "            ++ x
+-- trayerAlign     x = " --align "           ++ x
+-- trayerStrut     x = " --SetPartialStrut " ++ x
+-- trayerDockType  x = " --SetDockType "     ++ x
+-- trayerTransparent x s = " --transparent "   ++ x ++ " --alpha " ++ s
+-- trayerColour    x = " --tint " ++ "0xF" ++ colour x
+-- trayerLower       = " -l "
 
-trayerCmd = "/usr/bin/sleep 2 && "
-            ++ "/usr/bin/trayer"
-            ++ trayerMonitor "primary" -- primary/number
-            ++ trayerExpand "true"     -- true/false
-            ++ trayerWidth "10"        -- max 100
-            ++ trayerEdge "bottom"     -- none/bottom/top/left/right
-            ++ trayerAlign "left"      -- left/right/center       
-            ++ trayerDockType "true"   -- true/false
-            ++ trayerStrut "true"      -- true/false
-            ++ trayerTransparent "true" "0" -- true/false 0-100
-            ++ trayerColour "#002b36"
+-- trayerCmd = "/usr/bin/sleep 2 && "
+--             ++ "/usr/bin/trayer"
+--             ++ trayerMonitor "primary" -- primary/number
+--             ++ trayerExpand "true"     -- true/false
+--             ++ trayerWidth "10"        -- max 100
+--             ++ trayerEdge "bottom"     -- none/bottom/top/left/right
+--             ++ trayerAlign "left"      -- left/right/center       
+--             ++ trayerDockType "true"   -- true/false
+--             ++ trayerStrut "true"      -- true/false
+--             ++ trayerTransparent "true" "0" -- true/false 0-100
+--             ++ trayerColour "#002b36"
+--             -- ++ trayerLower
 
 -- StartupHook
 myStartupHook :: X ()
@@ -403,9 +407,14 @@ myStartupHook = do
   spawnOnce "/usr/bin/xss-lock --transfer-sleep-lock -- /usr/bin/i3lock -c 000000 --nofork"
   spawnOnce "/usr/bin/nitrogen --restore"
   spawnOnce "/usr/bin/udiskie"
+  spawnOnce "/bin/bash -c ~/stuff/vim-change-colourscheme.el"
+  spawnOnce "/bin/bash -c ~/stuff/neovim-change-colourscheme.el"
   -- kill trayer on every restart
-  spawn "pkill trayer"
-  spawn trayerCmd
+  -- spawn "pkill trayer"
+  -- spawn trayerCmd
+  -- kill stalonetray on every restart
+  spawn "pkill stalonetray"
+  spawn "/usr/bin/stalonetray"
 
 -- Colourscheme for this config (based on zenburn <- NOT REALLY ANYMORE)
 -- https://github.com/bbatsov/zenburn-emacs/blob/master/zenburn-theme.el
@@ -554,7 +563,7 @@ myXMonadCommands = [ ("shrink"              , sendMessage Shrink                
                      , ("swap-up"             , windows W.swapUp                                   )
                      , ("swap-down"           , windows W.swapDown                                 )
                      , ("swap-master"         , windows W.swapMaster                               )
-                     , ("toggle-tray"         , cycleAction "trayer" [ spawn "pkill trayer", spawn trayerCmd ] )
+                     -- , ("toggle-tray"         , cycleAction "trayer" [ spawn "pkill trayer", spawn trayerCmd ] )
                     --  , ("sink"                , withFocused $ windows . sink                     )
                     --  , ("quit-wm"             , io exitSuccess                                   )
             ]
