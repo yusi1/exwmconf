@@ -29,6 +29,7 @@
  '(vc-edited-state ((t :foreground "orange")))
  '(vc-up-to-date-state ((t :foreground "green")))
  '(erc-input-face ((t :foreground "aqua")))
- '(erc-nick-default-face ((t :inherit erc-input-face))))
+ '(erc-nick-default-face ((t :inherit erc-input-face)))
+ '(erc-notice-face ((t :foreground "lime" :bold t))))
 
 (provide-theme 'ysz-dark)
