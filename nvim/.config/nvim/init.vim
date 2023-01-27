@@ -27,6 +27,12 @@ set smartindent
 " Plugins with vim-plug
 call plug#begin()
 
+" Activity watcher vim plugin
+Plug 'ActivityWatch/aw-watcher-vim'
+
+" Solarized theme
+Plug 'altercation/vim-colors-solarized'
+
 " Align text
 Plug 'godlygeek/tabular'
 
@@ -36,10 +42,19 @@ Plug 'tpope/vim-surround'
 " Easy batch commenting like Emacs
 Plug 'tpope/vim-commentary'
 
+" Parinfer - a newer and simpler Paredit
+Plug 'eraserhd/parinfer-rust', {'do':
+        \  'cargo build --release'}
+
 " ParEdit ported to Vim
-Plug 'kovisoft/paredit'
+" Plug 'kovisoft/paredit'
 
 " Neovim embedded into a web browser
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
+
+" Theme
+syntax enable
+set background=dark
+colorscheme default
