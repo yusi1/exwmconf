@@ -35,11 +35,11 @@
     "network": {
         "interface": "wlan0",
         "format": "{ifname}",
-        "format-wifi": "W: {essid} ({signalStrength}%)",
+        "format-wifi": "🛜 {essid} ({signalStrength}%)",
         "format-ethernet": "ETH(UP): {ipaddr}/{cidr}",
-        "format-disconnected": "W: down", //An empty format will hide the module.
+        "format-disconnected": "🛜 down", //An empty format will hide the module.
         "tooltip-format": "{ifname} via {gwaddr}",
-        "tooltip-format-wifi": "W: {essid} ({signalStrength}%)",
+        "tooltip-format-wifi": "🛜 {essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "ETH: {ifname}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
