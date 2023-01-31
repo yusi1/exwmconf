@@ -67,3 +67,4 @@ emacs/.emacs.d/straight/
 waybar/.config/waybar/style.css*
 xmobar/.config/xmobar/xmobar-git/
 xmobar/.config/xmobar/xmobar-laptop
+emacs/.emacs.d/parinfer-rust/
