@@ -1,4 +1,4 @@
 set guioptions-=T
-set guifont=FiraCode\ 14
+set guifont=FiraMono\ 14
 colorscheme torte 
 

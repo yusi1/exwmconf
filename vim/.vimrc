@@ -28,7 +28,7 @@ set smartindent
 call plug#begin()
 
 " Activity watcher vim plugin
-Plug 'ActivityWatch/aw-watcher-vim'
+" Plug 'ActivityWatch/aw-watcher-vim'
 
 " Solarized theme
 Plug 'altercation/vim-colors-solarized'
