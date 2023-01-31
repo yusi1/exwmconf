@@ -4,14 +4,14 @@ xterm*locale: true
 xterm*utf8: 1
 xterm*utf8Fonts: always
 xterm*dynamicColors: true
-xterm*faceName: Fira Code
-xterm*faceSize: 14
+xterm*faceName: Fira Mono Medium
+xterm*faceSize: 20
 xterm*background: black
 xterm*foreground: white
 
 !emacs
 Xft.rgba: none
-emacs.font: DejaVu Sans Mono-14
+emacs.font: DejaVu Sans Mono-20
 ! emacs.font: PragmataPro Mono-16
 ! emacs.font: Fira Code-14
 ! emacs.font: -xos4-terminus-bold-*-*-*-18-*-*-*-*-*-*-*
