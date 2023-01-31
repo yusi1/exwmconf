@@ -105,7 +105,7 @@
   :config
   ;; whether fontaine is enabled
   (defvar fontaine-enabled nil "Whether fontaine is enabled or not.")
-  (setq fontaine-enabled t)
+  (setq fontaine-enabled nil)
   
   (setq fontaine-latest-state-file
 	(locate-user-emacs-file "fontaine-latest-state.eld"))

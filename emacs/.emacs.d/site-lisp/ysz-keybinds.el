@@ -20,11 +20,6 @@
   (setq which-key-idle-delay 2)
   (which-key-mode))
 
-(use-package parinfer-rust-mode
-  :straight t
-  :hook emacs-lisp-mode
-  :config (setq-default indent-tabs-mode nil)) ;; disable tabs
-
 ;;;EviL mode
 (use-package ysz-evil)
 ;;;;;;;;;;;;;;;;;;;;;;;
