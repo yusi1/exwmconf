@@ -17,11 +17,15 @@ VOLUP=$(echo "(${VOL}+$UP)/100" | bc -l)
 VOLDOWN=$(echo "(${VOL}-$DOWN)/100" | bc -l)
 
 if [[ "$ADJ" == "UP" ]]; then
-    sndioctl output.level=${VOLUP}
+    sndioctl output.level=+${VOLUP}
 fi
 
 if [[ "$ADJ" == "DOWN" ]]; then
-    sndioctl output.level=${VOLDOWN}
+    sndioctl output.level=-${VOLDOWN}
+fi
+
+if [[ "$ADJ" == "STATUS" ]]; then
+    echo "${VOL}"
 fi
 
 MUTESTATUS=$(echo "(${VOL}/100)>0" | bc -l)

@@ -21,6 +21,9 @@ case "$ARG" in
         mpc next
         ;;
     "PREVIOUS" )
-        mpc previous
+        mpc prev
+        ;;
+    "STATUS" )
+        mpc | head -n2 | tr '\n' ' '
         ;;
 esac

@@ -9,6 +9,9 @@
 ;; modeline
 (column-number-mode 1)
 
+;; inhibit startup screen
+(setq inhibit-startup-screen t)
+
 (progn
   (menu-bar-mode -1)
   (tool-bar-mode -1))

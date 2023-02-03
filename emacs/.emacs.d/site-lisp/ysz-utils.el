@@ -71,13 +71,13 @@
   (setq chatgpt-repo-path "~/.emacs.d/straight/repos/ChatGPT.el/")
   :bind ("C-c q" . chatgpt-query))
 
-(use-package request
-  :straight t)
+; (use-package request
+;   :straight t)
 
-(use-package activity-watch-mode
-  :straight t
-  :after request
-  :config (global-activity-watch-mode))
+;; (use-package activity-watch-mode
+;;   :straight t
+;;   :after request
+;;   :config (global-activity-watch-mode))
 
 (use-package current-window-only
   :straight (:host github :repo "FrostyX/current-window-only")
