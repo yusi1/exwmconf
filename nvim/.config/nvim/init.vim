@@ -18,6 +18,11 @@ vnoremap <right> <nop>
 nnoremap <Leader>o o<Esc>0"_D
 nnoremap <Leader>O O<Esc>0"_D
 
+" OSC52 keybinds
+" https://github.com/ojroques/vim-oscyank
+vnoremap <leader>c :OSCYank<CR>
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+
 " Indentation setup
 set tabstop=4
 set shiftwidth=4
@@ -26,6 +31,10 @@ set smartindent
 
 " Plugins with vim-plug
 call plug#begin()
+
+" OSC52 standard support plugin
+" copy text from anywhere into the system clipboard
+Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 " Activity watcher vim plugin
 " Plug 'ActivityWatch/aw-watcher-vim'
@@ -43,8 +52,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
 " Parinfer - a newer and simpler Paredit
-" Plug 'eraserhd/parinfer-rust', {'do':
-"         \  'cargo build --release'}
+Plug 'eraserhd/parinfer-rust', {'do':
+        \  'cargo build --release'}
 
 " ParEdit ported to Vim
 " Plug 'kovisoft/paredit'
