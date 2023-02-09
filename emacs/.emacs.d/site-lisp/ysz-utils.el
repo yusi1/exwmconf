@@ -83,5 +83,8 @@
   :straight (:host github :repo "FrostyX/current-window-only")
   :bind (("C-c w" . current-window-only-mode)))
 
+(use-package affe
+  :straight t)
+
 (provide 'ysz-utils)
 ;;; ysz-utils.el ends here

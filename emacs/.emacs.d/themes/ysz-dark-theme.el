@@ -27,7 +27,7 @@
  '(font-lock-comment-face ((t :foreground "chocolate1" :slant italic)))
  '(font-lock-function-name-face ((t :foreground "lightskyblue" :bold t)))
  '(vc-edited-state ((t :foreground "orange")))
- '(vc-up-to-date-state ((t :foreground "green")))
+ '(vc-up-to-date-state ((t :foreground "lime")))
  '(erc-input-face ((t :foreground "aqua")))
  '(erc-nick-default-face ((t :inherit erc-input-face)))
  '(erc-notice-face ((t :foreground "lime" :bold t))))
