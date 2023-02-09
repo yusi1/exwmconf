@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 # ask () {
 #     read -p "Do you wish to add this email account to the password store? " yn
