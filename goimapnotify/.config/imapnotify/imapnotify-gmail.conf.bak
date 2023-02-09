@@ -1,0 +1,17 @@
+{
+    "host": "imap.gmail.com",
+    "port": 993,
+    "tls": true,
+    "tlsOptions": {
+    "rejectUnauthorized": true
+    },
+    "username": "yaslam0x1@gmail.com",
+    "passwordCmd": "$HOME/stuff/get-email-pass.sh imapnotify-yaslam0x1@gmail.com",
+    "xoauth2": false,
+    "onNewMail": "mbsync gmail",
+    "onNewMailPost": "emacsclient  -e '(mu4e-update-index)'",
+    "wait": 20,
+    "boxes": [
+    "INBOX", "[Gmail]/Sent Mail"
+    ]
+}

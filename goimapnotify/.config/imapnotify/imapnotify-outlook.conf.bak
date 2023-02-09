@@ -1,0 +1,17 @@
+{
+    "host": "imap-mail.outlook.com",
+    "port": 993,
+    "tls": true,
+    "tlsOptions": {
+    "rejectUnauthorized": true
+    },
+    "username": "YUZi54780@outlook.com",
+    "passwordCmd": "$HOME/stuff/get-email-pass.sh YUZi54780@outlook.com",
+    "xoauth2": false,
+    "onNewMail": "mbsync outlook",
+    "onNewMailPost": "emacsclient  -e '(mu4e-update-index)'",
+    "wait": 20,
+    "boxes": [
+    "Inbox", "Sent"
+    ]
+}
