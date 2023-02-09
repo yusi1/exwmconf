@@ -81,6 +81,37 @@
 ;; support killed text going to the system clipboard
 (require 'osc52)
 
+;; get rid of org-agenda section in doom dashboard
+(setq +doom-dashboard-menu-sections
+      '(("Reload last session"
+         :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
+         :when (cond ((modulep! :ui workspaces)
+                      (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                     ((require 'desktop nil t)
+                      (file-exists-p (desktop-full-file-name))))
+         :face (:inherit (doom-dashboard-menu-title bold))
+         :action doom/quickload-session)
+        ;; ("Open org-agenda"
+        ;;  :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
+        ;;  :when (fboundp 'org-agenda)
+        ;;  :action org-agenda)
+        ("Recently opened files"
+         :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
+         :action recentf-open-files)
+        ("Open project"
+         :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
+         :action projectile-switch-project)
+        ("Jump to bookmark"
+         :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
+         :action bookmark-jump)
+        ("Open private configuration"
+         :icon (all-the-icons-octicon "tools" :face 'doom-dashboard-menu-title)
+         :when (file-directory-p doom-user-dir)
+         :action doom/open-private-config)
+        ("Open documentation"
+         :icon (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
+         :action doom/help)))
+
 (use-package! erc
   :config
   ;; Use authinfo instead of prompting for passwords.
@@ -112,6 +143,15 @@
   ;; if that file exists mu4e is refreshed.
   (require 'mu4e-IDLE-check)
 
+  ;; support format=flowed
+  (setq mu4e-compose-format-flowed t)
+  (add-hook 'text-mode-hook #'auto-fill-mode)
+  (setq fill-column 72)
+  (setq fill-flowed-encode-column fill-column)
+
+  ;; signature auto include
+  (setq mu4e-compose-signature-auto-include t)
+
   ;; Each path is relative to the path of the maildir you passed to mu
   (set-email-account! "gmail"
           '((mu4e-sent-folder       . "/gmail/[Gmail]/Sent Mail")
@@ -121,7 +161,8 @@
             (user-mail-address      . "yaslam0x1@gmail.com")    ;; only needed for mu < 1.4
             (smtpmail-smtp-user     . "yaslam0x1@gmail.com")
             (smtpmail-smtp-service  . "587")
-            (mu4e-compose-signature . "---\nRegards\nYusef Aslam"))
+            (mu4e-compose-signature . "Regards\nYusef Aslam"))
+            ;; (org-msg-signature      . "Regards\nYusef Aslam"))
            t)
 
   (set-email-account! "outlook"
@@ -132,7 +173,8 @@
             (user-mail-address      . "YUZi54780@outlook.com")    ;; only needed for mu < 1.4
             (smtpmail-smtp-user     . "YUZi54780@outlook.com")
             (smtpmail-smtp-service  . "587")
-            (mu4e-compose-signature . "---\nRegards\nYusef Aslam"))
+            (mu4e-compose-signature . "Regards\nYusef Aslam"))
+            ;; (org-msg-signature      . "Regards\nYusef Aslam"))
           t)
 
   (setq mu4e-context-policy 'ask-if-none
@@ -172,3 +214,6 @@
 ;;     :args (list "-conf" (expand-file-name ".config/imapnotify/imapnotify-outlook.conf" (getenv "HOME")))
 ;;     :tags '(email)
 ;;     :kill-signal 'sigkill))
+
+(use-package! org-contacts
+  :config (setq org-contacts-files '("~/Documents/contacts.org")))
