@@ -1,3 +1,6 @@
 [submodule "dot-stumpwm.d/modules"]
 	path = dot-stumpwm.d/modules
 	url = https://github.com/stumpwm/stumpwm-contrib
+[submodule "doom-emacs-v2/.doom.d/lisp/emacs-application-framework"]
+	path = doom-emacs-v2/.doom.d/lisp/emacs-application-framework
+	url = https://github.com/emacs-eaf/emacs-application-framework
