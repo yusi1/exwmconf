@@ -1,5 +1,6 @@
 ;;; lisp/site-lisp/mu4e-IDLE-check.el -*- lexical-binding: t; -*-
 
+;;; Credits: Tecosaurs Emacs configuration
 (defvar mu4e-reindex-request-file "/tmp/mu_reindex_now"
   "Location of the reindex request, signaled by existance")
 (defvar mu4e-reindex-request-min-seperation 5.0
