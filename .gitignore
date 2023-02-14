@@ -17,11 +17,19 @@ emacs/.emacs.d/bookmarks
 emacs/.emacs.d/history
 emacs/.emacs.d/eshell
 emacs/.emacs.d/transient
+emacs/.emacs.d/projects
+emacs/.emacs.d/recentf
 
 emacs-minimal/.emacs.d/elpa
 emacs-minimal/.emacs.d/tramp
 emacs-minimal/.emacs.d/eln-cache
 
+emacs-minimal-v2/.emacs.d/eshell/
+emacs-minimal-v2/.emacs.d/history
+emacs-minimal-v2/.emacs.d/parinfer-rust/
+emacs-minimal-v2/.emacs.d/recentf
+emacs-minimal-v2/.emacs.d/straight/
+emacs-minimal-v2/.emacs.d/tramp
 
 # Ignore Emacs backup files
 *~
@@ -68,3 +76,4 @@ waybar/.config/waybar/style.css*
 xmobar/.config/xmobar/xmobar-git/
 xmobar/.config/xmobar/xmobar-laptop
 emacs/.emacs.d/parinfer-rust/
+/systemd/.config/systemd/user/default.target.wants/
