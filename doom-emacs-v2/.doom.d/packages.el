@@ -50,3 +50,16 @@
 ;(unpin! t)
 
 (package! znc)
+;;; FIXME: Causes consult-buffer to return:
+;;; consult--display-width: Symbol’s function definition is void: compat-string-width
+;; (unpin! compat) ; fix tempel void variable tempel-map error
+;;; FIXME: Cannot use because of problems with unpinning compat.
+;; (package! tempel)
+
+;; (package! mu4e-views :recipe (:branch "mu-1.8-support"))
+
+(package! cape)
+;; FIXME: Causes: void-function defvar-keymap
+; (unpin! consult)
+;; FIXME: Cannot use because of problems with the package in Doom.
+; (package! affe)
