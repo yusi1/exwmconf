@@ -326,29 +326,28 @@ QUERY is the query to search for in the logs."
 ;;     :tags '(email)
 ;;     :kill-signal 'sigkill))
 
-(use-package! org-contacts
-  :config
-  (setq org-contacts-files '("~/Documents/contacts.org"))
-  (with-eval-after-load 'org-capture)
+; (use-package! org-contacts
+;   :config
+;   (setq org-contacts-files '("~/Documents/contacts.org"))
 
-  (defvar ysz/my-contact-template `,(concat "* %(org-contacts-template-name)\n"
-                                            ":PROPERTIES:\n"
-                                            ":EMAIL: %(org-contacts-template-email)\n"
-                                            ":NUMBER: %?\n"
-                                            ":END:\n")
-    "My org-capture contact template.")
+;   (defvar ysz/my-contact-template `,(concat "* %(org-contacts-template-name)\n"
+;                                             ":PROPERTIES:\n"
+;                                             ":EMAIL: %(org-contacts-template-email)\n"
+;                                             ":NUMBER: %?\n"
+;                                             ":END:\n")
+;     "My org-capture contact template.")
 
-  (dolist (templates `(("c" "Contact Parent")
-                       ("c1" "Contact (Family)" entry (file+headline "~/Documents/contacts.org" "Family")
-                        ,ysz/my-contact-template
-                        :empty-lines 1)
-                       ("c2" "Contact (Friends)" entry (file+headline "~/Documents/contacts.org" "Friends")
-                        ,ysz/my-contact-template
-                        :empty-lines 1)
-                       ("co" "Contact (Others)" entry (file+headline "~/Documents/contacts.org" "Others")
-                        ,ysz/my-contact-template
-                        :empty-lines 1)))
-      (add-to-list 'org-capture-templates templates)))
+;   (dolist (templates `(("c" "Contact Parent")
+;                        ("c1" "Contact (Family)" entry (file+headline "~/Documents/contacts.org" "Family")
+;                         ,ysz/my-contact-template
+;                         :empty-lines 1)
+;                        ("c2" "Contact (Friends)" entry (file+headline "~/Documents/contacts.org" "Friends")
+;                         ,ysz/my-contact-template
+;                         :empty-lines 1)
+;                        ("co" "Contact (Others)" entry (file+headline "~/Documents/contacts.org" "Others")
+;                         ,ysz/my-contact-template
+;                         :empty-lines 1)))
+;       (add-to-list 'org-capture-templates templates)))
 
 ;;; FIXME: Cannot use because of problems with unpinning compat.
 ;; (use-package! tempel
