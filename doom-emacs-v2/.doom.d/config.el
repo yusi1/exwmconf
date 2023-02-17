@@ -204,13 +204,14 @@ QUERY is the query to search for in the logs."
   ;; adds a function used by emacsclient to compose mail using mu4e
   (require 'mu4e-compose-from-mailto)
 
-  ;; support format=flowed
-  (setq mu4e-compose-format-flowed t)
-  (add-hook 'text-mode-hook #'auto-fill-mode)
+  ;; fill-column, some mailing lists need this
   (setq fill-column 72)
-  (setq fill-flowed-encode-column fill-column)
 
-   ;; signature auto include
+  ;; support format=flowed
+  ;; mailing lists don't support this
+  (require 'mu4e-format-flowed)
+
+     ;; signature auto include
   (setq mu4e-compose-signature-auto-include t)
 
    ;; Each path is relative to the path of the maildir you passed to mu
