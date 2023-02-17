@@ -5,6 +5,14 @@
 - Commits that mention my Emacs packages (ysz-utils.el) etc.. should not have a file extension in the commit summary.
 - Commits that mention anything else like a normal file (e.g config.el), should keep the file extension in the commit summary.
 - Descriptions of the commit don't usually need bullet points.
+- Additions / removals for files should again have short summaries, and should mention the package, e.g:
+  dotfiles: add abc.txt
+  It would be visible here:
+  WHERE-THE-REPO-WAS-CLONED/abc.txt
+  Or for a package:
+  emacs: add abc.el
+  It would be visible here:
+  WHERE-THE-REPO-WAS-CLONED/emacs/abc.el
 
 - Read this for further info:
 https://initialcommit.com/blog/git-commit-messages-best-practices
