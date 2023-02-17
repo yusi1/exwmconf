@@ -8,28 +8,30 @@
   :straight t
   :config
   (setq org-contacts-files '("~/Documents/contacts.org"))
-
   (with-eval-after-load 'org-capture
-    (add-list-to-list 'org-capture-templates
-                      '(("c" "Contact Parent")
+    (defvar ysz/my-contact-template-1 `,(concat "* %(org-contacts-template-name)\n"
+                                            ":PROPERTIES:\n"
+                                            ":EMAIL: %(org-contacts-template-email)\n"
+                                            ":END:\n")
+     "My org-capture contact template for family/others.")
+
+   (defvar ysz/my-contact-template-2 `,(concat "* %(org-contacts-template-name)\n"
+                                               ":PROPERTIES:\n"
+                                               ":NUMBER: %?\n"
+                                               ":END:\n")
+     "My org-capture contact template for friends.")
+
+   (dolist (templates `(("c" "Contact Parent")
                         ("c1" "Contact (Family)" entry (file+headline "~/Documents/contacts.org" "Family")
-                         "* %(org-contacts-template-name)
-:PROPERTIES:
-:EMAIL: %(org-contacts-template-email)
-:END:"
+                         ,ysz/my-contact-template-1
                          :empty-lines 1)
-                        ("c2" "Contact (Friend)" entry (file+headline "~/Documents/contacts.org" "Friends")
-                         "* %(org-contacts-template-name)
-:PROPERTIES:
-:NUMBER: %?
-:END:"
+                        ("c2" "Contact (Friends)" entry (file+headline "~/Documents/contacts.org" "Friends")
+                         ,ysz/my-contact-template-2
                          :empty-lines 1)
-                        ("co" "Contact (Other)" entry (file+headline "~/Documents/contacts.org" "Others")
-                         "* %(org-contacts-template-name)
-:PROPERTIES:
-:EMAIL: %(org-contacts-template-email)
-:END:"
-                         :empty-lines 1)))))
+                        ("co" "Contact (Others)" entry (file+headline "~/Documents/contacts.org" "Others")
+                         ,ysz/my-contact-template-1
+                         :empty-lines 1)))
+      (add-to-list 'org-capture-templates templates))))
 
 (use-package ibuffer-project
   :straight t
