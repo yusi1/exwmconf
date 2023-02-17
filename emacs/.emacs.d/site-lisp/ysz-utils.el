@@ -8,30 +8,25 @@
   :straight t
   :config
   (setq org-contacts-files '("~/Documents/contacts.org"))
-  (with-eval-after-load 'org-capture
-    (defvar ysz/my-contact-template-1 `,(concat "* %(org-contacts-template-name)\n"
+
+  (defvar ysz/my-contact-template `,(concat "* %(org-contacts-template-name)\n"
                                             ":PROPERTIES:\n"
                                             ":EMAIL: %(org-contacts-template-email)\n"
+                                            ":NUMBER: %?\n"
                                             ":END:\n")
-     "My org-capture contact template for family/others.")
+    "My org-capture contact template.")
 
-   (defvar ysz/my-contact-template-2 `,(concat "* %(org-contacts-template-name)\n"
-                                               ":PROPERTIES:\n"
-                                               ":NUMBER: %?\n"
-                                               ":END:\n")
-     "My org-capture contact template for friends.")
-
-   (dolist (templates `(("c" "Contact Parent")
-                        ("c1" "Contact (Family)" entry (file+headline "~/Documents/contacts.org" "Family")
-                         ,ysz/my-contact-template-1
-                         :empty-lines 1)
-                        ("c2" "Contact (Friends)" entry (file+headline "~/Documents/contacts.org" "Friends")
-                         ,ysz/my-contact-template-2
-                         :empty-lines 1)
-                        ("co" "Contact (Others)" entry (file+headline "~/Documents/contacts.org" "Others")
-                         ,ysz/my-contact-template-1
-                         :empty-lines 1)))
-      (add-to-list 'org-capture-templates templates))))
+  (dolist (templates `(("c" "Contact Parent")
+                       ("c1" "Contact (Family)" entry (file+headline "~/Documents/contacts.org" "Family")
+                        ,ysz/my-contact-template
+                        :empty-lines 1)
+                       ("c2" "Contact (Friends)" entry (file+headline "~/Documents/contacts.org" "Friends")
+                        ,ysz/my-contact-template
+                        :empty-lines 1)
+                       ("co" "Contact (Others)" entry (file+headline "~/Documents/contacts.org" "Others")
+                        ,ysz/my-contact-template
+                        :empty-lines 1)))
+      (add-to-list 'org-capture-templates templates)))
 
 (use-package ibuffer-project
   :straight t
