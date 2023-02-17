@@ -215,9 +215,9 @@ QUERY is the query to search for in the logs."
 
    ;; Each path is relative to the path of the maildir you passed to mu
   (set-email-account! "gmail"
-          '((mu4e-sent-folder       . "/gmail/[Gmail]/Sent Mail")
-            (mu4e-drafts-folder     . "/gmail/[Gmail]/Drafts")
-            (mu4e-trash-folder      . "/gmail/[Gmail]/Bin")
+          '((mu4e-sent-folder       . "/gmail/sent")
+            (mu4e-drafts-folder     . "/gmail/drafts")
+            (mu4e-trash-folder      . "/gmail/bin")
             (mu4e-refile-folder     . "/gmail/INBOX")
             (user-mail-address      . "yaslam0x1@gmail.com")    ;; only needed for mu < 1.4
             (smtpmail-smtp-user     . "yaslam0x1@gmail.com")
@@ -240,9 +240,9 @@ QUERY is the query to search for in the logs."
 
   (setq mu4e-maildir-shortcuts
     '(("/gmail/INBOX" . ?i)
-      ("/gmail/[Gmail]/Drafts" . ?d)
-      ("/gmail/[Gmail]/Sent Mail" . ?s)
-      ("/gmail/[Gmail]/Bin" . ?b)))
+      ("/gmail/drafts" . ?d)
+      ("/gmail/sent" . ?s)
+      ("/gmail/bin" . ?b)))
 
   (setq mu4e-context-policy 'ask-if-none
         mu4e-compose-context-policy 'always-ask)
@@ -267,7 +267,6 @@ QUERY is the query to search for in the logs."
 (use-package! hydra
   :config
   (let ((gmail-base-dir-inbox "/gmail/")
-        (gmail-base-dir-other "/gmail/[Gmail]/")
         (outlook-base-dir "/outlook/"))
    (defhydra my-mu4e-maildir-jump-outlook (:color blue)
      "[Outlook]"
