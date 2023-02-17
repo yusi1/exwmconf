@@ -22,14 +22,39 @@ Path ~/Mail/outlook/
 Inbox ~/Mail/outlook/Inbox
 Subfolders Verbatim
 
-Channel gmail
+Channel sync-gmail-default
 Far :gmail-remote:
 Near :gmail-local:
+Patterns "INBOX"
 Create Both
 Expunge Both
-Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred"
-SyncState *
 MaxMessages 400
+SyncState *
+
+Channel sync-gmail-drafts
+Far :gmail-remote:"[Gmail]/Drafts"
+Near :gmail-local:drafts
+Create Near
+Expunge Both
+SyncState *
+
+Channel sync-gmail-sent
+Far :gmail-remote:"[Gmail]/Sent Mail"
+Near :gmail-local:sent
+Create Near
+SyncState *
+
+Channel sync-gmail-bin
+Far :gmail-remote:"[Gmail]/Bin"
+Near :gmail-local:bin
+Create Near
+SyncState *
+
+Group gmail
+Channel sync-gmail-default
+Channel sync-gmail-sent
+Channel sync-gmail-bin
+Channel sync-gmail-drafts
 
 Channel outlook
 Far :outlook-remote:
