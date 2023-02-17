@@ -1,0 +1,12 @@
+- Commits that aren't full sentences should not have a capital at the start or a full stop at the end.
+- Commits to multiple files should be split up for a seperate commit per file.
+- Commits should have a filename (without any paths) and a short decription of WHAT you did as the first line
+  and on the third line (second line is whitespace) should be a decent description of WHY you did that thing.
+- Commits that mention my Emacs packages (ysz-utils.el) etc.. should not have a file extension in the commit summary.
+- Commits that mention anything else like a normal file (e.g config.el), should keep the file extension in the commit summary.
+- Descriptions of the commit don't usually need bullet points.
+
+- Read this for further info:
+https://initialcommit.com/blog/git-commit-messages-best-practices
+- Protesilaos' dotfiles have good commit messages, I should take inspiration from his format:
+https://git.sr.ht/~protesilaos/dotfiles/log
