@@ -279,10 +279,9 @@ QUERY is the query to search for in the logs."
    (defhydra my-mu4e-maildir-jump-gmail (:color blue)
      "[Gmail]"
      ("i" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "INBOX")) "Inbox")
-     ("d" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-other "Drafts")) "Drafts")
-     ("s" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-other "Sent Mail")) "Sent")
-     ("b" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-other "Bin")) "Bin")
-     ("S" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-other "Spam")) "Spam"))
+     ("d" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "drafts")) "Drafts")
+     ("s" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "sent")) "Sent")
+     ("b" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "bin")) "Bin"))
 
    (defhydra my-mu4e-maildir-jump (:color blue)
      "maildir jump"
