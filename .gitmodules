@@ -4,3 +4,6 @@
 [submodule "doom-emacs-v2/.doom.d/lisp/emacs-application-framework"]
 	path = doom-emacs-v2/.doom.d/lisp/emacs-application-framework
 	url = https://github.com/emacs-eaf/emacs-application-framework
+[submodule "doom-emacs-v2/.doom.d/lisp/erc-image"]
+	path = doom-emacs-v2/.doom.d/lisp/erc-image
+	url = https://github.com/kidd/erc-image.el
