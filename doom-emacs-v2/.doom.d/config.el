@@ -232,6 +232,7 @@ QUERY is the query to search for in the logs."
             (user-mail-address      . "yaslam0x1@gmail.com")    ;; only needed for mu < 1.4
             (smtpmail-smtp-user     . "yaslam0x1@gmail.com")
             (smtpmail-smtp-service  . "587")
+            (smtpmail-smtp-server   . "smtp.gmail.com")
             (mu4e-compose-signature . "Regards\nYusef Aslam"))
             ;; (org-msg-signature      . "Regards\nYusef Aslam"))
            t)
@@ -244,6 +245,7 @@ QUERY is the query to search for in the logs."
             (user-mail-address      . "YUZi54780@outlook.com")    ;; only needed for mu < 1.4
             (smtpmail-smtp-user     . "YUZi54780@outlook.com")
             (smtpmail-smtp-service  . "587")
+            (smtpmail-smtp-server   . "smtp-mail.outlook.com")
             (mu4e-compose-signature . "Regards\nYusef Aslam"))
             ;; (org-msg-signature      . "Regards\nYusef Aslam"))
            t)
