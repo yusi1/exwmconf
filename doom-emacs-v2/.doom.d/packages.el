@@ -63,3 +63,5 @@
 ; (unpin! consult)
 ;; FIXME: Cannot use because of problems with the package in Doom.
 ; (package! affe)
+
+(package! agitate)
