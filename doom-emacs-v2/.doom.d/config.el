@@ -161,9 +161,10 @@
 
   (defun erc-cmd-BASE (&rest str)
     "Encode the argument STR into base64, output it into the current buffer."
-    (let ((str `,(mapconcat 'identity str " "))
-          (encoded-strings (base64-encode-string (s-join " " str))))
-      (erc-send-message encoded-strings)))
+    (if str
+         (let ((str `,(mapconcat 'identity str " ")))
+              (encoded-strings (base64-encode-string (s-join " " str)))
+              (erc-send-message encoded-strings))))
 
   (defun erc-cmd-BL (chan lines)
     "Request a backlog from the ZNC backlog module by sending a message to the ZNC backlog module.
