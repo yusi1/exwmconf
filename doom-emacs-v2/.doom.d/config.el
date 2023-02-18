@@ -192,8 +192,8 @@ QUERY is the query to search for in the logs."
   ;; password in the USERNAME field and not
   ;; the NICK field.
   (defun znc-connect-tls ()
-   (interactive)
-   (erc-tls :server "freebsd-oldman.home" :port 3000 :nick "zncadmin" :user "zncadmin@laptop-emacs/libera" :password "ZNCIRC43521.")))
+    (interactive)
+    (erc-tls :server "freebsd-oldman.home" :port 3000 :nick "zncadmin" :user "zncadmin@laptop-emacs/libera" :password "ZNCIRC43521.")))
 
 
 (use-package! znc
@@ -201,6 +201,7 @@ QUERY is the query to search for in the logs."
   (require 'znc)
   (setq znc-servers '(("freebsd-oldman.home" 3000 t
                        ((libera "zncadmin@laptop-emacs" "ZNCIRC43521."))))))
+
 
 (use-package! mu4e
   :demand t
