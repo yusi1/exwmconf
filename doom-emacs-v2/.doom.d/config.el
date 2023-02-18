@@ -134,6 +134,13 @@
   ;; Use NickServ to authenticate.
   (setq erc-use-auth-source-for-nickserv-password t)
 
+  (add-to-list 'load-path "~/.doom.d/lisp/erc-image/")
+  (require 'erc-image)
+  ;; :load-path "~/.doom.d/lisp/erc-image"
+  (add-to-list 'erc-modules 'image)
+  (erc-update-modules)
+
+
   ;; This is an example of how to make a new command.  Type "/uptime" to
   ;; use it.
   (defun erc-cmd-UPTIME (&rest ignore)
