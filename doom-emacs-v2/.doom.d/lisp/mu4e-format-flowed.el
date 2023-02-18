@@ -2,9 +2,9 @@
 
 (setq mu4e-compose-format-flowed t)
 (add-hook! mu4e-compose-mode-hook (lambda () (auto-fill-mode -1)))
-;; (setq fill-flowed-encode-column 998)
+(setq fill-flowed-encode-column 998)
 (setq fill-column 72)
-(setq fill-flowed-encode-column fill-column)
+;; (setq fill-flowed-encode-column fill-column)
 
 (defun mu4e-fill-buffer-for-flowed ()
   "Fill all lines in buffer to match format=flowed email spec.
