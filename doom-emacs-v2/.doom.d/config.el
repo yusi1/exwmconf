@@ -174,14 +174,13 @@ CHAN is the channel to request the backlog for, if `nil', it is the current chan
           (lines lines))
       (erc-send-input-line "*backlog" (concat chan " " lines))))
 
-  (defun erc-cmd-LOGSEARCH (chan &rest query)
+  (defun erc-cmd-LOGS (chan &rest query)
     "Request a logsearch from the ZNC logsearch module by sending a message to the ZNC logsearch module.
 CHAN is the channel to request the logsearch for.
 QUERY is the query to search for in the logs."
     (let ((chan chan)
           (query `,(mapconcat 'identity query " ")))
-      (erc-send-input-line "*logsearch" (concat chan " " query))
-      (display-buffer-below-selected "*logsearch" '((height . 20)))))
+      (erc-send-input-line "*logsearch" (concat chan " " query))))
 
   ;;; DONE:: [2023-01-22 Sun 01:53]
   ;; Fixed: The problem was that ZNC
