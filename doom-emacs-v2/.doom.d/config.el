@@ -498,8 +498,8 @@ QUERY is the query to search for in the logs."
     "C-c M-F" 'vertico-multiform-flat
     "C-c M-R" 'vertico-multiform-reverse
     "C-c M-U" 'vertico-multiform-unobtrusive)
-  (setq vertico-multiform-commands
-        '((consult-imenu buffer)))
+  ;; (setq vertico-multiform-commands
+  ;;       '((consult-imenu vertical)))
   ;;         (execute-extended-command flat)))
   (vertico-multiform-mode t))
 
