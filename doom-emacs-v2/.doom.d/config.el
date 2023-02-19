@@ -140,6 +140,7 @@
   (add-to-list 'erc-modules 'image)
   (erc-update-modules)
 
+  (require 'erc-imenu)
 
   ;; This is an example of how to make a new command.  Type "/uptime" to
   ;; use it.
