@@ -141,6 +141,7 @@
   (erc-update-modules)
 
   (require 'erc-imenu)
+  (map! "C-c i" 'consult-imenu)
 
   ;; This is an example of how to make a new command.  Type "/uptime" to
   ;; use it.
