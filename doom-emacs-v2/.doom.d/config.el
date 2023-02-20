@@ -521,4 +521,6 @@ QUERY is the query to search for in the logs."
         "n" 'magit-section-forward-sibling
         "p" 'magit-section-backward-sibling
         (kbd "TAB") 'magit-section-toggle
-        (kbd "?") 'hydra:bufler/body))
+        (kbd "?") 'hydra:bufler/body
+        "f" 'bufler-list-group-frame
+        "F" 'bufler-list-group-make-frame))
