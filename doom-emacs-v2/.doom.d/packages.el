@@ -65,3 +65,5 @@
 ; (package! affe)
 
 (package! agitate)
+
+(package! bufler)
