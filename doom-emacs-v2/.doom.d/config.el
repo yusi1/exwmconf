@@ -511,6 +511,7 @@ QUERY is the query to search for in the logs."
   :config
   (require 'ysz-bufler-config)
   (bufler-mode 1)
+  (bufler-tabs-mode 1)
   (map! "C-c b" 'bufler-switch-buffer
         "C-c C-S-b" 'bufler-list)
 
