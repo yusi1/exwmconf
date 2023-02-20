@@ -465,23 +465,23 @@ QUERY is the query to search for in the logs."
 ;;     (cons input (lambda (str) (orderless--highlight input str))))
 ;;   (setq affe-regexp-compiler #'affe-orderless-regexp-compiler))
 
-(use-package! centaur-tabs
-  :init
-  (setq centaur-tabs-enable-key-bindings t)
-  (setq centaur-tabs-enable-ido-completion nil)
-  :config
-  ;; (centaur-tabs-group-by-projectile-project) ; group by this function
-  (centaur-tabs-group-buffer-groups) ; or this
-  (map! "C-c t" 'centaur-tabs-switch-group)
-  (map! "s-1" (lambda () (interactive) (centaur-tabs-select-visible-tab)))
-  (map! "s-2" (lambda () (interactive) (centaur-tabs-select-visible-tab)))
-  (map! "s-3" (lambda () (interactive) (centaur-tabs-select-visible-tab)))
-  (map! "s-4" (lambda () (interactive) (centaur-tabs-select-visible-tab)))
-  ;; disable centaur-tabs in these modes
-  (add-hook! 'mu4e-view-mode-hook 'centaur-tabs-local-mode)
-  (add-hook! 'mu4e-compose-mode-hook 'centaur-tabs-local-mode)
-  (use-package! ysz-tweaks)
-  (centaur-tabs-mode 1))
+;; (use-package! centaur-tabs
+;;   :init
+;;   (setq centaur-tabs-enable-key-bindings t)
+;;   (setq centaur-tabs-enable-ido-completion nil)
+;;   :config
+;;   ;; (centaur-tabs-group-by-projectile-project) ; group by this function
+;;   (centaur-tabs-group-buffer-groups) ; or this
+;;   (map! "C-c t" 'centaur-tabs-switch-group)
+;;   (map! "s-1" (lambda () (interactive) (centaur-tabs-select-visible-tab)))
+;;   (map! "s-2" (lambda () (interactive) (centaur-tabs-select-visible-tab)))
+;;   (map! "s-3" (lambda () (interactive) (centaur-tabs-select-visible-tab)))
+;;   (map! "s-4" (lambda () (interactive) (centaur-tabs-select-visible-tab)))
+;;   ;; disable centaur-tabs in these modes
+;;   (add-hook! 'mu4e-view-mode-hook 'centaur-tabs-local-mode)
+;;   (add-hook! 'mu4e-compose-mode-hook 'centaur-tabs-local-mode)
+;;   (use-package! ysz-tweaks)
+;;   (centaur-tabs-mode 1))
 
 (use-package! org
   :config (map! :map org-mode-map "C-c q" 'kill-this-buffer))
@@ -506,3 +506,19 @@ QUERY is the query to search for in the logs."
 ;; (use-package! mu4e-dashboard
 ;;   :config
 ;;   (setq mu4e-dashboard-file "~/org/mu4e-dashboard.org"))
+
+(use-package! bufler
+  :config
+  (require 'ysz-bufler-config)
+  (bufler-mode 1)
+  (map! "C-c b" 'bufler-switch-buffer
+        "C-c C-S-b" 'bufler-list)
+
+  (evil-define-key 'normal bufler-list-mode-map
+        "K" 'bufler-list-buffer-kill
+        "q" 'quit-window
+        (kbd "RET") 'bufler-list-buffer-switch
+        "n" 'magit-section-forward-sibling
+        "p" 'magit-section-backward-sibling
+        (kbd "TAB") 'magit-section-toggle
+        (kbd "?") 'hydra:bufler/body))
