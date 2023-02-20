@@ -517,6 +517,7 @@ QUERY is the query to search for in the logs."
 
   (evil-define-key 'normal bufler-list-mode-map
         "K" 'bufler-list-buffer-kill
+        "gs" 'bufler-list-buffer-save
         "q" 'quit-window
         (kbd "RET") 'bufler-list-buffer-switch
         "n" 'magit-section-forward-sibling
