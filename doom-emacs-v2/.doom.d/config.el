@@ -286,7 +286,8 @@ QUERY is the query to search for in the logs."
      ("i" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Inbox")) "Inbox")
      ("d" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Drafts"))   "Drafts")
      ("D" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Deleted"))   "Deleted")
-     ("s" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Sent"))   "Sent"))
+     ("s" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Sent"))   "Sent")
+     ("S" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Spam")) "Spam"))
 
    (defhydra my-mu4e-maildir-jump-gmail (:color blue)
      "[Gmail]"
