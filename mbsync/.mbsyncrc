@@ -56,6 +56,15 @@ Channel sync-gmail-sent
 Channel sync-gmail-bin
 Channel sync-gmail-drafts
 
+Channel sync-outlook-junk
+Far :outlook-remote:"Junk"
+Near :outlook-local:Spam
+Create Near
+SyncState *
+
+Group outlook
+Channel sync-outlook-junk
+
 Channel outlook
 Far :outlook-remote:
 Near :outlook-local:
