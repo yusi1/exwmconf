@@ -16,6 +16,8 @@
 	(group
 	 ;; Subgroup collecting all ERC buffers.
 	 (mode-match "IRC" (rx bos "erc-")))
+        (group
+         (mode-match "Mail" (rx bos "mu4e-")))
 	(group
 	 ;; Subgroup collecting all special buffers (i.e. ones that are not
 	 ;; file-backed), except `magit-status-mode' buffers (which are allowed to fall
