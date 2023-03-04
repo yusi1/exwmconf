@@ -485,7 +485,19 @@ QUERY is the query to search for in the logs."
 ;;   (centaur-tabs-mode 1))
 
 (use-package! org
-  :config (map! :map org-mode-map "C-c q" 'kill-this-buffer))
+  :config (map! :map org-mode-map "C-c q" 'kill-this-buffer)
+  (setq org-publish-project-alist
+      '(("yaslam's website" ;; my blog project (just a name)
+         ;; Path to org files.
+         :base-directory "~/mywebsite/_org"
+         :base-extension "org"
+         ;; Path to Jekyll Posts
+         :publishing-directory "~/mywebsite/_posts"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :headline-levels 4
+         :html-extension "html"
+         :body-only t))))
 
 (use-package! flycheck
   :config (setq flycheck-check-syntax-automatically '(save mode-enable)))
