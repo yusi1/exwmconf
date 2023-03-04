@@ -533,3 +533,8 @@ QUERY is the query to search for in the logs."
   (add-hook 'vterm-mode-hook (lambda ()
                                (vterm-send-string "source ~/.profile")
                                (vterm-send-return))))
+
+
+(use-package! charge)
+
+;; (use-package! pp-html)
