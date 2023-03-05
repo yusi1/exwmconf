@@ -4,7 +4,7 @@ ConditionPathExists=%h/.config/imapnotify/imapnotify-gmail.conf
 After=network.target
 
 [Service]
-ExecStart=%h/.local/bin/goimapnotify -conf %h/.config/imapnotify/imapnotify-gmail.conf
+ExecStart=goimapnotify -conf %h/.config/imapnotify/imapnotify-gmail.conf
 Restart=always
 RestartSec=30
 
