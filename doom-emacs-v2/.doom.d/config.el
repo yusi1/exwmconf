@@ -540,7 +540,7 @@ QUERY is the query to search for in the logs."
         "f" 'bufler-list-group-frame
         "F" 'bufler-list-group-make-frame))
 
-(use-package vterm
+(use-package! vterm
   :config
   (add-hook 'vterm-mode-hook (lambda ()
                                (vterm-send-string "source ~/.profile")
