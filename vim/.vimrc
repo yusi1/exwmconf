@@ -57,9 +57,21 @@ Plug 'bhurlow/vim-parinfer'
 " ParEdit ported to Vim
 " Plug 'kovisoft/paredit'
 
+" Vim Lightline status bar
+Plug 'itchyny/lightline.vim'
+
 call plug#end()
+
+" Lightline theme
+let g:lightline = {
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' },
+            \ 'colorscheme': 'onedark',
+            \ }
+
 
 " Theme
 syntax enable
 set background=dark
 colorscheme default
+set laststatus=2
