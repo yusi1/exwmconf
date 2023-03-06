@@ -66,6 +66,10 @@ Plug 'joshdick/onedark.vim'
 
 " Vim Lightline statusbar
 Plug 'itchyny/lightline.vim'
+
+" Vim Fish config syntax highlighting
+Plug 'dag/vim-fish'
+
 call plug#end()
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -92,7 +96,20 @@ let g:lightline = {
             \ }
 
 " Theme
-syntax enable
 set background=dark
 colorscheme onedark
 set laststatus=2
+
+
+" Syntax
+syntax enable
+filetype plugin indent on
+
+" Set up :make to use fish for syntax checking.
+compiler fish
+
+" Set this to have long lines wrap inside comments.
+setlocal textwidth=79
+
+" Enable folding of block structures in fish.
+setlocal foldmethod=expr
