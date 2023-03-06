@@ -545,6 +545,11 @@ QUERY is the query to search for in the logs."
   ;; (add-hook 'vterm-mode-hook (lambda ()
   ;;                              (vterm-send-string "source ~/.bash_profile")
   ;;                              (vterm-send-return)))
+  (setq vterm-eval-cmds '(("find-file" find-file)
+                          ("message" message)
+                          ("vterm-clear-scrollback" vterm-clear-scrollback)
+                          ("dired" dired)
+                          ("ediff-files" ediff-files)))
   (setq vterm-shell "/bin/fish"))
 
 
