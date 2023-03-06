@@ -140,13 +140,13 @@
   (setq erc-use-auth-source-for-nickserv-password t)
 
   (add-to-list 'load-path "~/.doom.d/lisp/erc-image/")
-  (require 'erc-image)
-  ;; :load-path "~/.doom.d/lisp/erc-image"
-  (add-to-list 'erc-modules 'image)
-  (erc-update-modules)
+  ;; (require 'erc-image)
+  ;; ;; :load-path "~/.doom.d/lisp/erc-image"
+  ;; (add-to-list 'erc-modules 'image)
+  ;; (erc-update-modules)
 
-  (require 'erc-imenu)
-  (map! "C-c i" 'consult-imenu)
+  ;; (require 'erc-imenu)
+  ;; (map! "C-c i" 'consult-imenu)
 
   ;; This is an example of how to make a new command.  Type "/uptime" to
   ;; use it.
