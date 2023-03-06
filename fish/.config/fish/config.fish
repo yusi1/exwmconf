@@ -3,16 +3,18 @@ if status is-interactive
 
     # editor global exported variable
     set -gx EDITOR nvim
-    set -l onedark_options '-b'
 
-    if set -q VIM
-        # Using from vim/neovim.
-        set onedark_options "-256"
-    else if string match -iq "eterm*" $TERM
-        # Using from emacs.
-        function fish_title; true; end
-        set onedark_options "-256"
-    end
+    # onedark theme stuff
+    # set -l onedark_options '-b'
 
-    set_onedark $onedark_options
+    # if set -q VIM
+    #     # Using from vim/neovim.
+    #     set onedark_options "-256"
+    # else if string match -iq "eterm*" $TERM
+    #     # Using from emacs.
+    #     function fish_title; true; end
+    #     set onedark_options "-256"
+    # end
+
+    # set_onedark $onedark_options
 end
