@@ -52,8 +52,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
 " Parinfer - a newer and simpler Paredit
-Plug 'eraserhd/parinfer-rust', {'do':
-        \  'cargo build --release'}
+Plug 'bhurlow/vim-parinfer'
+
+" " Parinfer - a newer and simpler Paredit
+" Plug 'eraserhd/parinfer-rust', {'do':
+"         \  'cargo build --release'}
 
 " ParEdit ported to Vim
 " Plug 'kovisoft/paredit'
