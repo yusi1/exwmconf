@@ -67,3 +67,5 @@
 (package! agitate)
 
 (package! bufler)
+
+(package! fish-mode)
