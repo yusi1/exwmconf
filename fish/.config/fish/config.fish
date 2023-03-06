@@ -1,6 +1,8 @@
 if status is-interactive
     xrdb -merge ~/.Xresources
 
+    # editor global exported variable
+    set -gx EDITOR nvim
     set -l onedark_options '-b'
 
     if set -q VIM
