@@ -82,6 +82,11 @@
 (delete-selection-mode 1)
 (ffap-bindings)
 
+;; fish shell completions
+(when (and (executable-find "fish")
+           (require 'fish-completion nil t))
+  (global-fish-completion-mode))
+
 ;; load path additions
 (let ((dir doom-user-dir))
   (add-to-list 'load-path (concat dir "lisp"))
