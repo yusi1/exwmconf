@@ -545,6 +545,7 @@ QUERY is the query to search for in the logs."
   ;; (add-hook 'vterm-mode-hook (lambda ()
   ;;                              (vterm-send-string "source ~/.bash_profile")
   ;;                              (vterm-send-return)))
+  (setq vterm-shell "/bin/fish"))
 
 
 (use-package! charge)
