@@ -3,16 +3,16 @@ set nu
 " Show relative line numbers
 set rnu
 
-" " Reassign the arrow keys to do nothing while in normal/visual mode
-" nnoremap <up> <nop>
-" nnoremap <down> <nop>
-" nnoremap <left> <nop>
-" nnoremap <right> <nop>
+" Reassign the arrow keys to do nothing while in normal/visual mode
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
 
-" vnoremap <up> <nop>
-" vnoremap <down> <nop>
-" vnoremap <left> <nop>
-" vnoremap <right> <nop>
+vnoremap <up> <nop>
+vnoremap <down> <nop>
+vnoremap <left> <nop>
+vnoremap <right> <nop>
 
 " Quickly insert a newline without entering Insert mode 
 nnoremap <Leader>o o<Esc>0"_D
