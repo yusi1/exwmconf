@@ -6,6 +6,8 @@ if status is-interactive
     set -gx PAGER nvimpager
 
     set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
+    dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
+
     # onedark theme stuff
     # set -l onedark_options '-b'
 
