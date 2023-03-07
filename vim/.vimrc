@@ -66,6 +66,9 @@ Plug 'itchyny/lightline.vim'
 " Vim Fish config syntax highlighting
 Plug 'dag/vim-fish'
 
+" Better syntax highlighting
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
