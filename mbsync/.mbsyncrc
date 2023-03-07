@@ -10,7 +10,7 @@ Host imap-mail.outlook.com
 SSLType IMAPS
 Port 993
 User YUZi54780@outlook.com
-PassCmd +"$HOME/stuff/get-email-pass.sh YUZi54780@outlook.com"
+PassCmd +"$HOME/stuff/get-email-pass.sh isync-yuzi54780@outlook.com"
 
 MaildirStore gmail-local
 Path ~/Mail/gmail/
