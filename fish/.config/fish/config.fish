@@ -5,6 +5,7 @@ if status is-interactive
     set -gx EDITOR nvim
     set -gx PAGER nvimpager
 
+    set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
     # onedark theme stuff
     # set -l onedark_options '-b'
 
