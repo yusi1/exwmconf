@@ -1,8 +1,9 @@
 if status is-interactive
     xrdb -merge ~/.Xresources
 
-    # editor global exported variable
+    # global exported variables
     set -gx EDITOR nvim
+    set -gx PAGER nvimpager
 
     # onedark theme stuff
     # set -l onedark_options '-b'
