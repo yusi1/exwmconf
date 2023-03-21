@@ -137,7 +137,7 @@ If XUSER is `t', use that username instead."
   (find-file (concat "/" (tramp-method-p) ":" "root@localhost:" "/")))
 
 (defun ysz/tramp--extract-file-name (xFILE)
-  (s-replace-regexp ".*\:.+?:" "" xFILE))
+  (s-replace-regexp ".*:.+?:" "" xFILE))
 
 (defun view-as-root-remote (&optional xUSER)
   (interactive)
