@@ -75,13 +75,18 @@ Else, prompt for which escalation method to use."
     (rmail rmail-file-name)))
 
 (defun mail-as-user (&optional user)
-  "View mail in `/var/spool/mail/USER' as USER with RMAIL.
-The mail file in `/var/spool/mail' should be owned by USER for this to work."
+  "View mail in either `/var/spool/mail/USER' or `/var/mail/USER' depending on which one exists.
+If neither exist, prompt for a mail file."
   (interactive)
-  (let ((rmail-file-name (if user
-                             (concat "/var/spool/mail/" user)
-                           "/var/spool/mail/yaslam")))
-    (rmail rmail-file-name)))
+  (let* ((user (if user user (user-login-name)))
+         (rmail-file-name (cond ((f-directory-p (concat "/var/spool/mail/" user))
+                                 (concat "/var/spool/mail/" user))
+                                ((f-directory-p (concat "/var/mail/" user))
+                                 (concat "/var/mail/" user))
+                                (t 'nil))))
+    (if rmail-file-name
+        (rmail rmail-file-name)
+      (message (concat "No mail for " (user-login-name) ".")))))
 
 (defun mail-as-root-multihop (&optional xfilepick xaddr xuser)
   "View mail in `/var/mail/root' as root with RMAIL.
