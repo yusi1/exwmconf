@@ -58,12 +58,15 @@
   "s-T" 'eshell)
 
 (defun tramp-method-p ()
-  "Get the TRAMP privilege escalation method depending on the `system-type' variable.
-If `system-type' is `berkeley-unix', use the `doas' method.
-If `system-type' is anything else (e.g `gnu/linux') then use the `sudo' method."
-  (setq tramp-method (if (not (eq system-type 'berkeley-unix))
-                         "sudo"
-                       "doas")))
+  "Get the TRAMP escalation method.
+If 'sudo' is in PATH, set `tramp-method' to 'sudo'.
+If 'doas' is in PATH, set `tramp-method' to 'doas'.
+Else, prompt for which escalation method to use."
+  (cond ((executable-find "sudo")
+         (setq tramp-method "sudo"))
+        ((executable-find "doas")
+         (setq tramp-method "doas"))
+        (t (setq tramp-method (read-from-minibuffer "Escalation program: ")))))
 
 (defun mail-as-root ()
   "View mail in `/var/mail/root' as root with RMAIL."
