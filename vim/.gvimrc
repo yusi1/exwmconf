@@ -1,4 +1,4 @@
 set guioptions-=T
-set guifont=Iosevka\ Comfy\ Fixed\ 14
+set guifont=Hack\ 14
 colorscheme onedark 
 
