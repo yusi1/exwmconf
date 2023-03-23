@@ -4,7 +4,7 @@ ConditionPathExists=%h/.config/imapnotify/imapnotify-outlook.conf
 After=network.target
 
 [Service]
-ExecStart=goimapnotify -conf %h/.config/imapnotify/imapnotify-outlook.conf
+ExecStart=%h/go/bin/goimapnotify -conf %h/.config/imapnotify/imapnotify-outlook.conf
 Restart=always
 RestartSec=30
 
