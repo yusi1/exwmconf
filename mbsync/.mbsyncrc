@@ -72,6 +72,6 @@ Far :outlook-remote:
 Near :outlook-local:
 Create Both
 Expunge Both
-Patterns * !"Junk" !"Mailspring" !"Archive" !"Notes" !"Outbox" !"Sync Issues"
+Patterns * !"Spam" !"Junk" !"Mailspring" !"Archive" !"Notes" !"Outbox" !"Sync Issues"
 SyncState *
 MaxMessages 400
