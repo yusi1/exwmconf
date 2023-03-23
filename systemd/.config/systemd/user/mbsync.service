@@ -5,7 +5,7 @@ ConditionPathExists=%h/.mbsyncrc
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/mbsync -c %h/.mbsyncrc --all
+ExecStart=mbsync -c %h/.mbsyncrc --all
 
 [Install]
 WantedBy=mail.target
