@@ -20,8 +20,8 @@ nnoremap <Leader>O O<Esc>0"_D
 
 " OSC52 keybinds
 " https://github.com/ojroques/vim-oscyank
-vnoremap <leader>c :OSCYank<CR>
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+" vnoremap <leader>c :OSCYank<CR>
+" autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
 
 " Indentation setup
 set tabstop=4
@@ -34,7 +34,7 @@ call plug#begin()
 
 " OSC52 standard support plugin
 " copy text from anywhere into the system clipboard
-Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+" Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 " Activity watcher vim plugin
 " Plug 'ActivityWatch/aw-watcher-vim'
