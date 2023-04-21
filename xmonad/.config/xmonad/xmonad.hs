@@ -64,14 +64,6 @@ import Solarized
 -- Function to update the pointer
 updPointer = updatePointer (0.95, 0.95) (0, 0)
 
--- delKeys :: XConfig l -> [(KeyMask, KeySym)]
--- delKeys XConfig {modMask = modm} =
---     [ (modm .|. shiftMask, xK_Return)
---     , (modm, xK_p) ]
-
--- insKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
--- insKeys conf@(XConfig {modMask = modm}) = []
-
 -- Scratchpad config
 scratchpads = [ ]
 
@@ -192,13 +184,6 @@ myKeys = ([
     -- , ("M4-M1-l", moveTo Next $ Not emptyWS)
     , ("C-M1-<L>", moveTo Prev $ hiddenWS)
     , ("C-M1-<R>", moveTo Next $ hiddenWS)
-    -- , ("M4-C-<R>", moveTo Next $ hiddenWS :&: emptyWS)
-    -- , ("M4-C-<L>", moveTo Prev $ hiddenWS :&: emptyWS)
-    -- , ("M4-S-<R>", shiftToNext >> nextWS)
-    -- , ("M4-S-<L>", shiftToPrev >> prevWS)
-    -- , ("M4-C-S-<R>", shiftTo Next (Not emptyWS) >> moveTo Next (Not emptyWS))
-    -- , ("M4-C-S-<L>", shiftTo Prev (Not emptyWS) >> moveTo Prev (Not emptyWS))
-
     -- ## Toggle struts (bars etc...)
     -- ToggleStruts visual submap
     -- , ("M4-S-b", visualSubmap myWindowConfig . M.fromList $ map (\(k, s, a) -> ((0, k), (s, a)))
@@ -220,14 +205,6 @@ myKeys = ([
     -- Toggle mirroring of the current layout
     , ("M4-s", sendMessage $ Toggle MIRROR)
 
-    -- ## Layout Groups keybinds
-    -- , ("M4-C-s", splitGroup)
-    -- , ("M4-C-l", nextOuterLayout)
-    -- , ("M4-M1-u", swapGroupUp)
-    -- , ("M4-M1-d", swapGroupDown)
-    -- , ("M4-S-u", moveToGroupUp False)
-    -- , ("M4-S-d", moveToGroupDown False)
-    
     -- ## Keybinds for XP prompts (XMonad.Prompt prompts)
     -- Start pass prompt
     , ("M4-=", passPrompt solarizedDarkXPConfig)
@@ -247,41 +224,6 @@ myKeys = ([
     , ("M4-S-/", helpCommand)
     -- Run xmessage with a summary of the default keybindings
     , ("M4-?", helpCommand)
-
-    -- ## Media control (SECTION NOW REPLACED WITH VOLUMEICON)
-    -- -- Increase volume
-    -- , ("M4-<Page_Up>", spawn "pamixer -i 2")
-    -- -- Increase volume
-    -- , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 2")
-    -- -- Decrease volume
-    -- , ("M4-<Page_Down>", spawn "pamixer -d 2")
-    -- -- Decrease volume
-    -- , ("<XF86AudioLowerVolume>", spawn "pamixer -d 2")
-    -- -- Toggle mute volume
-    -- , ("M4-<End>", spawn "pamixer -t")
-    -- -- Toggle mute volume
-    -- , ("<XF86AudioMute>", spawn "pamixer -t")
-    
-    -- ## Brightness control keybinds
-    -- Increase brightness
-    , ("<XF86MonBrightnessUp>", spawn "light -A 2")
-    -- Decrease brightness
-    , ("<XF86MonBrightnessDown>", spawn "light -U 2")
-
-    -- ## Scratchpad activation keybinds
-    -- TODO: Use visual submaps to visualize the keybinds
-    -- , ("M4-M1-e", namedScratchpadAction scratchpads "Emacs")
-    -- , ("M4-M1-<Return>", namedScratchpadAction scratchpads "qterminal")
-    -- , ("M4-M1-f", namedScratchpadAction scratchpads "Caja")
-    -- , ("M4-M1-s", namedScratchpadAction scratchpads "kitty")
-
-    -- , ("M4-g", visualSubmap myWindowConfig . M.fromList $ map (\(k, s, a) -> ((0, k), (s, a)))
-    --             [ (xK_t, "Tall", sendMessage $ JumpToLayout "Tall")
-    --             , (xK_r, "Full", sendMessage $ JumpToLayout "Full")
-    --             ])
-
-    -- , ("M4-g", sendMessage $ JumpToLayout "Tall")
-
 
     -- ## Dynamic scratchpad activation keybinds
     -- Allocate 1st dynamic scratchpad
@@ -361,34 +303,6 @@ mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
     -- , ((modMask, button9), \w -> focus w >> windows W.focusDown
     --                                      >> updPointer)
     ]
-
--- remove "#" from a string
--- colour xs = [ x | x <- xs, not (x `elem` "#") ]
-
--- -- System tray command
--- trayerMonitor   x = " --monitor "         ++ x
--- trayerExpand    x = " --expand "          ++ x
--- trayerWidth     x = " --width "           ++ x
--- trayerEdge      x = " --edge "            ++ x
--- trayerAlign     x = " --align "           ++ x
--- trayerStrut     x = " --SetPartialStrut " ++ x
--- trayerDockType  x = " --SetDockType "     ++ x
--- trayerTransparent x s = " --transparent "   ++ x ++ " --alpha " ++ s
--- trayerColour    x = " --tint " ++ "0xF" ++ colour x
--- trayerLower       = " -l "
-
--- trayerCmd = "/usr/bin/sleep 2 && "
---             ++ "/usr/bin/trayer"
---             ++ trayerMonitor "primary" -- primary/number
---             ++ trayerExpand "true"     -- true/false
---             ++ trayerWidth "10"        -- max 100
---             ++ trayerEdge "bottom"     -- none/bottom/top/left/right
---             ++ trayerAlign "left"      -- left/right/center       
---             ++ trayerDockType "true"   -- true/false
---             ++ trayerStrut "true"      -- true/false
---             ++ trayerTransparent "true" "0" -- true/false 0-100
---             ++ trayerColour "#002b36"
---             -- ++ trayerLower
 
 -- StartupHook
 myStartupHook :: X ()
