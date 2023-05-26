@@ -97,7 +97,6 @@ let g:lightline = {
 
 " Theme
 set background=dark
-colorscheme onedark
 set cursorline
 set laststatus=2
 
