@@ -209,105 +209,105 @@ QUERY is the query to search for in the logs."
                        ((libera "zncadmin@laptop-emacs" "ZNCIRC43521."))))))
 
 
-(use-package! mu4e
-  :demand t
-  :config
-  ;; support IMAP IDLE -- this checks for a file in /tmp
-  ;; if that file exists mu4e is refreshed.
-  (require 'mu4e-IDLE-check)
-  ;; add the mu4e-compose-from-mailto function
-  ;; adds a function used by emacsclient to compose mail using mu4e
-  (require 'mu4e-compose-from-mailto)
+;; (use-package! mu4e
+;;   :demand t
+;;   :config
+;;   ;; support IMAP IDLE -- this checks for a file in /tmp
+;;   ;; if that file exists mu4e is refreshed.
+;;   (require 'mu4e-IDLE-check)
+;;   ;; add the mu4e-compose-from-mailto function
+;;   ;; adds a function used by emacsclient to compose mail using mu4e
+;;   (require 'mu4e-compose-from-mailto)
 
-  ;; fill-column, some mailing lists need this
-  (setq fill-column 72)
+;;   ;; fill-column, some mailing lists need this
+;;   (setq fill-column 72)
 
-  ;; support format=flowed
-  ;; mailing lists don't support this
-  (require 'mu4e-format-flowed)
+;;   ;; support format=flowed
+;;   ;; mailing lists don't support this
+;;   (require 'mu4e-format-flowed)
 
-     ;; signature auto include
-  (setq mu4e-compose-signature-auto-include t)
+;;      ;; signature auto include
+;;   (setq mu4e-compose-signature-auto-include t)
 
-   ;; Each path is relative to the path of the maildir you passed to mu
-  (set-email-account! "gmail"
-          '((mu4e-sent-folder       . "/gmail/sent")
-            (mu4e-drafts-folder     . "/gmail/drafts")
-            (mu4e-trash-folder      . "/gmail/bin")
-            (mu4e-refile-folder     . "/gmail/INBOX")
-            (user-mail-address      . "yaslam0x1@gmail.com")    ;; only needed for mu < 1.4
-            (smtpmail-smtp-user     . "yaslam0x1@gmail.com")
-            (smtpmail-smtp-service  . "587")
-            (smtpmail-smtp-server   . "smtp.gmail.com")
-            (mu4e-compose-signature . "Regards\nYusef Aslam"))
-            ;; (org-msg-signature      . "Regards\nYusef Aslam"))
-           t)
+;;    ;; Each path is relative to the path of the maildir you passed to mu
+;;   (set-email-account! "gmail"
+;;           '((mu4e-sent-folder       . "/gmail/sent")
+;;             (mu4e-drafts-folder     . "/gmail/drafts")
+;;             (mu4e-trash-folder      . "/gmail/bin")
+;;             (mu4e-refile-folder     . "/gmail/INBOX")
+;;             (user-mail-address      . "yaslam0x1@gmail.com")    ;; only needed for mu < 1.4
+;;             (smtpmail-smtp-user     . "yaslam0x1@gmail.com")
+;;             (smtpmail-smtp-service  . "587")
+;;             (smtpmail-smtp-server   . "smtp.gmail.com")
+;;             (mu4e-compose-signature . "Regards\nYusef Aslam"))
+;;             ;; (org-msg-signature      . "Regards\nYusef Aslam"))
+;;            t)
 
-  (set-email-account! "outlook"
-          '((mu4e-sent-folder       . "/outlook/Sent")
-            (mu4e-drafts-folder     . "/outlook/Drafts")
-            (mu4e-trash-folder      . "/outlook/Deleted")
-            (mu4e-refile-folder     . "/outlook/Inbox")
-            (user-mail-address      . "YUZi54780@outlook.com")    ;; only needed for mu < 1.4
-            (smtpmail-smtp-user     . "YUZi54780@outlook.com")
-            (smtpmail-smtp-service  . "587")
-            (smtpmail-smtp-server   . "smtp-mail.outlook.com")
-            (mu4e-compose-signature . "Regards\nYusef Aslam"))
-            ;; (org-msg-signature      . "Regards\nYusef Aslam"))
-           t)
+;;   (set-email-account! "outlook"
+;;           '((mu4e-sent-folder       . "/outlook/Sent")
+;;             (mu4e-drafts-folder     . "/outlook/Drafts")
+;;             (mu4e-trash-folder      . "/outlook/Deleted")
+;;             (mu4e-refile-folder     . "/outlook/Inbox")
+;;             (user-mail-address      . "YUZi54780@outlook.com")    ;; only needed for mu < 1.4
+;;             (smtpmail-smtp-user     . "YUZi54780@outlook.com")
+;;             (smtpmail-smtp-service  . "587")
+;;             (smtpmail-smtp-server   . "smtp-mail.outlook.com")
+;;             (mu4e-compose-signature . "Regards\nYusef Aslam"))
+;;             ;; (org-msg-signature      . "Regards\nYusef Aslam"))
+;;            t)
 
-  (setq mu4e-maildir-shortcuts
-    '(("/gmail/INBOX" . ?i)
-      ("/gmail/drafts" . ?d)
-      ("/gmail/sent" . ?s)
-      ("/gmail/bin" . ?b)))
+;;   (setq mu4e-maildir-shortcuts
+;;     '(("/gmail/INBOX" . ?i)
+;;       ("/gmail/drafts" . ?d)
+;;       ("/gmail/sent" . ?s)
+;;       ("/gmail/bin" . ?b)))
 
-  (setq mu4e-context-policy 'ask-if-none
-        mu4e-compose-context-policy 'always-ask)
+;;   (setq mu4e-context-policy 'ask-if-none
+;;         mu4e-compose-context-policy 'always-ask)
 
-   ;; if "gmail" is missing from the address or maildir, the account must be listed here
-  (setq +mu4e-gmail-accounts '(("yaslam0x1@gmail.com" "/gmail")))
+;;    ;; if "gmail" is missing from the address or maildir, the account must be listed here
+;;   (setq +mu4e-gmail-accounts '(("yaslam0x1@gmail.com" "/gmail")))
 
-   ;; auto fetch mail every N seconds
-  (setq mu4e-update-interval 60)
-   ;; (setq mu4e-update-interval nil)
+;;    ;; auto fetch mail every N seconds
+;;   (setq mu4e-update-interval 60)
+;;    ;; (setq mu4e-update-interval nil)
 
-   ;; don't need to run cleanup after indexing for gmail
-  (setq mu4e-index-cleanup nil)
-   ;; because gmail uses labels as folders we can use lazy check since
-   ;; messages don't really "move"
-  (setq mu4e-index-lazy-check t)
+;;    ;; don't need to run cleanup after indexing for gmail
+;;   (setq mu4e-index-cleanup nil)
+;;    ;; because gmail uses labels as folders we can use lazy check since
+;;    ;; messages don't really "move"
+;;   (setq mu4e-index-lazy-check t)
 
-   ;; before retrieving and updating the mail, update the mail index nonlazily to catch
-   ;; changes that were missed because of lazy checking
-  (add-hook! 'mu4e-update-pre-hook 'mu4e-update-index-nonlazy))
+;;    ;; before retrieving and updating the mail, update the mail index nonlazily to catch
+;;    ;; changes that were missed because of lazy checking
+;;   (add-hook! 'mu4e-update-pre-hook 'mu4e-update-index-nonlazy))
 
-(use-package! hydra
-  :config
-  (let ((gmail-base-dir-inbox "/gmail/")
-        (outlook-base-dir "/outlook/"))
-   (defhydra my-mu4e-maildir-jump-outlook (:color blue)
-     "[Outlook]"
-     ("i" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Inbox")) "Inbox")
-     ("d" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Drafts"))   "Drafts")
-     ("D" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Deleted"))   "Deleted")
-     ("s" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Sent"))   "Sent")
-     ("S" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Spam")) "Spam"))
+;; (use-package! hydra
+;;   :config
+;;   (let ((gmail-base-dir-inbox "/gmail/")
+;;         (outlook-base-dir "/outlook/"))
+;;    (defhydra my-mu4e-maildir-jump-outlook (:color blue)
+;;      "[Outlook]"
+;;      ("i" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Inbox")) "Inbox")
+;;      ("d" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Drafts"))   "Drafts")
+;;      ("D" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Deleted"))   "Deleted")
+;;      ("s" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Sent"))   "Sent")
+;;      ("S" (mu4e~headers-jump-to-maildir (concat outlook-base-dir "Spam")) "Spam"))
 
-   (defhydra my-mu4e-maildir-jump-gmail (:color blue)
-     "[Gmail]"
-     ("i" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "INBOX")) "Inbox")
-     ("d" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "drafts")) "Drafts")
-     ("s" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "sent")) "Sent")
-     ("b" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "bin")) "Bin"))
+;;    (defhydra my-mu4e-maildir-jump-gmail (:color blue)
+;;      "[Gmail]"
+;;      ("i" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "INBOX")) "Inbox")
+;;      ("d" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "drafts")) "Drafts")
+;;      ("s" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "sent")) "Sent")
+;;      ("b" (mu4e~headers-jump-to-maildir (concat gmail-base-dir-inbox "bin")) "Bin"))
 
-   (defhydra my-mu4e-maildir-jump (:color blue)
-     "maildir jump"
-     ("g" (my-mu4e-maildir-jump-gmail/body) "[Gmail]")
-     ("o" (my-mu4e-maildir-jump-outlook/body) "[Outlook]")))
+;;    (defhydra my-mu4e-maildir-jump (:color blue)
+;;      "maildir jump"
+;;      ("g" (my-mu4e-maildir-jump-gmail/body) "[Gmail]")
+;;      ("o" (my-mu4e-maildir-jump-outlook/body) "[Outlook]")))
 
-  (evil-define-key 'normal mu4e-main-mode-map "O" (lambda! () (interactive) (my-mu4e-maildir-jump/body)))
-  (evil-define-key 'normal mu4e-headers-mode-map "O" (lambda! () (interactive) (my-mu4e-maildir-jump/body))))
+;;   (evil-define-key 'normal mu4e-main-mode-map "O" (lambda! () (interactive) (my-mu4e-maildir-jump/body)))
+;;   (evil-define-key 'normal mu4e-headers-mode-map "O" (lambda! () (interactive) (my-mu4e-maildir-jump/body))))
 
 ;; (use-package! mu4e-views
 ;;   :after mu4e
