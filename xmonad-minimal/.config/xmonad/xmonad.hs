@@ -51,4 +51,6 @@ mapAt r = ask >>= \w -> liftX (tileWindow w r $> mempty)
 myManageHook :: ManageHook
 myManageHook = composeAll $
                [ className =? "XClock" --> mapAt (Rectangle 1760 30 150 150) <> doIgnore
-               , className =? "XEyes" --> mapAt (Rectangle 1860 1020 60 60) <> doIgnore ] 
+                                                                             <> doRaise
+               , className =? "XEyes" --> mapAt (Rectangle 1860 1020 60 60) <> doIgnore
+                                                                            <> doRaise ] 
