@@ -303,3 +303,8 @@ QUERY is the query to search for in the logs."
         "F" 'bufler-list-group-make-frame))
 
 (after! charge)
+
+(after! minions
+  (require 'minions)
+  (minions-mode 1))
+
