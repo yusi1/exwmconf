@@ -80,6 +80,7 @@
 ;; ui stuff
 (delete-selection-mode 1)
 (ffap-bindings)
+(add-to-list 'default-frame-alist '(internal-border-width . 10))
 
 ;; fish shell completions
 (when (and (executable-find "fish")
