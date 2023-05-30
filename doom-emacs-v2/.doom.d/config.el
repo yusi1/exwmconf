@@ -131,8 +131,7 @@
          :icon (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
          :action doom/help)))
 
-(use-package! erc
-  :config
+(after! erc
   ;; Use authinfo instead of prompting for passwords.
   (setq erc-prompt-for-password nil)
   ;; Use NickServ to authenticate.
@@ -201,16 +200,13 @@ QUERY is the query to search for in the logs."
     (erc-tls :server "freebsd-oldman.home" :port 3000 :nick "zncadmin" :user "zncadmin@laptop-emacs/libera" :password "ZNCIRC43521.")))
 
 
-(use-package! znc
-  :config
+(after! znc
   (require 'znc)
   (setq znc-servers '(("freebsd-oldman.home" 3000 t
                        ((libera "zncadmin@laptop-emacs" "ZNCIRC43521."))))))
 
 
-;; (use-package! mu4e
-;;   :demand t
-;;   :config
+;; (after! mu4e
 ;;   ;; support IMAP IDLE -- this checks for a file in /tmp
 ;;   ;; if that file exists mu4e is refreshed.
 ;;   (require 'mu4e-IDLE-check)
@@ -281,8 +277,7 @@ QUERY is the query to search for in the logs."
 ;;    ;; changes that were missed because of lazy checking
 ;;   (add-hook! 'mu4e-update-pre-hook 'mu4e-update-index-nonlazy))
 
-;; (use-package! hydra
-;;   :config
+;; (after! hydra
 ;;   (let ((gmail-base-dir-inbox "/gmail/")
 ;;         (outlook-base-dir "/outlook/"))
 ;;    (defhydra my-mu4e-maildir-jump-outlook (:color blue)
@@ -343,8 +338,7 @@ QUERY is the query to search for in the logs."
 ;;     :tags '(email)
 ;;     :kill-signal 'sigkill))
 
-; (use-package! org-contacts
-;   :config
+; (after! org-contacts
 ;   (setq org-contacts-files '("~/Documents/contacts.org"))
 
 ;   (defvar ysz/my-contact-template `,(concat "* %(org-contacts-template-name)\n"
@@ -367,8 +361,7 @@ QUERY is the query to search for in the logs."
 ;       (add-to-list 'org-capture-templates templates)))
 
 ;;; FIXME: Cannot use because of problems with unpinning compat.
-;; (use-package! tempel
-;;   :config
+;; (after! tempel
 ;;   (add-hook!
 ;;    prog-mode-hook 'tempel-setup-capf
 ;;    text-mode-hook 'tempel-setup-capf)
@@ -435,9 +428,7 @@ QUERY is the query to search for in the logs."
        (quote
         ("/usr/local/bin/crontab" "vi" "screen" "top" "less" "more" "lynx" "ncftp" "pine" "tin" "trn" "elm" "tmux" "nano")))
 
-(use-package! cape
-  :demand t
-  :config
+(after! cape
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
   (map! :prefix "C-c ["
@@ -474,7 +465,7 @@ QUERY is the query to search for in the logs."
 ;;   :init
 ;;   (setq centaur-tabs-enable-key-bindings t)
 ;;   (setq centaur-tabs-enable-ido-completion nil)
-;;   :config
+;;
 ;;   ;; (centaur-tabs-group-by-projectile-project) ; group by this function
 ;;   (centaur-tabs-group-buffer-groups) ; or this
 ;;   (map! "C-c t" 'centaur-tabs-switch-group)
@@ -488,8 +479,8 @@ QUERY is the query to search for in the logs."
 ;;   (use-package! ysz-tweaks)
 ;;   (centaur-tabs-mode 1))
 
-(use-package! org
-  :config (map! :map org-mode-map "C-c q" 'kill-this-buffer)
+(after! org
+  (map! :map org-mode-map "C-c q" 'kill-this-buffer)
   (setq org-publish-project-alist
       '(("yaslam's website" ;; my blog project (just a name)
          ;; Path to org files.
@@ -503,8 +494,8 @@ QUERY is the query to search for in the logs."
          :html-extension "html"
          :body-only t))))
 
-(use-package! flycheck
-  :config (setq flycheck-check-syntax-automatically '(save mode-enable)))
+(after! flycheck
+  (setq flycheck-check-syntax-automatically '(save mode-enable)))
 
 (use-package! vertico-multiform
   :load-path "~/.emacs.d/.local/straight/repos/vertico/extensions/"
@@ -520,12 +511,10 @@ QUERY is the query to search for in the logs."
   ;;         (execute-extended-command flat)))
   (vertico-multiform-mode t))
 
-;; (use-package! mu4e-dashboard
-;;   :config
+;; (after! mu4e-dashboard
 ;;   (setq mu4e-dashboard-file "~/org/mu4e-dashboard.org"))
 
-(use-package! bufler
-  :config
+(after! bufler
   (require 'ysz-bufler-config)
   (bufler-mode 1)
   (bufler-tabs-mode 1)
@@ -544,8 +533,7 @@ QUERY is the query to search for in the logs."
         "f" 'bufler-list-group-frame
         "F" 'bufler-list-group-make-frame))
 
-;; (use-package! vterm
-;;   :config
+;; (after! vterm
 ;;   ;; (add-hook 'vterm-mode-hook (lambda ()
 ;;   ;;                              (vterm-send-string "source ~/.bash_profile")
 ;;   ;;                              (vterm-send-return)))
@@ -557,6 +545,6 @@ QUERY is the query to search for in the logs."
 ;;   (setq vterm-shell "/bin/fish"))
 
 
-(use-package! charge)
+(after! charge)
 
-;; (use-package! pp-html)
+;; (after! pp-html)
