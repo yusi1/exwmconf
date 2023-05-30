@@ -81,6 +81,7 @@
 (delete-selection-mode 1)
 (ffap-bindings)
 (add-to-list 'default-frame-alist '(internal-border-width . 10))
+(map! "<f12>" 'modus-themes-toggle)
 
 ;; fish shell completions
 (when (and (executable-find "fish")
