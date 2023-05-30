@@ -69,3 +69,7 @@
 ;; (package! bufler)
 
 (package! fish-mode)
+
+;; (package! keycast)
+
+(package! minions)
