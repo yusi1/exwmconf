@@ -308,3 +308,7 @@ QUERY is the query to search for in the logs."
   (require 'minions)
   (minions-mode 1))
 
+(after! keycast
+  (require 'keycast)
+  (setq keycast-header-line-insert-after 'mode-line-position)
+  (keycast-header-line-mode 1))
