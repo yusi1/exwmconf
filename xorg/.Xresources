@@ -1,28 +1,10 @@
-!xterm
-xterm*termName: xterm-256color
-xterm*locale: true
-xterm*utf8: 1
-xterm*utf8Fonts: always
-xterm*dynamicColors: true
-xterm*faceName: Fira Mono Medium
-xterm*faceSize: 20
+Xft.dpi: 120
+
 xterm*background: black
-xterm*foreground: white
+xterm*foreground: lightgrey
+xterm*font: -misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*
 
 !emacs
 ! Xft.rgba: none
 emacs.font: DejaVu Sans Mono-14
-! emacs.font: PragmataPro Mono-16
-! emacs.font: Fira Code-14
-! emacs.font: -xos4-terminus-bold-*-*-*-18-*-*-*-*-*-*-*
 
-!X*.*
-Xcursor.size: 32
-
-!dzen2
-dzen2.font:       -*-fixed-bold-*-*-*-18-*-*-*-*-*-*-*
-dzen2.foreground: #22EE11
-dzen2.background: black
-
-!xlock
-!XLock.font: 
