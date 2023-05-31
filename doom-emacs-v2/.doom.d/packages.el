@@ -73,3 +73,5 @@
 ;; (package! keycast)
 
 (package! minions)
+
+(package! lin)
