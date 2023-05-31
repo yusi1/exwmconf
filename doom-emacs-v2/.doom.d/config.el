@@ -312,3 +312,31 @@ QUERY is the query to search for in the logs."
   (require 'keycast)
   (setq keycast-header-line-insert-after 'mode-line-position)
   (keycast-header-line-mode 1))
+
+(use-package! lin
+  :init
+  (setq lin-face 'lin-blue)
+  ;; You can use this to live update the face:
+  ;;
+  ;; (customize-set-variable 'lin-face 'lin-green)
+  (setq lin-mode-hooks
+       '(bongo-mode-hook
+         dired-mode-hook
+         elfeed-search-mode-hook
+         git-rebase-mode-hook
+         grep-mode-hook
+         ibuffer-mode-hook
+         ilist-mode-hook
+         ledger-report-mode-hook
+         log-view-mode-hook
+         magit-log-mode-hook
+         mu4e-headers-mode-hook
+         notmuch-search-mode-hook
+         notmuch-tree-mode-hook
+         occur-mode-hook
+         org-agenda-mode-hook
+         pdf-outline-buffer-mode-hook
+         proced-mode-hook
+         tabulated-list-mode-hook))
+  :config
+  (lin-global-mode 1))
