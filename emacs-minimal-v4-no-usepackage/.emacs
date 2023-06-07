@@ -67,6 +67,7 @@
 
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit)
+(setq vc-follow-symlinks t)
 
 (require 'parinfer-rust-mode)
 (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
