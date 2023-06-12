@@ -103,7 +103,7 @@ let g:lightline = {
 
 " Theme
 set background=dark
-colorscheme onedark
+" colorscheme onedark
 set cursorline
 set laststatus=2
 let g:onedark_terminal_italics = 1
