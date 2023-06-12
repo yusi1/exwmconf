@@ -95,11 +95,11 @@ endif
 " endif
 
 " Lightline theme
-let g:lightline = {
-            \ 'separator': { 'left': '', 'right': '' },
-            \ 'subseparator': { 'left': '', 'right': '' },
-            \ 'colorscheme': 'onedark',
-            \ }
+" let g:lightline = {
+"             \ 'separator': { 'left': '', 'right': '' },
+"             \ 'subseparator': { 'left': '', 'right': '' },
+"             \ 'colorscheme': 'onedark',
+"             \ }
 
 " Theme
 set background=dark
