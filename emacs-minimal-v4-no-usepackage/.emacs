@@ -60,6 +60,8 @@
 (require 'evil)
 (evil-mode 1)
 
+(add-to-list 'evil-emacs-state-modes 'circe-mode)
+
 (evil-define-key 'normal global-map
   "gc" 'comment-line)
 
