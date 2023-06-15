@@ -102,3 +102,5 @@
          :sasl-password "_f3U0i1+'/!(&i\"0xT_]DgcZv"
          :channels ("#emacs-circe"))))
 
+(require 'org)
+(setq org-confirm-elisp-link-function nil)
