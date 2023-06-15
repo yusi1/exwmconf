@@ -32,6 +32,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(corfu-default ((t (:background "midnight blue"))))
+ '(info-menu-header ((t (:inherit default :underline t :weight bold :height 160 :family "DejaVu Sans Mono"))))
  '(line-number-current-line ((t (:inherit line-number :background "gray16" :foreground "yellow" :weight bold))))
  '(mode-line ((t (:background "gray75" :foreground "black" :box (:line-width (1 . 1) :style released-button))))))
 
