@@ -92,3 +92,13 @@
 (bufler-mode 1)
 
 (require 'ysz-keybinds)
+
+(require 'circe)
+(setq circe-network-options
+      '(("Libera Chat"
+         :tls t
+         :nick "yaslam"
+         :sasl-username "yaslam"
+         :sasl-password "_f3U0i1+'/!(&i\"0xT_]DgcZv"
+         :channels ("#emacs-circe"))))
+
