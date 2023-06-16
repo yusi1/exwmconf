@@ -1,1 +1,0 @@
-/home/yaslam/Git/solarized-xmonad/Solarized.hs
