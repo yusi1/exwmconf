@@ -223,10 +223,11 @@ QUERY is the query to search for in the logs."
        (quote
         ("/usr/local/bin/crontab" "vi" "screen" "top" "less" "more" "lynx" "ncftp" "pine" "tin" "trn" "elm" "tmux" "nano")))
 
-(after! cape
+(use-package! cape
+  :config
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
-  (map! :prefix "C-c ["
+  (map! :g :prefix "C-c ["
     "p" 'completion-at-point ;; capf
     "t" 'complete-tag        ;; etags
     "d" 'cape-dabbrev        ;; or dabbrev-completion
