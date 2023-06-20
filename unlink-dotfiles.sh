@@ -4,7 +4,7 @@ DOTFILES="$HOME/.dotfiles"
 
 cd $DOTFILES
 echo -e "\n[Linked files]"
-find $HOME -type l | xargs readlink -- | grep -i dotfiles | sed 's/\.\.\///1' | sed 's/.dotfiles\///g' | sort
+find $HOME -type l | xargs readlink -- | grep -i "\.dotfiles" | sed 's/\.\.\///1' | sed 's/.dotfiles\///g' | sort
 
 echo -e "\n[Select packages to UN-install]"
 
