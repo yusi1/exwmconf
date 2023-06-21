@@ -10,6 +10,7 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.DynamicIcons
 import XMonad.Util.EZConfig
 import qualified XMonad.Util.ExtensibleState as XS
+import XMonad.Util.Loggers
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import qualified Data.Set as S
@@ -30,6 +31,19 @@ myIconConfig = def { iconConfigIcons = myIcons
                    , iconConfigFmt = iconsFmtAppend unwords }
 
 mySB = statusBarProp "xmobar" (dynamicIconsPP myIconConfig myPP)
+
+myPP :: PP
+myPP = def { ppCurrent = xmobarColor "yellow" "" . xmobarBorder "Top" "yellow" 2
+           , ppTitle   = xmobarColor "green" "" . shorten 40
+           , ppVisible = wrap "(" ")"
+           , ppUrgent  = xmobarColor "red" "yellow"
+           , ppExtras  = [logTitles formatFocused formatUnfocused]
+           , ppOrder   = \(ws:l:t:e) -> [ws, l] ++ e
+           }
+          where
+            formatFocused = wrap "[" "]" . xmobarColor "#ff79c6" "" . shorten 50 . xmobarStrip
+            formatUnfocused = wrap "(" ")" . xmobarColor "#bd93f9" "" . shorten 30 . xmobarStrip
+
 
 main :: IO ()
 main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsKey def
