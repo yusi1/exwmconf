@@ -13,6 +13,7 @@ import qualified XMonad.Util.ExtensibleState as XS
 import XMonad.Util.Loggers
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.Renamed
 import qualified Data.Set as S
 import Data.Foldable (for_)
 import Data.Functor
@@ -58,10 +59,12 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
           , ("M-f", sendMessage $ Toggle FULL) ]
 
-myLayoutHook = mkToggle (FULL ?? EOT) $ avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayoutHook = mkToggle (FULL ?? EOT) $ avoidStruts (tiled ||| Mirror tiled ||| full)
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
+     tiled   = renamed [Replace "<icon=/home/yaslam/.config/xmobar/icons/layout-tiled.xbm/>"] $ Tall nmaster delta ratio
+
+     full = renamed [Replace "<icon=/home/yaslam/.config/xmobar/icons/layout-full.xbm/>"] $ Full
 
      -- The default number of windows in the master pane
      nmaster = 1
