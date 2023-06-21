@@ -57,7 +57,10 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           }
           `additionalKeysP`
           [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
-          , ("M-f", sendMessage $ Toggle FULL) ]
+          , ("M-f", sendMessage $ Toggle FULL)
+          , ("<XF86AudioRaiseVolume>", spawn "pamixer -i2" )
+          , ("<XF86AudioLowerVolume>", spawn "pamixer -d2" )
+          , ("<XF86AudioMute>", spawn "pamixer -t" ) ]
 
 myLayoutHook = mkToggle (FULL ?? EOT) $ avoidStruts (tiled ||| Mirror tiled ||| full)
   where
