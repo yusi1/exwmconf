@@ -7,7 +7,6 @@ config =
       iconOffset = -2,
       allDesktops = True,
       alpha = 200,
-      position = TopH 26,
       commands =
         [ Run XMonadLog,
           Run $ Memory ["t", "Mem: <usedratio>%"] 10,
