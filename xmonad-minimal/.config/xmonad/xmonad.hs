@@ -34,7 +34,7 @@ myIconConfig = def { iconConfigIcons = myIcons
 mySB = statusBarProp "xmobar" (dynamicIconsPP myIconConfig myPP)
 
 myPP :: PP
-myPP = def { ppCurrent = xmobarColor "yellow" "" . xmobarBorder "Top" "yellow" 2
+myPP = def { ppCurrent = xmobarColor "yellow" "" . wrap "[" " ]"
            , ppTitle   = xmobarColor "green" "" . shorten 40
            , ppVisible = wrap "(" ")"
            , ppUrgent  = xmobarColor "red" "yellow"
