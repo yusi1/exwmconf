@@ -7,6 +7,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.DynamicIcons
 import XMonad.Util.EZConfig
 import qualified XMonad.Util.ExtensibleState as XS
 import XMonad.Layout.MultiToggle
@@ -15,7 +16,20 @@ import qualified Data.Set as S
 import Data.Foldable (for_)
 import Data.Functor
 
-mySB = statusBarProp "xmobar" (pure xmobarPP)
+myIcons :: Query [String]
+myIcons = composeAll
+  [ className =? "Chromium" --> appIcon "\xf268"
+  , className =? "steam" --> appIcon "\xf04d3"
+  , className =? "Pavucontrol" --> appIcon "\xf04c3"
+  , className =? "XTerm" --> appIcon "\xf489"
+  , className =? "Emacs" --> appIcon "\xe632"
+  ]
+
+myIconConfig :: IconConfig
+myIconConfig = def { iconConfigIcons = myIcons
+                   , iconConfigFmt = iconsFmtAppend unwords }
+
+mySB = statusBarProp "xmobar" (dynamicIconsPP myIconConfig myPP)
 
 main :: IO ()
 main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsKey def
