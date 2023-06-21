@@ -3,7 +3,7 @@ import Xmobar
 config :: Config
 config =
   defaultConfig
-    { font = "DejaVu Sans Mono 12",
+    { font = "DejaVuSansM Nerd Font 12",
       allDesktops = True,
       alpha = 200,
       commands =
