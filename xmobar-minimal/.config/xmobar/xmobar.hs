@@ -4,6 +4,7 @@ config :: Config
 config =
   defaultConfig
     { font = "DejaVuSansM Nerd Font 12",
+      iconOffset = -2,
       allDesktops = True,
       alpha = 200,
       commands =
