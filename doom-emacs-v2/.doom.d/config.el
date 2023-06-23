@@ -346,3 +346,10 @@ QUERY is the query to search for in the logs."
 ;;   (setq ef-themes-to-toggle '(ef-day ef-dark))
 ;;   (map! "<f12>" 'ef-themes-toggle))
 
+(use-package! doom-modeline
+  :config
+  (setq doom-modeline-hud nil)
+  (setq doom-modeline-icon t)
+  (setq doom-modeline-major-mode-icon t)
+  (setq doom-modeline-height 10))
+
