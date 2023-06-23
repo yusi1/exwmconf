@@ -79,6 +79,8 @@ myLayoutHook = mkToggle (Main.FULL ?? EOT) $ avoidStruts (tiled ||| mtiled ||| f
      -- default tiling algorithm partitions the screen into two panes
      tiled   = renamed [Replace $ iconPath "layout-tiled.xbm"] $ Tall nmaster delta ratio
 
+     mtiled   = renamed [Replace $ iconPath "layout-mtiled.xbm"] $ Mirror tiled
+
      full = renamed [Replace $ iconPath "layout-full.xbm"] $ Full
 
      -- The default number of windows in the master pane
