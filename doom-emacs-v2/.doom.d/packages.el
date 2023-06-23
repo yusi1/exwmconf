@@ -81,3 +81,5 @@
 (package! dante)
 
 (package! beacon)
+
+(package! org-auto-tangle)
