@@ -249,8 +249,19 @@ QUERY is the query to search for in the logs."
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file))
 
-(after! org
+(after! (:and org org-superstar)
   (map! :map org-mode-map "C-c q" 'kill-this-buffer)
+
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Fira Code" :weight 'bold :height (cdr face)))
+
   (setq org-publish-project-alist
       '(("yaslam's website" ;; my blog project (just a name)
          ;; Path to org files.
