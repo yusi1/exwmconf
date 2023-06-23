@@ -1,0 +1,168 @@
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+PROPERTY: header-args :tangle xmonad.hs
+
+* GHC LANGUAGE options
+These are options for the GHC compiler to use.
+#+begin_src haskell
+-- vim: tabstop=2 shiftwidth=2 expandtab
+  {-# LANGUAGE TypeSynonymInstances #-}
+  {-# LANGUAGE MultiParamTypeClasses #-}
+#+end_src
+
+* Imports
+#+begin_src haskell
+import XMonad
+import qualified XMonad.StackSet as W
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.DynamicIcons
+import XMonad.Util.EZConfig
+import qualified XMonad.Util.ExtensibleState as XS
+import XMonad.Util.Loggers
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.Renamed
+import qualified Data.Set as S
+import Data.Foldable (for_)
+import Data.Functor
+#+end_src
+
+* AppIcon configuration
+These are icons for applications that are shown in XMobar next to the workspace number.
+#+begin_src haskell
+myIcons :: Query [String]
+myIcons = composeAll
+  [ className =? "Chromium" --> appIcon "\xf268"
+  , className =? "steam" --> appIcon "\xf04d3"
+  , className =? "Pavucontrol" --> appIcon "\xf04c3"
+  , className =? "XTerm" --> appIcon "\xf489"
+  , className =? "Emacs" --> appIcon "\xe632"
+  , className =? "Vmware" --> appIcon "\xea7a"
+  , className =? "qpwgraph" --> appIcon "\xf07e5"
+  ]
+
+myIconConfig :: IconConfig
+myIconConfig = def { iconConfigIcons = myIcons
+                   , iconConfigFmt = iconsFmtAppend unwords }
+#+end_src
+
+* Status bar configuration
+#+begin_src haskell
+mySB = statusBarProp "xmobar" (dynamicIconsPP myIconConfig myPP)
+
+myPP :: PP
+myPP = def { ppCurrent = xmobarColor "yellow" "" . wrap "[" " ]"
+           , ppTitle   = xmobarColor "green" "" . shorten 40
+           , ppVisible = wrap "(" ")"
+           , ppUrgent  = xmobarColor "red" "yellow"
+           , ppExtras  = [logTitles formatFocused formatUnfocused]
+           , ppOrder   = \(ws:l:t:e) -> [ws, l] ++ e
+           }
+          where
+            formatFocused = wrap "[" "]" . xmobarColor "#ff79c6" "" . shorten 50 . xmobarStrip
+            formatUnfocused = wrap "(" ")" . xmobarColor "#bd93f9" "" . shorten 30 . xmobarStrip
+#+end_src
+
+* Main block
+#+begin_src haskell
+main :: IO ()
+main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsKey def
+          { modMask = mod1Mask
+          , terminal = "xterm"
+          , borderWidth = 2
+          , manageHook = myManageHook
+          , layoutHook = myLayoutHook
+          , logHook = raiseSaved
+          }
+#+end_src
+** Keybinds
+#+begin_src haskell
+          `additionalKeysP`
+          [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
+          , ("M-f", sendMessage $ Toggle Main.FULL)
+          , ("<XF86AudioRaiseVolume>", spawn "pamixer -i2" )
+          , ("<XF86AudioLowerVolume>", spawn "pamixer -d2" )
+          , ("<XF86AudioMute>", spawn "pamixer -t" ) ]
+#+end_src
+
+
+* Misc
+- This function is used to make specifiying icons for layouts or transformers easier because I don't have to specify an entire path everytime.
+#+begin_src haskell
+iconPath a = "<icon=/home/yaslam/.config/xmobar/icons/" ++ a ++ "/>"
+#+end_src
+- This is a layout transformer that I took from the XMonad source code and edited slightly to change the name into an icon. A layout transformer is a layout that you can dynamically apply to any layout that you are using in XMonad, like for example, you press Alt-f for a temporary fullscreen layout transformer on the current window.
+#+begin_src haskell
+data StdTransformers = FULL          -- ^ switch to Full layout
+  deriving (Read, Show, Eq)
+
+instance Transformer Main.StdTransformers Window where
+    transform Main.FULL         x k = k (renamed [Replace $ iconPath "layout-full.xbm"] Full) (const x)
+#+end_src
+
+* Layouts
+Each layouts name has been replaced with an icon which you can see below.
+- These layouts are mostly the default XMonad layouts.
+#+begin_src haskell
+myLayoutHook = mkToggle (Main.FULL ?? EOT) $ avoidStruts (tiled ||| mtiled ||| full)
+  where
+     -- default tiling algorithm partitions the screen into two panes
+     tiled   = renamed [Replace $ iconPath "layout-tiled.xbm"] $ Tall nmaster delta ratio
+
+     mtiled   = renamed [Replace $ iconPath "layout-mtiled.xbm"] $ Mirror tiled
+
+     full = renamed [Replace $ iconPath "layout-full.xbm"] $ Full
+
+     -- The default number of windows in the master pane
+     nmaster = 1
+
+     -- Default proportion of screen occupied by master pane
+     ratio   = 1/2
+
+     -- Percent of screen to increment by when resizing panes
+     delta   = 3/100
+#+end_src
+
+* Misc
+The 5 blocks of code below basically let me spawn a window that is fully ignored by XMonad (won't get focused, can't be moved etc..), and it is perfect for a program like xeyes which you can use like a dock with this code.
+#+begin_src haskell
+-- provided by geekosaur on IRC
+data SavedWindow = SavedWindow (S.Set Window) deriving (Read, Show)
+
+-- provided by geekosaur on IRC
+instance ExtensionClass SavedWindow where
+  initialValue = SavedWindow S.empty
+  extensionType = PersistentExtension
+
+-- use in ManageHook: className =? "whatever" --> saveWindow
+-- provided by geekosaur on IRC
+saveWindow :: ManageHook
+saveWindow = ask >>= \w -> liftX (XS.modify (\(SavedWindow s) -> SavedWindow (S.insert w s))) >> doIgnore
+
+-- use in logHook: no parameters
+-- provided by geekosaur on IRC
+raiseSaved :: X ()
+raiseSaved = do
+  SavedWindow s <- XS.get
+  withDisplay $ \d -> for_ s $ io . raiseWindow d
+
+-- this lets you have a floating window that is fully ignored
+-- but also lets you control the placement of the ignored floating window
+-- thanks to [Leary] on #xmonad for this
+-- use like: mapAt (Rectangle x y w h) <> doIgnore
+-- in the manageHook
+mapAt :: Rectangle -> ManageHook
+mapAt r = ask >>= \w -> liftX (tileWindow w r $> mempty)
+#+end_src
+
+* Managehook
+#+begin_src haskell
+myManageHook :: ManageHook
+myManageHook = composeAll $
+               [ className =? "XClock" --> mapAt (Rectangle 1760 30 150 150) <> saveWindow
+               , className =? "XEyes" --> mapAt (Rectangle 1860 1020 60 60) <> saveWindow ]
+
+#+end_src
