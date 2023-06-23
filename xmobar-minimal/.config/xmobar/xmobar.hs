@@ -11,9 +11,10 @@ config =
         [ Run XMonadLog,
           Run $ Memory ["t", "Mem: <usedratio>%"] 10,
           Run $ Kbd [],
-          Run $ Date "\xf00f0 %a %_d %b %Y <fc=#ee9a00>%H:%M:%S</fc>" "date" 10
+          Run $ Date "\xf00f0 %a %_d %b %Y <fc=#ee9a00>%H:%M:%S</fc>" "date" 10,
+          Run Locks
         ],
-      template = "%XMonadLog% }{ %kbd% | %date% | %memory%",
+      template = "%XMonadLog% }{ [%locks%] %kbd% | %date% | %memory%",
       alignSep = "}{"
     }
 
