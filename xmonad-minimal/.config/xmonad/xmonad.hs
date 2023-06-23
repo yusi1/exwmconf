@@ -77,7 +77,7 @@ instance Transformer Main.StdTransformers Window where
 myLayoutHook = mkToggle (Main.FULL ?? EOT) $ avoidStruts (tiled ||| mtiled ||| full)
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = renamed [Replace "<icon=/home/yaslam/.config/xmobar/icons/layout-tiled.xbm/>"] $ Tall nmaster delta ratio
+     tiled   = renamed [Replace $ iconPath "layout-tiled.xbm"] $ Tall nmaster delta ratio
 
      full = renamed [Replace "<icon=/home/yaslam/.config/xmobar/icons/layout-full.xbm/>"] $ Full
 
