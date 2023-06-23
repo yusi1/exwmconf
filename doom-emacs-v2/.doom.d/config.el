@@ -369,3 +369,7 @@ QUERY is the query to search for in the logs."
   (setq beacon-blink-when-focused t)
   (setq beacon-blink-when-point-moves-vertically t)
   (beacon-mode 1))
+
+(use-package! org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
