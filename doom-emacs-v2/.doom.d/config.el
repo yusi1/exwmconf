@@ -353,3 +353,8 @@ QUERY is the query to search for in the logs."
   (setq doom-modeline-major-mode-icon t)
   (setq doom-modeline-height 10))
 
+(after! beacon
+  (setq beacon-blink-when-window-scrolls t)
+  (setq beacon-blink-when-focused t)
+  (setq beacon-blink-when-point-moves-vertically t)
+  (beacon-mode 1))
