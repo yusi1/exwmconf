@@ -1,3 +1,5 @@
+#+TITLE: XMonad Configuration
+#+AUTHOR: Yusef Aslam
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+PROPERTY: header-args :tangle xmonad.hs
 
