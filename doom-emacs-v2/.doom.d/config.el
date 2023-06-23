@@ -341,3 +341,8 @@ QUERY is the query to search for in the logs."
          tabulated-list-mode-hook))
   :config
   (lin-global-mode 1))
+
+;; (after! ef-themes
+;;   (setq ef-themes-to-toggle '(ef-day ef-dark))
+;;   (map! "<f12>" 'ef-themes-toggle))
+
