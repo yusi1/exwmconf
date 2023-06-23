@@ -79,7 +79,7 @@ myLayoutHook = mkToggle (Main.FULL ?? EOT) $ avoidStruts (tiled ||| mtiled ||| f
      -- default tiling algorithm partitions the screen into two panes
      tiled   = renamed [Replace $ iconPath "layout-tiled.xbm"] $ Tall nmaster delta ratio
 
-     full = renamed [Replace "<icon=/home/yaslam/.config/xmobar/icons/layout-full.xbm/>"] $ Full
+     full = renamed [Replace $ iconPath "layout-full.xbm"] $ Full
 
      -- The default number of windows in the master pane
      nmaster = 1
