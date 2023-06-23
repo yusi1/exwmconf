@@ -75,3 +75,9 @@
 (package! minions)
 
 (package! lin)
+
+(package! ef-themes)
+
+(package! dante)
+
+(package! beacon)
