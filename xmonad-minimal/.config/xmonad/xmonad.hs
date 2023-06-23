@@ -1,4 +1,7 @@
 -- vim: tabstop=2 shiftwidth=2 expandtab
+  {-# LANGUAGE TypeSynonymInstances #-}
+  {-# LANGUAGE MultiParamTypeClasses #-}
+
 
 import XMonad
 import qualified XMonad.StackSet as W
