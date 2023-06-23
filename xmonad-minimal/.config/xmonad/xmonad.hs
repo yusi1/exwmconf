@@ -28,6 +28,8 @@ myIcons = composeAll
   , className =? "Pavucontrol" --> appIcon "\xf04c3"
   , className =? "XTerm" --> appIcon "\xf489"
   , className =? "Emacs" --> appIcon "\xe632"
+  , className =? "Vmware" --> appIcon "\xea7a"
+  , className =? "qpwgraph" --> appIcon "\xf07e5"
   ]
 
 myIconConfig :: IconConfig
