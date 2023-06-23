@@ -60,14 +60,21 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           }
           `additionalKeysP`
           [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
-          , ("M-f", sendMessage $ Toggle FULL)
+          , ("M-f", sendMessage $ Toggle Main.FULL)
           , ("<XF86AudioRaiseVolume>", spawn "pamixer -i2" )
           , ("<XF86AudioLowerVolume>", spawn "pamixer -d2" )
           , ("<XF86AudioMute>", spawn "pamixer -t" ) ]
 
-myLayoutHook = mkToggle (FULL ?? EOT) $ avoidStruts (tiled ||| Mirror tiled ||| full)
+
 iconPath a = "<icon=/home/yaslam/.config/xmobar/icons/" ++ a ++ "/>"
 
+data StdTransformers = FULL          -- ^ switch to Full layout
+  deriving (Read, Show, Eq)
+
+instance Transformer Main.StdTransformers Window where
+    transform Main.FULL         x k = k (renamed [Replace $ iconPath "layout-full.xbm"] Full) (const x)
+
+myLayoutHook = mkToggle (Main.FULL ?? EOT) $ avoidStruts (tiled ||| mtiled ||| full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = renamed [Replace "<icon=/home/yaslam/.config/xmobar/icons/layout-tiled.xbm/>"] $ Tall nmaster delta ratio
