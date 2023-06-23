@@ -66,6 +66,8 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           , ("<XF86AudioMute>", spawn "pamixer -t" ) ]
 
 myLayoutHook = mkToggle (FULL ?? EOT) $ avoidStruts (tiled ||| Mirror tiled ||| full)
+iconPath a = "<icon=/home/yaslam/.config/xmobar/icons/" ++ a ++ "/>"
+
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = renamed [Replace "<icon=/home/yaslam/.config/xmobar/icons/layout-tiled.xbm/>"] $ Tall nmaster delta ratio
