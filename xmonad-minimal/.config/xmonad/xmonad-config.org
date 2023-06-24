@@ -5,6 +5,7 @@
 #+auto_tangle: t
 #+STARTUP: overview
 
+* DONE Add tiled window dragging
 
 * GHC LANGUAGE options
 These are options for the GHC compiler to use.
@@ -44,6 +45,7 @@ import XMonad.Util.Loggers
 
 ** Actions
 #+begin_src haskell
+import XMonad.Actions.TiledWindowDragging
 #+end_src
 
 ** Layouts
@@ -51,11 +53,13 @@ import XMonad.Util.Loggers
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.Renamed
+import XMonad.Layout.DraggingVisualizer
 #+end_src
 
 ** Misc
 #+begin_src haskell
 import qualified Data.Set as S
+import qualified Data.Map as M
 import Data.Foldable (for_)
 import Data.Functor
 #+end_src
@@ -106,8 +110,10 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           , manageHook = myManageHook
           , layoutHook = myLayoutHook
           , logHook = raiseSaved
+          , XMonad.mouseBindings = Main.mouseBindings
           }
 #+end_src
+
 ** Keybinds
 #+begin_src haskell
           `additionalKeysP`
@@ -118,6 +124,30 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           , ("<XF86AudioMute>", spawn "pamixer -t" ) ]
 #+end_src
 
+* Mouse keybinds
+#+begin_src haskell
+-- | Mouse bindings: default actions bound to mouse events
+-- | (Taken from XMonad source)
+mouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
+mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
+    -- mod-button1 %! Set the window to floating mode and move by dragging
+    [ ((modMask, button1), \w -> focus w >> mouseMoveWindow w
+                                          >> windows W.shiftMaster)
+    , ((modMask .|. shiftMask, button1), dragWindow)
+    -- mod-button2 %! Raise the window to the top of the stack
+    , ((modMask, button2), windows . (W.shiftMaster .) . W.focusWindow)
+    -- mod-button3 %! Set the window to floating mode and resize by dragging
+    , ((modMask, button3), \w -> focus w >> mouseResizeWindow w
+                                         >> windows W.shiftMaster)
+    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    , ((modMask, button4), \w -> focus w >> windows W.swapUp)
+    , ((modMask, button5), \w -> focus w >> windows W.swapDown)
+    -- , ((modMask, button8), \w -> focus w >> windows W.focusUp
+    --                                      >> updPointer)
+    -- , ((modMask, button9), \w -> focus w >> windows W.focusDown
+    --                                      >> updPointer)
+    ]
+#+end_src
 
 * Misc
 ** iconPath function
@@ -139,7 +169,10 @@ instance Transformer Main.StdTransformers Window where
 Each layouts name has been replaced with an icon using the [[*iconPath function][iconPath function]] and the renamed module from XMonad-Contrib.
 - These layouts are mostly the default XMonad layouts.
 #+begin_src haskell
-myLayoutHook = mkToggle (Main.FULL ?? EOT) $ avoidStruts (tiled ||| mtiled ||| full)
+myLayoutHook = mkToggle (Main.FULL ?? EOT)
+               $ avoidStruts
+               $ draggingVisualizer
+               (tiled ||| mtiled ||| full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = renamed [Replace $ iconPath "layout-tiled.xbm"] $ Tall nmaster delta ratio
