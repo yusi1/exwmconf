@@ -1,5 +1,6 @@
 #+TITLE: Doom Emacs Configuration
 #+AUTHOR: Yusef Aslam
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+PROPERTY: header-args :tangle config.el
 #+auto_tangle: t
 #+STARTUP: overview
