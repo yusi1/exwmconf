@@ -116,7 +116,7 @@
 ;; enhancements to info mode
 (require 'info+)
 
-(after! dashboard
+(after! dash
   ;; get rid of org-agenda section in doom dashboard
   (setq +doom-dashboard-menu-sections
         '(("Reload last session"
