@@ -3,7 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Yusef Aslam"
@@ -44,6 +43,21 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+;; ui stuff
+(delete-selection-mode 1)
+(ffap-bindings)
+(add-to-list 'default-frame-alist '(internal-border-width . 10))
+;; (map! "<f12>" 'modus-themes-toggle)
+
+;; fish shell completions
+(when (and (executable-find "fish")
+           (require 'fish-completion nil t))
+  (global-fish-completion-mode))
+
+;; load path additions
+(let ((dir doom-user-dir))
+  (add-to-list 'load-path (concat dir "lisp"))
+  (add-to-list 'load-path (concat dir "lisp/ysz-addons/")))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -77,21 +91,21 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; ui stuff
-(delete-selection-mode 1)
-(ffap-bindings)
-(add-to-list 'default-frame-alist '(internal-border-width . 10))
-;; (map! "<f12>" 'modus-themes-toggle)
-
-;; fish shell completions
-(when (and (executable-find "fish")
-           (require 'fish-completion nil t))
-  (global-fish-completion-mode))
-
-;; load path additions
-(let ((dir doom-user-dir))
-  (add-to-list 'load-path (concat dir "lisp"))
-  (add-to-list 'load-path (concat dir "lisp/ysz-addons/")))
+;;; eshell fixes
+;; turn off company-mode in eshell buffers since it is slow
+(add-hook! 'eshell-mode-hook (company-mode -1))
+;; (add-hook 'eshell-mode-hook (lambda () (company-mode -1)))
+;; bind `C-x C-f' to `find-file' instead of `company-files'
+;; in eshell buffers
+(add-hook! 'eshell-mode-hook
+   (with-current-buffer (current-buffer)
+           (when (derived-mode-p 'eshell-mode)
+             (map! :map evil-insert-state-map
+                     "C-x C-f" 'find-file))))
+;; eshell-visual-commands -- open these commands in a term buffer
+(setq eshell-visual-commands
+       (quote
+        ("/usr/local/bin/crontab" "vi" "screen" "top" "less" "more" "lynx" "ncftp" "pine" "tin" "trn" "elm" "tmux" "nano")))
 
 ;; my keybind addons
 (require 'ysz-keybinds)
@@ -102,36 +116,37 @@
 ;; enhancements to info mode
 (require 'info+)
 
-;; get rid of org-agenda section in doom dashboard
-(setq +doom-dashboard-menu-sections
-      '(("Reload last session"
-         :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
-         :when (cond ((modulep! :ui workspaces)
-                      (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
-                     ((require 'desktop nil t)
-                      (file-exists-p (desktop-full-file-name))))
-         :face (:inherit (doom-dashboard-menu-title bold))
-         :action doom/quickload-session)
-        ;; ("Open org-agenda"
-        ;;  :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
-        ;;  :when (fboundp 'org-agenda)
-        ;;  :action org-agenda)
-        ("Recently opened files"
-         :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
-         :action recentf-open-files)
-        ("Open project"
-         :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
-         :action projectile-switch-project)
-        ("Jump to bookmark"
-         :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
-         :action bookmark-jump)
-        ("Open private configuration"
-         :icon (all-the-icons-octicon "tools" :face 'doom-dashboard-menu-title)
-         :when (file-directory-p doom-user-dir)
-         :action doom/open-private-config)
-        ("Open documentation"
-         :icon (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
-         :action doom/help)))
+(after! dashboard
+  ;; get rid of org-agenda section in doom dashboard
+  (setq +doom-dashboard-menu-sections
+        '(("Reload last session"
+           :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
+           :when (cond ((modulep! :ui workspaces)
+                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                       ((require 'desktop nil t)
+                        (file-exists-p (desktop-full-file-name))))
+           :face (:inherit (doom-dashboard-menu-title bold))
+           :action doom/quickload-session)
+          ;; ("Open org-agenda"
+          ;;  :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
+          ;;  :when (fboundp 'org-agenda)
+          ;;  :action org-agenda)
+          ("Recently opened files"
+           :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
+           :action recentf-open-files)
+          ("Open project"
+           :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
+           :action projectile-switch-project)
+          ("Jump to bookmark"
+           :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
+           :action bookmark-jump)
+          ("Open private configuration"
+           :icon (all-the-icons-octicon "tools" :face 'doom-dashboard-menu-title)
+           :when (file-directory-p doom-user-dir)
+           :action doom/open-private-config)
+          ("Open documentation"
+           :icon (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
+           :action doom/help))))
 
 (after! erc
   ;; Use authinfo instead of prompting for passwords.
@@ -201,27 +216,10 @@ QUERY is the query to search for in the logs."
     (interactive)
     (erc-tls :server "freebsd-oldman.home" :port 3000 :nick "zncadmin" :user "zncadmin@laptop-emacs/libera" :password "ZNCIRC43521.")))
 
-
 (after! znc
   (require 'znc)
   (setq znc-servers '(("freebsd-oldman.home" 3000 t
                        ((libera "zncadmin@laptop-emacs" "ZNCIRC43521."))))))
-
-;;; eshell fixes
-;; turn off company-mode in eshell buffers since it is slow
-(add-hook! 'eshell-mode-hook (company-mode -1))
-;; (add-hook 'eshell-mode-hook (lambda () (company-mode -1)))
-;; bind `C-x C-f' to `find-file' instead of `company-files'
-;; in eshell buffers
-(add-hook! 'eshell-mode-hook
-   (with-current-buffer (current-buffer)
-           (when (derived-mode-p 'eshell-mode)
-             (map! :map evil-insert-state-map
-                     "C-x C-f" 'find-file))))
-;; eshell-visual-commands -- open these commands in a term buffer
-(setq eshell-visual-commands
-       (quote
-        ("/usr/local/bin/crontab" "vi" "screen" "top" "less" "more" "lynx" "ncftp" "pine" "tin" "trn" "elm" "tmux" "nano")))
 
 (use-package! cape
   :config
@@ -313,8 +311,6 @@ QUERY is the query to search for in the logs."
         (kbd "?") 'hydra:bufler/body
         "f" 'bufler-list-group-frame
         "F" 'bufler-list-group-make-frame))
-
-(after! charge)
 
 (after! minions
   (require 'minions)
