@@ -124,7 +124,7 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           , ("<XF86AudioMute>", spawn "pamixer -t" ) ]
 #+end_src
 
-* Mouse keybinds
+** Mouse keybinds
 #+begin_src haskell
 -- | Mouse bindings: default actions bound to mouse events
 -- | (Taken from XMonad source)
