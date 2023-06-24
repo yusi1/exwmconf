@@ -2,6 +2,7 @@
 #+AUTHOR: Yusef Aslam
 #+PROPERTY: header-args :tangle config.el
 #+auto_tangle: t
+#+STARTUP: overview
 
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
