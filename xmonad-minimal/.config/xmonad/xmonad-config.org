@@ -120,11 +120,13 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
 
 
 * Misc
-- This function is used to make specifiying icons for layouts or transformers easier because I don't have to specify an entire path everytime.
+** iconPath function
++ This function is used to make specifiying icons for layouts or transformers easier because I don't have to specify an entire path everytime.
 #+begin_src haskell
 iconPath a = "<icon=/home/yaslam/.config/xmobar/icons/" ++ a ++ "/>"
 #+end_src
-- This is a layout transformer that I took from the XMonad source code and edited slightly to change the name into an icon. A layout transformer is a layout that you can dynamically apply to any layout that you are using in XMonad, like for example, you press Alt-f for a temporary fullscreen layout transformer on the current window.
+** Slightly modified layout transformer
++ This is a layout transformer that I took from the [[https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/src/XMonad.Layout.MultiToggle.Instances.html#StdTransformers][XMonad-Contrib source code]] and edited slightly to change the name into an icon. A layout transformer is a layout that you can dynamically apply to any layout that you are using in XMonad, like for example, you press Alt-f for a temporary fullscreen layout transformer on the current window.
 #+begin_src haskell
 data StdTransformers = FULL          -- ^ switch to Full layout
   deriving (Read, Show, Eq)
@@ -134,7 +136,7 @@ instance Transformer Main.StdTransformers Window where
 #+end_src
 
 * Layouts
-Each layouts name has been replaced with an icon which you can see below.
+Each layouts name has been replaced with an icon using the [[*iconPath function][iconPath function]] and the renamed module from XMonad-Contrib.
 - These layouts are mostly the default XMonad layouts.
 #+begin_src haskell
 myLayoutHook = mkToggle (Main.FULL ?? EOT) $ avoidStruts (tiled ||| mtiled ||| full)
@@ -189,6 +191,7 @@ mapAt r = ask >>= \w -> liftX (tileWindow w r $> mempty)
 #+end_src
 
 * Managehook
+This is where you specify how windows will be shown by XMonad (e.g: the workspace it will be shown on, whether it's floating or tiled etc..)
 #+begin_src haskell
 myManageHook :: ManageHook
 myManageHook = composeAll $
