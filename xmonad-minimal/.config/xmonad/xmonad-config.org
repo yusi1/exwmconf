@@ -165,7 +165,7 @@ instance Transformer Main.StdTransformers Window where
     transform Main.FULL         x k = k (renamed [Replace $ iconPath "layout-full.xbm"] Full) (const x)
 #+end_src
 
-* Layouts
+* Layouthook
 Each layouts name has been replaced with an icon using the [[*iconPath function][iconPath function]] and the renamed module from XMonad-Contrib.
 - These layouts are mostly the default XMonad layouts.
 #+begin_src haskell
