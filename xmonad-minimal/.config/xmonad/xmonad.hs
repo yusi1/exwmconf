@@ -2,22 +2,30 @@
   {-# LANGUAGE TypeSynonymInstances #-}
   {-# LANGUAGE MultiParamTypeClasses #-}
 
-
 import XMonad
+
 import qualified XMonad.StackSet as W
+
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.DynamicIcons
+
 import XMonad.Util.EZConfig
 import qualified XMonad.Util.ExtensibleState as XS
 import XMonad.Util.Loggers
+
+import XMonad.Actions.TiledWindowDragging
+
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.Renamed
+import XMonad.Layout.DraggingVisualizer
+
 import qualified Data.Set as S
+import qualified Data.Map as M
 import Data.Foldable (for_)
 import Data.Functor
 
@@ -50,7 +58,6 @@ myPP = def { ppCurrent = xmobarColor "yellow" "" . wrap "[" " ]"
             formatFocused = wrap "[" "]" . xmobarColor "#ff79c6" "" . shorten 50 . xmobarStrip
             formatUnfocused = wrap "(" ")" . xmobarColor "#bd93f9" "" . shorten 30 . xmobarStrip
 
-
 main :: IO ()
 main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsKey def
           { modMask = mod1Mask
@@ -59,7 +66,9 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           , manageHook = myManageHook
           , layoutHook = myLayoutHook
           , logHook = raiseSaved
+          , XMonad.mouseBindings = Main.mouseBindings
           }
+
           `additionalKeysP`
           [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
           , ("M-f", sendMessage $ Toggle Main.FULL)
@@ -67,6 +76,27 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           , ("<XF86AudioLowerVolume>", spawn "pamixer -d2" )
           , ("<XF86AudioMute>", spawn "pamixer -t" ) ]
 
+-- | Mouse bindings: default actions bound to mouse events
+-- | (Taken from XMonad source)
+mouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
+mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
+    -- mod-button1 %! Set the window to floating mode and move by dragging
+    [ ((modMask, button1), \w -> focus w >> mouseMoveWindow w
+                                          >> windows W.shiftMaster)
+    , ((modMask .|. shiftMask, button1), dragWindow)
+    -- mod-button2 %! Raise the window to the top of the stack
+    , ((modMask, button2), windows . (W.shiftMaster .) . W.focusWindow)
+    -- mod-button3 %! Set the window to floating mode and resize by dragging
+    , ((modMask, button3), \w -> focus w >> mouseResizeWindow w
+                                         >> windows W.shiftMaster)
+    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    , ((modMask, button4), \w -> focus w >> windows W.swapUp)
+    , ((modMask, button5), \w -> focus w >> windows W.swapDown)
+    -- , ((modMask, button8), \w -> focus w >> windows W.focusUp
+    --                                      >> updPointer)
+    -- , ((modMask, button9), \w -> focus w >> windows W.focusDown
+    --                                      >> updPointer)
+    ]
 
 iconPath a = "<icon=/home/yaslam/.config/xmobar/icons/" ++ a ++ "/>"
 
@@ -76,7 +106,10 @@ data StdTransformers = FULL          -- ^ switch to Full layout
 instance Transformer Main.StdTransformers Window where
     transform Main.FULL         x k = k (renamed [Replace $ iconPath "layout-full.xbm"] Full) (const x)
 
-myLayoutHook = mkToggle (Main.FULL ?? EOT) $ avoidStruts (tiled ||| mtiled ||| full)
+myLayoutHook = mkToggle (Main.FULL ?? EOT)
+               $ avoidStruts
+               $ draggingVisualizer
+               (tiled ||| mtiled ||| full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = renamed [Replace $ iconPath "layout-tiled.xbm"] $ Tall nmaster delta ratio
