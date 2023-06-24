@@ -108,13 +108,12 @@ instance Transformer Main.StdTransformers Window where
 
 myLayoutHook = mkToggle (Main.FULL ?? EOT)
                $ avoidStruts
-               $ draggingVisualizer
                (tiled ||| mtiled ||| full)
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = renamed [Replace $ iconPath "layout-tiled.xbm"] $ Tall nmaster delta ratio
+     tiled   = renamed [Replace $ iconPath "layout-tiled.xbm"] $ draggingVisualizer $ Tall nmaster delta ratio
 
-     mtiled   = renamed [Replace $ iconPath "layout-mtiled.xbm"] $ Mirror tiled
+     mtiled   = renamed [Replace $ iconPath "layout-mtiled.xbm"] $ draggingVisualizer $ Mirror tiled
 
      full = renamed [Replace $ iconPath "layout-full.xbm"] $ Full
 
