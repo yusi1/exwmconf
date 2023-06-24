@@ -162,7 +162,7 @@
 ** Dashboard tweaks
 I don't use org-agenda so I removed that section from doom-dashboard.
 #+begin_src emacs-lisp
-(after! dashboard
+(after! dash
   ;; get rid of org-agenda section in doom dashboard
   (setq +doom-dashboard-menu-sections
         '(("Reload last session"
