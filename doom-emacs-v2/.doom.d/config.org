@@ -75,7 +75,9 @@
 (ffap-bindings)
 (add-to-list 'default-frame-alist '(internal-border-width . 10))
 ;; (map! "<f12>" 'modus-themes-toggle)
-
+#+end_src
+** Fish completion
+#+begin_src emacs-lisp
 ;; fish shell completions
 (when (and (executable-find "fish")
            (require 'fish-completion nil t))
