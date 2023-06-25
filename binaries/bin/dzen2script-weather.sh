@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 while true; do
     if [ ! -f /tmp/weather ]; then
         WEATHER="$(curl wttr.in/Turriff?0T | head -n8 > /tmp/weather)"

@@ -5,5 +5,3 @@ while true; do
     echo "^p(1650)$STR_RIGHT"
     sleep 1
 done | dzen2
-
-
