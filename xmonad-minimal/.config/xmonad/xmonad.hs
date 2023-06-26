@@ -68,6 +68,8 @@ main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsK
           , manageHook = myManageHook
           , layoutHook = myLayoutHook
           , logHook = raiseSaved
+          , handleEventHook = handleEventHook def
+                              <> Hacks.trayerPaddingXmobarEventHook
           , XMonad.mouseBindings = Main.mouseBindings
           }
 
