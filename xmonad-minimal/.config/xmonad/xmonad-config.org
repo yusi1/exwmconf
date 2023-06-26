@@ -64,6 +64,11 @@ import Data.Foldable (for_)
 import Data.Functor
 #+end_src
 
+** Hacks
+#+begin_src haskell
+import qualified XMonad.Util.Hacks as Hacks
+#+end_src
+
 * AppIcon configuration
 These are icons for applications that are shown in XMobar next to the workspace number.
 #+begin_src haskell
