@@ -29,6 +29,8 @@ import qualified Data.Map as M
 import Data.Foldable (for_)
 import Data.Functor
 
+import qualified XMonad.Util.Hacks as Hacks
+
 myIcons :: Query [String]
 myIcons = composeAll
   [ className =? "Chromium" --> appIcon "\xf268"
