@@ -2,7 +2,10 @@ Xft.dpi: 120
 
 xterm*background: black
 xterm*foreground: lightgrey
-xterm*font: -misc-fixed-*-*-*-*-20-*-*-*-*-*-*-*
+/* xterm*font: -misc-fixed-*-*-*-*-20-*-*-*-*-*-*-* */
+/* xterm*font: -xos4-terminus-bold-*-*-*-28-*-*-*-*-*-*-* */
+xterm*font: -misc-fixed-bold-*-*-*-18-*-*-*-*-*-*-*
+/* xterm*faceName: spleen:pixelsize=24:antialias=false */
 
 !emacs
 ! Xft.rgba: none
