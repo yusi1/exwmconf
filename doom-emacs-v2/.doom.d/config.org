@@ -444,19 +444,20 @@ Lin provides a customizable alternative to hl-line.
   (minions-mode 1))
 #+end_src
 
-*** Org-auto-tangle
-#+begin_src emacs-lisp
-(use-package! org-auto-tangle
-  :defer t
-  :hook (org-mode . org-auto-tangle-mode))
-#+end_src
-
 *** Treemacs
 #+begin_src emacs-lisp
 (after! treemacs)
 #+end_src
 
 ** Utilities
+*** Org-auto-tangle
+Automatically tangle an Org file on save, rather than having to do it manually.
+#+begin_src emacs-lisp
+(use-package! org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+#+end_src
+
 *** Bufler
 #+begin_src emacs-lisp
 (after! bufler
