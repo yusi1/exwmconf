@@ -83,3 +83,6 @@
 (package! beacon)
 
 (package! org-auto-tangle)
+
+(package! clippy)
+
