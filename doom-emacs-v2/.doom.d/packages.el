@@ -86,3 +86,5 @@
 
 (package! clippy)
 
+
+(package! crux)
