@@ -378,6 +378,9 @@ QUERY is the query to search for in the logs."
 (use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
+
+(after! treemacs)
+
 (after! clippy
   (map! :leader
         (:prefix ("c h" . "Help info from Clippy")
