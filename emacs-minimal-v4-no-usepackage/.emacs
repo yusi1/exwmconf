@@ -25,12 +25,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(hnreader circe general projectile bufler evil-collection pass password-store parinfer-rust-mode magit evil corfu orderless vertico)))
+   '(lua-mode rg ripgrep hnreader circe general projectile bufler evil-collection pass password-store parinfer-rust-mode magit evil corfu orderless vertico)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:weight normal :height 140 :width normal :foundry "PfEd" :family "DejaVu Sans Mono"))))
  '(corfu-default ((t (:background "midnight blue"))))
  '(info-menu-header ((t (:inherit default :underline t :weight bold :height 160 :family "DejaVu Sans Mono"))))
  '(line-number-current-line ((t (:inherit line-number :background "gray16" :foreground "yellow" :weight bold))))
