@@ -352,11 +352,11 @@ QUERY is the query to search for in the logs."
   (require 'minions)
   (minions-mode 1))
 
+(after! treemacs)
+
 (use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
-
-(after! treemacs)
 
 (after! bufler
   (require 'ysz-bufler-config)
