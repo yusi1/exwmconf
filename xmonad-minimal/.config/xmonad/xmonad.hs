@@ -12,6 +12,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.DynamicIcons
+import XMonad.Hooks.Rescreen
 
 import XMonad.Util.EZConfig
 import qualified XMonad.Util.ExtensibleState as XS
