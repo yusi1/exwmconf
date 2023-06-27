@@ -92,3 +92,5 @@ xmonad-minimal/.config/xmonad/dist-newstyle/
 xmonad-minimal/.config/xmonad/xmonad-contrib/
 xmonad-minimal/.config/xmonad/xmonad/
 
+binaries/bin/*.sh
+binaries/bin/xlayout/*.sh
