@@ -32,6 +32,10 @@ import Data.Functor
 
 import qualified XMonad.Util.Hacks as Hacks
 
+myAfterRescreenHook :: X ()
+myAfterRescreenHook = do
+  spawn "~/bin/xlayout/post.sh"
+
 myIcons :: Query [String]
 myIcons = composeAll
   [ className =? "Chromium" --> appIcon "\xf268"
