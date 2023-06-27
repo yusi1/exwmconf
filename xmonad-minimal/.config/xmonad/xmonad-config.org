@@ -70,6 +70,13 @@ import Data.Functor
 import qualified XMonad.Util.Hacks as Hacks
 #+end_src
 
+* Rescreen configuration
+#+begin_src haskell
+myAfterRescreenHook :: X ()
+myAfterRescreenHook = do
+  spawn "~/bin/xlayout/post.sh"
+#+end_src
+
 * AppIcon configuration
 These are icons for applications that are shown in XMobar next to the workspace number.
 #+begin_src haskell
