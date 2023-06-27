@@ -468,6 +468,11 @@ QUERY is the query to search for in the logs."
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
 #+end_src
+
+*** Treemacs
+#+begin_src emacs-lisp
+(after! treemacs)
+#+end_src
 *** Clippy
 #+begin_src emacs-lisp
 (after! clippy
