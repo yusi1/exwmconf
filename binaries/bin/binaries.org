@@ -17,11 +17,11 @@ Scripts that relaunch things. Usually used for when a display is connected/disco
 #+begin_src sh :tangle-mode (identity #o755)  :tangle xlayout/post.sh
 #!/bin/sh
 
-pkill conky && conky -c ~/.config/conky/conky-moregap.conf && conky -c ~/.config/conky/conky-mpd.conf
-nitrogen --restore
+# pkill conky && conky -c ~/.config/conky/conky-moregap.conf && conky -c ~/.config/conky/conky-mpd.conf
+# nitrogen --restore
 
-pkill stalonetray
-/usr/bin/stalonetray
+# pkill stalonetray
+# /usr/bin/stalonetray
 #+end_src
 
 * Dmenu scripts
