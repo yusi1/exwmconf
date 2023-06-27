@@ -99,22 +99,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;;; eshell fixes
-;; turn off company-mode in eshell buffers since it is slow
-(add-hook! 'eshell-mode-hook (company-mode -1))
-;; (add-hook 'eshell-mode-hook (lambda () (company-mode -1)))
-;; bind `C-x C-f' to `find-file' instead of `company-files'
-;; in eshell buffers
-(add-hook! 'eshell-mode-hook
-   (with-current-buffer (current-buffer)
-           (when (derived-mode-p 'eshell-mode)
-             (map! :map evil-insert-state-map
-                     "C-x C-f" 'find-file))))
-;; eshell-visual-commands -- open these commands in a term buffer
-(setq eshell-visual-commands
-       (quote
-        ("/usr/local/bin/crontab" "vi" "screen" "top" "less" "more" "lynx" "ncftp" "pine" "tin" "trn" "elm" "tmux" "nano")))
-
 ;; my keybind addons
 (require 'ysz-keybinds)
 
@@ -124,37 +108,51 @@
 ;; enhancements to info mode
 (require 'info+)
 
-(after! dash
-  ;; get rid of org-agenda section in doom dashboard
-  (setq +doom-dashboard-menu-sections
-        '(("Reload last session"
-           :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
-           :when (cond ((modulep! :ui workspaces)
-                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
-                       ((require 'desktop nil t)
-                        (file-exists-p (desktop-full-file-name))))
-           :face (:inherit (doom-dashboard-menu-title bold))
-           :action doom/quickload-session)
-          ;; ("Open org-agenda"
-          ;;  :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
-          ;;  :when (fboundp 'org-agenda)
-          ;;  :action org-agenda)
-          ("Recently opened files"
-           :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
-           :action recentf-open-files)
-          ("Open project"
-           :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
-           :action projectile-switch-project)
-          ("Jump to bookmark"
-           :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
-           :action bookmark-jump)
-          ("Open private configuration"
-           :icon (all-the-icons-octicon "tools" :face 'doom-dashboard-menu-title)
-           :when (file-directory-p doom-user-dir)
-           :action doom/open-private-config)
-          ("Open documentation"
-           :icon (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
-           :action doom/help))))
+(after! flycheck
+  (setq flycheck-check-syntax-automatically '(save mode-enable)))
+
+(use-package! cape
+  :config
+  ;; Bind dedicated completion commands
+  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+  (map! :g :prefix "C-c ["
+    "p" 'completion-at-point ;; capf
+    "t" 'complete-tag        ;; etags
+    "d" 'cape-dabbrev        ;; or dabbrev-completion
+    "h" 'cape-history
+    "f" 'cape-file
+    "k" 'cape-keyword
+    "s" 'cape-symbol
+    "a" 'cape-abbrev
+    "i" 'cape-ispell
+    "l" 'cape-line
+    "w" 'cape-dict
+    "\\" 'cape-tex
+    "_" 'cape-tex
+    "^" 'cape-tex
+    "&" 'cape-sgml
+    "r" 'cape-rfc1345)
+
+   ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
+
+(use-package! vertico-multiform
+  :load-path "~/.emacs.d/.local/straight/repos/vertico/extensions/"
+  :config
+  (map! :map vertico-map
+    "C-c M-V" 'vertico-multiform-vertical
+    "C-c M-G" 'vertico-multiform-grid
+    "C-c M-F" 'vertico-multiform-flat
+    "C-c M-R" 'vertico-multiform-reverse
+    "C-c M-U" 'vertico-multiform-unobtrusive)
+
+  (setq vertico-multiform-commands
+    '((consult-line buffer)
+      (consult-imenu buffer)))
+       ;; (execute-extended-command flat)))
+
+  (vertico-multiform-mode t))
 
 (after! erc
   ;; Use authinfo instead of prompting for passwords.
@@ -229,32 +227,7 @@ QUERY is the query to search for in the logs."
   (setq znc-servers '(("freebsd-oldman.home" 3000 t
                        ((libera "zncadmin@laptop-emacs" "ZNCIRC43521."))))))
 
-(use-package! cape
-  :config
-  ;; Bind dedicated completion commands
-  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
-  (map! :g :prefix "C-c ["
-    "p" 'completion-at-point ;; capf
-    "t" 'complete-tag        ;; etags
-    "d" 'cape-dabbrev        ;; or dabbrev-completion
-    "h" 'cape-history
-    "f" 'cape-file
-    "k" 'cape-keyword
-    "s" 'cape-symbol
-    "a" 'cape-abbrev
-    "i" 'cape-ispell
-    "l" 'cape-line
-    "w" 'cape-dict
-    "\\" 'cape-tex
-    "_" 'cape-tex
-    "^" 'cape-tex
-    "&" 'cape-sgml
-    "r" 'cape-rfc1345)
-
-   ;; Add `completion-at-point-functions', used by `completion-at-point'.
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file))
-
+(setq org-ellipsis " ▼ ")
 (after! (:and org org-superstar)
   (map! :map org-mode-map "C-c q" 'kill-this-buffer)
 
@@ -281,53 +254,53 @@ QUERY is the query to search for in the logs."
          :html-extension "html"
          :body-only t))))
 
-(after! flycheck
-  (setq flycheck-check-syntax-automatically '(save mode-enable)))
+;;; eshell fixes
+;; turn off company-mode in eshell buffers since it is slow
+(add-hook! 'eshell-mode-hook (company-mode -1))
+;; (add-hook 'eshell-mode-hook (lambda () (company-mode -1)))
+;; bind `C-x C-f' to `find-file' instead of `company-files'
+;; in eshell buffers
+(add-hook! 'eshell-mode-hook
+   (with-current-buffer (current-buffer)
+           (when (derived-mode-p 'eshell-mode)
+             (map! :map evil-insert-state-map
+                     "C-x C-f" 'find-file))))
+;; eshell-visual-commands -- open these commands in a term buffer
+(setq eshell-visual-commands
+       (quote
+        ("/usr/local/bin/crontab" "vi" "screen" "top" "less" "more" "lynx" "ncftp" "pine" "tin" "trn" "elm" "tmux" "nano")))
 
-(use-package! vertico-multiform
-  :load-path "~/.emacs.d/.local/straight/repos/vertico/extensions/"
-  :config
-  (map! :map vertico-map
-    "C-c M-V" 'vertico-multiform-vertical
-    "C-c M-G" 'vertico-multiform-grid
-    "C-c M-F" 'vertico-multiform-flat
-    "C-c M-R" 'vertico-multiform-reverse
-    "C-c M-U" 'vertico-multiform-unobtrusive)
-
-  (setq vertico-multiform-commands
-    '((consult-line buffer)
-      (consult-imenu buffer)))
-       ;; (execute-extended-command flat)))
-
-  (vertico-multiform-mode t))
-
-(after! bufler
-  (require 'ysz-bufler-config)
-  (bufler-mode 1)
-  (bufler-tabs-mode 1)
-  (map! "C-c b" 'bufler-switch-buffer
-        "C-c C-S-b" 'bufler-list)
-
-  (evil-define-key 'normal bufler-list-mode-map
-        "K" 'bufler-list-buffer-kill
-        "gs" 'bufler-list-buffer-save
-        "q" 'quit-window
-        (kbd "RET") 'bufler-list-buffer-switch
-        "n" 'magit-section-forward-sibling
-        "p" 'magit-section-backward-sibling
-        (kbd "TAB") 'magit-section-toggle
-        (kbd "?") 'hydra:bufler/body
-        "f" 'bufler-list-group-frame
-        "F" 'bufler-list-group-make-frame))
-
-(after! minions
-  (require 'minions)
-  (minions-mode 1))
-
-(after! keycast
-  (require 'keycast)
-  (setq keycast-header-line-insert-after 'mode-line-position)
-  (keycast-header-line-mode 1))
+(after! dash
+  ;; get rid of org-agenda section in doom dashboard
+  (setq +doom-dashboard-menu-sections
+        '(("Reload last session"
+           :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
+           :when (cond ((modulep! :ui workspaces)
+                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                       ((require 'desktop nil t)
+                        (file-exists-p (desktop-full-file-name))))
+           :face (:inherit (doom-dashboard-menu-title bold))
+           :action doom/quickload-session)
+          ;; ("Open org-agenda"
+          ;;  :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
+          ;;  :when (fboundp 'org-agenda)
+          ;;  :action org-agenda)
+          ("Recently opened files"
+           :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
+           :action recentf-open-files)
+          ("Open project"
+           :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
+           :action projectile-switch-project)
+          ("Jump to bookmark"
+           :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
+           :action bookmark-jump)
+          ("Open private configuration"
+           :icon (all-the-icons-octicon "tools" :face 'doom-dashboard-menu-title)
+           :when (file-directory-p doom-user-dir)
+           :action doom/open-private-config)
+          ("Open documentation"
+           :icon (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
+           :action doom/help))))
 
 (use-package! lin
   :init
@@ -375,11 +348,39 @@ QUERY is the query to search for in the logs."
   (setq beacon-blink-when-point-moves-vertically nil)
   (beacon-mode 1))
 
+(after! minions
+  (require 'minions)
+  (minions-mode 1))
+
 (use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
 
 (after! treemacs)
+
+(after! bufler
+  (require 'ysz-bufler-config)
+  (bufler-mode 1)
+  (bufler-tabs-mode 1)
+  (map! "C-c b" 'bufler-switch-buffer
+        "C-c C-S-b" 'bufler-list)
+
+  (evil-define-key 'normal bufler-list-mode-map
+        "K" 'bufler-list-buffer-kill
+        "gs" 'bufler-list-buffer-save
+        "q" 'quit-window
+        (kbd "RET") 'bufler-list-buffer-switch
+        "n" 'magit-section-forward-sibling
+        "p" 'magit-section-backward-sibling
+        (kbd "TAB") 'magit-section-toggle
+        (kbd "?") 'hydra:bufler/body
+        "f" 'bufler-list-group-frame
+        "F" 'bufler-list-group-make-frame))
+
+(after! keycast
+  (require 'keycast)
+  (setq keycast-header-line-insert-after 'mode-line-position)
+  (keycast-header-line-mode 1))
 
 (after! clippy
   (map! :leader
