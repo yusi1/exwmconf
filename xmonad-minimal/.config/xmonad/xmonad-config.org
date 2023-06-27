@@ -116,7 +116,12 @@ myPP = def { ppCurrent = xmobarColor "yellow" "" . wrap "[" " ]"
 * Main block
 #+begin_src haskell
 main :: IO ()
-main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsKey def
+main = xmonad
+       . docks
+       . ewmhFullscreen
+       . ewmh
+       . addAfterRescreenHook myAfterRescreenHook
+       $ withEasySB mySB defToggleStrutsKey def
           { modMask = mod1Mask
           , terminal = "xterm"
           , borderWidth = 2
