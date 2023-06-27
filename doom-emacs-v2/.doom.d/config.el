@@ -383,3 +383,6 @@ QUERY is the query to search for in the logs."
         (:prefix ("c h" . "Help info from Clippy")
          :desc "Clippy describes function under point" "f" #'clippy-describe-function
          :desc "Clippy describes variable under point" "v" #'clippy-describe-variable)))
+
+(after! crux
+  (map! "C-c o" 'crux-open-with))
