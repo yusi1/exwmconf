@@ -175,6 +175,7 @@ mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
 #+begin_src haskell
 iconPath a = "<icon=/home/yaslam/.config/xmobar/icons/" ++ a ++ "/>"
 #+end_src
+
 ** Slightly modified layout transformer
 + This is a layout transformer that I took from the [[https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/src/XMonad.Layout.MultiToggle.Instances.html#StdTransformers][XMonad-Contrib source code]] and edited slightly to change the name into an icon. A layout transformer is a layout that you can dynamically apply to any layout that you are using in XMonad, like for example, you press Alt-f for a temporary fullscreen layout transformer on the current window.
 #+begin_src haskell
