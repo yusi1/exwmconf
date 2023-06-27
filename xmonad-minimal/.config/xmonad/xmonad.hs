@@ -66,7 +66,12 @@ myPP = def { ppCurrent = xmobarColor "yellow" "" . wrap "[" " ]"
             formatUnfocused = wrap "(" ")" . xmobarColor "#bd93f9" "" . shorten 30 . xmobarStrip
 
 main :: IO ()
-main = xmonad . docks . ewmhFullscreen . ewmh $ withEasySB mySB defToggleStrutsKey def
+main = xmonad
+       . docks
+       . ewmhFullscreen
+       . ewmh
+       . addAfterRescreenHook myAfterRescreenHook
+       $ withEasySB mySB defToggleStrutsKey def
           { modMask = mod1Mask
           , terminal = "xterm"
           , borderWidth = 2
