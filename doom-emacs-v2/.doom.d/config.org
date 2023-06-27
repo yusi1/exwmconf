@@ -476,3 +476,10 @@ QUERY is the query to search for in the logs."
          :desc "Clippy describes function under point" "f" #'clippy-describe-function
          :desc "Clippy describes variable under point" "v" #'clippy-describe-variable)))
 #+end_src
+
+*** Crux
+A Collection of Ridiculously Useful eXtensions for EMacs.
+#+begin_src emacs-lisp
+(after! crux
+  (map! "C-c o" 'crux-open-with))
+#+end_src
