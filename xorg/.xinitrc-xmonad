@@ -8,4 +8,6 @@ xsettingsd -c ~/.xsettingsd-twm &
 dbus-run-session -- wireplumber &
 dbus-run-session -- pipewire &
 dbus-run-session -- pipewire-pulse &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent false --height 17 --width 4 --alpha 0 --tint 0x000000 --transparent true &
+xsettingsd -c ~/.xsettingsd-twm &
 exec dbus-run-session -- ~/.cache/xmonad/xmonad-x86_64-linux
