@@ -57,6 +57,7 @@
 #+end_src
 
 * Theme
+** Colourscheme
 #+begin_src emacs-lisp
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -64,7 +65,7 @@
 (setq doom-theme 'doom-one)
 #+end_src
 
-* Line numbers
+** Line numbers
 #+begin_src emacs-lisp
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -137,25 +138,6 @@
 ;; they are implemented.
 #+end_src
 
-** Eshell tweaks
-#+begin_src emacs-lisp
-;;; eshell fixes
-;; turn off company-mode in eshell buffers since it is slow
-(add-hook! 'eshell-mode-hook (company-mode -1))
-;; (add-hook 'eshell-mode-hook (lambda () (company-mode -1)))
-;; bind `C-x C-f' to `find-file' instead of `company-files'
-;; in eshell buffers
-(add-hook! 'eshell-mode-hook
-   (with-current-buffer (current-buffer)
-           (when (derived-mode-p 'eshell-mode)
-             (map! :map evil-insert-state-map
-                     "C-x C-f" 'find-file))))
-;; eshell-visual-commands -- open these commands in a term buffer
-(setq eshell-visual-commands
-       (quote
-        ("/usr/local/bin/crontab" "vi" "screen" "top" "less" "more" "lynx" "ncftp" "pine" "tin" "trn" "elm" "tmux" "nano")))
-#+end_src
-
 ** Misc. packages
 #+begin_src emacs-lisp
 ;; my keybind addons
@@ -168,43 +150,69 @@
 (require 'info+)
 #+end_src
 
-** Dashboard tweaks
-I don't use org-agenda so I removed that section from doom-dashboard.
+** Temp. packages
+This is where I store configs for packages that I don't know which heading to put under yet, the package will be refiled under the appropriate heading some other time.
+** Code linting
+*** Flycheck
 #+begin_src emacs-lisp
-(after! dash
-  ;; get rid of org-agenda section in doom dashboard
-  (setq +doom-dashboard-menu-sections
-        '(("Reload last session"
-           :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
-           :when (cond ((modulep! :ui workspaces)
-                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
-                       ((require 'desktop nil t)
-                        (file-exists-p (desktop-full-file-name))))
-           :face (:inherit (doom-dashboard-menu-title bold))
-           :action doom/quickload-session)
-          ;; ("Open org-agenda"
-          ;;  :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
-          ;;  :when (fboundp 'org-agenda)
-          ;;  :action org-agenda)
-          ("Recently opened files"
-           :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
-           :action recentf-open-files)
-          ("Open project"
-           :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
-           :action projectile-switch-project)
-          ("Jump to bookmark"
-           :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
-           :action bookmark-jump)
-          ("Open private configuration"
-           :icon (all-the-icons-octicon "tools" :face 'doom-dashboard-menu-title)
-           :when (file-directory-p doom-user-dir)
-           :action doom/open-private-config)
-          ("Open documentation"
-           :icon (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
-           :action doom/help))))
+(after! flycheck
+  (setq flycheck-check-syntax-automatically '(save mode-enable)))
 #+end_src
 
-** Erc
+** Completion
+*** Cape
+CAPE (Completion At Point Extensions) provides a way to complete things like file names and other stuff.
+#+begin_src emacs-lisp
+(use-package! cape
+  :config
+  ;; Bind dedicated completion commands
+  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+  (map! :g :prefix "C-c ["
+    "p" 'completion-at-point ;; capf
+    "t" 'complete-tag        ;; etags
+    "d" 'cape-dabbrev        ;; or dabbrev-completion
+    "h" 'cape-history
+    "f" 'cape-file
+    "k" 'cape-keyword
+    "s" 'cape-symbol
+    "a" 'cape-abbrev
+    "i" 'cape-ispell
+    "l" 'cape-line
+    "w" 'cape-dict
+    "\\" 'cape-tex
+    "_" 'cape-tex
+    "^" 'cape-tex
+    "&" 'cape-sgml
+    "r" 'cape-rfc1345)
+
+   ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
+#+end_src
+
+*** Vertico multiform
+Vertico has extensions to dynamically change what the completion area looks like, I define keybinds for it here and also what commands will use which style.
+#+begin_src emacs-lisp
+(use-package! vertico-multiform
+  :load-path "~/.emacs.d/.local/straight/repos/vertico/extensions/"
+  :config
+  (map! :map vertico-map
+    "C-c M-V" 'vertico-multiform-vertical
+    "C-c M-G" 'vertico-multiform-grid
+    "C-c M-F" 'vertico-multiform-flat
+    "C-c M-R" 'vertico-multiform-reverse
+    "C-c M-U" 'vertico-multiform-unobtrusive)
+
+  (setq vertico-multiform-commands
+    '((consult-line buffer)
+      (consult-imenu buffer)))
+       ;; (execute-extended-command flat)))
+
+  (vertico-multiform-mode t))
+#+end_src
+
+** IRC
+*** Erc
 #+begin_src emacs-lisp
 (after! erc
   ;; Use authinfo instead of prompting for passwords.
@@ -275,7 +283,7 @@ QUERY is the query to search for in the logs."
     (erc-tls :server "freebsd-oldman.home" :port 3000 :nick "zncadmin" :user "zncadmin@laptop-emacs/libera" :password "ZNCIRC43521.")))
 #+end_src
 
-** Znc
+*** Znc
 #+begin_src emacs-lisp
 (after! znc
   (require 'znc)
@@ -283,37 +291,10 @@ QUERY is the query to search for in the logs."
                        ((libera "zncadmin@laptop-emacs" "ZNCIRC43521."))))))
 #+end_src
 
-** Cape
+** Language config
+*** Org
 #+begin_src emacs-lisp
-(use-package! cape
-  :config
-  ;; Bind dedicated completion commands
-  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
-  (map! :g :prefix "C-c ["
-    "p" 'completion-at-point ;; capf
-    "t" 'complete-tag        ;; etags
-    "d" 'cape-dabbrev        ;; or dabbrev-completion
-    "h" 'cape-history
-    "f" 'cape-file
-    "k" 'cape-keyword
-    "s" 'cape-symbol
-    "a" 'cape-abbrev
-    "i" 'cape-ispell
-    "l" 'cape-line
-    "w" 'cape-dict
-    "\\" 'cape-tex
-    "_" 'cape-tex
-    "^" 'cape-tex
-    "&" 'cape-sgml
-    "r" 'cape-rfc1345)
-
-   ;; Add `completion-at-point-functions', used by `completion-at-point'.
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file))
-#+end_src
-
-** Org
-#+begin_src emacs-lisp
+(setq org-ellipsis " ▼ ")
 (after! (:and org org-superstar)
   (map! :map org-mode-map "C-c q" 'kill-this-buffer)
 
@@ -341,70 +322,64 @@ QUERY is the query to search for in the logs."
          :body-only t))))
 #+end_src
 
-** Flycheck
+** Theming
+*** Eshell tweaks
 #+begin_src emacs-lisp
-(after! flycheck
-  (setq flycheck-check-syntax-automatically '(save mode-enable)))
+;;; eshell fixes
+;; turn off company-mode in eshell buffers since it is slow
+(add-hook! 'eshell-mode-hook (company-mode -1))
+;; (add-hook 'eshell-mode-hook (lambda () (company-mode -1)))
+;; bind `C-x C-f' to `find-file' instead of `company-files'
+;; in eshell buffers
+(add-hook! 'eshell-mode-hook
+   (with-current-buffer (current-buffer)
+           (when (derived-mode-p 'eshell-mode)
+             (map! :map evil-insert-state-map
+                     "C-x C-f" 'find-file))))
+;; eshell-visual-commands -- open these commands in a term buffer
+(setq eshell-visual-commands
+       (quote
+        ("/usr/local/bin/crontab" "vi" "screen" "top" "less" "more" "lynx" "ncftp" "pine" "tin" "trn" "elm" "tmux" "nano")))
 #+end_src
 
-** Vertico multiform
+*** Dashboard tweaks
+I don't use org-agenda so I removed that section from doom-dashboard.
 #+begin_src emacs-lisp
-(use-package! vertico-multiform
-  :load-path "~/.emacs.d/.local/straight/repos/vertico/extensions/"
-  :config
-  (map! :map vertico-map
-    "C-c M-V" 'vertico-multiform-vertical
-    "C-c M-G" 'vertico-multiform-grid
-    "C-c M-F" 'vertico-multiform-flat
-    "C-c M-R" 'vertico-multiform-reverse
-    "C-c M-U" 'vertico-multiform-unobtrusive)
-
-  (setq vertico-multiform-commands
-    '((consult-line buffer)
-      (consult-imenu buffer)))
-       ;; (execute-extended-command flat)))
-
-  (vertico-multiform-mode t))
+(after! dash
+  ;; get rid of org-agenda section in doom dashboard
+  (setq +doom-dashboard-menu-sections
+        '(("Reload last session"
+           :icon (all-the-icons-octicon "history" :face 'doom-dashboard-menu-title)
+           :when (cond ((modulep! :ui workspaces)
+                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                       ((require 'desktop nil t)
+                        (file-exists-p (desktop-full-file-name))))
+           :face (:inherit (doom-dashboard-menu-title bold))
+           :action doom/quickload-session)
+          ;; ("Open org-agenda"
+          ;;  :icon (all-the-icons-octicon "calendar" :face 'doom-dashboard-menu-title)
+          ;;  :when (fboundp 'org-agenda)
+          ;;  :action org-agenda)
+          ("Recently opened files"
+           :icon (all-the-icons-octicon "file-text" :face 'doom-dashboard-menu-title)
+           :action recentf-open-files)
+          ("Open project"
+           :icon (all-the-icons-octicon "briefcase" :face 'doom-dashboard-menu-title)
+           :action projectile-switch-project)
+          ("Jump to bookmark"
+           :icon (all-the-icons-octicon "bookmark" :face 'doom-dashboard-menu-title)
+           :action bookmark-jump)
+          ("Open private configuration"
+           :icon (all-the-icons-octicon "tools" :face 'doom-dashboard-menu-title)
+           :when (file-directory-p doom-user-dir)
+           :action doom/open-private-config)
+          ("Open documentation"
+           :icon (all-the-icons-octicon "book" :face 'doom-dashboard-menu-title)
+           :action doom/help))))
 #+end_src
 
-** Bufler
-#+begin_src emacs-lisp
-(after! bufler
-  (require 'ysz-bufler-config)
-  (bufler-mode 1)
-  (bufler-tabs-mode 1)
-  (map! "C-c b" 'bufler-switch-buffer
-        "C-c C-S-b" 'bufler-list)
-
-  (evil-define-key 'normal bufler-list-mode-map
-        "K" 'bufler-list-buffer-kill
-        "gs" 'bufler-list-buffer-save
-        "q" 'quit-window
-        (kbd "RET") 'bufler-list-buffer-switch
-        "n" 'magit-section-forward-sibling
-        "p" 'magit-section-backward-sibling
-        (kbd "TAB") 'magit-section-toggle
-        (kbd "?") 'hydra:bufler/body
-        "f" 'bufler-list-group-frame
-        "F" 'bufler-list-group-make-frame))
-#+end_src
-
-** Minions
-#+begin_src emacs-lisp
-(after! minions
-  (require 'minions)
-  (minions-mode 1))
-#+end_src
-
-** Keycast
-#+begin_src emacs-lisp
-(after! keycast
-  (require 'keycast)
-  (setq keycast-header-line-insert-after 'mode-line-position)
-  (keycast-header-line-mode 1))
-#+end_src
-
-** Lin
+*** Lin
+Lin provides a customizable alternative to hl-line.
 #+begin_src emacs-lisp
 (use-package! lin
   :init
@@ -435,14 +410,14 @@ QUERY is the query to search for in the logs."
   (lin-global-mode 1))
 #+end_src
 
-** Ef-themes
+*** Ef-themes
 #+begin_src emacs-lisp
 ;; (after! ef-themes
 ;;   (setq ef-themes-to-toggle '(ef-day ef-dark))
 ;;   (map! "<f12>" 'ef-themes-toggle))
 #+end_src
 
-** Doom-modeline
+*** Doom-modeline
 #+begin_src emacs-lisp
 (use-package! doom-modeline
   :config
@@ -452,7 +427,7 @@ QUERY is the query to search for in the logs."
   (setq doom-modeline-height 10))
 #+end_src
 
-** Beacon
+*** Beacon
 #+begin_src emacs-lisp
 (use-package! beacon
   :config
@@ -462,7 +437,14 @@ QUERY is the query to search for in the logs."
   (beacon-mode 1))
 #+end_src
 
-** Org-auto-tangle
+*** Minions
+#+begin_src emacs-lisp
+(after! minions
+  (require 'minions)
+  (minions-mode 1))
+#+end_src
+
+*** Org-auto-tangle
 #+begin_src emacs-lisp
 (use-package! org-auto-tangle
   :defer t
@@ -473,6 +455,38 @@ QUERY is the query to search for in the logs."
 #+begin_src emacs-lisp
 (after! treemacs)
 #+end_src
+
+** Utilities
+*** Bufler
+#+begin_src emacs-lisp
+(after! bufler
+  (require 'ysz-bufler-config)
+  (bufler-mode 1)
+  (bufler-tabs-mode 1)
+  (map! "C-c b" 'bufler-switch-buffer
+        "C-c C-S-b" 'bufler-list)
+
+  (evil-define-key 'normal bufler-list-mode-map
+        "K" 'bufler-list-buffer-kill
+        "gs" 'bufler-list-buffer-save
+        "q" 'quit-window
+        (kbd "RET") 'bufler-list-buffer-switch
+        "n" 'magit-section-forward-sibling
+        "p" 'magit-section-backward-sibling
+        (kbd "TAB") 'magit-section-toggle
+        (kbd "?") 'hydra:bufler/body
+        "f" 'bufler-list-group-frame
+        "F" 'bufler-list-group-make-frame))
+#+end_src
+
+*** Keycast
+#+begin_src emacs-lisp
+(after! keycast
+  (require 'keycast)
+  (setq keycast-header-line-insert-after 'mode-line-position)
+  (keycast-header-line-mode 1))
+#+end_src
+
 *** Clippy
 #+begin_src emacs-lisp
 (after! clippy
