@@ -34,6 +34,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.DynamicIcons
+import XMonad.Hooks.Rescreen
 #+end_src
 
 ** Utilities
