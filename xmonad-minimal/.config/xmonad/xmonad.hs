@@ -86,9 +86,9 @@ main = xmonad
           `additionalKeysP`
           [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
           , ("M-f", sendMessage $ Toggle Main.FULL)
-          , ("<XF86AudioRaiseVolume>", spawn "pamixer -i2" )
-          , ("<XF86AudioLowerVolume>", spawn "pamixer -d2" )
-          , ("<XF86AudioMute>", spawn "pamixer -t" ) ]
+          , ("<XF86AudioRaiseVolume>", spawn "$HOME/bin/dvol -i 2" )
+          , ("<XF86AudioLowerVolume>", spawn "$HOME/bin/dvol -d 2" )
+          , ("<XF86AudioMute>", spawn "$HOME/bin/dvol -t" ) ]
 
 -- | Mouse bindings: default actions bound to mouse events
 -- | (Taken from XMonad source)
