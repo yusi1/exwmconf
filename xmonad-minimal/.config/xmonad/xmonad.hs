@@ -2,7 +2,9 @@
   {-# LANGUAGE TypeSynonymInstances #-}
   {-# LANGUAGE MultiParamTypeClasses #-}
 
+-- Base
 import XMonad
+import qualified XMonad.StackSet as W
 
 -- Hooks
 import XMonad.Hooks.ManageHelpers
@@ -33,8 +35,6 @@ import qualified Data.Set as S
 import qualified Data.Map as M
 import Data.Foldable (for_)
 import Data.Functor
--- Window stack operation
-import qualified XMonad.StackSet as W
 
 myAfterRescreenHook :: X ()
 myAfterRescreenHook = do
