@@ -1,5 +1,6 @@
 export GDK_DPI_SCALE=1.2
-export PATH="$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.config/emacs/bin:$HOME/.cargo/bin:$PATH"
+export
+PATH="$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.config/emacs/bin:$HOME/.cargo/bin:$HOME/bin:$PATH"
 setxkbmap gb
 xrdb -merge ~/.Xresources
 sleep 1 && xeyes &
