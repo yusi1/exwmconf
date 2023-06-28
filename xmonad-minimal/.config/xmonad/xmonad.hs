@@ -4,8 +4,7 @@
 
 import XMonad
 
-import qualified XMonad.StackSet as W
-
+-- Hooks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
@@ -14,23 +13,28 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.DynamicIcons
 import XMonad.Hooks.Rescreen
 
-import XMonad.Util.EZConfig
+-- Utilities
 import qualified XMonad.Util.ExtensibleState as XS
+import qualified XMonad.Util.Hacks as Hacks
+import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
 
+-- Actions
 import XMonad.Actions.TiledWindowDragging
 
+-- Layouts
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.Renamed
 import XMonad.Layout.DraggingVisualizer
 
+-- Misc
 import qualified Data.Set as S
 import qualified Data.Map as M
 import Data.Foldable (for_)
 import Data.Functor
-
-import qualified XMonad.Util.Hacks as Hacks
+-- Window stack operation
+import qualified XMonad.StackSet as W
 
 myAfterRescreenHook :: X ()
 myAfterRescreenHook = do
