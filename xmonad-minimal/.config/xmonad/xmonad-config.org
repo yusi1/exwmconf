@@ -16,18 +16,10 @@ These are options for the GHC compiler to use.
 #+end_src
 
 * Imports
-** XMonad haskell library
 #+begin_src haskell
 import XMonad
-#+end_src
 
-** Window stack operation
-#+begin_src haskell
-import qualified XMonad.StackSet as W
-#+end_src
-
-** Hooks
-#+begin_src haskell
+-- Hooks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
@@ -35,39 +27,29 @@ import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.DynamicIcons
 import XMonad.Hooks.Rescreen
-#+end_src
 
-** Utilities
-#+begin_src haskell
-import XMonad.Util.EZConfig
+-- Utilities
 import qualified XMonad.Util.ExtensibleState as XS
+import qualified XMonad.Util.Hacks as Hacks
+import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
-#+end_src
 
-** Actions
-#+begin_src haskell
+-- Actions
 import XMonad.Actions.TiledWindowDragging
-#+end_src
 
-** Layouts
-#+begin_src haskell
+-- Layouts
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.Renamed
 import XMonad.Layout.DraggingVisualizer
-#+end_src
 
-** Misc
-#+begin_src haskell
+-- Misc
 import qualified Data.Set as S
 import qualified Data.Map as M
 import Data.Foldable (for_)
 import Data.Functor
-#+end_src
-
-** Hacks
-#+begin_src haskell
-import qualified XMonad.Util.Hacks as Hacks
+-- Window stack operation
+import qualified XMonad.StackSet as W
 #+end_src
 
 * Rescreen configuration
