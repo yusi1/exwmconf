@@ -449,6 +449,19 @@ Lin provides a customizable alternative to hl-line.
 (after! treemacs)
 #+end_src
 
+*** Centaur-tabs
+#+begin_src emacs-lisp
+(use-package! centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (map! :gnvi
+        "C-<tab>" 'centaur-tabs-forward
+        "C-<iso-lefttab>" 'centaur-tabs-backward
+        [C-tab] 'centaur-tabs-forward
+        [C-S-tab] 'centaur-tabs-backward))
+#+end_src
+
 ** Utilities
 *** Org-auto-tangle
 Automatically tangle an Org file on save, rather than having to do it manually.
