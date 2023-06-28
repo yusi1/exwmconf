@@ -354,6 +354,16 @@ QUERY is the query to search for in the logs."
 
 (after! treemacs)
 
+(use-package! centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (map! :gnvi
+        "C-<tab>" 'centaur-tabs-forward
+        "C-<iso-lefttab>" 'centaur-tabs-backward
+        [C-tab] 'centaur-tabs-forward
+        [C-S-tab] 'centaur-tabs-backward))
+
 (use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
