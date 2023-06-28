@@ -2,7 +2,7 @@
 #+AUTHOR: Yusef Aslam
 #+DESCRIPTION: Miscellaneous shell scripts.
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
-#+PROPERTY: header-args :results output silent
+#+PROPERTY: header-args :results output silent :mkdirp yes
 #+STARTUP: overview
 
 * Tangle this file
