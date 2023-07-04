@@ -241,6 +241,10 @@ This is where you specify how windows will be shown by XMonad (e.g: the workspac
 myManageHook :: ManageHook
 myManageHook = composeAll $
                [ className =? "XClock" --> mapAt (Rectangle 1760 30 150 150) <> saveWindow
-               , className =? "XEyes" --> mapAt (Rectangle 1860 1020 60 60) <> saveWindow ]
-
+               , className =? "XEyes" --> mapAt (Rectangle 1860 1020 60 60) <> saveWindow
+               , className =? "qpwgraph" --> doShift (myWorkspaces !! 1)
+               , className =? "Pavucontrol" --> doShift (myWorkspaces !! 1)
+               , className =? "mpv" --> doShift (myWorkspaces !! 1)
+               , isFullscreen <&&> className =? "dzen" --> doRaise
+               , className =? "dzen" --> doIgnore <> doLower ]
 #+end_src
