@@ -16,6 +16,7 @@ These are options for the GHC compiler to use.
 #+end_src
 
 * Imports
+These are Haskell modules that we must import so that we can use their functions later in the config.
 #+begin_src haskell
 -- Base
 import XMonad
