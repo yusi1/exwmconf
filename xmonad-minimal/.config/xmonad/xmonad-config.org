@@ -65,13 +65,14 @@ These are icons for applications that are shown in XMobar next to the workspace 
 #+begin_src haskell
 myIcons :: Query [String]
 myIcons = composeAll
-  [ className =? "Chromium" --> appIcon "\xf268"
-  , className =? "steam" --> appIcon "\xf04d3"
+  [ className =? "Chromium"    --> appIcon "\xf268"
+  , className =? "steam"       --> appIcon "\xf04d3"
   , className =? "Pavucontrol" --> appIcon "\xf04c3"
-  , className =? "XTerm" --> appIcon "\xf489"
-  , className =? "Emacs" --> appIcon "\xe632"
-  , className =? "Vmware" --> appIcon "\xea7a"
-  , className =? "qpwgraph" --> appIcon "\xf07e5"
+  , className =? "XTerm"       --> appIcon "\xf489"
+  , className =? "Emacs"       --> appIcon "\xe632"
+  , className =? "Vmware"      --> appIcon "\xea7a"
+  , className =? "qpwgraph"    --> appIcon "\xf07e5"
+  , className =? "mpv"         --> appIcon "\xf52c"
   ]
 
 myIconConfig :: IconConfig
