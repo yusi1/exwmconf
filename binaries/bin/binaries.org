@@ -105,13 +105,25 @@ done | dzen2 -u -ta left -bg aqua -x 580 -w 800 -l 20
 
 ** dzen2script.sh
 #+begin_src sh :tangle-mode (identity #o755)  :tangle dzen2script.sh
-#!/bin/sh
+#!/bin/bash
+
+if [ ! -f "/tmp/dzen-is-lowered" ]; then
+    touch /tmp/dzen-is-lowered
+    DZENCMD="dzen2 -w 200 -e 'onstart=lower'"
+else
+    DZENCMD="dzen2 -w 200"
+    rm /tmp/dzen-is-lowered
+fi
+
 
 while true; do
     STR_RIGHT="$(date)"
-    echo "^p(1650)$STR_RIGHT"
+    RIGHTOFFSET="200"
+    WINDOW=( $(xdpyinfo | awk -F ' |x' '/dimensions/ {print $7 " " $8}') )
+    XPOS=$((-${WINDOW[0]} + $RIGHTOFFSET))
+    echo "^p($XPOS)$STR_RIGHT"
     sleep 1
-done | dzen2
+done | eval $DZENCMD
 #+end_src
 
 ** dvol
