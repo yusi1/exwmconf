@@ -88,3 +88,5 @@
 
 
 (package! crux)
+
+(package! corfu)
