@@ -180,4 +180,9 @@ mapAt r = ask >>= \w -> liftX (tileWindow w r $> mempty)
 myManageHook :: ManageHook
 myManageHook = composeAll $
                [ className =? "XClock" --> mapAt (Rectangle 1760 30 150 150) <> saveWindow
-               , className =? "XEyes" --> mapAt (Rectangle 1860 1020 60 60) <> saveWindow ]
+               , className =? "XEyes" --> mapAt (Rectangle 1860 1020 60 60) <> saveWindow
+               , className =? "qpwgraph" --> doShift (myWorkspaces !! 1)
+               , className =? "Pavucontrol" --> doShift (myWorkspaces !! 1)
+               , className =? "mpv" --> doShift (myWorkspaces !! 1)
+               , isFullscreen <&&> className =? "dzen" --> doRaise
+               , className =? "dzen" --> doIgnore <> doLower ]
