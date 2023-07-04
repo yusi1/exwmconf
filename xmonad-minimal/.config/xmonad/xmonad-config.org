@@ -96,6 +96,13 @@ myPP = def { ppCurrent = xmobarColor "yellow" "" . wrap "[" " ]"
             formatUnfocused = wrap "(" ")" . xmobarColor "#bd93f9" "" . shorten 30 . xmobarStrip
 #+end_src
 
+* Workspaces
+I am setting the amount of workspaces I want to use here.
+#+begin_src haskell
+myWorkspaces :: [WorkspaceId]
+myWorkspaces = map show [1 .. 9 :: Int]
+#+end_src
+
 * Main block
 #+begin_src haskell
 main :: IO ()
@@ -108,6 +115,7 @@ main = xmonad
           { modMask = mod1Mask
           , terminal = "xterm"
           , borderWidth = 2
+          , workspaces = myWorkspaces
           , manageHook = myManageHook
           , layoutHook = myLayoutHook
           , logHook = raiseSaved
