@@ -133,7 +133,8 @@ main = xmonad
           , ("M-f", sendMessage $ Toggle Main.FULL)
           , ("<XF86AudioRaiseVolume>", spawn "$HOME/bin/dvol -i 2" )
           , ("<XF86AudioLowerVolume>", spawn "$HOME/bin/dvol -d 2" )
-          , ("<XF86AudioMute>", spawn "$HOME/bin/dvol -t" ) ]
+          , ("<XF86AudioMute>", spawn "$HOME/bin/dvol -t" )
+          , ("M-r e", spawn "$HOME/bin/rain-sounds.sh") ]
 #+end_src
 
 ** Mouse keybinds
