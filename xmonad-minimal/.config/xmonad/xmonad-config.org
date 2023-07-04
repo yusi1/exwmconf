@@ -7,6 +7,12 @@
 
 * DONE Add tiled window dragging
 
+* TODO Add clock only when fullscreen window is active
+I want to utilize [[file:~/.dotfiles/binaries/bin/binaries.org::*dzen2script.sh][dzen2script.sh]] to provide a clock in the top left of the screen when a fullscreen window is present, for example, the XMonad manageHook will check to see if there is a fullscreen window present, if there is raise dzen2, if there isn't, lower dzen2.
+** Usecase
+I want to be able to check the time while I'm playing a game or watching a video, without having to go out of fullscreen or pressing a keybind, this can be useful for that.
+
+
 * GHC LANGUAGE options
 These are options for the GHC compiler to use.
 #+begin_src haskell
