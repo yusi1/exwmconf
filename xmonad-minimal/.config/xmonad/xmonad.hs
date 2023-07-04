@@ -69,6 +69,9 @@ myPP = def { ppCurrent = xmobarColor "yellow" "" . wrap "[" " ]"
             formatFocused = wrap "[" "]" . xmobarColor "#ff79c6" "" . shorten 50 . xmobarStrip
             formatUnfocused = wrap "(" ")" . xmobarColor "#bd93f9" "" . shorten 30 . xmobarStrip
 
+myWorkspaces :: [WorkspaceId]
+myWorkspaces = map show [1 .. 9 :: Int]
+
 main :: IO ()
 main = xmonad
        . docks
@@ -79,6 +82,7 @@ main = xmonad
           { modMask = mod1Mask
           , terminal = "xterm"
           , borderWidth = 2
+          , workspaces = myWorkspaces
           , manageHook = myManageHook
           , layoutHook = myLayoutHook
           , logHook = raiseSaved
