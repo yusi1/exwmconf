@@ -24,6 +24,8 @@ Scripts that relaunch things. Usually used for when a display is connected/disco
 # /usr/bin/stalonetray
 pkill trayer
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent false --height 17 --width 4 --alpha 0 --tint 0x000000 --transparent true &
+# dzen2script.sh
+# pkill dzen2
 #+end_src
 
 * Dmenu scripts
