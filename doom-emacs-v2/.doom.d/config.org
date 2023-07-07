@@ -138,6 +138,8 @@
 ;; they are implemented.
 #+end_src
 
+** Temp. packages
+This is where I store configs for packages that I don't know which heading to put under yet, the package will be refiled under the appropriate heading some other time.
 ** Misc. packages
 #+begin_src emacs-lisp
 ;; my keybind addons
@@ -150,8 +152,6 @@
 (require 'info+)
 #+end_src
 
-** Temp. packages
-This is where I store configs for packages that I don't know which heading to put under yet, the package will be refiled under the appropriate heading some other time.
 ** Code linting
 *** Flycheck
 #+begin_src emacs-lisp
