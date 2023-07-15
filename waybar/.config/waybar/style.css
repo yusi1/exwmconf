@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    background-color: rgba(43, 48, 59, 0.7);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -46,18 +46,20 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    /* box-shadow: inset 0 -3px #ffffff; */
 }
 
 #workspaces button {
+    margin: 6px;
     padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+    border-radius: 4px;
+    background-color: #bbccdd;
+    color: #000000;
 }
 
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
+/* #workspaces button:hover { */
+/*     background: rgba(0, 0, 0, 0.2); */
+/* } */
 
 #workspaces button.focused {
     background-color: #64727D;
@@ -71,7 +73,6 @@ button:hover {
 #workspaces {
     border-radius: 0px;
     padding-right: 5px;
-    border-right: white 2px solid;
 }
 
 #mode {
@@ -96,7 +97,8 @@ button:hover {
 #scratchpad,
 #mpd {
     padding: 0 10px;
-    color: #ffffff;
+    margin: 6px 3px;
+    color: #000000;
 }
 
 #window,
@@ -115,17 +117,17 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+    background-color: #bbccdd;
 }
 
 #battery {
-    background-color: #ffffff;
+    background-color: #bbccdd;
     color: #000000;
 }
 
 #battery.charging, #battery.plugged {
     color: #ffffff;
-    background-color: #26A65B;
+    background-color: #bbccdd;
 }
 
 @keyframes blink {
@@ -150,24 +152,24 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
+    background-color: #bbccdd;
     color: #000000;
 }
 
 #memory {
-    background-color: #9b59b6;
+    background-color: #bbccdd;
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: #bbccdd;
 }
 
 #backlight {
-    background-color: #90b1b1;
+    background-color: #bbccdd;
 }
 
 #network {
-    background-color: #2980b9;
+    background-color: #bbccdd;
 }
 
 #network.disconnected {
@@ -175,26 +177,26 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
+    background-color: #bbccdd;
     color: #000000;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
+    background-color: #bbccdd;
     color: #2a5c45;
 }
 
 #wireplumber {
-    background-color: #fff0f5;
+    background-color: #bbccdd;
     color: #000000;
 }
 
 #wireplumber.muted {
-    background-color: #f53c3c;
+    background-color: #bbccdd;
 }
 
 #custom-media {
-    background-color: #66cc99;
+    background-color: #bbccdd;
     color: #2a5c45;
     min-width: 100px;
 }
@@ -208,15 +210,14 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: #bbccdd;
 }
 
 #temperature.critical {
-    background-color: #eb4d4b;
+    background-color: #bbccdd;
 }
 
 #tray {
-    background-color: #2980b9;
 }
 
 #tray > .passive {
@@ -263,10 +264,10 @@ label:focus {
 }
 
 #keyboard-state {
-    background: #97e1ad;
+    background: #bbccdd;
     color: #000000;
     padding: 0 0px;
-    margin: 0 5px;
+    margin: 6px 3px;
     min-width: 16px;
 }
 
