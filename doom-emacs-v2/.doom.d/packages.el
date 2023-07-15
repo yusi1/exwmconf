@@ -90,3 +90,7 @@
 (package! crux)
 
 (package! corfu)
+
+(package! guix)
+
+(package! geiser-guile)
