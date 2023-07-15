@@ -1194,3 +1194,6 @@ H=$(echo $SELECTION | awk -F'[, x]' '{print $4}')
 echo $SWAY_TREE | jq -r --argjson x $X --argjson y $Y --argjson w $W --argjson h $H \
   '. | select(.rect.x == $x and .rect.y == $y and .rect.width == $w and .rect.height == $h)'
 #+end_src
+
+* Startup scripts
+Scripts for starting stuff up.
