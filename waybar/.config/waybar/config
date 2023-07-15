@@ -7,12 +7,14 @@
     // Choose the order of the modules
     "modules-left": ["wlr/workspaces", "hyprland/window", "custom/media"],
     // "modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "clock", "tray"],
+    "modules-right": ["cava", "pulseaudio", "network", "cpu", "memory", "temperature", "keyboard-state", "clock", "tray"],
     // Modules configuration
     "wlr/workspaces": {
          "disable-scroll": true,
          "all-outputs": true,
          "warp-on-scroll": false,
+         "on-scroll-up": "hyprctl dispatch workspace e+1",
+         "on-scroll-down": "hyprctl dispatch workspace e-1",
          "format": "{name}: {icon}",
          "format-icons": {
              "1": "",
@@ -26,7 +28,7 @@
          }
     },
     "hyprland/window": {
-        "format": "👉 {}"
+        "format": "{}"
     },
     "keyboard-state": {
         "numlock": true,
@@ -39,7 +41,8 @@
     },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10
+        "spacing": 10,
+        "icon-theme": "Qogir-dark"
     },
     "clock": {
         // "timezone": "America/New_York",
@@ -74,8 +77,8 @@
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
@@ -89,6 +92,30 @@
         },
         "on-click": "pavucontrol"
     },
+
+    "cava": {
+        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+        "framerate": 144,
+        "autosens": 1,
+        "sensitivity": 100,
+        "bars": 2,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "method": "pulse",
+        "source": "auto",
+        "stereo": true,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": false,
+        "waves": false,
+        "noise_reduction": 0.77,
+        "input_delay": 2,
+        "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
