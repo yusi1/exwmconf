@@ -12,6 +12,10 @@ I want to utilize [[file:~/.dotfiles/binaries/bin/binaries.org::*dzen2script.sh]
 ** Usecase
 I want to be able to check the time while I'm playing a game or watching a video, without having to go out of fullscreen or pressing a keybind, this can be useful for that.
 
+* NOTE Fix XMonad Installation on Arch with Cabal
+In Arch, with =ghc-static= installed, cabal-install usually fails with error: There are files missing in the `XXX' package, the fix is described below:
+https://stackoverflow.com/questions/52429645/haskell-there-are-files-missing-in-the-quickcheck-2-11-3-package
+
 
 * GHC LANGUAGE options
 These are options for the GHC compiler to use.
