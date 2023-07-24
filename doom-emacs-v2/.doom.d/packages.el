@@ -91,6 +91,6 @@
 
 (package! corfu)
 
-(package! guix)
+; (package! guix)
 
-(package! geiser-guile)
+; (package! geiser-guile)
