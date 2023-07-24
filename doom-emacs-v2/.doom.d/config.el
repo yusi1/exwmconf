@@ -23,7 +23,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font "Fira Code Medium-14")
+(setq doom-font "Fira Code Medium:style=Medium:pixelsize=22")
+(setq doom-big-font "Fira Code Medium:style=Medium:pixelsize=34")
 (after! doom-themes
         (setq doom-themes-enable-bold t
               doom-themes-enable-italic t))
