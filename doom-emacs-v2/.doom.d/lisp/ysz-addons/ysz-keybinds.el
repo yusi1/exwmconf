@@ -129,7 +129,7 @@ If XUSER is `t', use that username instead."
   "Find-file as root."
   (interactive)
   (find-file (concat "/" (tramp-method-p) ":" "root@localhost:"
-                     (read-file-name "Find file (as root): " "/"))))
+                     (helm-read-file-name "Find file (as root): " :name "Read File Name" :initial-input "/"))))
 
 (defun dired-root ()
   "Dired as root."

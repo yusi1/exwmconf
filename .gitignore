@@ -94,3 +94,4 @@ xmonad-minimal/.config/xmonad/xmonad/
 
 binaries/bin/*.sh
 binaries/bin/xlayout/*.sh
+emacs-minimal-v5/
