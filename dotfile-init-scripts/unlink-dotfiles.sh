@@ -11,8 +11,6 @@ fi
 
 [[ $(which stow 2>/dev/null) ]] || echo "stow not found, exiting."
 
-DOTFILES="$HOME/.dotfiles"
-
 cd $DOTFILES
 echo -e "\n[Linked files]"
 find $HOME -type l | xargs readlink -- | grep -i "\.dotfiles" | sed 's/\.\.\///1' | sed 's/.dotfiles\///g' | sort
