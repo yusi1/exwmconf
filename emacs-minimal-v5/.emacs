@@ -13,18 +13,27 @@
  '(minimap-width-fraction 0.08)
  '(minimap-window-location 'right)
  '(package-selected-packages
-   '(orderless vertico all-the-icons material-theme mini-frame sublime-themes org-superstar 2048-game tabnine doom-themes standard-themes simple-modeline highlight-leading-spaces keycast dirvish color-identifiers-mode anzu helm-migemo migemo helm-swoop corfu minimap volatile-highlights beacon cursory keepass-mode helm)))
+   '(mines orderless vertico all-the-icons material-theme mini-frame sublime-themes org-superstar 2048-game tabnine doom-themes standard-themes simple-modeline highlight-leading-spaces keycast dirvish color-identifiers-mode anzu helm-migemo migemo helm-swoop corfu minimap volatile-highlights beacon cursory keepass-mode helm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:strike-through nil :slant normal :weight regular :height 181 :width normal :family "Roboto Mono"))))
+ '(default ((t (:slant normal :weight normal :height 140 :width normal :foundry "GOOG" :family "Roboto Mono"))))
  '(minimap-active-region-background ((t (:extend t :background "#22262E"))))
- '(mode-line ((t (:height 160)))))
+ '(mode-line ((t (:height 120))))
+ '(org-document-title ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono" :height 2.0 :underline nil))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono" :height 1.75))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono" :height 1.5))))
+ '(org-level-3 ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono" :height 1.25))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono" :height 1.1))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "#ECEFF4" :family "Roboto Mono")))))
 
 (require 'nano)
-(setq nano-font-size 18)
+(setq nano-font-size 12)
 (setq nano-font-family-proportional nil)
 
 (require 'nano-theme-dark)
@@ -33,7 +42,7 @@
 ;; (require 'nano-minibuffer)
 
 (setq initial-frame-alist
-      '((top . 1) (left . 1) (width . 91) (height . 18)))
+      '((top . 1) (left . 1) (width . 69) (height . 32)))
 
 (setq inhibit-startup-screen t)
 
@@ -222,4 +231,4 @@
 (require 'org-superstar)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
-(require 'ysz-addons)
+;; (require 'ysz-addons)
