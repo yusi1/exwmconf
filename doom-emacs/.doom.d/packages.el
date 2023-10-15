@@ -9,13 +9,6 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
-;; (package! fontaine)
-;; (package! modus-themes)
-;; (package! ctrlf)
-(package! eglot)
-(package! sly)
-;; (package! evil-org)
-
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/radian-software/straight.el#the-recipe-format
@@ -56,4 +49,50 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-;; (unpin! org)
+(package! znc)
+;;; FIXME: Causes consult-buffer to return:
+;;; consult--display-width: Symbol’s function definition is void: compat-string-width
+;; (unpin! compat) ; fix tempel void variable tempel-map error
+;;; FIXME: Cannot use because of problems with unpinning compat.
+;; (package! tempel)
+
+;; (package! mu4e-views :recipe (:branch "mu-1.8-support"))
+
+(package! cape)
+;; FIXME: Causes: void-function defvar-keymap
+; (unpin! consult)
+;; FIXME: Cannot use because of problems with the package in Doom.
+; (package! affe)
+
+(package! agitate)
+
+;; (package! bufler)
+
+(package! fish-mode)
+
+;; (package! keycast)
+
+(package! minions)
+
+(package! lin)
+
+(package! ef-themes)
+
+(package! dante)
+
+(package! beacon)
+
+(package! org-auto-tangle)
+
+(package! clippy)
+
+
+(package! crux)
+
+(package! corfu)
+
+; (package! guix)
+
+; (package! geiser-guile)
+
+(package! dirvish)

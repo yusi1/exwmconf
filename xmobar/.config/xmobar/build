@@ -1,3 +1,0 @@
-#!/bin/sh
-stack ghc -- --make xmobar.hs
-stack ghc -- --make xmobar-laptop.hs

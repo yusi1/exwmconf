@@ -128,7 +128,7 @@ done | eval $DZENCMD
 
 ** dvol
 #+begin_src sh :tangle-mode (identity #o755)  :tangle dvol
-  #!/bin/bash
+  #!/usr/bin/env bash
 
   #Customize this stuff
   IF="Master"
@@ -219,7 +219,7 @@ done | eval $DZENCMD
   fi
 
   #Feed the pipe!
-  (echo "$VOL" | gdbar -l "$IF ^i(${ICON}) " -fg "$FG" -bg "$BG" -w $WIDTH_BAR ; sleep "$SECS") > "$PIPE"
+  (echo "$VOL" | /usr/local/bin/dzen2-gdbar -l "$IF ^i(${ICON}) " -fg "$FG" -bg "$BG" -w $WIDTH_BAR ; sleep "$SECS") > "$PIPE"
 #+end_src
 
 ** pulsevolbar.sh

@@ -1,1 +1,0 @@
-equery has repository gentoo
