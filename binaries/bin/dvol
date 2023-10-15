@@ -4,8 +4,8 @@
 IF="Master"
 SECS="2"
 
-BG="#43464f"
-FG="#9ab8c2"
+BG="#000000"
+FG="green"
 WIDTH="250"
 WIDTH_BAR=$(($WIDTH - 150))
 WINDOW=( $(xdpyinfo | awk -F ' |x' '/dimensions/ {print $7 " " $8}') )
