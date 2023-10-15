@@ -53,7 +53,7 @@ set $term2 foot -f "DejaVuSansM Nerd Font:size=$term2size"
 set $menu2 dmenu_path | dmenu_run -fn "DejaVu Sans Mono:size=$termsize" | xargs swaymsg exec --
 
 for_window [title="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-set $menu exec $term -T launcher /usr/bin/sway-launcher-desktop
+set $menu exec $term -T launcher $HOME/Git/sway-launcher-desktop/sway-launcher-desktop.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
