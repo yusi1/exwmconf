@@ -20,6 +20,7 @@ import qualified XMonad.Util.ExtensibleState as XS
 import qualified XMonad.Util.Hacks as Hacks
 import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
+import XMonad.Util.SpawnOnce (spawnOnce)
 
 -- Actions
 import XMonad.Actions.TiledWindowDragging
@@ -80,25 +81,26 @@ main = xmonad
        . ewmh
        . addAfterRescreenHook myAfterRescreenHook
        $ withEasySB mySB defToggleStrutsKey def
-          { modMask = mod1Mask
-          , terminal = "xterm"
-          , borderWidth = 2
-          , workspaces = myWorkspaces
-          , manageHook = myManageHook
-          , layoutHook = myLayoutHook
-          , logHook = raiseSaved
-          , handleEventHook = handleEventHook def
-                              <> Hacks.trayerPaddingXmobarEventHook
-          , XMonad.mouseBindings = Main.mouseBindings
-          }
-
-          `additionalKeysP`
-          [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
-          , ("M-f", sendMessage $ Toggle Main.FULL)
-          , ("<XF86AudioRaiseVolume>", spawn "$HOME/bin/dvol -i 2" )
-          , ("<XF86AudioLowerVolume>", spawn "$HOME/bin/dvol -d 2" )
-          , ("<XF86AudioMute>", spawn "$HOME/bin/dvol -t" )
-          , ("M-r e", spawn "$HOME/bin/rain-sounds.sh") ]
+	  { modMask = mod1Mask
+	  , terminal = "xterm"
+	  , borderWidth = 2
+	  , workspaces = myWorkspaces
+	  , manageHook = myManageHook
+	  , layoutHook = myLayoutHook
+	  , startupHook = myStartupHook
+	  , logHook = raiseSaved
+	  , handleEventHook = handleEventHook def
+			      <> Hacks.trayerPaddingXmobarEventHook
+	  , XMonad.mouseBindings = Main.mouseBindings
+	  }
+          -- Keybinds
+	  `additionalKeysP`
+	  [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
+	  , ("M-f", sendMessage $ Toggle Main.FULL)
+	  , ("<XF86AudioRaiseVolume>", spawn "$HOME/bin/dvol -i 2" )
+	  , ("<XF86AudioLowerVolume>", spawn "$HOME/bin/dvol -d 2" )
+	  , ("<XF86AudioMute>", spawn "$HOME/bin/dvol -t" )
+	  , ("M-r e", spawn "$HOME/bin/rain-sounds.sh") ]
 
 -- | Mouse bindings: default actions bound to mouse events
 -- | (Taken from XMonad source)
@@ -121,6 +123,16 @@ mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
     -- , ((modMask, button9), \w -> focus w >> windows W.focusDown
     --                                      >> updPointer)
     ]
+
+myStartupHook :: X ()
+myStartupHook = do
+  spawnOnce "trayer --edge top --align right --SetDockType true \
+	    \--SetPartialStrut true --expand true --width 4 \
+	    \--transparent true --tint 0x000000 --alpha 0 --height 17"
+  spawnOnce "sleep 1 && xeyes"
+  spawnOnce "xclock"
+  spawnOnce "xterm"
+  spawnOnce "xsettingsd -c ~/.xsettingsd-twm"
 
 iconPath a = "<icon=/home/yaslam/.config/xmobar/icons/" ++ a ++ "/>"
 
