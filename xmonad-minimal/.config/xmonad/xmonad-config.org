@@ -115,37 +115,35 @@ myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1 .. 9 :: Int]
 #+end_src
 
-* Main block
+* Main block and Keybinds
 #+begin_src haskell
-main :: IO ()
-main = xmonad
-       . docks
-       . ewmhFullscreen
-       . ewmh
-       . addAfterRescreenHook myAfterRescreenHook
-       $ withEasySB mySB defToggleStrutsKey def
-          { modMask = mod1Mask
-          , terminal = "xterm"
-          , borderWidth = 2
-          , workspaces = myWorkspaces
-          , manageHook = myManageHook
-          , layoutHook = myLayoutHook
-          , logHook = raiseSaved
-          , handleEventHook = handleEventHook def
-                              <> Hacks.trayerPaddingXmobarEventHook
-          , XMonad.mouseBindings = Main.mouseBindings
-          }
-#+end_src
-
-* Keybinds
-#+begin_src haskell
-          `additionalKeysP`
-          [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
-          , ("M-f", sendMessage $ Toggle Main.FULL)
-          , ("<XF86AudioRaiseVolume>", spawn "$HOME/bin/dvol -i 2" )
-          , ("<XF86AudioLowerVolume>", spawn "$HOME/bin/dvol -d 2" )
-          , ("<XF86AudioMute>", spawn "$HOME/bin/dvol -t" )
-          , ("M-r e", spawn "$HOME/bin/rain-sounds.sh") ]
+  main :: IO ()
+  main = xmonad
+	 . docks
+	 . ewmhFullscreen
+	 . ewmh
+	 . addAfterRescreenHook myAfterRescreenHook
+	 $ withEasySB mySB defToggleStrutsKey def
+	    { modMask = mod1Mask
+	    , terminal = "xterm"
+	    , borderWidth = 2
+	    , workspaces = myWorkspaces
+	    , manageHook = myManageHook
+	    , layoutHook = myLayoutHook
+	    , startupHook = myStartupHook
+	    , logHook = raiseSaved
+	    , handleEventHook = handleEventHook def
+				<> Hacks.trayerPaddingXmobarEventHook
+	    , XMonad.mouseBindings = Main.mouseBindings
+	    }
+            -- Keybinds
+	    `additionalKeysP`
+	    [ ("M-p", spawn "dmenu_run -fn 'DejaVu Sans Mono:pixelsize=18' -nf 'gray' -nb 'black' -sb 'red' -sf 'white'")
+	    , ("M-f", sendMessage $ Toggle Main.FULL)
+	    , ("<XF86AudioRaiseVolume>", spawn "$HOME/bin/dvol -i 2" )
+	    , ("<XF86AudioLowerVolume>", spawn "$HOME/bin/dvol -d 2" )
+	    , ("<XF86AudioMute>", spawn "$HOME/bin/dvol -t" )
+	    , ("M-r e", spawn "$HOME/bin/rain-sounds.sh") ]
 #+end_src
 
 ** Mouse keybinds
