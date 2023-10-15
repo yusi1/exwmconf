@@ -94,3 +94,5 @@
 ; (package! guix)
 
 ; (package! geiser-guile)
+
+(package! dirvish)
