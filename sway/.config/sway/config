@@ -152,9 +152,9 @@ for_window [app_id="^zenity$"] floating enable, sticky enable, resize set 60 ppt
     bindsym $mod+Return exec $term
 
     # Volume control
-    bindsym XF86AudioRaiseVolume exec "pamixer -i2"
-    bindsym XF86AudioLowerVolume exec "pamixer -d2"
-    bindsym XF86AudioMute exec "pamixer -t"
+    bindsym XF86AudioRaiseVolume exec "dvol -i 2"
+    bindsym XF86AudioLowerVolume exec "dvol -d 2"
+    bindsym XF86AudioMute exec "dvol -t"
 
     # Start editor
     bindsym $mod+e exec /bin/sh -c $HOME/stuff/vim-select-file.sh
