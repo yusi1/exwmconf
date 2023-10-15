@@ -23,8 +23,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font "Fira Code Medium:style=Medium:pixelsize=22")
-(setq doom-big-font "Fira Code Medium:style=Medium:pixelsize=34")
+(setq doom-font "Fira Code Medium:style=Medium:pixelsize=16")
+(setq doom-big-font "Fira Code Medium:style=Medium:pixelsize=22")
 (after! doom-themes
         (setq doom-themes-enable-bold t
               doom-themes-enable-italic t))
@@ -377,7 +377,7 @@ QUERY is the query to search for in the logs."
 (use-package! doom-modeline
   :config
   (setq doom-modeline-hud nil)
-  (setq doom-modeline-icon t)
+  (setq doom-modeline-icon nil)
   (setq doom-modeline-major-mode-icon t)
   (setq doom-modeline-height 10))
 
