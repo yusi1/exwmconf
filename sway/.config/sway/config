@@ -43,10 +43,10 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $termsize 12
-set $term foot -f "Fira Code:size=$termsize"
-set $term2size 12
-set $term2 foot -f "Fira Code Nerd Font:size=$term2size"
+set $termsize 14
+set $term foot -f "DejaVuSansM Nerd Font:size=$termsize"
+set $term2size 14
+set $term2 foot -f "DejaVuSansM Nerd Font:size=$term2size"
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
