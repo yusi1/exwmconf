@@ -171,6 +171,18 @@ mouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList
     ]
 #+end_src
 
+* Startuphook
+#+begin_src haskell
+  myStartupHook :: X ()
+  myStartupHook = do
+    spawnOnce "trayer --edge top --align right --SetDockType true \
+	      \--SetPartialStrut true --expand true --width 4 \
+	      \--transparent true --tint 0x000000 --alpha 0 --height 17"
+    spawnOnce "sleep 1 && xeyes"
+    spawnOnce "xclock"
+    spawnOnce "xterm"
+    spawnOnce "xsettingsd -c ~/.xsettingsd-twm"
+#+end_src
 * Misc
 ** iconPath function
 + This function is used to make specifiying icons for layouts or transformers easier because I don't have to specify an entire path everytime.
