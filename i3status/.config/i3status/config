@@ -14,8 +14,9 @@ general {
 # order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
-order += "battery all"
+# order += "battery all"
 order += "disk /"
+order += "disk /mnt/GAMESNVMS"
 # order += "cpu_temperature 0"
 order += "load"
 # order += "memory"
@@ -43,6 +44,10 @@ battery all {
 
 disk "/" {
         format = "(/) %avail"
+}
+
+disk "/mnt/GAMESNVMS" {
+        format = "(GAMES) %avail"
 }
 
 cpu_temperature 0 {
