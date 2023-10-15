@@ -27,7 +27,7 @@ exec xsettingsd -c ~/.xsettingsd-twm
 exec nm-applet --indicator
 
 # Autostart desktop files
-exec dex --autostart --environment sway
+# exec dex --autostart --environment sway
 
 # Start conky
 # exec conky
