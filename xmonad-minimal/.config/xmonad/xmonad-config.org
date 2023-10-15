@@ -28,39 +28,40 @@ These are options for the GHC compiler to use.
 * Imports
 These are Haskell modules that we must import so that we can use their functions later in the config.
 #+begin_src haskell
--- Base
-import XMonad
-import qualified XMonad.StackSet as W
+  -- Base
+  import XMonad
+  import qualified XMonad.StackSet as W
 
--- Hooks
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
-import XMonad.Hooks.DynamicIcons
-import XMonad.Hooks.Rescreen
+  -- Hooks
+  import XMonad.Hooks.ManageHelpers
+  import XMonad.Hooks.ManageDocks
+  import XMonad.Hooks.EwmhDesktops
+  import XMonad.Hooks.StatusBar
+  import XMonad.Hooks.StatusBar.PP
+  import XMonad.Hooks.DynamicIcons
+  import XMonad.Hooks.Rescreen
 
--- Utilities
-import qualified XMonad.Util.ExtensibleState as XS
-import qualified XMonad.Util.Hacks as Hacks
-import XMonad.Util.EZConfig
-import XMonad.Util.Loggers
+  -- Utilities
+  import qualified XMonad.Util.ExtensibleState as XS
+  import qualified XMonad.Util.Hacks as Hacks
+  import XMonad.Util.EZConfig
+  import XMonad.Util.Loggers
+  import XMonad.Util.SpawnOnce (spawnOnce)
 
--- Actions
-import XMonad.Actions.TiledWindowDragging
+  -- Actions
+  import XMonad.Actions.TiledWindowDragging
 
--- Layouts
-import XMonad.Layout.MultiToggle
-import XMonad.Layout.MultiToggle.Instances
-import XMonad.Layout.Renamed
-import XMonad.Layout.DraggingVisualizer
+  -- Layouts
+  import XMonad.Layout.MultiToggle
+  import XMonad.Layout.MultiToggle.Instances
+  import XMonad.Layout.Renamed
+  import XMonad.Layout.DraggingVisualizer
 
--- Misc
-import qualified Data.Set as S
-import qualified Data.Map as M
-import Data.Foldable (for_)
-import Data.Functor
+  -- Misc
+  import qualified Data.Set as S
+  import qualified Data.Map as M
+  import Data.Foldable (for_)
+  import Data.Functor
 #+end_src
 
 * Rescreen configuration
