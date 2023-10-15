@@ -19,7 +19,11 @@ PACKAGES_LIST=()
 select SELECTION in $(echo "[EXIT]" && find . -maxdepth 1 | sed 's/\.\///1' | sort | awk 'NR>1')
 do
 	[[ $SELECTION == "[EXIT]" ]] && break
-	PACKAGES_LIST+=($SELECTION)
+	if [[ ${PACKAGES_LIST[@]} =~ $SELECTION ]]; then
+		PACKAGES_LIST=${PACKAGES_LIST[@]/$SELECTION /}
+	else
+		PACKAGES_LIST+=($SELECTION)
+	fi
 	echo "Selected: ${PACKAGES_LIST[@]}"
 done
 
