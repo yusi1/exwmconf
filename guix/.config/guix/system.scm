@@ -11,6 +11,7 @@
 ;; used in this configuration.
 (use-modules (gnu) (nongnu packages linux))
 (use-modules (gnu services virtualization))
+(use-modules (gnu services admin))
 (use-service-modules cups desktop networking ssh xorg)
 
 
