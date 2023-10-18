@@ -25,6 +25,7 @@
 (setq org-todo-keywords
       '((sequence "TODO" "FEEDBACK" "VERIFY" "NOTE" "|" "DONE" "DELEGATED")))
 
-(require 'parinfer)
-(add-hook 'emacs-lisp-mode-hook (lambda () (parinfer-mode 1)))
-(add-hook 'scheme-mode-hook (lambda () (parinfer-mode 1)))
+;; (require 'parinfer)
+;; (add-hook 'emacs-lisp-mode-hook (lambda () (parinfer-mode 1)))
+;; (add-hook 'scheme-mode-hook (lambda () (parinfer-mode 1)))
+
