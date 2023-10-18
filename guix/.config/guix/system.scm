@@ -82,13 +82,16 @@
 					      (gdm-configuration
 					       (wayland? #t))))))
 
-    (bootloader (bootloader-configuration
-                (bootloader grub-efi-bootloader)
-                (targets (list "/boot/efi"))
-                (keyboard-layout keyboard-layout)))
+  ;; Allow resolution of '.local' host names with mDNS.
+  (name-service-switch %mdns-host-lookup-nss)
+  
+  (bootloader (bootloader-configuration
+               (bootloader grub-efi-bootloader)
+               (targets (list "/boot/efi"))
+               (keyboard-layout keyboard-layout)))
   (swap-devices (list (swap-space
-                        (target (uuid
-                                 "a79ba3b2-3ee9-41de-8a80-8cb569e7bc2e")))))
+                       (target (uuid
+                                "a79ba3b2-3ee9-41de-8a80-8cb569e7bc2e")))))
 
   ;; The list of file systems that get "mounted".  The unique
   ;; file system identifiers there ("UUIDs") can be obtained
