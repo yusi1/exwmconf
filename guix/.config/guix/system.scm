@@ -70,7 +70,9 @@
 
             (service virtlog-service-type
                      (virtlog-configuration
-                      (max-clients 1000))))
+                      (max-clients 1000)))
+
+	    (service unattended-upgrade-service-type))
            
            
            ;; This is the default list of services we
@@ -79,8 +81,8 @@
 			    (gdm-service-type config =>
 					      (gdm-configuration
 					       (wayland? #t))))))
-  
-  (bootloader (bootloader-configuration
+
+    (bootloader (bootloader-configuration
                 (bootloader grub-efi-bootloader)
                 (targets (list "/boot/efi"))
                 (keyboard-layout keyboard-layout)))
