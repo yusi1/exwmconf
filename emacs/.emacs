@@ -29,3 +29,5 @@
 ;; (add-hook 'emacs-lisp-mode-hook (lambda () (parinfer-mode 1)))
 ;; (add-hook 'scheme-mode-hook (lambda () (parinfer-mode 1)))
 
+(require 'info)
+(add-hook 'Info-mode-hook (lambda () (hl-line-mode 1)))
