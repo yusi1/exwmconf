@@ -43,7 +43,8 @@
 			  (specification->package "xdg-desktop-portal-kde")
                           (specification->package "iptables")
                           (specification->package "ebtables")
-                          (specification->package "dnsmasq"))
+                          (specification->package "dnsmasq")
+			  (specification->package "x11-ssh-askpass"))
                     %base-packages))
 
   ;; Below is the list of system services.  To search for available
