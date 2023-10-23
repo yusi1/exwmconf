@@ -65,7 +65,8 @@
 (let ((map vc-git-log-view-mode-map))
   (define-key map (kbd "c") #'agitate-vc-git-format-patch-single))
 (let ((map log-edit-mode-map))
-  (define-key map (kbd "C-c C-i C-n") (lambda () "Agitate insert file name with ext." (interactive) (agitate-log-edit-insert-file-name t)))
+  (define-key map (kbd "C-c C-i C-n") (lambda () "Agitate insert file name with ext."
+					(interactive) (agitate-log-edit-insert-file-name t)))
   ;; See user options `agitate-log-edit-emoji-collection' and
   ;; `agitate-log-edit-conventional-commits-collection'.
   (define-key map (kbd "C-c C-i C-e") #'agitate-log-edit-emoji-commit)
