@@ -63,6 +63,6 @@
 	
 	(simple-service 'my-env-vars-service
 			home-environment-variables-service-type
-			`(("GDK_DPI_SCALE" . "1.1")
+			`(("GDK_DPI_SCALE" . "1.0")
 			  ("BEANS" . "BEANSNMACHINES")
 			  ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/yaslam/.local/share/flatpak/exports/share"))))))
