@@ -16,10 +16,12 @@
  ;; Home profile, under ~/.guix-home/profile.
  (packages (specifications->packages
 	    (list
+	     "flatpak"
              "dconf-editor"
 	     "virt-manager"
 	     "vim"
 	     "lxappearance"
+	     "ublock-origin-icecat"
              "icecat"
              "htop"
              "hexchat"
@@ -40,6 +42,7 @@
              "emacs-guix"
              "stow"
              "git"
+	     "secrets"
              "keepassxc"
              "ublock-origin-chromium"
              "ungoogled-chromium")))
