@@ -63,7 +63,10 @@
                   (bash-profile (list (local-file
                                        "/home/yaslam/src/guix-config/.bash_profile"
                                        "bash_profile")))))
-	
+
+	(service home-files-service-type
+		 `((".gitconfig" ,(local-file "gitconfig"))))
+
 	(simple-service 'my-env-vars-service
 			home-environment-variables-service-type
 			`(("GDK_DPI_SCALE" . "1.0")
