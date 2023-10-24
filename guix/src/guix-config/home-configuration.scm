@@ -16,6 +16,9 @@
  ;; Home profile, under ~/.guix-home/profile.
  (packages (specifications->packages
 	    (list
+	     "gparted"
+	     "vlc"
+	     "blender"
 	     "flatpak"
              "dconf-editor"
 	     "virt-manager"
