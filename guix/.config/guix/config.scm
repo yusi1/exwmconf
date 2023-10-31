@@ -107,8 +107,8 @@
                          (mount-point "/")
 			 (device (file-system-label "GUIXROOT"))
                          (type "ext4"))
-		       ;; (file-system
-		       ;; 	(mount-point "/mnt/GAMESNVMS")
-		       ;; 	(device "/dev/sda1")
-		       ;; 	(type "ntfs-3g"))
+		       (file-system
+			(mount-point "/mnt/GAMESNVMS")
+			(device "/dev/sda4")
+			(type "ext4"))
                        %base-file-systems)))
