@@ -9,13 +9,17 @@
 	     (gnu home services)
              (gnu services)
              (guix gexp)
-             (gnu home services shells))
+             (gnu home services shells)
+	     (gnu home services gnupg)
+	     (gnu packages gnupg))
 
 (home-environment
  ;; Below is the list of packages that will show up in your
  ;; Home profile, under ~/.guix-home/profile.
  (packages (specifications->packages
 	    (list
+	     "ytfzf"
+             "nextcloud-client"
 	     "gparted"
 	     "vlc"
 	     "blender"
@@ -74,4 +78,12 @@
 			home-environment-variables-service-type
 			`(("GDK_DPI_SCALE" . "1.0")
 			  ("BEANS" . "BEANSNMACHINES")
-			  ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/yaslam/.local/share/flatpak/exports/share"))))))
+			  ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/yaslam/.local/share/flatpak/exports/share")
+			  ("PATH" . "$HOME/.local/bin:$PATH")
+			  ("GUIX_PACKAGE_PATH" . "$HOME/guix-packages")))
+
+	(service home-gpg-agent-service-type
+		 (home-gpg-agent-configuration
+		  (pinentry-program
+                   (file-append pinentry-emacs "/bin/pinentry-emacs"))
+		  (ssh-support? #t))))))
