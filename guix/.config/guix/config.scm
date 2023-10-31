@@ -56,10 +56,10 @@
   (services
    (append (list 
 	    ;; (service enlightenment-desktop-service-type)
-	    (service gnome-desktop-service-type)
+	    ;; (service gnome-desktop-service-type)
 	    ;; (service plasma-desktop-service-type)
 	    ;; (service xfce-desktop-service-type)
-            ;; (service mate-desktop-service-type)
+            (service mate-desktop-service-type)
 
             ;; To configure OpenSSH, pass an 'openssh-configuration'
             ;; record as a second argument to 'service' below.
