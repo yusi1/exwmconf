@@ -38,7 +38,6 @@
   (packages (append (list (specification->package "adwaita-icon-theme")
                           (specification->package "hicolor-icon-theme")
                      	  (specification->package "nss-certs")
-                          (specification->package "sway")
 			  (specification->package "ntfs-3g")
                           ;; (specification->package "kde-gtk-config")
 			  ;; (specification->package "xdg-desktop-portal-kde")
@@ -46,7 +45,10 @@
                           (specification->package "ebtables")
                           (specification->package "dnsmasq")
 			  (specification->package "x11-ssh-askpass")
-			  (specification->package "os-prober"))
+			  (specification->package "os-prober")
+			  (specification->package "qemu")
+                          (specification->package "gnome-shell-extensions")
+                          (specification->package "glibc"))
                     %base-packages))
 
   ;; Below is the list of system services.  To search for available
