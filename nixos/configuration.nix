@@ -85,6 +85,7 @@
       stow
       nextcloud-client
       vmware-workstation
+      nix-index
       prismlauncher
     ];
   };
