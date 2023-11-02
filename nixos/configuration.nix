@@ -87,6 +87,9 @@
       vmware-workstation
       nix-index
       prismlauncher
+      android-tools
+      heimdall
+      heimdall-gui
     ];
   };
 
