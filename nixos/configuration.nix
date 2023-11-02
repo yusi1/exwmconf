@@ -92,6 +92,11 @@
       heimdall-gui
       nil
       kate
+      jamesdsp-pulse
+      unzip
+      ark
+      yt-dlp
+      qbittorrent
     ];
   };
 
