@@ -77,7 +77,7 @@
     packages = with pkgs; [
       firefox
       thunderbird
-      emacs
+      emacs-gtk
       vlc
       ungoogled-chromium
       keepassxc
