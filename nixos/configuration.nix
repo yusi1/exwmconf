@@ -105,6 +105,8 @@
       ark
       yt-dlp
       qbittorrent
+      carla
+      qpwgraph
     ];
   };
 
