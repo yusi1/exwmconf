@@ -90,6 +90,8 @@
       android-tools
       heimdall
       heimdall-gui
+      nil
+      kate
     ];
   };
 
