@@ -1,5 +1,0 @@
-#!/bin/bash
-
-ARG="$1"
-[[ -z $ARG ]] && echo "Needs argument!"
-[[ ! -z $ARG ]] && stow -D $ARG
