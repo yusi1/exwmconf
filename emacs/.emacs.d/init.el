@@ -66,6 +66,7 @@
 (put 'downcase-region 'disabled nil)
 (put 'emms-browser-delete-files 'disabled nil)
 
+(use-package ysz-compatibility)
 (use-package ysz-theme)
 (use-package ysz-completion)
 (use-package ysz-git)
@@ -81,10 +82,12 @@
 (use-package ysz-irc)
 
 ;;; EXWM
-(defun ysz/exwm-enabled (switch) "Dummy function")
-(add-to-list 'command-switch-alist '("--use-exwm" . ysz/exwm-enabled))
-(setq ysz/exwm-enabled-p
-      (if (seq-contains command-line-args "--use-exwm") t))
+;; (defun ysz/exwm-enabled (switch) "Dummy function")
+;; (add-to-list 'command-switch-alist '("--use-exwm" . ysz/exwm-enabled))
+;; (setq ysz/exwm-enabled-p
+;;       (if (seq-contains command-line-args "--use-exwm") t))
+
+(setq ysz/exwm-enabled-p t)
 
 (when ysz/exwm-enabled-p
   (use-package ysz-desktop-init)
