@@ -66,7 +66,6 @@
 (put 'downcase-region 'disabled nil)
 (put 'emms-browser-delete-files 'disabled nil)
 
-(use-package ysz-compatibility)
 (use-package ysz-theme)
 (use-package ysz-completion)
 (use-package ysz-git)
