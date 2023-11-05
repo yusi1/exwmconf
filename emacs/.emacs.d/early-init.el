@@ -1,3 +1,6 @@
+ (setq initial-frame-alist
+       '((top . 1) (left . 1) (width . 1920) (height . 1080)))
+
 (setq package-enable-at-startup nil)
 
 (let ((dir (expand-file-name user-emacs-directory)))
