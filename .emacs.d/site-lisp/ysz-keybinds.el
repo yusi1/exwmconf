@@ -21,42 +21,32 @@
   (which-key-mode))
 
 ;;;EviL mode
-(use-package ysz-evil)
+;; (use-package ysz-evil)
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;;Xah-Fly-Keys mode
 ;; (use-package ysz-xfk)
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-(defmacro gremap (map func remap)
-    "Remap keys using a macro.
-- MAP is the map to remap the key on.
-- FUNC is the function that you want to remap in string form, e.g: \"ibuffer\".
-- REMAP is the function you want to remap to, can be nil
-  (to remap to nothing, disabling the key for the function)
-  or a function to remap to."
-    (let ((rfunc (eval (concat "<remap> " (s-wrap func "<" ">")))))
-      `(keymap-set ,map ,rfunc ,remap)))
+;; (defmacro gremap (map func remap)
+;;     "Remap keys using a macro.
+;; - MAP is the map to remap the key on.
+;; - FUNC is the function that you want to remap in string form, e.g: \"ibuffer\".
+;; - REMAP is the function you want to remap to, can be nil
+;;   (to remap to nothing, disabling the key for the function)
+;;   or a function to remap to."
+;;     (let ((rfunc (eval (concat "<remap> " (s-wrap func "<" ">")))))
+;;       `(keymap-set ,map ,rfunc ,remap)))
 
-(gremap global-map "kill-buffer" 'kill-this-buffer)
+;; (gremap global-map "kill-buffer" 'kill-this-buffer)
 
 (setq mouse-drag-copy-region 'non-empty)
 (setq mouse-drag-mode-line-buffer t)
 (setq mouse-drag-and-drop-region-cross-program t)
 
-(defun ysz/consult-buffer-by-prefix (prefix)
-  "Select a buffer prefixed by PREFIX#"
-  (minibuffer-with-setup-hook
-      (lambda ()
-        (insert (concat prefix "# ")))
-    (consult-buffer)))
-
-(keymap-set global-map "C-c /"
-            (lambda () (interactive) (ysz/consult-buffer-by-prefix "F")))
-
-;; Remappings for when backspace doesn't work in TTY's.
-(when (not window-system)
-  (keymap-set key-translation-map "C-h" "DEL")
-  (keymap-set key-translation-map "M-h" "C-h"))
+;; ;; Remappings for when backspace doesn't work in TTY's.
+;; (when (not window-system)
+;;   (keymap-set key-translation-map "C-h" "DEL")
+;;   (keymap-set key-translation-map "M-h" "C-h"))
 
 (general-def global-map
   "s-O" 'other-window

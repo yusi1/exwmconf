@@ -1,7 +1,6 @@
 ;;; EXWM main configuration (keybinds, workspaces etc..) --- ysz-desktop-config.el
 
 (use-package exwm-config
-  :after (exwm)
   :config
   (defun ysz-exwm/exwm-config ()
     "My configuration of EXWM."
@@ -100,6 +99,19 @@
   :config
   (if (fboundp 'ysz-exwm/exwm-window-config)
       (ysz-exwm/exwm-window-config)))
+
+
+(defun ysz/consult-buffer-by-prefix (prefix)
+  "Select a buffer prefixed by PREFIX#"
+  (minibuffer-with-setup-hook
+      (lambda ()
+        (insert (concat prefix "# ")))
+    (consult-buffer)))
+
+(define-key global-map (kbd "C-c /") (lambda () (interactive) (ysz/consult-buffer-by-prefix "F")))
+(define-key global-map (kbd "C-c C-/") (lambda () (interactive) (ysz/consult-buffer-by-prefix "F")))
+
+
 
 (provide 'ysz-desktop-config)
 ;;; ysz-desktop-config.el ends here

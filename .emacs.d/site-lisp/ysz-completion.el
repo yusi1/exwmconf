@@ -36,11 +36,11 @@
                   vertico-flat vertico-buffer)
   :config
   (let ((map vertico-map))
-    (keymap-set map "M-V" #'vertico-multiform-vertical)
-    (keymap-set map "M-G" #'vertico-multiform-grid)
-    (keymap-set map "M-F" #'vertico-multiform-flat)
-    (keymap-set map "M-R" #'vertico-multiform-reverse)
-    (keymap-set map "M-U" #'vertico-multiform-unobtrusive))
+    (define-key map (kbd "M-V") #'vertico-multiform-vertical)
+    (define-key map (kbd "M-G") #'vertico-multiform-grid)
+    (define-key map (kbd "M-F") #'vertico-multiform-flat)
+    (define-key map (kbd "M-R") #'vertico-multiform-reverse)
+    (define-key map (kbd "M-U") #'vertico-multiform-unobtrusive))
   (setq vertico-multiform-commands
         '((consult-imenu buffer)
           (execute-extended-command flat)))
@@ -76,8 +76,8 @@
   :straight t
   :config
   (let ((map corfu-map))
-    (keymap-set map "M-p" 'nil)
-    (keymap-set map "M-n" 'nil))
+    (define-key map (kbd "M-p") 'nil)
+    (define-key map (kbd "M-n") 'nil))
   (setq tab-always-indent 'complete)
   (setq completion-cycle-threshold 3)
   (global-corfu-mode 1)
@@ -95,9 +95,9 @@
   :demand t
   :config
   (let ((map corfu-map))
-    (keymap-set map "M-p" 'corfu-popupinfo-scroll-down)
-    (keymap-set map "M-n" 'corfu-popupinfo-scroll-up)
-    (keymap-set map "M-d" 'corfu-popupinfo-toggle))
+    (define-key map (kbd "M-p") 'corfu-popupinfo-scroll-down)
+    (define-key map (kbd "M-n") 'corfu-popupinfo-scroll-up)
+    (define-key map (kbd "M-d") 'corfu-popupinfo-toggle))
   ;; Change height of `corfu-popinfo' face.
   (set-face-attribute 'corfu-popupinfo nil :height 1.0)
   (corfu-popupinfo-mode 1))

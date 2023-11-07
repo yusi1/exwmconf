@@ -1,10 +1,12 @@
 ;;; Theming configurations --- ysz-theme.el
 
+;; (load-theme 'wheatgrass)
+
 ;; My own theme
 ;; (load-theme 'ysz-dark t)
 
 ;; Icons
-(setq ysz/icons-enabled t)
+(setq ysz/icons-enabled nil)
 (if ysz/icons-enabled
     (use-package all-the-icons
       :straight t
@@ -84,8 +86,9 @@
 (use-package doom-modeline
   :straight t
   :config
-  (if ysz/icons-enabled
-      (setq doom-modeline-icons t))
+  (setq doom-modeline-icon nil)
+  ;; (if ysz/icons-enabled
+      ;; (setq doom-modeline-icon t)
   (setq doom-modeline-minor-modes t)
   (doom-modeline-mode 1))
 

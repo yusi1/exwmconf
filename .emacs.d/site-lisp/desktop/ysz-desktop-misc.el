@@ -2,12 +2,12 @@
 
 ;;; EXWM-related integration packages
 
-(use-package exwm-outer-gaps
-  :straight '(exwm-outer-gaps :host github
-			      :repo "lucasgruss/exwm-outer-gaps")
-  :init
-  (setq exwm-outer-gaps-width [3 3 3 3])
-  (add-hook 'exwm-init-hook (lambda () (interactive) (exwm-outer-gaps-mode 1))))
+;; (use-package exwm-outer-gaps
+;;   :straight '(exwm-outer-gaps :host github
+;; 			      :repo "lucasgruss/exwm-outer-gaps")
+;;   :init
+;;   (setq exwm-outer-gaps-width [3 3 3 3])
+;;   (add-hook 'exwm-init-hook (lambda () (interactive) (exwm-outer-gaps-mode 1))))
 
 (use-package exwm-edit
   :straight t

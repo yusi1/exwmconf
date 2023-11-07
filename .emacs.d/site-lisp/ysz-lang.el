@@ -21,5 +21,14 @@
 
 (add-to-list 'auto-mode-alist '("\\.rasi\\'" . css-mode))
 
+(use-package guix
+  :straight t)
+
+
+(use-package nix-mode
+  :straight t)
+
+
+
 (provide 'ysz-lang)
 ;;; ysz-lang.el ends here
